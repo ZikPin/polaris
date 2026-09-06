@@ -11,16 +11,14 @@ Must have:
 - SR-M-08: I want to have a dashboard per course to list lectures that have no checked box
 
 Should have:
-- SR-S-01: I want to add/edit/delete grades for each of the tasks
-- SR-S-02: I want to have columns not only with checkboxes but also with custom range fields with number inputs
-- SR-S-03: I want to restrict the dashboard to certain courses or specific tags
-- SR-S-04: I want to have a dashboard statistics for range field columns to choose between average and sum statistics (maybe average grade per assignment or sum of points to measure if bonus threshhold is reached)
+- SR-S-01: I want to have columns not only with checkboxes but also with custom range fields with number inputs
+- SR-S-02: I want to restrict the dashboard to certain courses or specific tags
+- SR-S-03: I want to have a dashboard statistics for range field columns to choose between average and sum statistics (maybe average grade per assignment or sum of points to measure if bonus threshhold is reached)
 
 Could have:
 Calendar feature is thought to plan the studying, prepare for exams and have overview of when is what done, not to enforce specific time constraints and deadlines
 - SR-C-01: I want to have a calendar view to assign lectures to specific days (not a lecture timetable, just visual planning aid)
 - SR-C-02: I want to have a calendar view to assign assignment to specific days (not to enforce a deadling, just visual planning aid)
-- SR-C-03: I want to have another overview panel in the dashboard to list lectures/assignment of selected week
 
 Won'have:
 - I can't add deadlines to tasks
