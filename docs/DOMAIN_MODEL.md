@@ -82,9 +82,8 @@ Stores the calendar dates which have lectures and/or assignments assigned to
 | Attribute | Required | Notes                                         |
 | --------- | -------- | --------------------------------------------- |
 | id        | yes      | identifies the triplet of day, month and year |
-| day       | yes      |                                               |
-| month     | yes      |                                               |
-| year      | yes      |                                               |
+| date      | yes      |                                               |
+
 ## Relationships
 
 | Entity        | Cardinality | Entity | Notes                                                                                             |
