@@ -34,7 +34,6 @@ tag_id and course_id form a composite primary key
 | Fields    | Type    | Constraints                |
 | --------- | ------- | -------------------------- |
 | id        | number  | unique, autoincrement, PK  |
-| order     | number  |                            |
 | table     | varchar | ('lecture'\|'assignment')  |
 | value     | varchar |                            |
 | course_id | number  | FK(course_id -> course.id) |
