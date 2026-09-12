@@ -1,6 +1,8 @@
 # polaris
 Study planner
 
+This is a test commit from Fedora
+
 # Folder structure
 ```
 study-planner/
