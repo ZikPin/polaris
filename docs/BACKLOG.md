@@ -6,11 +6,11 @@ Statuses: `todo`, `in progress`, `done`, `stale` (the request or requirement it 
 | T-001  | infra               | done   | Scaffold the backend (`requirements.txt` at the root, sources in `backend/`): app factory with configs, models for the whole schema and the initial migration, error handler, pytest fixtures (ST-24, ST-25, ST-30) |
 | T-002  | infra               | done   | Scaffold the frontend: Angular workspace at the root (`package.json`, `angular.json`) with the app sources in `frontend/`, feature folders, routing, login guard and dev proxy to Flask |
 | T-003  | infra               | todo   | Set up the acceptance tests: Playwright with playwright-bdd on Chromium, database restore and login fixtures (REQ-NF-02) |
-| T-004  | SR-M-09             | in progress | Register, log in, log out and current user, with the login guard in the UI (REQ-F-47 to 49, REQ-NF-04) |
-| T-005  | SR-M-01             | in progress | Course list: add, rename and delete with confirmation, both empty tables exist from the start (REQ-F-01 to 04, 51, 52) |
-| T-006  | SR-M-02             | in progress | Add, rename and delete lecture and assignment rows in the table view (REQ-F-05 to 12, 51) |
-| T-007  | SR-M-03, M-04, M-05 | in progress | Checkbox columns: add with label, rename, delete, and check or uncheck the cells (REQ-F-13 to 15, 20 to 23, 51, 52) |
-| T-008  | SR-M-06             | in progress | Tags: create, rename, delete, assign to courses and filter the course list (REQ-F-24 to 30, 51, 52) |
+| T-004  | SR-M-09             | done   | Register, log in, log out and current user, with the login guard in the UI (REQ-F-47 to 49, REQ-NF-04) |
+| T-005  | SR-M-01             | done   | Course list: add, rename and delete with confirmation, both empty tables exist from the start (REQ-F-01 to 04, 51, 52) |
+| T-006  | SR-M-02             | done   | Add, rename and delete lecture and assignment rows in the table view (REQ-F-05 to 12, 51) |
+| T-007  | SR-M-03, M-04, M-05 | done   | Checkbox columns: add with label, rename, delete, and check or uncheck the cells (REQ-F-13 to 15, 20 to 23, 51, 52) |
+| T-008  | SR-M-06             | done   | Tags: create, rename, delete, assign to courses and filter the course list (REQ-F-24 to 30, 51, 52) |
 | T-009  | SR-M-07             | todo   | Dashboard per course with checked and unchecked counts per checkbox column (REQ-F-31, 32) |
 | T-010  | SR-M-08             | todo   | Dashboard lists of lectures and assignments with at least one unchecked checkbox (REQ-F-37, 38) |
 | T-011  | SR-S-01             | todo   | Number columns: add with optional min and max, edit values and bounds, delete (REQ-F-16 to 19) |
