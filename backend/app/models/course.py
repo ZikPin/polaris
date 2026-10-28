@@ -1,5 +1,7 @@
+from sqlalchemy import func
+
 from ..extensions import db
-from .tag import course_tags
+from .tag import Tag, course_tags
 
 
 class Course(db.Model):
@@ -11,7 +13,11 @@ class Course(db.Model):
     user_id = db.Column(db.ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
 
     tags = db.relationship(
-        "Tag", secondary=course_tags, back_populates="courses", order_by="Tag.value", passive_deletes=True
+        "Tag",
+        secondary=course_tags,
+        back_populates="courses",
+        order_by=lambda: func.lower(Tag.value),
+        passive_deletes=True,
     )
     # Rows and columns are listed in creation order (see RELATIONAL_SCHEMA.md)
     rows = db.relationship(

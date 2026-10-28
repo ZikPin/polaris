@@ -1,0 +1,55 @@
+<h1>Courses</h1>
+
+<form (submit)="add($event, title)">
+  <input #title placeholder="New course" required />
+  <button type="submit">Add course</button>
+</form>
+
+@if (error()) {
+  <p role="alert">{{ error() }}</p>
+}
+
+@if (tags().length) {
+  <fieldset>
+    <legend>Show courses with one of these tags</legend>
+    @for (tag of tags(); track tag.id) {
+      <label>
+        <input type="checkbox" [checked]="filter().includes(tag.id)" (change)="toggleFilter(tag.id)" />
+        {{ tag.value }}
+      </label>
+    }
+  </fieldset>
+}
+
+<ul>
+  @for (course of courses(); track course.id) {
+    <li>
+      @if (editingId() === course.id) {
+        <form (submit)="save($event, course, editTitle.value)">
+          <input #editTitle [value]="course.title" required />
+          @for (tag of tags(); track tag.id) {
+            <label>
+              <input
+                type="checkbox"
+                [checked]="editTagIds().includes(tag.id)"
+                (change)="toggleEditTag(tag.id)"
+              />
+              {{ tag.value }}
+            </label>
+          }
+          <button type="submit">Save</button>
+          <button type="button" (click)="cancel()">Cancel</button>
+        </form>
+      } @else {
+        <a [routerLink]="['/courses', course.id]">{{ course.title }}</a>
+        @if (course.tags.length) {
+          <span>({{ tagNames(course) }})</span>
+        }
+        <button type="button" (click)="edit(course)">Edit</button>
+        <button type="button" (click)="remove(course)">Delete</button>
+      }
+    </li>
+  } @empty {
+    <li>No courses.</li>
+  }
+</ul>
