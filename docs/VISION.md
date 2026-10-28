@@ -1,38 +1,43 @@
 # Vision
 
 ## Problem statement
-Sometimes it is hard to keep track of lectures and relevant assignments. Other apps tend to have overengineered interfaces where the lectures and assignments of different courses are blended and not structured enough. The spreadsheets solve this problem, but maintaining them is generally hard and tedious: adding new columns forces to rewrite and edit for each of the lectures, hard to maintain style and dashboards require to advanced understanding of functions to implement
+Sometimes it is hard to keep track of lectures and relevant assignments. Other apps tend to have overengineered interfaces where the lectures and assignments of different courses are blended and not structured enough. Spreadsheets solve this problem, but maintaining them is generally hard and tedious: adding a new column forces you to rewrite and edit every lecture, it is hard to keep the style consistent, and dashboards require an advanced understanding of spreadsheet functions to implement.
 
 ## Vision statement
-Polaris is a web-based study planner that lets students track course progress at the task level, replacing manual spreadsheets.
+Polaris is a web-based study planner that lets students track course progress at the level of individual lectures and assignments, replacing manual spreadsheets.
 
 ## Goals
 - Students can organize lectures and assignments into courses
-- Students can manage and group courses for example with semesters
+- Students can manage and group courses, for example by semester
+- Students can add their own tracking columns to a course without touching existing entries
 - Students can overview the current study status with relevant statistics
 
 ## Scope
 - In scope
-    - Adding courses and assigning them to semesters
-    - Managing tasks and lectures
+    - Adding courses and tagging them to group them (for example by semester)
+    - Managing lectures and assignments, including custom columns
     - Having a dashboard with overview of the materials
+    - User accounts with private, isolated data (multi-tenant)
+    - Calendar view for planning study days (planned for a later release)
 - Out of scope
     - Mobile-app
-    - Multi-user
+    - Sharing courses or data between users (accounts are separate, each user's courses are private)
     - University event tracker management
     - Learning material uploads
     - Learning features like Anki Cards and etc.
 
 ## Stakeholders
-- Primary stakeholders: 
+- Primary stakeholders:
     - Students
     - Regular people wanting to learn new stuff
 - Secondary stakeholders:
-    - Course organizers or instructors planning lecture and assignment sequences
+    - Instructors and course organizers. They may use Polaris as a personal planner to lay out the lecture and assignment sequence of a course they teach. They are potential users, not the target audience, so there are no instructor-specific features
 
 ## Success criteria
-- Adding a course takes under 20 seconds
-- Adding lectures and assignments in the courses takes under 20 seconds
-- Configuration is easy, possible to add a column with custom name and metric with default values in under a minute
-- Filtering views to not mix lectures from different courses
-- Statistics that show per course what assignments are done with grade overview and how far each lecture is worked on and how many lectures are left
+Timed criteria are measured as the median of 5 runs by a user who knows the app.
+
+- Adding a course takes under 20 seconds (from the main page until the course appears in the list)
+- Adding a lecture or an assignment to a course takes under 20 seconds
+- Adding a custom column with a label (and, for number columns, its statistic) takes under 1 minute
+- A course view only shows the lectures and assignments of that course, never those of other courses
+- The dashboard shows per course how many assignments are done, the grade overview, how far each lecture is worked on, and how many lectures are left
