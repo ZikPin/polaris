@@ -1,0 +1,10 @@
+<h1>Register</h1>
+<form (submit)="submit($event, email.value, password.value)">
+  <p><label>Email <input #email type="email" required /></label></p>
+  <p><label>Password (at least 8 characters) <input #password type="password" required /></label></p>
+  <p><button type="submit">Register</button></p>
+</form>
+@if (error()) {
+  <p role="alert">{{ error() }}</p>
+}
+<p>Already registered? <a routerLink="/login">Log in</a></p>

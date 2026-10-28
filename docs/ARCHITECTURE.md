@@ -13,7 +13,7 @@ There are 3 environments:
 - Angular standalone components are grouped in feature folders (`frontend/src/app/features`), shared code like the auth service and the route guard is in `core`
 - The frontend only talks to the backend through the API
 - In development the Angular dev server proxies `/api` to Flask on port 5000 (`proxy.conf.json`), so the browser sees a single origin
-- Protected routes (`/courses`) use a route guard that asks `GET api/auth/me` and redirects to `/login` if there is no session
+- Routes: `/login`, `/register`, and the guarded `/courses`, `/courses/:id` and `/tags`. The route guard asks `GET api/auth/me` and redirects to `/login` if the user is not logged in or the check fails
 
 ## Backend Architecture
 The backend is created by an app factory `create_app(config, overrides)` with a development, a test and a production configuration. The configuration is chosen by name or by the `APP_ENV` variable (default `development`). Production reads `SECRET_KEY` and `DATABASE_URL` from the environment and does not start without them. The extensions (SQLAlchemy, migrations, login) are initialized inside the factory. `requirements.txt` and the virtual environment are at the repository root, the sources are in `backend/`.

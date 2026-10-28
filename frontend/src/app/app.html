@@ -1,1 +1,14 @@
-<router-outlet />
+<header>
+  <a routerLink="/courses">Polaris</a>
+  @if (auth.user(); as user) {
+    <nav>
+      <a routerLink="/courses">Courses</a>
+      <a routerLink="/tags">Tags</a>
+      <span>{{ user.email }}</span>
+      <button type="button" (click)="logout()">Log out</button>
+    </nav>
+  }
+</header>
+<main>
+  <router-outlet />
+</main>
