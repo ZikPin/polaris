@@ -6,6 +6,7 @@ Validates [VISION.md](../../docs/VISION.md) and [STAKEHOLDER_REQ.md](../../docs/
 - **Level:** black-box, through the browser UI only. Automated with Playwright in `tests/acceptance/`, except the timed tests (AT-V-01 to 03) and the negative checklist (AT-N-01), which are manual.
 - **Environment:** the development environment (SQLite) with a deterministic seed (see Seed data). The database is restored to the seeded state before every test, by copying a pristine seeded database file over the live one. Tests can therefore change data freely and never depend on run order. The suite runs with a single worker, because all tests share one database file.
 - **Style (BDD):** the scenarios below are written as Given/When/Then. Acceptance tests are implemented as Gherkin `.feature` files in `tests/acceptance/features/`, one scenario per test case and tagged with its id (for example `@AT-07 @SR-M-05`), plus step definitions. They run on Playwright through playwright-bdd, which compiles the feature files into Playwright tests, so Playwright fixtures can be used inside steps. Other test levels stay plain tests.
+- **Browsers:** the automated suite runs as three Playwright projects: Chrome, Edge and Firefox (REQ-NF-02).
 - **Fixtures:** Playwright fixtures (setup/teardown units requested by tests) provide the database restore and logging in as a seeded user.
 - **Terms:** a lecture or assignment is "done" when every checkbox column in its row is checked. It is "not done" when at least one checkbox column is unchecked.
 
@@ -33,7 +34,7 @@ Registration tests use new email addresses. Where a scenario below describes spe
 | --- | --- | --- | --- |
 | AT-01 | SR-M-09 | Register as user A, log out, then log in again. | After registering, the main page opens. After logout, opening any app page redirects to login. After login, the main page opens again. Wrong password is rejected with an error. |
 | AT-02 | SR-M-09 | User A creates course "Algorithms". User B logs in. | User B's course list is empty. Opening the URL of A's course as B shows "not found" or "forbidden" and no data from A. |
-| AT-03 | SR-M-01 | Add course "Algorithms". Rename it to "Algorithms 1". Delete it. | The course appears in the list after adding, shows the new title after renaming, and is gone after deleting (also after a reload). A new course with the same title starts with empty lecture and assignment tables. |
+| AT-03 | SR-M-01 | Add course "Algorithms". Rename it to "Algorithms 1". Delete it. | The course appears in the list after adding, shows the new title after renaming, and is gone after deleting (also after a reload). Before deleting, the app asks for confirmation, and cancelling keeps the course. A new course with the same title starts with empty lecture and assignment tables. |
 | AT-04 | SR-M-02 | In one course, add lecture "Intro" and assignment "Sheet 1". Rename both. Delete both. | Each row appears only in its own table. Rename and delete work in both tables, and the changes survive a reload. |
 | AT-05 | SR-M-03, SR-M-04 | Add the checkbox column "Watched" to the lectures table, with 2 lectures present. Then add a third lecture. | The column appears with the label "Watched". All three rows show it unchecked. The assignments table is unchanged. |
 | AT-06 | SR-M-03 | Delete the "Watched" column. | The column and its values disappear. Lecture titles remain. |
@@ -65,6 +66,7 @@ Registration tests use new email addresses. Where a scenario below describes spe
 | AT-V-03 | Vision | Add a custom column with a label, and for a number column choose its statistic. | Median of 5 runs is under 60 s. |
 | AT-V-04 | Vision | Two courses with different lecture and assignment titles. Open each. | Each course view lists only its own titles and none from the other. |
 | AT-V-05 | Vision | Course with lectures and assignments, some done, some graded. Open its dashboard. | The dashboard shows the number of done assignments, the grade overview, the progress per lecture, and the number of lectures left. |
+| AT-V-06 | Vision (timed tasks), REQ-NF-03 | On the seed data, perform each main interaction: add, rename and delete a row, check a box, open the dashboard. | Visible feedback appears within 500 ms each time. |
 
 ### Out of scope (negative check)
 
