@@ -12,10 +12,11 @@ Work: `docs/BACKLOG.md` (tickets), `docs/CHANGE_LOG.md`.
 - Docs first. If the code has to differ from the docs, change the docs in the same change.
 - A change of behavior updates every affected doc and test plan down the chain above, including traceability tables.
 - Work on a BACKLOG ticket. Set its status when you start and when you finish.
-- Every change gets one CHANGE_LOG line: date, ticket, what and why.
+- When a ticket is finished (the user approved it), add one CHANGE_LOG line: date, ticket id and one sentence. Log nothing else.
 - IDs (SR-, REQ-, T-, ST-, AT-) are never renumbered or reused. New ones get the next number. A removed requirement is marked removed, and the tickets that depend on it become stale.
 - DOMAIN_MODEL and RELATIONAL_SCHEMA stay consistent: same fields, entities singular, tables plural.
 - Follow the layers in ARCHITECTURE.md: routes → services → models, pure functions in `utils` (no Flask or SQLAlchemy imports).
+- Keep the UI plain: HTML elements without visual styling, CSS only for layout (flex, grid). Theming comes with T-020.
 - Keep docs and code lean. Do not add anything the docs do not ask for. Ask first.
 - Install nothing globally: `pip` only inside `.venv`, `npm` only in the project.
 - Do not commit unless asked.
@@ -32,5 +33,8 @@ pytest                      # all tests in tests/
 flask run                   # backend
 flask db migrate -m "..."   # after a model change, then review the file in backend/migrations/versions
 flask db upgrade
+npm install
+npm start                   # frontend on :4200, proxies /api to Flask on :5000
+npm run build
 ```
-Frontend and acceptance test commands are added by their scaffold tickets.
+Acceptance test commands are added by T-003.

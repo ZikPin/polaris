@@ -13,7 +13,6 @@ Plan the request in $ARGUMENTS. Do not write code.
 5. Update the design docs the requirements touch, only as far as needed: `DOMAIN_MODEL.md` and `RELATIONAL_SCHEMA.md` (keep them consistent), the API in `ARCHITECTURE.md`, `MARSHMALLOW_SCHEMAS.md`.
 6. Add test cases to `tests/plans/acceptance-test-plan.md` and `system-test-plan.md` (next ids) and update their traceability tables.
 7. Add tickets to `BACKLOG.md`: one per slice that can be built and tested alone, status `todo`, one sentence naming the REQ ids. Mark tickets that no longer fit as `stale`.
-8. Add a line to `CHANGE_LOG.md`.
-9. Report what you added. List open questions, each with a default.
+8. Report what you added. List open questions, each with a default.
 
 Never renumber ids. A replaced requirement is marked removed.

@@ -3,8 +3,8 @@ Statuses: `todo`, `in progress`, `done`, `stale` (the request or requirement it 
 
 | Ticket | Request             | Status | Description |
 | ------ | ------------------- | ------ | ----------- |
-| T-001  | infra               | in progress | Scaffold the backend (`requirements.txt` at the root, sources in `backend/`): app factory with configs, models for the whole schema and the initial migration, error handler, pytest fixtures (ST-24, ST-25, ST-30) |
-| T-002  | infra               | todo   | Scaffold the frontend: Angular workspace at the root (`package.json`, `angular.json`) with the app sources in `frontend/`, feature folders, routing, login guard and dev proxy to Flask |
+| T-001  | infra               | done   | Scaffold the backend (`requirements.txt` at the root, sources in `backend/`): app factory with configs, models for the whole schema and the initial migration, error handler, pytest fixtures (ST-24, ST-25, ST-30) |
+| T-002  | infra               | in progress | Scaffold the frontend: Angular workspace at the root (`package.json`, `angular.json`) with the app sources in `frontend/`, feature folders, routing, login guard and dev proxy to Flask |
 | T-003  | infra               | todo   | Set up the acceptance tests: Playwright with playwright-bdd on Chromium, database restore and login fixtures (REQ-NF-02) |
 | T-004  | SR-M-09             | todo   | Register, log in, log out and current user, with the login guard in the UI (REQ-F-47 to 49, REQ-NF-04) |
 | T-005  | SR-M-01             | todo   | Course list: add, rename and delete with confirmation, both empty tables exist from the start (REQ-F-01 to 04, 51, 52) |
@@ -22,3 +22,4 @@ Statuses: `todo`, `in progress`, `done`, `stale` (the request or requirement it 
 | T-017  | infra               | todo   | Run the system suite against Postgres with docker-compose |
 | T-018  | infra               | todo   | Decide hosting and deploy over HTTPS, with `flask db upgrade` as a deploy step before the new version starts (REQ-C-02, REQ-NF-05) |
 | T-019  | SR-C-01, SR-C-02    | todo   | Calendar: assign lectures and assignments to days, later (REQ-F-41 to 46) |
+| T-020  | infra               | todo   | Design: wireframes and a color palette as a theme (CSS variables), applied to the screens built so far |
