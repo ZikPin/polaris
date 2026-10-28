@@ -50,7 +50,7 @@ class CustomRangeColumn(CourseColumn):
     max = db.Column(db.Float)
     preferred_statistic = db.Column(db.String, nullable=False, default="avg", server_default="avg")
 
-    __mapper_args__ = {"polymorphic_identity": "number"}
+    __mapper_args__ = {"polymorphic_identity": "number", "polymorphic_load": "selectin"}
 
 
 class BoolCell(db.Model):

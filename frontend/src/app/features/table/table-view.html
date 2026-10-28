@@ -1,0 +1,56 @@
+@if (error()) {
+  <p role="alert">{{ error() }}</p>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      @for (column of table().columns; track column.id) {
+        <th>
+          {{ column.label }}
+          <button type="button" (click)="renameColumn(column)">Rename</button>
+          <button type="button" (click)="deleteColumn(column)">Delete</button>
+        </th>
+      }
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of table().rows; track row.id) {
+      <tr>
+        <td>{{ row.title }}</td>
+        @for (column of table().columns; track column.id) {
+          <td>
+            @if (column.column_type === 'bool') {
+              <input
+                type="checkbox"
+                [checked]="row.cells[column.id] === true"
+                (change)="setChecked(row, column, $event)"
+              />
+            } @else {
+              {{ row.cells[column.id] }}
+            }
+          </td>
+        }
+        <td>
+          <button type="button" (click)="renameRow(row)">Rename</button>
+          <button type="button" (click)="deleteRow(row)">Delete</button>
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td [attr.colspan]="table().columns.length + 2">Nothing here yet.</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<form (submit)="addRow($event, rowTitle)">
+  <input #rowTitle placeholder="New {{ tableType() }}" required />
+  <button type="submit">Add {{ tableType() }}</button>
+</form>
+<form (submit)="addColumn($event, columnLabel)">
+  <input #columnLabel placeholder="Label of the new checkbox column" required />
+  <button type="submit">Add checkbox column</button>
+</form>
