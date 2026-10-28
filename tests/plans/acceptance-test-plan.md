@@ -6,7 +6,7 @@ Validates [VISION.md](../../docs/VISION.md) and [STAKEHOLDER_REQ.md](../../docs/
 - **Level:** black-box, through the browser UI only. Automated with Playwright in `tests/acceptance/`, except the timed tests (AT-V-01 to 03) and the negative checklist (AT-N-01), which are manual.
 - **Environment:** the development environment (SQLite) with a deterministic seed (see Seed data). The database is restored to the seeded state before every test, by copying a pristine seeded database file over the live one. Tests can therefore change data freely and never depend on run order. The suite runs with a single worker, because all tests share one database file.
 - **Style (BDD):** the scenarios below are written as Given/When/Then. Acceptance tests are implemented as Gherkin `.feature` files in `tests/acceptance/features/`, one scenario per test case and tagged with its id (for example `@AT-07 @SR-M-05`), plus step definitions. They run on Playwright through playwright-bdd, which compiles the feature files into Playwright tests, so Playwright fixtures can be used inside steps. Other test levels stay plain tests.
-- **Browsers:** the automated suite runs as three Playwright projects: Chrome, Edge and Firefox (REQ-NF-02).
+- **Browser:** the automated suite runs in Chromium only. Other Chromium-based browsers (for example Edge) are expected to behave the same (REQ-NF-02).
 - **Fixtures:** Playwright fixtures (setup/teardown units requested by tests) provide the database restore and logging in as a seeded user.
 - **Terms:** a lecture or assignment is "done" when every checkbox column in its row is checked. It is "not done" when at least one checkbox column is unchecked.
 
@@ -39,7 +39,7 @@ Registration tests use new email addresses. Where a scenario below describes spe
 | AT-05 | SR-M-03, SR-M-04 | Add the checkbox column "Watched" to the lectures table, with 2 lectures present. Then add a third lecture. | The column appears with the label "Watched". All three rows show it unchecked. The assignments table is unchanged. |
 | AT-06 | SR-M-03 | Delete the "Watched" column. | The column and its values disappear. Lecture titles remain. |
 | AT-07 | SR-M-05 | Check a box, reload, then uncheck it and reload again. | The checked state persists after the first reload and the unchecked state after the second. |
-| AT-08 | SR-M-06 | Create tags "Semester 1" and "ML". Assign "Semester 1" to courses A and B, and "ML" to course B. On the main page, filter by "Semester 1", then by "ML". | The first filter shows A and B. The second shows only B. Tags are listed alphabetically. A course can carry several tags. |
+| AT-08 | SR-M-06 | Create tags "Semester 1" and "ML". Assign "Semester 1" to courses A and B, and "ML" to courses B and C. On the main page, filter by "Semester 1", by "ML", then by both. | "Semester 1" shows A and B, "ML" shows B and C, and both together show A, B and C. Tags are listed alphabetically. A course can carry several tags. |
 | AT-09 | SR-M-07 | Lectures L1 to L4 with column "Watched" where L1 to L3 are checked. Open the course dashboard. | The dashboard shows "Watched: 3 checked, 1 unchecked" for lectures. Assignment columns are counted separately. |
 | AT-10 | SR-M-08 | Lectures with two checkbox columns "Watched" and "Notes": L1 has both checked, L2 has only "Watched", L3 has neither. Same setup for assignments. | The not-done list for lectures contains L2 and L3 but not L1. The assignments list follows the same rule. After checking the missing box on L2, it disappears from the list. |
 

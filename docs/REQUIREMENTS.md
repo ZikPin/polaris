@@ -64,7 +64,7 @@ These do not come from a single stakeholder requirement.
 - REQ-F-26: The user can delete a tag. Courses with this tag are kept and lose the tag
 - REQ-F-27: The user can add multiple tags to a course
 - REQ-F-28: The user can edit the tags of a course
-- REQ-F-29: The user can filter the courses on the main page by tags
+- REQ-F-29: The user can filter the courses on the main page by tags. A course is shown if it has at least one of the selected tags
 - REQ-F-30: The tags are always listed in alphabetical order
 ### Dashboard
 - REQ-F-31: The dashboard shows per course the checked and unchecked number of lectures for each checkbox column
@@ -75,7 +75,7 @@ These do not come from a single stakeholder requirement.
 - REQ-F-36: Empty cells of custom range columns are ignored in the statistics. If all cells are empty, the dashboard shows that there is no data
 - REQ-F-37: The dashboard shows per course the lectures that have at least one unchecked checkbox
 - REQ-F-38: The dashboard shows per course the assignments that have at least one unchecked checkbox
-- REQ-F-39: The dashboard can be restricted to selected tags
+- REQ-F-39: The dashboard can be restricted to selected tags. A course is included if it has at least one of the selected tags
 - REQ-F-40: The dashboard can be restricted to selected courses
 ### Calendar view (for future)
 - REQ-F-41: The user can assign lectures to specific days in the calendar view
@@ -83,7 +83,7 @@ These do not come from a single stakeholder requirement.
 - REQ-F-43: The user can assign assignments to specific days in the calendar view
 - REQ-F-44: The user can remove assignments from specific days in the calendar view
 - REQ-F-45: The lectures and assignments of a day are shown together in one list in the calendar view
-- REQ-F-46: The list of a day is ordered by the time of assignment
+- REQ-F-46: The list of a day shows the lectures first and then the assignments, each in creation order
 ### Authentication
 - REQ-F-47: The user can register with a valid email and a password of at least 8 characters. An email can be registered only once
 - REQ-F-48: The user can log in to an existing account with email and password. A failed login shows a generic "invalid email or password" error
@@ -95,7 +95,7 @@ These do not come from a single stakeholder requirement.
 
 ## Non-Functional Requirements
 - REQ-NF-01: Every change is saved on the server without a save action and is still there after a reload
-- REQ-NF-02: The system runs on the newest stable version of Chrome, Edge and Firefox
+- REQ-NF-02: The system runs on the newest stable version of Chromium-based browsers (tested on Chrome)
 - REQ-NF-03: Every user interaction gives visible feedback in under 500ms under normal network conditions
 - REQ-NF-04: Passwords are stored hashed
 - REQ-NF-05: In production, all traffic goes over HTTPS
