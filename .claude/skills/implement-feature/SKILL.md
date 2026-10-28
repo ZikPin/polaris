@@ -11,5 +11,5 @@ Implement ticket $ARGUMENTS.
 3. Implement it as the docs describe: `ARCHITECTURE.md` (layers, API), `MARSHMALLOW_SCHEMAS.md`, `RELATIONAL_SCHEMA.md`. Include the frontend if the ticket has UI. Nothing beyond the ticket.
 4. Write the tests the plans list for these requirements (system and unit tests, acceptance tests for UI), but don't run them.
 5. If the implementation had to differ from a doc, fix that doc and everything derived from it in the same change.
-6. Set the ticket status to `done` and add a line to `docs/CHANGE_LOG.md`.
-7. Report what was done and the test results. Do not commit unless asked.
+6. Do not commit.
+7. Set the ticket status to `done` and add a line to `docs/CHANGE_LOG.md`, when the user approves the implementation
