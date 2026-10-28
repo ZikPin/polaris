@@ -1,0 +1,27 @@
+<h1>Tags</h1>
+<form (submit)="add($event, value)">
+  <input #value placeholder="New tag" required />
+  <button type="submit">Add tag</button>
+</form>
+@if (error()) {
+  <p role="alert">{{ error() }}</p>
+}
+<ul>
+  @for (tag of tags(); track tag.id) {
+    <li>
+      @if (editingId() === tag.id) {
+        <form (submit)="save($event, tag, editValue.value)">
+          <input #editValue [value]="tag.value" required />
+          <button type="submit">Save</button>
+          <button type="button" (click)="cancel()">Cancel</button>
+        </form>
+      } @else {
+        {{ tag.value }}
+        <button type="button" (click)="edit(tag)">Edit</button>
+        <button type="button" (click)="remove(tag)">Delete</button>
+      }
+    </li>
+  } @empty {
+    <li>No tags yet.</li>
+  }
+</ul>
