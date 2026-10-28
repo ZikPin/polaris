@@ -9,12 +9,13 @@ There are 3 environments:
 - Production: for deployment. Postgres database through Supabase
 
 ## Frontend Architecture
+- The Angular workspace is at the repository root (`package.json`, `angular.json`, `node_modules`), the sources are in `frontend/`
 - Angular standalone components are grouped in feature folders
 - The frontend only talks to the backend through the API
 - In development the Angular dev server proxies `/api` to Flask, so the browser sees a single origin
 
 ## Backend Architecture
-The backend is created by an app factory `create_app(config)` with a development, a test and a production configuration. The extensions (SQLAlchemy, migrations, login) are initialized inside the factory.
+The backend is created by an app factory `create_app(config, overrides)` with a development, a test and a production configuration. The configuration is chosen by name or by the `APP_ENV` variable (default `development`). Production reads `SECRET_KEY` and `DATABASE_URL` from the environment and does not start without them. The extensions (SQLAlchemy, migrations, login) are initialized inside the factory. `requirements.txt` and the virtual environment are at the repository root, the sources are in `backend/`.
 
 ```
 backend/app/

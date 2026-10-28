@@ -1,6 +1,14 @@
 # Change Log
 One line per change, newest first: date · ticket · what — why.
 
+- 2026-10-28 · T-001 · README section on database migrations, T-018 now includes running migrations on deploy — migrations never run automatically, so the deploy has to do it
+
+- 2026-10-28 · T-001 · Added .env.example and a Configuration section to the README — the production setup (APP_ENV, SECRET_KEY, DATABASE_URL) was not visible in the repo
+
+- 2026-10-28 · T-001 · Scaffolded the backend: app factory with configs, models and initial migration for the whole schema, JSON error handlers, system test fixtures with ST-24, ST-25 and ST-30 (new) — first step of the implementation
+- 2026-10-28 · — · .gitignore: package-lock.json is committed again, Python and instance ignores added — the lockfile is needed for reproducible installs
+
+- 2026-10-28 · — · Dependencies and tool config (requirements.txt, package.json, angular.json, node_modules) at the repository root, sources stay in backend/ and frontend/ — no `cd` needed, one place for tooling
 - 2026-10-28 · — · Added AUDIT_REPORT.md — full consistency audit of the docs, test plans and skills; no doc was changed
 - 2026-10-28 · — · Added CLAUDE.md, the plan-feature and implement-feature skills, BACKLOG.md, CHANGE_LOG.md and a new README — keep docs, tickets and code in sync
 - 2026-10-28 · — · Added MARSHMALLOW_SCHEMAS.md — payload shapes are fixed before implementation

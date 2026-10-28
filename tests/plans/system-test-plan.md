@@ -77,13 +77,14 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | ID | Requirements | Scenario | Pass criterion |
 | --- | --- | --- | --- |
 | ST-23 | F-51 | Create or rename a course, a row, a column label and a tag to an empty or whitespace-only value. | Every attempt is rejected and nothing changes. |
+| ST-30 | Architecture: error format | Request an unknown URL, send a payload that fails validation, and call a protected endpoint without logging in. | The answers are 404, 400 and 401, each with a JSON body that has an `error` message. The 400 also has `fields` with the messages per field. |
 
 ### Database
 
 | ID | Source | Scenario | Pass criterion |
 | --- | --- | --- | --- |
 | ST-24 | Schema | Run all migrations on an empty database, then ask the migration tool for a diff against the models. | Every table of RELATIONAL_SCHEMA exists, and there is no diff. |
-| ST-25 | Schema: constraints | Directly in the database, one case per rule: a course with an unknown user_id, a duplicate email, a duplicate tag value for the same user, a duplicate date, a duplicate cell, a duplicate course-tag link, an invalid table_type, column_type or preferred_statistic, a range column with min greater than max, and a NULL in a required field. Also insert records without optional values. | Every violation is rejected. A bool cell is false by default, preferred_statistic is 'avg', and min, max and number cell value can be NULL. |
+| ST-25 | Schema: constraints | Directly in the database, one case per rule: a course with an unknown user_id, a duplicate email, a duplicate tag value for the same user, a duplicate date, a duplicate cell, a duplicate course-tag link, an invalid table_type, column_type or preferred_statistic, a range column with min greater than max, and a NULL in a required field. Also insert records without optional values, and delete a course directly. | Every violation is rejected. A bool cell is false by default, preferred_statistic is 'avg', and min, max and number cell value can be NULL. Deleting the course also deletes its rows, columns, cells, tag links and calendar links, while the user, the tag and the date remain. |
 | ST-26 | REQ-NF-04 | Register two users with the same password. | The stored passwords are not the plain text, differ from each other, and each verifies against its own password. |
 | ST-27 | Acceptance plan: seed data | Run the seed command on an empty database, then run it again. | Users alice, bob and carol exist with the data described in the acceptance plan. The second run leaves exactly the same data. |
 
@@ -132,4 +133,5 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | REQ-NF-04 | ST-26 |
 | REQ-NF-05 | Deployment check |
 | Schema rules | ST-10, ST-24, ST-25 |
+| Error format | ST-30 |
 | Seed command | ST-27 |

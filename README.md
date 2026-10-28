@@ -17,19 +17,43 @@ Planning is done (requirements, design, test plans). Implementation has not star
 ## Run
 The commands below are the planned ones and get verified by the scaffold tickets.
 ```
+# all commands run from the repository root
+
 # backend
-cd backend && python -m venv .venv && . .venv/bin/activate
+python -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
 flask db upgrade && flask seed     # seed creates demo users alice, bob, carol
 flask run
 
 # frontend (proxies /api to Flask)
-cd frontend && npm install && npm start
+npm install && npm start
 
 # tests
 pytest tests/system tests/unit
 npx playwright test
 ```
+
+## Configuration
+The backend has three configs, chosen by the `APP_ENV` variable (default `development`):
+
+| `APP_ENV`     | Used for        | Secret key  | Database                                   |
+| ------------- | --------------- | ----------- | ------------------------------------------ |
+| `development` | local work      | built in    | SQLite file `instance/polaris.db`          |
+| `test`        | the test suite  | built in    | temporary SQLite file per test             |
+| `production`  | deployment      | `SECRET_KEY` | Postgres from `DATABASE_URL`              |
+
+Development and test need no setup. Production refuses to start unless `SECRET_KEY` and `DATABASE_URL` are set.
+
+Variables come from, in this order of priority: the real environment, `.env` (your local copy of `.env.example`, ignored by git), and `.flaskenv` (committed, only tells `flask` where the app is). Only the `flask` command reads the two files. `pytest` selects the test config itself.
+
+## Database migrations
+The schema changes through migrations in `backend/migrations/versions`, never by editing the database by hand. After changing a model:
+```
+flask db migrate -m "describe the change"   # drafts a migration from the model diff
+# review the new file in backend/migrations/versions
+flask db upgrade                            # applies all pending migrations
+```
+Commit the model change and its migration together. Migrations never run on their own: run `flask db upgrade` after pulling, and as a deploy step in production before the new version starts. Do not edit a migration that was already applied somewhere, add a new one instead. `flask db check` fails if the models and the migrations disagree.
 
 ## Architecture in short
 - Angular single-page app ⇄ JSON REST API ⇄ Flask backend ⇄ SQLAlchemy ⇄ SQLite (dev) / Postgres (prod)
@@ -40,10 +64,11 @@ npx playwright test
 ```
 docs/       vision, requirements, design, API schemas, backlog, change log
 tests/      plans/ (test plans), acceptance/ (Playwright), system/ (pytest), unit/
-backend/    Flask app, migrations
-frontend/   Angular app
+backend/    Flask sources, migrations
+frontend/   Angular sources
 .claude/    skills to plan and implement features
 ```
+Dependencies and tool configuration live at the root (`requirements.txt`, `.venv`, `package.json`, `angular.json`, `node_modules`), the sources stay in `backend/` and `frontend/`.
 
 ## Documentation
 Read in this order, each is derived from the one before: [VISION](docs/VISION.md) → [STAKEHOLDER_REQ](docs/STAKEHOLDER_REQ.md) → [REQUIREMENTS](docs/REQUIREMENTS.md) → [DOMAIN_MODEL](docs/DOMAIN_MODEL.md) → [RELATIONAL_SCHEMA](docs/RELATIONAL_SCHEMA.md) → [ARCHITECTURE](docs/ARCHITECTURE.md) → [MARSHMALLOW_SCHEMAS](docs/MARSHMALLOW_SCHEMAS.md).
