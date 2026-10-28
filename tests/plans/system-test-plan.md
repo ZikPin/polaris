@@ -19,7 +19,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 
 | ID | Requirements | Scenario | Pass criterion |
 | --- | --- | --- | --- |
-| ST-01 | F-01, 02, 03, 04 | Create a course, read its tables, rename the course, delete it. | The new course has a lecture table and an assignment table, each with only the default title column, no rows and no custom columns. The rename and the delete take effect. |
+| ST-01 | F-01, 02, 03, 04 | Create a course, read its tables, rename the course, delete it. | The new course has a lecture table and an assignment table, each empty, with no rows and no custom columns. The rename and the delete take effect. |
 | ST-02 | F-03 | Course with rows, columns, cell values, tags and a calendar link. Delete the course. | All of it is gone, and its tables can no longer be read. The user and the tag remain. A new course with the same title has empty tables. |
 
 ### Rows
@@ -37,7 +37,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | ST-06 | F-15, 19 | Delete a checkbox column and a number column that have values. | The columns and their values are gone. The rows remain. |
 | ST-07 | F-16, 17 | Number columns with min 1 and max 5, only a min, only a max, and neither. Write values inside, on and outside each bound, and "abc". Then clear a value. | Values on or inside the bounds that are set are accepted. Values outside a set bound and "abc" are rejected with a client error, and the stored value stays. Without bounds every number is accepted. A cleared value is empty again. |
 | ST-08 | F-18 | Number column with values 1 to 5. Change min to 3, then write 2 and 4 to other cells. | The stored values stay as they are. 2 is rejected, and 4 is accepted. |
-| ST-09 | F-20, 21 | Add checkbox column "X", number column "Y", checkbox column "Z", rename "X". Try to delete the default title column. | Columns come back as title column, X, Y, Z. The deletion is rejected, and the column remains. |
+| ST-09 | F-20, 21 | Add checkbox column "X", number column "Y", checkbox column "Z", rename "X". | The table lists the columns X, Y, Z in creation order. The title is part of each row, not a column, so it is not listed and there is nothing to delete. |
 | ST-10 | Schema: cells | Write a bool value to a number column, a number to a checkbox column, and a cell for a row and a column of different courses or table types. | Every write is rejected, and the stored data is unchanged. |
 
 ### Tags
@@ -61,7 +61,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 
 | ID | Requirements | Scenario | Pass criterion |
 | --- | --- | --- | --- |
-| ST-18 | F-41 to 46 | Assign two lectures and an assignment to a day, assign the first lecture to a second day, and try to assign it to the first day again. Read the day, remove one lecture, delete the other lecture. | The duplicate is rejected. The day lists the lectures first, then the assignments, each in creation order. Removing and deleting take effect, and deleting a row removes its calendar links. |
+| ST-18 | F-41 to 46 | Set a day to two lectures and an assignment (sent in mixed order), set a second day to the first lecture, then set the first day again without one lecture. Delete the other lecture. A second user sets the same date to their own row. | The day lists the lectures first, then the assignments, each in creation order. Setting a day replaces its rows, and the date is created on first use. Deleting a row removes its calendar links. The second user's row on the same date is untouched and not shown to the first user. |
 
 ### Authentication and isolation
 
