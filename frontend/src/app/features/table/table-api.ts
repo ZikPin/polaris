@@ -54,8 +54,32 @@ export class TableApi {
     });
   }
 
-  renameColumn(columnId: number, label: string): Observable<unknown> {
-    return this.http.patch(`/api/table/column/${columnId}`, { label });
+  addNumberColumn(
+    courseId: number,
+    tableType: TableType,
+    label: string,
+    min: number | null,
+    max: number | null,
+  ): Observable<unknown> {
+    return this.http.post(`/api/table/${courseId}/${tableType}/column`, {
+      column_type: 'number',
+      label,
+      min,
+      max,
+    });
+  }
+
+  /** Changes only the sent fields. A null min or max removes the bound. */
+  updateColumn(
+    columnId: number,
+    changes: {
+      label?: string;
+      min?: number | null;
+      max?: number | null;
+      preferred_statistic?: 'avg' | 'sum';
+    },
+  ): Observable<unknown> {
+    return this.http.patch(`/api/table/column/${columnId}`, changes);
   }
 
   deleteColumn(columnId: number): Observable<void> {

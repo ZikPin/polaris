@@ -27,6 +27,16 @@ export const routes: Routes = [
     loadComponent: () => import('./features/tags/tags').then((m) => m.Tags),
   },
   {
+    path: 'dashboard',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/dashboard/dashboard').then((m) => m.Dashboard),
+  },
+  {
+    path: 'calendar',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/calendar/calendar').then((m) => m.Calendar),
+  },
+  {
     path: '**',
     redirectTo: 'courses',
   },

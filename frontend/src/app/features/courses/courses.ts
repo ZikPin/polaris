@@ -2,12 +2,9 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { errorMessage } from '../../core/api-error';
+import { toggleId } from '../../core/ids';
 import { Tag, TagApi } from '../tags/tag-api';
 import { Course, CourseApi } from './course-api';
-
-function toggle(ids: number[], id: number): number[] {
-  return ids.includes(id) ? ids.filter((x) => x !== id) : [...ids, id];
-}
 
 @Component({
   selector: 'app-courses',
@@ -50,7 +47,7 @@ export class Courses implements OnInit {
   }
 
   protected toggleFilter(tagId: number) {
-    this.filter.update((ids) => toggle(ids, tagId));
+    this.filter.update((ids) => toggleId(ids, tagId));
     this.load();
   }
 
@@ -65,7 +62,7 @@ export class Courses implements OnInit {
   }
 
   protected toggleEditTag(tagId: number) {
-    this.editTagIds.update((ids) => toggle(ids, tagId));
+    this.editTagIds.update((ids) => toggleId(ids, tagId));
   }
 
   protected save(event: Event, course: Course, title: string) {

@@ -8,18 +8,29 @@ CREDENTIALS = {"email": "a@example.com", "password": "password1"}
 
 @pytest.fixture
 def app(tmp_path):
-    """The app with a fresh database file that has no tables yet."""
+    """The app with a fresh database file that has no tables yet.
+
+    No app context is kept open for the test: requests made inside an open context would share it,
+    and with it the user that Flask-Login caches on `g`. Tests that use `db` directly request `db_context`.
+    """
     app = create_app("test", {"SQLALCHEMY_DATABASE_URI": f"sqlite:///{tmp_path / 'test.db'}"})
+    yield app
     with app.app_context():
-        yield app
-        db.session.remove()
         db.engine.dispose()
+
+
+@pytest.fixture
+def db_context(app):
+    """An app context, for tests that use `db` directly instead of through requests."""
+    with app.app_context():
+        yield
 
 
 @pytest.fixture
 def tables(app):
     """The tables of the models, created in the database of the app."""
-    db.create_all()
+    with app.app_context():
+        db.create_all()
 
 
 @pytest.fixture
@@ -64,6 +75,15 @@ def add_row(user_client):
         assert response.status_code == 201
         return response.get_json()
     return add
+
+
+@pytest.fixture
+def set_cell(user_client):
+    def put(row, column, value):
+        response = user_client.put(f"/api/table/cell/{row['id']}/{column['id']}", json={"value": value})
+        assert response.status_code == 200
+        return response.get_json()
+    return put
 
 
 @pytest.fixture

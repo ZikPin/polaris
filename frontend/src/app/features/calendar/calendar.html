@@ -1,0 +1,86 @@
+<h1>Calendar</h1>
+<p>A planning aid: assign lectures and assignments to the days you want to work on them.</p>
+
+<p>
+  <button type="button" (click)="shift(-1)">Previous month</button>
+  {{ monthLabel() }}
+  <button type="button" (click)="shift(1)">Next month</button>
+</p>
+
+@if (error()) {
+  <p role="alert">{{ error() }}</p>
+}
+
+<div class="layout">
+  <table>
+    <thead>
+      <tr>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+        <th>Sun</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (week of weeks(); track week[0].date) {
+        <tr>
+          @for (day of week; track day.date) {
+            <td>
+              @if (day.inMonth) {
+                <button type="button" (click)="select(day.date)">{{ day.day }}</button>
+                @for (row of days()[day.date] ?? []; track row.id) {
+                  <div>{{ row.title }}</div>
+                }
+              }
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  @if (selected(); as date) {
+    <section>
+      <h2>{{ date }}</h2>
+      <ul>
+        @for (row of selectedRows(); track row.id) {
+          <li>
+            {{ row.title }} ({{ row.table_type }}, {{ courseTitle(row.course_id) }})
+            <button type="button" (click)="remove(row)">Remove</button>
+          </li>
+        } @empty {
+          <li>Nothing planned.</li>
+        }
+      </ul>
+
+      <p>
+        <select #course (change)="chooseCourse(+course.value)">
+          <option value="0">Choose a course</option>
+          @for (c of courses(); track c.id) {
+            <option [value]="c.id">{{ c.title }}</option>
+          }
+        </select>
+      </p>
+      @if (tables(); as tables) {
+        <p>
+          <select #row>
+            <optgroup label="Lectures">
+              @for (r of tables.lecture.rows; track r.id) {
+                <option [value]="r.id">{{ r.title }}</option>
+              }
+            </optgroup>
+            <optgroup label="Assignments">
+              @for (r of tables.assignment.rows; track r.id) {
+                <option [value]="r.id">{{ r.title }}</option>
+              }
+            </optgroup>
+          </select>
+          <button type="button" (click)="add(+row.value)">Add to this day</button>
+        </p>
+      }
+    </section>
+  }
+</div>

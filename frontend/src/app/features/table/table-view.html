@@ -11,6 +11,17 @@
           {{ column.label }}
           <button type="button" (click)="renameColumn(column)">Rename</button>
           <button type="button" (click)="deleteColumn(column)">Delete</button>
+          @if (column.column_type === 'number') {
+            <br />
+            Values: {{ rangeText(column) }}
+            <button type="button" (click)="editBounds(column)">Bounds</button>
+            <br />
+            Dashboard shows:
+            <select (change)="setStatistic(column, $event)">
+              <option value="avg" [selected]="column.preferred_statistic === 'avg'">average</option>
+              <option value="sum" [selected]="column.preferred_statistic === 'sum'">sum</option>
+            </select>
+          }
         </th>
       }
       <th></th>
@@ -29,7 +40,12 @@
                 (change)="setChecked(row, column, $event)"
               />
             } @else {
-              {{ row.cells[column.id] }}
+              <input
+                type="number"
+                step="any"
+                [value]="numberText(row, column)"
+                (change)="setNumber(row, column, $event)"
+              />
             }
           </td>
         }
@@ -50,7 +66,13 @@
   <input #rowTitle placeholder="New {{ tableType() }}" required />
   <button type="submit">Add {{ tableType() }}</button>
 </form>
-<form (submit)="addColumn($event, columnLabel)">
-  <input #columnLabel placeholder="Label of the new checkbox column" required />
+<form (submit)="addCheckboxColumn($event, checkboxLabel)">
+  <input #checkboxLabel placeholder="Label of the new checkbox column" required />
   <button type="submit">Add checkbox column</button>
+</form>
+<form (submit)="addNumberColumn($event, numberLabel, min, max)">
+  <input #numberLabel placeholder="Label of the new number column" required />
+  <input #min type="number" step="any" placeholder="Minimum (optional)" />
+  <input #max type="number" step="any" placeholder="Maximum (optional)" />
+  <button type="submit">Add number column</button>
 </form>

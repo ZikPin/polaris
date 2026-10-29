@@ -15,7 +15,7 @@ def test_register_logs_the_user_in(client):
     assert client.get("/api/auth/me").status_code == 200
 
 
-def test_register_rejects_bad_input(client):
+def test_register_rejects_bad_input(app, client):
     """ST-19"""
     client.post("/api/auth/register", json=CREDENTIALS)
     rejected = [
@@ -29,7 +29,8 @@ def test_register_rejects_bad_input(client):
     for payload, status in rejected:
         assert client.post("/api/auth/register", json=payload).status_code == status, payload
 
-    assert db.session.execute(text("SELECT COUNT(*) FROM users")).scalar_one() == 1
+    with app.app_context():
+        assert db.session.execute(text("SELECT COUNT(*) FROM users")).scalar_one() == 1
 
 
 def test_login_and_logout(user_client):
@@ -52,7 +53,8 @@ def test_passwords_are_stored_hashed(app, client):
     for email in ("a@example.com", "b@example.com"):
         app.test_client().post("/api/auth/register", json={"email": email, "password": "password1"})
 
-    stored = [row[0] for row in db.session.execute(text("SELECT password FROM users ORDER BY id"))]
+    with app.app_context():
+        stored = [row[0] for row in db.session.execute(text("SELECT password FROM users ORDER BY id"))]
 
     assert len(stored) == 2
     assert "password1" not in stored

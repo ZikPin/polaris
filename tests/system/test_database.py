@@ -9,6 +9,8 @@ from sqlalchemy.exc import IntegrityError
 
 from backend.app.extensions import db
 
+pytestmark = pytest.mark.usefixtures("db_context")
+
 MIGRATIONS = Path(__file__).resolve().parents[2] / "backend" / "migrations"
 
 TABLES = {

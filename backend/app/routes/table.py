@@ -12,11 +12,9 @@ from ..schemas.table import (
     RowResponseSchema,
 )
 from ..services import table as table_service
-from .helpers import load
+from .helpers import TABLE_TYPE, load
 
 bp = Blueprint("table", __name__, url_prefix="/api/table")
-
-TABLE_TYPE = "<any(lecture,assignment):table_type>"
 
 
 @bp.get("/<int:course_id>")

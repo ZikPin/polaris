@@ -34,6 +34,3 @@ __pycache__/
 
 # Local development database
 /instance/
-
-# vscode
-.vscode
