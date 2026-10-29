@@ -1,22 +1,42 @@
+import os
+
 import pytest
+from sqlalchemy import text
 
 from backend.app import create_app
 from backend.app.extensions import db
+
+# Set it to run the suite on Postgres instead of a SQLite file per test (docker-compose.yml)
+TEST_DATABASE_URL = os.environ.get("TEST_DATABASE_URL")
 
 CREDENTIALS = {"email": "a@example.com", "password": "password1"}
 
 
 @pytest.fixture
 def app(tmp_path):
-    """The app with a fresh database file that has no tables yet.
+    """The app with a fresh database that has no tables yet.
 
     No app context is kept open for the test: requests made inside an open context would share it,
     and with it the user that Flask-Login caches on `g`. Tests that use `db` directly request `db_context`.
+
+    On SQLite every test has its own file. A Postgres is shared, so the tables are dropped before and after each test.
     """
-    app = create_app("test", {"SQLALCHEMY_DATABASE_URI": f"sqlite:///{tmp_path / 'test.db'}"})
+    app = create_app("test", {"SQLALCHEMY_DATABASE_URI": TEST_DATABASE_URL or f"sqlite:///{tmp_path / 'test.db'}"})
+    if TEST_DATABASE_URL:
+        _drop_tables(app)
     yield app
+    if TEST_DATABASE_URL:
+        _drop_tables(app)
     with app.app_context():
         db.engine.dispose()
+
+
+def _drop_tables(app):
+    with app.app_context():
+        db.session.remove()
+        db.drop_all()
+        db.session.execute(text("DROP TABLE IF EXISTS alembic_version"))  # left by the migration test
+        db.session.commit()
 
 
 @pytest.fixture

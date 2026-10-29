@@ -58,17 +58,17 @@ def ids(tables):
         "VALUES ('number', 'lecture', 'Grade', :course)", **ids
     )
     run("INSERT INTO course_tags (tag_id, course_id) VALUES (:tag, :course)", ids)
-    run("INSERT INTO bool_cells (column_id, row_id, value) VALUES (:column, :row, 1)", ids)
+    run("INSERT INTO bool_cells (column_id, row_id, value) VALUES (:column, :row, true)", ids)
     return ids
 
 
 VIOLATIONS = {
     "course of an unknown user": "INSERT INTO courses (title, user_id) VALUES ('X', 999)",
-    "cell of an unknown row": "INSERT INTO bool_cells (column_id, row_id, value) VALUES (:column, 999, 0)",
+    "cell of an unknown row": "INSERT INTO bool_cells (column_id, row_id, value) VALUES (:column, 999, false)",
     "duplicate email": "INSERT INTO users (email, password) VALUES ('a@example.com', 'x')",
     "duplicate tag value of a user": "INSERT INTO tags (value, user_id) VALUES ('ML', :user)",
     "duplicate date": "INSERT INTO calendar_dates (date) VALUES ('2026-11-03')",
-    "duplicate cell": "INSERT INTO bool_cells (column_id, row_id, value) VALUES (:column, :row, 0)",
+    "duplicate cell": "INSERT INTO bool_cells (column_id, row_id, value) VALUES (:column, :row, false)",
     "duplicate course tag link": "INSERT INTO course_tags (tag_id, course_id) VALUES (:tag, :course)",
     "invalid table_type of a row":
         "INSERT INTO course_rows (table_type, title, course_id) VALUES ('exam', 'X', :course)",

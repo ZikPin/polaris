@@ -34,6 +34,8 @@ Everything runs from the repository root: `requirements.txt`, `.venv`, `package.
 ```
 python -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt
 pytest                      # all tests in tests/
+docker compose up -d        # Postgres on :5433, then run the suite on it:
+TEST_DATABASE_URL=postgresql+psycopg2://polaris:polaris@localhost:5433/polaris_test pytest tests/system
 flask run                   # backend
 flask db migrate -m "..."   # after a model change, then review the file in backend/migrations/versions
 flask db upgrade

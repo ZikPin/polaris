@@ -1,0 +1,18 @@
+# A Postgres like the one of Supabase, only for the system tests (T-017):
+#   docker compose up -d
+#   TEST_DATABASE_URL=postgresql+psycopg2://polaris:polaris@localhost:5433/polaris_test pytest tests/system
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: polaris
+      POSTGRES_PASSWORD: polaris
+      POSTGRES_DB: polaris_test
+    ports:
+      - "5433:5432"  # 5433, so it does not collide with a Postgres on the host
+    tmpfs:
+      - /var/lib/postgresql/data  # the data is thrown away with the container
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U polaris -d polaris_test"]
+      interval: 2s
+      retries: 15

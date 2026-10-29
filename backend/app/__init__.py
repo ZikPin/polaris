@@ -21,7 +21,7 @@ def create_app(config=None, overrides=None):
     if overrides:
         app.config.update(overrides)
     if name == "production" and not (app.config["SECRET_KEY"] and app.config["SQLALCHEMY_DATABASE_URI"]):
-        raise RuntimeError("SECRET_KEY and DATABASE_URL must be set in production")
+        raise RuntimeError("SECRET_KEY, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT and DB_NAME must be set in production")
 
     os.makedirs(app.instance_path, exist_ok=True)
     db.init_app(app)

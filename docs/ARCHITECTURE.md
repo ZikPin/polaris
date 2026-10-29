@@ -5,7 +5,7 @@ The system is a client-server application. An Angular single-page application (c
 
 There are 3 environments:
 - Development: for local development. SQLite database
-- Test: for the automated tests. A temporary SQLite database for every test
+- Test: for the automated tests. A temporary SQLite database for every test, or a Postgres from `docker-compose.yml` when `TEST_DATABASE_URL` is set (the tables are dropped around every test)
 - Production: for deployment. Postgres database through Supabase
 
 ## Frontend Architecture
@@ -16,7 +16,7 @@ There are 3 environments:
 - Routes: `/login`, `/register`, and the guarded `/courses`, `/courses/:id`, `/dashboard` and `/calendar`. Tags have no route, they are managed in a dialog opened from the header. The route guard asks `GET api/auth/me` and redirects to `/login` if the user is not logged in or the check fails
 
 ## Backend Architecture
-The backend is created by an app factory `create_app(config, overrides)` with a development, a test and a production configuration. The configuration is chosen by name or by the `APP_ENV` variable (default `development`). Production reads `SECRET_KEY` and `DATABASE_URL` from the environment and does not start without them. The extensions (SQLAlchemy, migrations, login) are initialized inside the factory. `requirements.txt` and the virtual environment are at the repository root, the sources are in `backend/`.
+The backend is created by an app factory `create_app(config, overrides)` with a development, a test and a production configuration. The configuration is chosen by name or by the `APP_ENV` variable (default `development`). Production reads `SECRET_KEY` and the database settings `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT` and `DB_NAME` (a Postgres over SSL) from the environment and does not start without them. The extensions (SQLAlchemy, migrations, login) are initialized inside the factory. `requirements.txt` and the virtual environment are at the repository root, the sources are in `backend/`.
 
 ```
 backend/app/

@@ -30,6 +30,8 @@ npm install && npm start
 
 # tests
 pytest tests/system tests/unit
+docker compose up -d               # a Postgres for the system tests, then:
+TEST_DATABASE_URL=postgresql+psycopg2://polaris:polaris@localhost:5433/polaris_test pytest tests/system
 npx playwright install chromium    # once, the browser of the acceptance tests
 npm run acceptance                 # starts its own backend (5050) and frontend (4300), the dev servers can keep running
 ```
@@ -40,10 +42,10 @@ The backend has three configs, chosen by the `APP_ENV` variable (default `develo
 | `APP_ENV`     | Used for        | Secret key  | Database                                   |
 | ------------- | --------------- | ----------- | ------------------------------------------ |
 | `development` | local work      | built in    | SQLite file `instance/polaris.db`          |
-| `test`        | the test suite  | built in    | temporary SQLite file per test             |
-| `production`  | deployment      | `SECRET_KEY` | Postgres from `DATABASE_URL`              |
+| `test`        | the test suite  | built in    | temporary SQLite file per test, or the `TEST_DATABASE_URL` Postgres |
+| `production`  | deployment      | `SECRET_KEY` | Postgres from `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_NAME` |
 
-Development and test need no setup. Production refuses to start unless `SECRET_KEY` and `DATABASE_URL` are set.
+Development and test need no setup. Production refuses to start unless `SECRET_KEY` and the five `DB_*` variables are set.
 
 Variables come from, in this order of priority: the real environment, `.env` (your local copy of `.env.example`, ignored by git), and `.flaskenv` (committed, only tells `flask` where the app is). Only the `flask` command reads the two files. `pytest` selects the test config itself.
 

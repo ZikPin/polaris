@@ -22,5 +22,5 @@ Statuses: `todo`, `in progress`, `done`, `stale` (the request or requirement it 
 | T-003  | infra               | done   | Set up the acceptance tests: Playwright with playwright-bdd on Chromium, database restore and login fixtures (REQ-NF-02) |
 | T-021  | SR-M, SR-S, SR-C    | in progress | Automated acceptance tests AT-02 to AT-14 as Gherkin features with step definitions (AT-01 exists since T-003, the timed and negative checks belong to T-016 and are manual) |
 | T-016  | Vision              | in progress | Success criteria: timed tests and the 500 ms feedback check (AT-V-01 to 06, REQ-NF-01, 03) |
-| T-017  | infra               | todo   | Run the system suite against Postgres with docker-compose |
+| T-017  | infra               | in progress | Run the system suite against Postgres with docker-compose |
 | T-018  | infra               | todo   | Decide hosting and deploy over HTTPS, with `flask db upgrade` as a deploy step before the new version starts (REQ-C-02, REQ-NF-05) |
