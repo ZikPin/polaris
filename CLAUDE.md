@@ -37,8 +37,13 @@ pytest                      # all tests in tests/
 flask run                   # backend
 flask db migrate -m "..."   # after a model change, then review the file in backend/migrations/versions
 flask db upgrade
+flask seed                  # users alice, bob, carol (password polaris-demo), skips users that exist
 npm install
 npm start                   # frontend on :4200, proxies /api to Flask on :5000
 npm run build
 ```
-Acceptance test commands are added by T-003.
+Acceptance tests (Playwright + playwright-bdd, own backend and frontend ports, `tests/acceptance/`):
+```
+npx playwright install chromium   # once
+npm run acceptance                # bddgen, then playwright test
+```

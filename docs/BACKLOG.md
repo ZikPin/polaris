@@ -18,8 +18,8 @@ Statuses: `todo`, `in progress`, `done`, `stale` (the request or requirement it 
 | T-014  | SR-M-09             | done   | Verify that users only reach their own data on every endpoint (REQ-F-50, ST-21, ST-22) |
 | T-019  | SR-C-01, SR-C-02    | done   | Calendar: assign lectures and assignments to days (REQ-F-41 to 46) |
 | T-020  | infra               | done   | Design: wireframes, a color palette as a theme (CSS variables) and a UX pass (too many buttons, browser prompts for renaming rows and columns), applied to the screens built so far |
-| T-015  | infra               | todo   | Seed command that creates the users alice, bob and carol with demo data (ST-27) |
-| T-003  | infra               | todo   | Set up the acceptance tests: Playwright with playwright-bdd on Chromium, database restore and login fixtures (REQ-NF-02) |
+| T-015  | infra               | in progress | Seed command that creates the users alice, bob and carol with demo data (ST-27) |
+| T-003  | infra               | in progress | Set up the acceptance tests: Playwright with playwright-bdd on Chromium, database restore and login fixtures (REQ-NF-02) |
 | T-016  | Vision              | todo   | Success criteria: timed tests and the 500 ms feedback check (AT-V-01 to 06, REQ-NF-01, 03) |
 | T-017  | infra               | todo   | Run the system suite against Postgres with docker-compose |
 | T-018  | infra               | todo   | Decide hosting and deploy over HTTPS, with `flask db upgrade` as a deploy step before the new version starts (REQ-C-02, REQ-NF-05) |

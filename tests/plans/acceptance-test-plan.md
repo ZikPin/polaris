@@ -11,15 +11,15 @@ Validates [VISION.md](../../docs/VISION.md) and [STAKEHOLDER_REQ.md](../../docs/
 - **Terms:** a lecture or assignment is "done" when every checkbox column in its row is checked. It is "not done" when at least one checkbox column is unchecked.
 
 ## Seed data
-The seed is created by a `seed` command of the backend, which also serves as demo data for development. The pristine database used for the restore is generated from it.
+The seed is created by the `flask seed` command (`backend/app/seed.py`), which also serves as demo data for development. All seed users have the password `polaris-demo`. A user that already exists is skipped, so a second run changes nothing. The pristine database used for the restore is built from it: `tests/acceptance/server.py` applies the migrations and the seed to a new file every time the suite starts.
 
-| User | Content | Used for |
-| --- | --- | --- |
-| alice | Several courses with tags, lecture and assignment rows, custom checkbox and number columns, and a mix of checked and unchecked cells | Read-only tests: dashboard, filters, not-done lists |
-| bob | A few courses of their own | Isolation test AT-02 |
+| User  | Content | Used for |
+| ----- | ------- | -------- |
+| alice | Tags Semester 1, Semester 2, CS, Math and ML, and five courses. **Algorithms** (Semester 1, CS): lectures Chapter 1 to 4 with the checkbox columns Watched (checked on 1 to 3) and Notes (checked on 1), assignments Sheet 1 to 3 with Solved and the number column Points (0 to 20, statistic sum). **Linear Algebra** (Semester 1, Math): all lectures watched, assignments with Grade 1, 2 and 3 (1 to 6, default statistic). **Databases** (Semester 2, CS) and **Machine Learning** (Semester 2, CS, ML) with a mix of checked and unchecked cells, **Statistics** without tags and with empty tables. Calendar entries on today, in 2 and in 5 days | Read-only tests: dashboard, filters, not-done lists |
+| bob   | Tag Lab and the courses Biology and Chemistry | Isolation test AT-02 |
 | carol | Registered, no courses | Tests that create, rename or delete data, and the timed tests |
 
-Registration tests use new email addresses. Where a scenario below describes specific data (for example "L1 to L4 with L1 to L3 checked"), either alice's seed contains exactly that, or the test creates it first as carol. The exact seed contents are fixed when the seed command is written, and checked against this plan.
+Registration tests use new email addresses. Where a scenario below describes specific data (for example "L1 to L4 with L1 to L3 checked"), either alice's seed contains exactly that (AT-09 and AT-13 do: Algorithms and Linear Algebra), or the test creates it first as carol.
 
 ## Pass criteria for the release
 - All **Must have** tests (AT-01 to AT-10) and all success-criteria tests (AT-V-*) pass.

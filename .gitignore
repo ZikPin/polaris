@@ -34,3 +34,8 @@ __pycache__/
 
 # Local development database
 /instance/
+
+# Acceptance tests (Playwright)
+/tests/acceptance/.features-gen/
+/tests/acceptance/test-results/
+/tests/acceptance/playwright-report/

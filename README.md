@@ -22,7 +22,7 @@ The commands below are the planned ones and get verified by the scaffold tickets
 # backend
 python -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
-flask db upgrade && flask seed     # seed creates demo users alice, bob, carol
+flask db upgrade && flask seed     # seed creates the demo users alice, bob, carol (password polaris-demo)
 flask run
 
 # frontend (proxies /api to Flask)
@@ -30,7 +30,8 @@ npm install && npm start
 
 # tests
 pytest tests/system tests/unit
-npx playwright test
+npx playwright install chromium    # once, the browser of the acceptance tests
+npm run acceptance                 # starts its own backend (5050) and frontend (4300), the dev servers can keep running
 ```
 
 ## Configuration
