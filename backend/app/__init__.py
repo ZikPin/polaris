@@ -2,11 +2,13 @@ import os
 from pathlib import Path
 
 from flask import Flask
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from . import models  # noqa: F401  registers the models with SQLAlchemy
 from .config import CONFIGS
 from .errors import register_error_handlers
 from .extensions import db, login_manager, migrate
+from .frontend import register_frontend
 from .routes import register_blueprints
 from .seed import seed_command
 
@@ -29,5 +31,10 @@ def create_app(config=None, overrides=None):
     login_manager.init_app(app)
     register_error_handlers(app)
     register_blueprints(app)
+    if app.config.get("FRONTEND_DIR"):
+        register_frontend(app)
+    if name == "production":
+        # Behind the proxy of the host: trust its headers, so URLs and redirects say https and the real host
+        app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
     app.cli.add_command(seed_command)
     return app

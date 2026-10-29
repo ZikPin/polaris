@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from sqlalchemy.engine import URL
 
@@ -42,6 +43,7 @@ def _production_database():
 
 class Production(Base):
     SESSION_COOKIE_SECURE = True
+    FRONTEND_DIR = str(Path(__file__).resolve().parents[2] / "dist" / "polaris" / "browser")  # the built Angular app
     SECRET_KEY = os.environ.get("SECRET_KEY")
     SQLALCHEMY_DATABASE_URI = _production_database()
 

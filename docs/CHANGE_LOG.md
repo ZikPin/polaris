@@ -1,6 +1,7 @@
 # Change Log
 One line per finished ticket, newest first: date · ticket · one sentence.
 
+- 2026-10-29 · T-017 · System suite on Postgres: `docker-compose.yml`, `TEST_DATABASE_URL` switch in the fixtures, Postgres driver, and prefixed `DB_*` production settings.
 - 2026-10-29 · T-003 · Acceptance test setup: Playwright with playwright-bdd on Chromium, own backend and frontend ports, pristine database restored before every test, login fixture.
 - 2026-10-29 · T-015 · Seed command `flask seed`: the users alice, bob and carol with demo data, safe to run twice.
 - 2026-10-29 · T-020 · Design: light pearl theme with Manrope and CSS tokens applied to every screen, frame with navbar, tags and column dialogs, and in-place editing instead of browser prompts.

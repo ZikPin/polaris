@@ -36,6 +36,12 @@ npx playwright install chromium    # once, the browser of the acceptance tests
 npm run acceptance                 # starts its own backend (5050) and frontend (4300), the dev servers can keep running
 ```
 
+## Deploy (Render + Supabase)
+1. Supabase: Connect, Session pooler. Put user, password, host, port and database name into `.env` as `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_NAME`.
+2. Check the connection and create the tables once from your machine: `APP_ENV=production flask db upgrade`.
+3. Push the repository to GitHub. In Render: New, Blueprint, pick the repository (`render.yaml`), and enter the five `DB_*` values. `SECRET_KEY` is generated.
+4. Render builds the `Dockerfile`. The container runs `flask db upgrade` and then gunicorn. Never run `flask seed` there.
+
 ## Configuration
 The backend has three configs, chosen by the `APP_ENV` variable (default `development`):
 

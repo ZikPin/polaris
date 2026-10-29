@@ -59,8 +59,8 @@ Calendar dates are shared between users (the date table has no owner). Setting a
 - The browser always talks to a single origin (the dev proxy in development, one origin in production), so no CORS configuration is needed
 - Request bodies are JSON only, and no CSRF tokens are used
 
-### Open decision: deployment
-Where Flask and the built Angular app run in production is not decided yet (locally, for example with docker, or on a hosting service like Render). Supabase only hosts the production database. To be decided before deployment.
+### Deployment
+One Docker image (`Dockerfile`): a Node stage builds the Angular app, a Python stage runs Flask with gunicorn, and Flask serves the built app next to `/api`, so the browser sees a single origin. It runs as a web service on Render (`render.yaml`), the database is the Supabase Postgres (Session pooler, SSL). Render terminates HTTPS and sends `X-Forwarded-*` headers, which the app trusts in production (REQ-NF-05). The container runs `flask db upgrade` before gunicorn starts, so every deploy migrates the database first. The seed command is never run in production.
 
 ## API
 

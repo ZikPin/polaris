@@ -77,6 +77,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | --- | --- | --- | --- |
 | ST-23 | F-51 | Create or rename a course, a row, a column label and a tag to an empty or whitespace-only value. | Every attempt is rejected and nothing changes. |
 | ST-30 | Architecture: error format | Request an unknown URL, send a payload that fails validation, and call a protected endpoint without logging in. | The answers are 404, 400 and 401, each with a JSON body that has an `error` message. The 400 also has `fields` with the messages per field. |
+| ST-31 | Architecture: one origin | With a built frontend configured, request `/`, an Angular route like `/courses/3`, a file of the build, and an unknown path below `/api`. | The first two return `index.html`, the file is sent as it is, and the unknown API path is a JSON 404 (not the app). |
 
 ### Database
 
@@ -133,4 +134,5 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | REQ-NF-05 | Deployment check |
 | Schema rules | ST-10, ST-24, ST-25 |
 | Error format | ST-30 |
+| Serving the frontend (one origin) | ST-31 |
 | Seed command | ST-27 |
