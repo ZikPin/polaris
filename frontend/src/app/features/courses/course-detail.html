@@ -7,7 +7,7 @@
 
 @if (tables(); as tables) {
   <div class="tables">
-    <app-table-view [courseId]="courseId" tableType="lecture" [table]="tables.lecture" (changed)="reload()" />
-    <app-table-view [courseId]="courseId" tableType="assignment" [table]="tables.assignment" (changed)="reload()" />
+    <app-table-view [courseId]="courseId()" tableType="lecture" [table]="tables.lecture" (changed)="reload()" />
+    <app-table-view [courseId]="courseId()" tableType="assignment" [table]="tables.assignment" (changed)="reload()" />
   </div>
 }

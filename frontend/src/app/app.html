@@ -15,14 +15,19 @@
   @if (auth.user()) {
     <aside class="sidebar">
       <nav aria-label="Main">
-        <div class="nav-group" routerLinkActive="open">
-          <a class="nav-item" routerLink="/courses" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            <app-icon name="courses" />Courses<app-icon class="chev" name="chevron-down" />
-          </a>
+        <div class="nav-group" [class.open]="coursesOpen()">
+          <div class="nav-row">
+            <a class="nav-item" routerLink="/courses" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="coursesOpen.set(true)">
+              <app-icon name="courses" />Courses
+            </a>
+            <button class="nav-toggle" type="button" [attr.aria-expanded]="coursesOpen()" aria-label="Show or hide the courses" (click)="coursesOpen.set(!coursesOpen())">
+              <app-icon name="chevron-down" />
+            </button>
+          </div>
           <ul class="nav-sub">
             @for (course of courseApi.all(); track course.id) {
               <li>
-                <a [routerLink]="['/courses', course.id]" routerLinkActive="active"><i class="dot"></i>{{ course.title }}</a>
+                <a [routerLink]="['/courses', course.id]" routerLinkActive="active" [attr.title]="course.title"><i class="dot"></i><span>{{ course.title }}</span></a>
               </li>
             }
           </ul>

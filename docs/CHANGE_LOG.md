@@ -1,6 +1,7 @@
 # Change Log
 One line per finished ticket, newest first: date · ticket · one sentence.
 
+- 2026-10-29 · T-020 · Design: light pearl theme with Manrope and CSS tokens applied to every screen, frame with navbar, tags and column dialogs, and in-place editing instead of browser prompts.
 - 2026-10-29 · T-019 · Calendar: assign lectures and assignments to days in a month view, per user, lectures listed before assignments.
 - 2026-10-29 · T-014 · Isolation tests: every protected endpoint needs a login and users cannot reach each other's data.
 - 2026-10-29 · T-013 · Dashboard filters by tags (at least one) and by courses.

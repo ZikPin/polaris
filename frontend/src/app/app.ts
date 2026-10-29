@@ -18,6 +18,7 @@ export class App {
   private readonly router = inject(Router);
 
   protected readonly tagsOpen = signal(false);
+  protected readonly coursesOpen = signal(true);
 
   constructor() {
     // The navigation and the filters list the courses and tags of whoever is logged in.

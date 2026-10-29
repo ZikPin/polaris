@@ -19,7 +19,7 @@ Design: `docs/design/` (`BRIEF.md`, wireframes, HTML mock-ups with `theme.css`).
 - IDs (SR-, REQ-, T-, ST-, AT-) are never renumbered or reused. New ones get the next number. A removed requirement is marked removed, and the tickets that depend on it become stale.
 - DOMAIN_MODEL and RELATIONAL_SCHEMA stay consistent: same fields, entities singular, tables plural.
 - Follow the layers in ARCHITECTURE.md: routes → services → models, pure functions in `utils` (no Flask or SQLAlchemy imports).
-- Keep the UI plain: HTML elements without visual styling, CSS only for layout (flex, grid). Theming comes with T-020.
+- Style the UI only with the tokens and rules of `docs/design/BRIEF.md` (`frontend/src/styles.css`). Raw colors and sizes exist only in the token block.
 - Answer what was asked and stop. When the user is debugging or asking how something works, do not volunteer the diagnosis, the fix, or extra experiments. Ask first, or give hints and let them find it. Implementing tickets and edits they ask for is fine.
 - Keep docs and code lean. Do not add anything the docs do not ask for. Ask first.
 - Install nothing globally: `pip` only inside `.venv`, `npm` only in the project.
