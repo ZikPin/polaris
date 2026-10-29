@@ -1,10 +1,18 @@
-<h1>Log in</h1>
-<form (submit)="submit($event, email.value, password.value)">
-  <p><label>Email <input #email type="email" required /></label></p>
-  <p><label>Password <input #password type="password" required /></label></p>
-  <p><button type="submit">Log in</button></p>
-</form>
-@if (error()) {
-  <p role="alert">{{ error() }}</p>
-}
-<p>No account yet? <a routerLink="/register">Register</a></p>
+<div class="auth">
+  <section class="auth-card">
+    <i class="deco"></i>
+    <h1>Log in</h1>
+    @if (error()) {
+      <div class="banner" role="alert">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7.5v5M12 16v.5" /></svg>
+        <span>{{ error() }}</span>
+      </div>
+    }
+    <form (submit)="submit($event, email.value, password.value)">
+      <label class="field"><span>Email</span><input #email class="input" type="email" required /></label>
+      <label class="field"><span>Password</span><input #password class="input" type="password" required /></label>
+      <button class="btn btn-primary" type="submit">Log in</button>
+    </form>
+    <p class="alt">No account yet? <a routerLink="/register">Register</a></p>
+  </section>
+</div>

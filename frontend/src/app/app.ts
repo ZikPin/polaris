@@ -5,7 +5,6 @@ import { Auth } from './core/auth';
 @Component({
   imports: [RouterOutlet, RouterLink],
   selector: 'app-root',
-  styleUrl: './app.css',
   templateUrl: './app.html',
 })
 export class App {

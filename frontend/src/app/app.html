@@ -1,13 +1,18 @@
-<header>
-  <a routerLink="/courses">Polaris</a>
+<header class="topbar">
+  <a class="brand" routerLink="/courses">
+    <span class="brand-mark">
+      <svg class="ico ico-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.6 4.6 2.8 8 10 10-7.2 2-9.4 5.4-10 10-.6-4.6-2.8-8-10-10 7.2-2 9.4-5.4 10-10z" /></svg>
+    </span>
+    Polaris
+  </a>
   @if (auth.user(); as user) {
-    <nav>
+    <nav class="topbar-actions">
       <a routerLink="/courses">Courses</a>
       <a routerLink="/tags">Tags</a>
       <a routerLink="/dashboard">Dashboard</a>
       <a routerLink="/calendar">Calendar</a>
       <span>{{ user.email }}</span>
-      <button type="button" (click)="logout()">Log out</button>
+      <button class="btn btn-ghost" type="button" (click)="logout()">Log out</button>
     </nav>
   }
 </header>
