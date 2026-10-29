@@ -1,16 +1,25 @@
 import { Component, inject, input, output, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { errorMessage } from '../../core/api-error';
+import { FocusSelect } from '../../core/focus-select';
+import { Icon } from '../../core/icon';
+import { parseNumber } from '../../core/numbers';
+import { AddColumnDialog, NumberColumnOptions } from './add-column-dialog';
+import { ColumnChanges, EditColumnDialog } from './edit-column-dialog';
 import { Column, Row, Table, TableApi, TableType } from './table-api';
 
-/** An empty text is no number, a text that is not a number gives NaN. */
-function parseNumber(text: string): number | null {
-  return text.trim() === '' ? null : Number(text);
-}
+const rowKey = (row: Row) => `row:${row.id}`;
+const columnKey = (columnId: number) => `column:${columnId}`;
+const cellKey = (row: Row, column: Column) => `cell:${row.id}:${column.id}`;
 
-/** One table (lectures or assignments) of a course. Every change is saved at once and reported through `changed`. */
+/**
+ * One table (lectures or assignments) of a course. Every change is saved at once and reported through `changed`.
+ * Titles, labels and numbers are edited in place: `editing` holds the key of the one being edited, Enter or leaving
+ * the field saves it, Escape drops it.
+ */
 @Component({
   selector: 'app-table-view',
+  imports: [Icon, FocusSelect, AddColumnDialog, EditColumnDialog],
   templateUrl: './table-view.html',
 })
 export class TableView {
@@ -21,7 +30,23 @@ export class TableView {
   readonly table = input.required<Table>();
   readonly changed = output<void>();
 
+  protected readonly editing = signal('');
+  protected readonly addingColumn = signal(false);
+  protected readonly editedColumn = signal<Column | null>(null);
   protected readonly error = signal('');
+
+  protected readonly rowKey = rowKey;
+  protected readonly columnKey = columnKey;
+  protected readonly cellKey = cellKey;
+
+  protected get heading(): string {
+    return this.tableType() === 'lecture' ? 'Lectures' : 'Assignments';
+  }
+
+  private fail(e: unknown) {
+    this.error.set(errorMessage(e));
+    this.changed.emit();
+  }
 
   private run(request: Observable<unknown>, done: () => void = () => {}) {
     request.subscribe({
@@ -30,97 +55,96 @@ export class TableView {
         done();
         this.changed.emit();
       },
-      error: (e) => {
-        this.error.set(errorMessage(e));
-        this.changed.emit();
-      },
+      error: (e) => this.fail(e),
     });
   }
 
-  protected addRow(event: Event, input: HTMLInputElement) {
-    event.preventDefault();
-    this.run(this.api.addRow(this.courseId(), this.tableType(), input.value), () => (input.value = ''));
+  protected edit(key: string) {
+    this.editing.set(key);
   }
 
-  protected renameRow(row: Row) {
-    const title = prompt('New title', row.title);
-    if (title !== null) {
+  protected cancelEdit(event: Event) {
+    event.stopPropagation();
+    this.editing.set('');
+  }
+
+  /** Enter and leaving the field both end up here, the second call finds nothing to do. */
+  private finish(key: string): boolean {
+    if (this.editing() !== key) {
+      return false;
+    }
+    this.editing.set('');
+    return true;
+  }
+
+  protected commitRow(row: Row, title: string) {
+    if (this.finish(rowKey(row)) && title !== row.title) {
       this.run(this.api.renameRow(row.id, title));
     }
+  }
+
+  protected commitColumn(column: Column, label: string) {
+    if (this.finish(columnKey(column.id)) && label !== column.label) {
+      this.run(this.api.updateColumn(column.id, { label }));
+    }
+  }
+
+  protected commitCell(row: Row, column: Column, text: string) {
+    if (!this.finish(cellKey(row, column))) {
+      return;
+    }
+    const value = parseNumber(text);
+    if (value !== (row.cells[column.id] ?? null)) {
+      this.run(this.api.setCell(row.id, column.id, value));
+    }
+  }
+
+  /** A new row has a default title, edited in place right away. */
+  protected addRow() {
+    const title = `Default ${this.tableType()}.`;
+    this.api.addRow(this.courseId(), this.tableType(), title).subscribe({
+      next: (row) => {
+        this.error.set('');
+        this.editing.set(`row:${row.id}`);
+        this.changed.emit();
+      },
+      error: (e) => this.fail(e),
+    });
   }
 
   protected deleteRow(row: Row) {
     this.run(this.api.deleteRow(row.id));
   }
 
-  protected addCheckboxColumn(event: Event, label: HTMLInputElement) {
-    event.preventDefault();
-    this.run(
-      this.api.addCheckboxColumn(this.courseId(), this.tableType(), label.value),
-      () => (label.value = ''),
-    );
+  protected createCheckboxColumn() {
+    this.createColumn(this.api.addCheckboxColumn(this.courseId(), this.tableType(), 'Default bool-col.'));
   }
 
-  protected addNumberColumn(
-    event: Event,
-    label: HTMLInputElement,
-    min: HTMLInputElement,
-    max: HTMLInputElement,
-  ) {
-    event.preventDefault();
-    const request = this.api.addNumberColumn(
-      this.courseId(),
-      this.tableType(),
-      label.value,
-      parseNumber(min.value),
-      parseNumber(max.value),
-    );
-    this.run(request, () => {
-      label.value = min.value = max.value = '';
+  protected createNumberColumn(options: NumberColumnOptions) {
+    this.createColumn(this.api.addNumberColumn(this.courseId(), this.tableType(), 'Default num-col.', options));
+  }
+
+  /** The new column has a default label, edited in place right away. */
+  private createColumn(request: Observable<Column>) {
+    request.subscribe({
+      next: (column) => {
+        this.error.set('');
+        this.addingColumn.set(false);
+        this.editing.set(columnKey(column.id));
+        this.changed.emit();
+      },
+      error: (e) => this.fail(e),
     });
   }
 
-  protected renameColumn(column: Column) {
-    const label = prompt('New label', column.label);
-    if (label !== null) {
-      this.run(this.api.updateColumn(column.id, { label }));
-    }
-  }
-
-  protected editBounds(column: Column) {
-    const minText = prompt('Minimum (empty for no minimum)', column.min?.toString() ?? '');
-    if (minText === null) {
-      return;
-    }
-    const maxText = prompt('Maximum (empty for no maximum)', column.max?.toString() ?? '');
-    if (maxText === null) {
-      return;
-    }
-    const min = parseNumber(minText);
-    const max = parseNumber(maxText);
-    if (Number.isNaN(min) || Number.isNaN(max)) {
-      this.error.set('The bounds must be numbers.');
-      return;
-    }
-    this.run(this.api.updateColumn(column.id, { min, max }));
-  }
-
-  protected setStatistic(column: Column, event: Event) {
-    const statistic = (event.target as HTMLSelectElement).value as 'avg' | 'sum';
-    this.run(this.api.updateColumn(column.id, { preferred_statistic: statistic }));
+  protected saveColumn(column: Column, changes: ColumnChanges) {
+    this.run(this.api.updateColumn(column.id, changes), () => this.editedColumn.set(null));
   }
 
   protected deleteColumn(column: Column) {
     if (confirm(`Delete the column "${column.label}" with all its values?`)) {
       this.run(this.api.deleteColumn(column.id));
     }
-  }
-
-  protected rangeText(column: Column): string {
-    if (column.min == null && column.max == null) {
-      return 'any number';
-    }
-    return `${column.min ?? 'no minimum'} to ${column.max ?? 'no maximum'}`;
   }
 
   protected numberText(row: Row, column: Column): string {
@@ -130,10 +154,5 @@ export class TableView {
 
   protected setChecked(row: Row, column: Column, event: Event) {
     this.run(this.api.setCell(row.id, column.id, (event.target as HTMLInputElement).checked));
-  }
-
-  protected setNumber(row: Row, column: Column, event: Event) {
-    const value = parseNumber((event.target as HTMLInputElement).value);
-    this.run(this.api.setCell(row.id, column.id, value));
   }
 }

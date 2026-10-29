@@ -1,11 +1,13 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EMPTY, Subject, catchError, forkJoin, switchMap } from 'rxjs';
 import { errorMessage } from '../../core/api-error';
+import { Icon } from '../../core/icon';
 import { toggleId } from '../../core/ids';
-import { Course, CourseApi } from '../courses/course-api';
-import { Tag, TagApi } from '../tags/tag-api';
+import { MultiSelect } from '../../core/multi-select';
+import { CourseApi } from '../courses/course-api';
+import { TagApi } from '../tags/tag-api';
 import {
   ColumnStatistic,
   CourseNotDone,
@@ -14,42 +16,52 @@ import {
   DashboardFilter,
 } from './dashboard-api';
 
-interface CourseSummary {
-  id: number;
+/** The card of one table (lectures or assignments) of a course. */
+interface Card {
   title: string;
   columns: ColumnStatistic[];
   open: { id: number; title: string }[];
 }
 
-interface Section {
+interface CourseBlock {
+  id: number;
   title: string;
-  courses: CourseSummary[];
+  cards: Card[];
 }
 
-function summarize(statistics: CourseStatistics[], notDone: CourseNotDone[]): CourseSummary[] {
-  return statistics.map((course) => ({
-    id: course.course_id,
-    title: course.title,
-    columns: course.columns,
-    open: notDone.find((entry) => entry.course_id === course.course_id)?.rows ?? [],
-  }));
+function card(
+  title: string,
+  courseId: number,
+  statistics: CourseStatistics[],
+  notDone: CourseNotDone[],
+): Card {
+  return {
+    title,
+    columns: statistics.find((entry) => entry.course_id === courseId)?.columns ?? [],
+    open: notDone.find((entry) => entry.course_id === courseId)?.rows ?? [],
+  };
 }
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, Icon, MultiSelect],
   templateUrl: './dashboard.html',
 })
-export class Dashboard implements OnInit {
+export class Dashboard {
   private readonly api = inject(DashboardApi);
   private readonly courseApi = inject(CourseApi);
   private readonly tagApi = inject(TagApi);
 
-  protected readonly courses = signal<Course[]>([]);
-  protected readonly tags = signal<Tag[]>([]);
+  protected readonly tags = this.tagApi.all;
+  protected readonly tagOptions = computed(() =>
+    this.tags().map((tag) => ({ id: tag.id, label: tag.value })),
+  );
+  protected readonly courseOptions = computed(() =>
+    this.courseApi.all().map((course) => ({ id: course.id, label: course.title })),
+  );
   protected readonly tagFilter = signal<number[]>([]);
   protected readonly courseFilter = signal<number[]>([]);
-  protected readonly sections = signal<Section[]>([]);
+  protected readonly blocks = signal<CourseBlock[]>([]);
   protected readonly error = signal('');
 
   /** Every reload goes through this stream, `switchMap` drops the answers of outdated requests. */
@@ -79,20 +91,33 @@ export class Dashboard implements OnInit {
       )
       .subscribe((result) => {
         this.error.set('');
-        this.sections.set([
-          { title: 'Lectures', courses: summarize(result.lectureStatistics, result.lectureNotDone) },
-          {
-            title: 'Assignments',
-            courses: summarize(result.assignmentStatistics, result.assignmentNotDone),
-          },
-        ]);
+        this.blocks.set(
+          result.lectureStatistics.map((course) => ({
+            id: course.course_id,
+            title: course.title,
+            cards: [
+              card('Lectures', course.course_id, result.lectureStatistics, result.lectureNotDone),
+              card(
+                'Assignments',
+                course.course_id,
+                result.assignmentStatistics,
+                result.assignmentNotDone,
+              ),
+            ],
+          })),
+        );
       });
-  }
 
-  ngOnInit() {
-    this.courseApi.list().subscribe((courses) => this.courses.set(courses));
-    this.tagApi.list().subscribe((tags) => this.tags.set(tags));
-    this.reload$.next();
+    // Loads the dashboard, and again when the tags or courses change (deleted ones leave the filters).
+    effect(() => {
+      const tagIds = this.tags().map((tag) => tag.id);
+      const courseIds = this.courseApi.all().map((course) => course.id);
+      untracked(() => {
+        this.tagFilter.update((ids) => ids.filter((id) => tagIds.includes(id)));
+        this.courseFilter.update((ids) => ids.filter((id) => courseIds.includes(id)));
+        this.reload$.next();
+      });
+    });
   }
 
   protected toggleTag(tagId: number) {

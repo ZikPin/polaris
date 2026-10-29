@@ -1,78 +1,146 @@
-@if (error()) {
-  <p role="alert">{{ error() }}</p>
-}
+<section class="tbl">
+  <h2>{{ heading }}</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      @for (column of table().columns; track column.id) {
-        <th>
-          {{ column.label }}
-          <button type="button" (click)="renameColumn(column)">Rename</button>
-          <button type="button" (click)="deleteColumn(column)">Delete</button>
-          @if (column.column_type === 'number') {
-            <br />
-            Values: {{ rangeText(column) }}
-            <button type="button" (click)="editBounds(column)">Bounds</button>
-            <br />
-            Dashboard shows:
-            <select (change)="setStatistic(column, $event)">
-              <option value="avg" [selected]="column.preferred_statistic === 'avg'">average</option>
-              <option value="sum" [selected]="column.preferred_statistic === 'sum'">sum</option>
-            </select>
+  @if (error() && !addingColumn() && !editedColumn()) {
+    <div class="banner" role="alert">
+      <app-icon name="alert" />
+      <span>{{ error() }}</span>
+    </div>
+  }
+
+  <div class="tbl-body">
+    <table class="tbl-grid" [style.--cols]="table().columns.length + 1">
+      <thead>
+        <tr>
+          <th class="t-head t-title" scope="col">Title</th>
+          @for (column of table().columns; track column.id) {
+            <th
+              class="t-head"
+              scope="col"
+              tabindex="0"
+              [class.editing]="editing() === columnKey(column.id)"
+              (click)="edit(columnKey(column.id))"
+              (keydown.enter)="$event.target === $event.currentTarget && edit(columnKey(column.id))"
+            >
+              @if (editing() === columnKey(column.id)) {
+                <input
+                  #label
+                  class="cell-input"
+                  appFocusSelect
+                  [value]="column.label"
+                  aria-label="Column label"
+                  (keydown.enter)="commitColumn(column, label.value)"
+                  (keydown.escape)="cancelEdit($event)"
+                  (blur)="commitColumn(column, label.value)"
+                />
+              } @else {
+                {{ column.label }}
+                <span class="tools">
+                  @if (column.column_type === 'number') {
+                    <button class="tool" type="button" aria-label="Edit column" (click)="editedColumn.set(column); $event.stopPropagation()">
+                      <app-icon name="edit" />
+                    </button>
+                  }
+                  <button class="tool" type="button" aria-label="Delete column" (click)="deleteColumn(column); $event.stopPropagation()">
+                    <app-icon name="close" />
+                  </button>
+                </span>
+              }
+            </th>
           }
-        </th>
-      }
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (row of table().rows; track row.id) {
-      <tr>
-        <td>{{ row.title }}</td>
-        @for (column of table().columns; track column.id) {
-          <td>
-            @if (column.column_type === 'bool') {
-              <input
-                type="checkbox"
-                [checked]="row.cells[column.id] === true"
-                (change)="setChecked(row, column, $event)"
-              />
-            } @else {
-              <input
-                type="number"
-                step="any"
-                [value]="numberText(row, column)"
-                (change)="setNumber(row, column, $event)"
-              />
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of table().rows; track row.id) {
+          <tr>
+            <th
+              class="t-row"
+              scope="row"
+              tabindex="0"
+              [class.editing]="editing() === rowKey(row)"
+              (click)="edit(rowKey(row))"
+              (keydown.enter)="$event.target === $event.currentTarget && edit(rowKey(row))"
+            >
+              @if (editing() === rowKey(row)) {
+                <input
+                  #title
+                  class="cell-input"
+                  appFocusSelect
+                  [value]="row.title"
+                  aria-label="Title"
+                  (keydown.enter)="commitRow(row, title.value)"
+                  (keydown.escape)="cancelEdit($event)"
+                  (blur)="commitRow(row, title.value)"
+                />
+              } @else {
+                {{ row.title }}
+                <span class="tools">
+                  <button class="tool" type="button" aria-label="Delete row" (click)="deleteRow(row); $event.stopPropagation()">
+                    <app-icon name="close" />
+                  </button>
+                </span>
+              }
+            </th>
+            @for (column of table().columns; track column.id) {
+              @if (column.column_type === 'bool') {
+                <td class="c-bool">
+                  <input
+                    class="cell-check"
+                    type="checkbox"
+                    [attr.aria-label]="column.label"
+                    [checked]="row.cells[column.id] === true"
+                    (change)="setChecked(row, column, $event)"
+                  />
+                </td>
+              } @else {
+                <td
+                  class="c-num"
+                  tabindex="0"
+                  [class.editing]="editing() === cellKey(row, column)"
+                  (click)="edit(cellKey(row, column))"
+                  (keydown.enter)="$event.target === $event.currentTarget && edit(cellKey(row, column))"
+                >
+                  @if (editing() === cellKey(row, column)) {
+                    <input
+                      #value
+                      class="cell-input"
+                      type="number"
+                      step="any"
+                      appFocusSelect
+                      [value]="numberText(row, column)"
+                      [attr.aria-label]="column.label"
+                      (keydown.enter)="commitCell(row, column, value.value)"
+                      (keydown.escape)="cancelEdit($event)"
+                      (blur)="commitCell(row, column, value.value)"
+                    />
+                  } @else {
+                    {{ numberText(row, column) }}
+                  }
+                </td>
+              }
             }
-          </td>
+          </tr>
         }
-        <td>
-          <button type="button" (click)="renameRow(row)">Rename</button>
-          <button type="button" (click)="deleteRow(row)">Delete</button>
-        </td>
-      </tr>
-    } @empty {
-      <tr>
-        <td [attr.colspan]="table().columns.length + 2">Nothing here yet.</td>
-      </tr>
-    }
-  </tbody>
-</table>
+      </tbody>
+    </table>
+    <button class="add-col" type="button" aria-label="Add column" (click)="addingColumn.set(true)"><app-icon name="plus" /></button>
+    <button class="add-row-bar" type="button" aria-label="Add row" (click)="addRow()"><app-icon name="plus" /></button>
+  </div>
+</section>
 
-<form (submit)="addRow($event, rowTitle)">
-  <input #rowTitle placeholder="New {{ tableType() }}" required />
-  <button type="submit">Add {{ tableType() }}</button>
-</form>
-<form (submit)="addCheckboxColumn($event, checkboxLabel)">
-  <input #checkboxLabel placeholder="Label of the new checkbox column" required />
-  <button type="submit">Add checkbox column</button>
-</form>
-<form (submit)="addNumberColumn($event, numberLabel, min, max)">
-  <input #numberLabel placeholder="Label of the new number column" required />
-  <input #min type="number" step="any" placeholder="Minimum (optional)" />
-  <input #max type="number" step="any" placeholder="Maximum (optional)" />
-  <button type="submit">Add number column</button>
-</form>
+@if (addingColumn()) {
+  <app-add-column-dialog
+    [error]="error()"
+    (closed)="addingColumn.set(false); error.set('')"
+    (createBool)="createCheckboxColumn()"
+    (createNumber)="createNumberColumn($event)"
+  />
+}
+@if (editedColumn(); as column) {
+  <app-edit-column-dialog
+    [column]="column"
+    [error]="error()"
+    (closed)="editedColumn.set(null); error.set('')"
+    (saved)="saveColumn(column, $event)"
+  />
+}

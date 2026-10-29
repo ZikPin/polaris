@@ -1,21 +1,41 @@
 <header class="topbar">
   <a class="brand" routerLink="/courses">
-    <span class="brand-mark">
-      <svg class="ico ico-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.6 4.6 2.8 8 10 10-7.2 2-9.4 5.4-10 10-.6-4.6-2.8-8-10-10 7.2-2 9.4-5.4 10-10z" /></svg>
-    </span>
+    <span class="brand-mark"><app-icon name="star" /></span>
     Polaris
   </a>
   @if (auth.user(); as user) {
-    <nav class="topbar-actions">
-      <a routerLink="/courses">Courses</a>
-      <a routerLink="/tags">Tags</a>
-      <a routerLink="/dashboard">Dashboard</a>
-      <a routerLink="/calendar">Calendar</a>
-      <span>{{ user.email }}</span>
-      <button class="btn btn-ghost" type="button" (click)="logout()">Log out</button>
+    <nav class="topbar-actions" aria-label="Account">
+      <button class="btn btn-ghost" type="button" (click)="tagsOpen.set(true)"><app-icon name="tag" />Tags</button>
+      <span class="user">{{ user.email }}</span>
+      <button class="btn btn-ghost" type="button" (click)="logout()"><app-icon name="logout" />Log out</button>
     </nav>
   }
 </header>
-<main>
-  <router-outlet />
-</main>
+<div [class.shell]="auth.user()">
+  @if (auth.user()) {
+    <aside class="sidebar">
+      <nav aria-label="Main">
+        <div class="nav-group" routerLinkActive="open">
+          <a class="nav-item" routerLink="/courses" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <app-icon name="courses" />Courses<app-icon class="chev" name="chevron-down" />
+          </a>
+          <ul class="nav-sub">
+            @for (course of courseApi.all(); track course.id) {
+              <li>
+                <a [routerLink]="['/courses', course.id]" routerLinkActive="active"><i class="dot"></i>{{ course.title }}</a>
+              </li>
+            }
+          </ul>
+        </div>
+        <a class="nav-item" routerLink="/dashboard" routerLinkActive="active"><app-icon name="dashboard" />Dashboard</a>
+        <a class="nav-item" routerLink="/calendar" routerLinkActive="active"><app-icon name="calendar" />Calendar</a>
+      </nav>
+    </aside>
+  }
+  <main [class.main]="auth.user()">
+    <router-outlet />
+  </main>
+</div>
+@if (tagsOpen()) {
+  <app-tags-dialog (closed)="tagsOpen.set(false)" />
+}

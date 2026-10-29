@@ -187,7 +187,7 @@ All structure comes from the wireframes. This section only says how each piece l
 - **Header.** 56px, page tone (no bar). Brand left: a 30px ink rounded square (`--radius-sm`) with a four-point star, then "Polaris" in extrabold 18px. Right: the Tags button, the user email in soft ink, the Log out button, both ghost buttons (`--tint-1`) with a leading icon. Login and register show only the brand.
 - **Navbar.** 220px, page tone, no divider. Entries: icon, label, semibold, `--radius-md`, hover `--tint-1`, **active = ink fill with `--color-on-ink` text**. "Courses" expands (chevron rotates) to the course list: dot in the course color, 13.5px, soft ink; hover `--tint-1`; the current course is `--tint-2` and bold.
 - **Content sheet.** `--color-sheet`, `--radius-sheet`, fills the rest of the window.
-- **Page head.** Title (h1) left, actions right (the back button, the dashboard filters).
+- **Page head.** Title (h1) left, actions right (the back button, the dashboard filters) and the Tags filter of the courses page (REQ-F-29), the same select as on the dashboard.
 
 ### 6.2 Buttons
 
@@ -199,7 +199,7 @@ All buttons: `--control-h`, `--radius-md`, semibold, field tone, **hover = `--co
 | Primary (add, create, save, log in, register) | Ink fill, on-ink text. Hover as above. |
 | Ghost (header) | `--tint-1`. |
 | Square icon (add) | 44px, `--radius-lg`, primary. |
-| Select (filters, statistic) | Default button with a chevron after the label. Long values are cut with an ellipsis. |
+| Select (filters, statistic) | Default button with a chevron after the label. Long values are cut with an ellipsis. A multi-select (filters) opens a list of checkboxes under the button (`--color-panel`, `--radius-lg`, checkboxes in `--color-sheet`) and shows the number selected, e.g. "Tags (2)". |
 | Small icon button | 30px, `--radius-sm`, `--glass-3` on a colored card, `--tint-2` on light surfaces; hover ink with on-ink icon. |
 | Auth submit | Full width, 46px, `--radius-lg`. |
 
@@ -234,7 +234,7 @@ Per course: a heading (a dot in the course color and the name, 18px bold), then 
 - Boolean cell: centered checkbox. Number cell: centered number, tabular figures.
 - **Add bars:** a 20px bar on the right of the table and a 20px bar below it, 4px away from the table, field tone, soft ink `+`, hover `--color-hover`.
 - **Hover tools:** on a column header (and a row title) two 18px circles appear at the right inside the cell (`--tint-3`): the edit circle (only on number columns) and the delete circle; on a row title only delete. Hover of a tool: ink fill.
-- **In-place edit:** the cell holds an input (`--color-sheet-raised`, `--radius-sm`, 2px ink outline, semibold). A new column starts with a default label that is edited this way.
+- **In-place edit:** the cell holds an input (`--color-sheet-raised`, `--radius-sm`, 2px ink outline, semibold). A new column starts with a default label that is edited this way. Enter or leaving the field saves, Escape drops the change. A new row starts with the title "Default lecture." or "Default assignment." and a new column with "Default bool-col." or "Default num-col.", and the new title or label is edited at once.
 - Tables sit side by side while they fit and wrap under each other when they do not.
 
 ### 6.8 Calendar
@@ -249,7 +249,7 @@ Per course: a heading (a dot in the course color and the name, 18px bold), then 
 
 A scrim (`--color-scrim`) over the whole page, a centered 460px panel: `--color-sheet`, `--radius-dialog`, padding 26px. Head: title (20px extrabold) and a close icon button. The page behind stays visible.
 
-- **Tags dialog:** new tag input with swatch and a square add button, then rows (38px, `--radius-md`, `--mix-tag-row` tint of the tag color, swatch and name).
+- **Tags dialog:** new tag input with swatch and a square add button, then rows (38px, `--radius-md`, `--mix-tag-row` tint of the tag color, swatch and name). Click a name to rename it in place; the delete circle (same as the table tools) appears on hover at the right of the row. The swatch is not clickable yet.
 - **Column dialogs:** option panels (`--color-panel`, `--radius-xl`, padding 16px 18px) with the title and its control on one line, inputs below in `--color-sheet` (42px), the action button centered at the bottom.
 
 ### 6.10 Login and register

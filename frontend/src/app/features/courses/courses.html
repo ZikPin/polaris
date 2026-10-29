@@ -1,55 +1,66 @@
-<h1>Courses</h1>
+<div class="page-head">
+  <h1>Courses</h1>
+  @if (tags().length) {
+    <div class="filters">
+      <app-multi-select label="Tags" [options]="tagOptions()" [selected]="filter()" (toggled)="toggleFilter($event)" />
+    </div>
+  }
+</div>
 
-<form (submit)="add($event, title)">
-  <input #title placeholder="New course" required />
-  <button type="submit">Add course</button>
+<form class="add-row" (submit)="add($event, title)">
+  <input #title class="input grow" placeholder="Title of a new course" aria-label="Title of a new course" required />
+  <button class="btn btn-primary icon" type="submit" aria-label="Add course"><app-icon name="plus" /></button>
 </form>
 
 @if (error()) {
-  <p role="alert">{{ error() }}</p>
+  <div class="banner" role="alert">
+    <app-icon name="alert" />
+    <span>{{ error() }}</span>
+  </div>
 }
 
-@if (tags().length) {
-  <fieldset>
-    <legend>Show courses with one of these tags</legend>
-    @for (tag of tags(); track tag.id) {
-      <label>
-        <input type="checkbox" [checked]="filter().includes(tag.id)" (change)="toggleFilter(tag.id)" />
-        {{ tag.value }}
-      </label>
-    }
-  </fieldset>
-}
-
-<ul>
+<div class="grid">
   @for (course of courses(); track course.id) {
-    <li>
+    <article class="card course" [class.editing]="editingId() === course.id">
+      <i class="deco"></i>
       @if (editingId() === course.id) {
         <form (submit)="save($event, course, editTitle.value)">
-          <input #editTitle [value]="course.title" required />
-          @for (tag of tags(); track tag.id) {
-            <label>
-              <input
-                type="checkbox"
-                [checked]="editTagIds().includes(tag.id)"
-                (change)="toggleEditTag(tag.id)"
-              />
-              {{ tag.value }}
-            </label>
-          }
-          <button type="submit">Save</button>
-          <button type="button" (click)="cancel()">Cancel</button>
+          <input #editTitle class="input" [value]="course.title" aria-label="Course title" required />
+          <ul class="check-list">
+            @for (tag of tags(); track tag.id) {
+              <li>
+                <label class="check">
+                  <input type="checkbox" [checked]="editTagIds().includes(tag.id)" (change)="toggleEditTag(tag.id)" />
+                  {{ tag.value }}
+                </label>
+              </li>
+            }
+          </ul>
+          <div class="card-actions">
+            <button class="icon-btn ok" type="submit" aria-label="Save"><app-icon name="check" /></button>
+            <button class="icon-btn" type="button" aria-label="Cancel" (click)="cancel()"><app-icon name="close" /></button>
+          </div>
         </form>
       } @else {
-        <a [routerLink]="['/courses', course.id]">{{ course.title }}</a>
+        <h3 class="card-title"><a [routerLink]="['/courses', course.id]">{{ course.title }}</a></h3>
         @if (course.tags.length) {
-          <span>({{ tagNames(course) }})</span>
+          <ul class="tags">
+            @for (tag of course.tags; track tag.id) {
+              <li class="tag">{{ tag.value }}</li>
+            }
+          </ul>
         }
-        <button type="button" (click)="edit(course)">Edit</button>
-        <button type="button" (click)="remove(course)">Delete</button>
+        <div class="card-actions">
+          <button class="icon-btn" type="button" [attr.aria-label]="'Edit ' + course.title" (click)="edit(course)">
+            <app-icon name="edit" />
+          </button>
+          <button class="icon-btn" type="button" [attr.aria-label]="'Delete ' + course.title" (click)="remove(course)">
+            <app-icon name="close" />
+          </button>
+        </div>
       }
-    </li>
+    </article>
   } @empty {
-    <li>No courses.</li>
+    <p class="muted">No courses.</p>
   }
-</ul>
+</div>

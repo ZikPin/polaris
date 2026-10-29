@@ -1,74 +1,67 @@
-<h1>Dashboard</h1>
-
-@if (tags().length) {
-  <fieldset>
-    <legend>Only courses with one of these tags</legend>
-    @for (tag of tags(); track tag.id) {
-      <label>
-        <input type="checkbox" [checked]="tagFilter().includes(tag.id)" (change)="toggleTag(tag.id)" />
-        {{ tag.value }}
-      </label>
+<div class="page-head">
+  <h1>Dashboard</h1>
+  <div class="filters">
+    @if (tags().length) {
+      <app-multi-select label="Tags" [options]="tagOptions()" [selected]="tagFilter()" (toggled)="toggleTag($event)" />
     }
-  </fieldset>
-}
-
-@if (courses().length) {
-  <fieldset>
-    <legend>Only these courses</legend>
-    @for (course of courses(); track course.id) {
-      <label>
-        <input
-          type="checkbox"
-          [checked]="courseFilter().includes(course.id)"
-          (change)="toggleCourse(course.id)"
-        />
-        {{ course.title }}
-      </label>
+    @if (courseOptions().length) {
+      <app-multi-select label="Courses" [options]="courseOptions()" [selected]="courseFilter()" (toggled)="toggleCourse($event)" />
     }
-  </fieldset>
-}
+  </div>
+</div>
 
 @if (error()) {
-  <p role="alert">{{ error() }}</p>
+  <div class="banner" role="alert">
+    <app-icon name="alert" />
+    <span>{{ error() }}</span>
+  </div>
 }
 
-@for (section of sections(); track section.title) {
-  <h2>{{ section.title }}</h2>
-  @for (course of section.courses; track course.id) {
-    <h3>{{ course.title }}</h3>
+@for (block of blocks(); track block.id) {
+  <section class="course-block">
+    <h2><i class="dot"></i>{{ block.title }}</h2>
+    <div class="pair">
+      @for (card of block.cards; track card.title) {
+        <article class="card stat-card">
+          <i class="deco"></i>
+          <h3>{{ card.title }}</h3>
 
-    @if (course.columns.length) {
-      <ul>
-        @for (column of course.columns; track column.column_id) {
-          <li>
-            @if (column.column_type === 'bool') {
-              {{ column.label }}: {{ column.checked }} checked, {{ column.unchecked }} unchecked
-            } @else {
-              {{ column.label }} ({{ column.statistic === 'sum' ? 'sum' : 'average' }}):
-              @if (column.value == null) {
-                no data
-              } @else {
-                {{ column.value | number: '1.0-2' }}
+          @if (card.columns.length) {
+            <dl class="stats">
+              @for (column of card.columns; track column.column_id) {
+                @if (column.column_type === 'bool') {
+                  <div>
+                    <dt>{{ column.label }}</dt>
+                    <dd>{{ column.checked }} checked, {{ column.unchecked }} unchecked</dd>
+                  </div>
+                } @else {
+                  <div>
+                    <dt>{{ column.label }} ({{ column.statistic === 'sum' ? 'sum' : 'average' }})</dt>
+                    <dd>{{ column.value == null ? 'no data' : (column.value | number: '1.0-2') }}</dd>
+                  </div>
+                }
               }
-            }
-          </li>
-        }
-      </ul>
-    } @else {
-      <p>No custom columns.</p>
-    }
+            </dl>
+          } @else {
+            <p class="muted">No custom columns.</p>
+          }
 
-    @if (course.open.length) {
-      <p>Not done yet (an unchecked checkbox):</p>
-      <ul>
-        @for (row of course.open; track row.id) {
-          <li>{{ row.title }}</li>
-        }
-      </ul>
-    } @else {
-      <p>Nothing open.</p>
-    }
-  } @empty {
-    <p>No courses match.</p>
-  }
+          @if (card.open.length) {
+            <div class="todo">
+              <h4>Not done yet</h4>
+              <ul>
+                @for (row of card.open; track row.id) {
+                  <li>{{ row.title }}</li>
+                }
+              </ul>
+            </div>
+          } @else {
+            <p class="muted">Nothing open.</p>
+          }
+        </article>
+      }
+    </div>
+  </section>
+} @empty {
+  <p class="muted">No courses match.</p>
 }

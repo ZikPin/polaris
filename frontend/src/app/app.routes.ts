@@ -22,11 +22,6 @@ export const routes: Routes = [
       import('./features/courses/course-detail').then((m) => m.CourseDetail),
   },
   {
-    path: 'tags',
-    canActivate: [authGuard],
-    loadComponent: () => import('./features/tags/tags').then((m) => m.Tags),
-  },
-  {
     path: 'dashboard',
     canActivate: [authGuard],
     loadComponent: () => import('./features/dashboard/dashboard').then((m) => m.Dashboard),

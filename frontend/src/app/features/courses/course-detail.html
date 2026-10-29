@@ -1,23 +1,13 @@
-<p><a routerLink="/courses">Back to courses</a></p>
-
-@if (course(); as course) {
-  <h1>{{ course.title }}</h1>
-}
+<div class="page-head">
+  @if (course(); as course) {
+    <h1>{{ course.title }}</h1>
+  }
+  <a class="btn" routerLink="/courses"><app-icon name="arrow-left" />Back to courses</a>
+</div>
 
 @if (tables(); as tables) {
-  <h2>Lectures</h2>
-  <app-table-view
-    [courseId]="courseId"
-    tableType="lecture"
-    [table]="tables.lecture"
-    (changed)="reload()"
-  />
-
-  <h2>Assignments</h2>
-  <app-table-view
-    [courseId]="courseId"
-    tableType="assignment"
-    [table]="tables.assignment"
-    (changed)="reload()"
-  />
+  <div class="tables">
+    <app-table-view [courseId]="courseId" tableType="lecture" [table]="tables.lecture" (changed)="reload()" />
+    <app-table-view [courseId]="courseId" tableType="assignment" [table]="tables.assignment" (changed)="reload()" />
+  </div>
 }

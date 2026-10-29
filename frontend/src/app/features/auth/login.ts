@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { errorMessage } from '../../core/api-error';
 import { Auth } from '../../core/auth';
+import { Icon } from '../../core/icon';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink],
+  imports: [RouterLink, Icon],
   templateUrl: './login.html',
 })
 export class Login {

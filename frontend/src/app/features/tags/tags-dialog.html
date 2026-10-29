@@ -1,0 +1,40 @@
+<app-dialog heading="Tags" (closed)="closed.emit()">
+  <form class="tag-new" (submit)="add($event, value)">
+    <label class="input-wrap grow"><i class="swatch"></i><input #value placeholder="New tag" aria-label="New tag" required /></label>
+    <button class="btn btn-primary icon" type="submit" aria-label="Add tag"><app-icon name="plus" /></button>
+  </form>
+
+  @if (error()) {
+    <div class="banner" role="alert">
+      <app-icon name="alert" />
+      <span>{{ error() }}</span>
+    </div>
+  }
+
+  <ul class="tag-list">
+    @for (tag of api.all(); track tag.id) {
+      <li>
+        <i class="swatch"></i>
+        @if (editingId() === tag.id) {
+          <input
+            #name
+            class="tag-input"
+            appFocusSelect
+            [value]="tag.value"
+            aria-label="Tag name"
+            (keydown.enter)="commit(tag, name.value)"
+            (keydown.escape)="cancel($event)"
+            (blur)="commit(tag, name.value)"
+          />
+        } @else {
+          <button class="tag-name" type="button" (click)="edit(tag)">{{ tag.value }}</button>
+        }
+        <button class="tool" type="button" [attr.aria-label]="'Delete ' + tag.value" (click)="remove(tag)">
+          <app-icon name="close" />
+        </button>
+      </li>
+    } @empty {
+      <li class="muted">No tags yet.</li>
+    }
+  </ul>
+</app-dialog>
