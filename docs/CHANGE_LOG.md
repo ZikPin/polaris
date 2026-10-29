@@ -1,6 +1,8 @@
 # Change Log
 One line per finished ticket, newest first: date · ticket · one sentence.
 
+- 2026-10-29 · T-003 · Acceptance test setup: Playwright with playwright-bdd on Chromium, own backend and frontend ports, pristine database restored before every test, login fixture.
+- 2026-10-29 · T-015 · Seed command `flask seed`: the users alice, bob and carol with demo data, safe to run twice.
 - 2026-10-29 · T-020 · Design: light pearl theme with Manrope and CSS tokens applied to every screen, frame with navbar, tags and column dialogs, and in-place editing instead of browser prompts.
 - 2026-10-29 · T-019 · Calendar: assign lectures and assignments to days in a month view, per user, lectures listed before assignments.
 - 2026-10-29 · T-014 · Isolation tests: every protected endpoint needs a login and users cannot reach each other's data.

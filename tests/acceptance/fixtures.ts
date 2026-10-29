@@ -15,9 +15,14 @@ type Fixtures = {
   restoreDatabase: void;
   /** Logs in as a seed user (alice, bob or carol) without the login page. The browser keeps the session cookie. */
   loginAs: (user: string) => Promise<void>;
+  /** Values that a step keeps for a later step of the same scenario. */
+  notes: Record<string, string>;
 };
 
 export const test = base.extend<Fixtures>({
+  notes: async ({}, use) => {
+    await use({});
+  },
   restoreDatabase: [
     async ({}, use) => {
       // Copy next to the live file, then rename: the server never sees a half-written file.

@@ -24,7 +24,7 @@ Registration tests use new email addresses. Where a scenario below describes spe
 ## Pass criteria for the release
 - All **Must have** tests (AT-01 to AT-10) and all success-criteria tests (AT-V-*) pass.
 - All **Should have** tests (AT-11 to AT-13) pass, or the failure is recorded with a decision to defer it.
-- **Could have** tests (AT-14) are deferred until the calendar is built. They are not release blockers.
+- **Could have** tests (AT-14) are not release blockers.
 
 ## Test cases
 
@@ -33,7 +33,7 @@ Registration tests use new email addresses. Where a scenario below describes spe
 | ID | Source | Scenario | Pass criterion |
 | --- | --- | --- | --- |
 | AT-01 | SR-M-09 | Register as user A, log out, then log in again. | After registering, the main page opens. After logout, opening any app page redirects to login. After login, the main page opens again. Wrong password is rejected with an error. |
-| AT-02 | SR-M-09 | User A creates course "Algorithms". User B logs in. | User B's course list is empty. Opening the URL of A's course as B shows "not found" or "forbidden" and no data from A. |
+| AT-02 | SR-M-09 | Alice (seed) has the course "Algorithms". Bob logs in and opens the URL of Alice's course. | Bob's course list contains only his own courses. Opening Alice's course sends him back to the course list (the API answers "not found") and shows no data from Alice. |
 | AT-03 | SR-M-01 | Add course "Algorithms". Rename it to "Algorithms 1". Delete it. | The course appears in the list after adding, shows the new title after renaming, and is gone after deleting (also after a reload). Before deleting, the app asks for confirmation, and cancelling keeps the course. A new course with the same title starts with empty lecture and assignment tables. |
 | AT-04 | SR-M-02 | In one course, add lecture "Intro" and assignment "Sheet 1". Rename both. Delete both. | Each row appears only in its own table. Rename and delete work in both tables, and the changes survive a reload. |
 | AT-05 | SR-M-03, SR-M-04 | Add the checkbox column "Watched" to the lectures table, with 2 lectures present. Then add a third lecture. | The column appears with the label "Watched". All three rows show it unchecked. The assignments table is unchanged. |
@@ -47,11 +47,11 @@ Registration tests use new email addresses. Where a scenario below describes spe
 
 | ID | Source | Scenario | Pass criterion |
 | --- | --- | --- | --- |
-| AT-11 | SR-S-01 | Add a number column "Grade" to the assignments table. Enter 1, 2, 3 in three rows, change one value, then delete the column. | Values are accepted and edits persist after a reload. The column and its values are gone after deleting. Non-numeric input is rejected. |
+| AT-11 | SR-S-01 | Add a number column "Grade" to the assignments table. Enter 1, 2, 3 in three rows, change one value, then delete the column. | Values are accepted and edits persist after a reload. The column and its values are gone after deleting. Letters cannot be typed into a number cell: the cell stays empty. |
 | AT-12 | SR-S-02 | With courses of different tags, restrict the dashboard to one tag, then to one course. | Only the selected courses appear. Removing the filter shows all courses again. |
 | AT-13 | SR-S-03 | Assignment column "Grade" with values 1, 2, 3. Open the dashboard, then switch the statistic from the default to sum. | The default shows average 2. After switching, it shows sum 6. The choice persists after a reload. |
 
-### Could have (deferred)
+### Could have
 
 | ID | Source | Scenario | Pass criterion |
 | --- | --- | --- | --- |

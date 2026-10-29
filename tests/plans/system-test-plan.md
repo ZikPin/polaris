@@ -11,7 +11,6 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 
 ## Pass criteria for the release
 - All tests pass on SQLite and on Postgres.
-- Tests for the calendar (ST-18) are deferred until the calendar is built.
 
 ## Test cases
 
@@ -57,7 +56,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | ST-16 | F-37, 38 | Rows with two checkbox columns "W" and "N": R1 both checked, R2 only "W", R3 neither. Do it for lectures and assignments. Also a table with no checkbox column. | Not-done lists contain R2 and R3 but not R1. After checking "N" on R2, R2 is gone. The table without checkbox columns gives an empty list. |
 | ST-17 | F-39, 40 | Courses 1 (tag "A"), 2 (tag "B"), 3 (tags "A", "B"). Restrict the dashboard to "A", then to "A" and "B", then to courses 2 and 3. | The results are courses 1 and 3, then 1, 2 and 3 (each once), then 2 and 3. |
 
-### Calendar (deferred)
+### Calendar
 
 | ID | Requirements | Scenario | Pass criterion |
 | --- | --- | --- | --- |
