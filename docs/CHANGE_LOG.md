@@ -1,6 +1,14 @@
 # Change Log
 One line per finished ticket, newest first: date · ticket · one sentence.
 
+- 2026-10-29 · T-019 · Calendar: assign lectures and assignments to days in a month view, per user, lectures listed before assignments.
+- 2026-10-29 · T-014 · Isolation tests: every protected endpoint needs a login and users cannot reach each other's data.
+- 2026-10-29 · T-013 · Dashboard filters by tags (at least one) and by courses.
+- 2026-10-29 · T-012 · Number column statistics on the dashboard: average or sum, empty cells are ignored.
+- 2026-10-29 · T-011 · Number columns: add with optional min and max, edit values and bounds, delete.
+- 2026-10-29 · T-010 · Dashboard lists of rows with at least one unchecked checkbox.
+- 2026-10-29 · T-009 · Dashboard counts of checked and unchecked boxes per checkbox column.
+
 - 2026-10-28 · T-008 · Tags: create, edit and delete tags, assign them to courses and filter the course list by tags.
 - 2026-10-28 · T-007 · Checkbox columns: add, rename and delete columns and check or uncheck cells, which are created together with rows and columns.
 - 2026-10-28 · T-006 · Lecture and assignment rows: add, rename and delete rows in both tables of a course.

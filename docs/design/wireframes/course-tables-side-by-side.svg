@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="sans-serif">
+  <rect x="0" y="0" width="1280" height="720" fill="#fafafa" stroke="none" stroke-width="1"/>
+  <rect x="0" y="0" width="1280" height="56" fill="#d9d9d9" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="24" y="36" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="900" y="12" width="64" height="32" fill="#e8e8e8" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="932" y="33" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">Tags</text>
+  <text x="1160" y="34" font-size="14" text-anchor="end" font-weight="normal" fill="#333">user@example.com</text>
+  <rect x="1176" y="12" width="80" height="32" fill="#e8e8e8" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="1216" y="33" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">Log out</text>
+  <rect x="0" y="56" width="220" height="664" fill="#e6e6e6" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="24" y="91" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Courses  ▾</text>
+  <rect x="8" y="111" width="204" height="26" fill="#cfcfcf" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="44" y="128" font-size="13" text-anchor="start" font-weight="bold" fill="#333">Algorithms</text>
+  <text x="44" y="154" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Linear Algebra</text>
+  <text x="44" y="180" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Databases</text>
+  <text x="44" y="206" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Machine Learning</text>
+  <text x="44" y="232" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Statistics</text>
+  <text x="24" y="277" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Dashboard</text>
+  <text x="24" y="321" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Calendar</text>
+  <text x="252" y="112" font-size="26" text-anchor="start" font-weight="bold" fill="#333">Algorithms</text>
+  <rect x="1088" y="84" width="160" height="36" fill="#e8e8e8" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="1168" y="107" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">←  Back to courses</text>
+  <text x="252" y="154" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Lectures</text>
+  <rect x="252" y="170" width="168" height="44" fill="#bdbdbd" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="264" y="197" font-size="11" text-anchor="start" font-weight="bold" fill="#333">Title</text>
+  <rect x="420" y="170" width="144" height="44" fill="#bdbdbd" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="432" y="197" font-size="11" text-anchor="start" font-weight="bold" fill="#333">Watched</text>
+  <rect x="564" y="170" width="144" height="44" fill="#bdbdbd" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="576" y="197" font-size="11" text-anchor="start" font-weight="bold" fill="#333">Grade</text>
+  <rect x="252" y="214" width="168" height="40" fill="#dcdcdc" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="264" y="239" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Chapter 1</text>
+  <rect x="420" y="214" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <rect x="484.0" y="226" width="16" height="16" fill="#ffffff" stroke="#757575" stroke-width="1"/>
+  <text x="492.0" y="239" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <rect x="564" y="214" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="636.0" y="239" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">2.5</text>
+  <rect x="252" y="254" width="168" height="40" fill="#dcdcdc" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="264" y="279" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Chapter 2</text>
+  <rect x="420" y="254" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <rect x="484.0" y="266" width="16" height="16" fill="#ffffff" stroke="#757575" stroke-width="1"/>
+  <text x="492.0" y="279" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <rect x="564" y="254" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="636.0" y="279" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">1.7</text>
+  <rect x="252" y="294" width="168" height="40" fill="#dcdcdc" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="264" y="319" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Chapter 3</text>
+  <rect x="420" y="294" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <rect x="484.0" y="306" width="16" height="16" fill="#ffffff" stroke="#757575" stroke-width="1"/>
+  <rect x="564" y="294" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <rect x="252" y="334" width="168" height="40" fill="#dcdcdc" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="264" y="359" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Chapter 4</text>
+  <rect x="420" y="334" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <rect x="484.0" y="346" width="16" height="16" fill="#ffffff" stroke="#757575" stroke-width="1"/>
+  <rect x="564" y="334" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <rect x="712" y="170" width="24" height="204" fill="#e6e6e6" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="724.0" y="278.0" font-size="18" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <rect x="252" y="378" width="456" height="24" fill="#e6e6e6" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="480.0" y="396" font-size="18" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <text x="756" y="154" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Assignments</text>
+  <rect x="756" y="170" width="168" height="44" fill="#bdbdbd" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="768" y="197" font-size="11" text-anchor="start" font-weight="bold" fill="#333">Title</text>
+  <rect x="924" y="170" width="144" height="44" fill="#bdbdbd" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="936" y="197" font-size="11" text-anchor="start" font-weight="bold" fill="#333">Solved</text>
+  <rect x="1068" y="170" width="144" height="44" fill="#bdbdbd" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="1080" y="197" font-size="11" text-anchor="start" font-weight="bold" fill="#333">Points</text>
+  <rect x="756" y="214" width="168" height="40" fill="#dcdcdc" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="768" y="239" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Sheet 1</text>
+  <rect x="924" y="214" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <rect x="988.0" y="226" width="16" height="16" fill="#ffffff" stroke="#757575" stroke-width="1"/>
+  <text x="996.0" y="239" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <rect x="1068" y="214" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="1140.0" y="239" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">14</text>
+  <rect x="756" y="254" width="168" height="40" fill="#dcdcdc" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="768" y="279" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Sheet 2</text>
+  <rect x="924" y="254" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <rect x="988.0" y="266" width="16" height="16" fill="#ffffff" stroke="#757575" stroke-width="1"/>
+  <rect x="1068" y="254" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="1140.0" y="279" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">9</text>
+  <rect x="756" y="294" width="168" height="40" fill="#dcdcdc" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="768" y="319" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Sheet 3</text>
+  <rect x="924" y="294" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <rect x="988.0" y="306" width="16" height="16" fill="#ffffff" stroke="#757575" stroke-width="1"/>
+  <rect x="1068" y="294" width="144" height="40" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <rect x="1216" y="170" width="24" height="164" fill="#e6e6e6" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="1228.0" y="258.0" font-size="18" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <rect x="756" y="338" width="456" height="24" fill="#e6e6e6" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="984.0" y="356" font-size="18" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <text x="252" y="678" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Two tables next to each other as long as they fit.</text>
+  <text x="252" y="694" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Default grey: header darker, title column lighter, body lightest. The thin + buttons are outside the table (a column on its right, a row below it).</text>
+</svg>

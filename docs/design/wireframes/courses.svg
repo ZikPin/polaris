@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="sans-serif">
+  <rect x="0" y="0" width="1280" height="720" fill="#fafafa" stroke="none" />
+  <rect x="0" y="0" width="1280" height="56" fill="#d9d9d9" stroke="#8c8c8c" />
+  <text x="24" y="36" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="900" y="12" width="64" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <text x="932" y="33" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">Tags</text>
+  <text x="1160" y="34" font-size="14" text-anchor="end" font-weight="normal" fill="#333">user@example.com</text>
+  <rect x="1176" y="12" width="80" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <text x="1216" y="33" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">Log out</text>
+  <rect x="0" y="56" width="220" height="664" fill="#e6e6e6" stroke="#8c8c8c" />
+  <rect x="8" y="68" width="204" height="36" fill="#cfcfcf" stroke="#8c8c8c" />
+  <text x="24" y="91" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Courses  ▾</text>
+  <text x="44" y="128" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms</text>
+  <text x="44" y="154" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Linear Algebra</text>
+  <text x="44" y="180" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Databases</text>
+  <text x="44" y="206" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Machine Learning</text>
+  <text x="44" y="232" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Statistics</text>
+  <text x="24" y="277" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Dashboard</text>
+  <text x="24" y="321" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Calendar</text>
+  <text x="252" y="112" font-size="26" text-anchor="start" font-weight="bold" fill="#333">Courses</text>
+  <rect x="252" y="132" width="948" height="40" fill="#ffffff" stroke="#757575" />
+  <text x="266" y="157" font-size="14" text-anchor="start" font-weight="normal" fill="#999">Title of a new course</text>
+  <rect x="1208" y="132" width="40" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="1228.0" y="157.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <rect x="252" y="204" width="237" height="160" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="252" y="204" width="237" height="28" fill="#bdbdbd" stroke="#8c8c8c" />
+  <text x="264" y="260" font-size="16" text-anchor="start" font-weight="bold" fill="#333">Algorithms</text>
+  <rect x="264" y="274" width="82.0" height="20" fill="#d4d4d4" stroke="none" />
+  <text x="305.0" y="288" font-size="11" text-anchor="middle" font-weight="normal" fill="#333">Semester 1</text>
+  <rect x="352.0" y="274" width="29.2" height="20" fill="#d4d4d4" stroke="none" />
+  <text x="366.6" y="288" font-size="11" text-anchor="middle" font-weight="normal" fill="#333">CS</text>
+  <rect x="419" y="324" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="433.0" y="343.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">✎</text>
+  <rect x="451" y="324" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="465.0" y="343.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <rect x="505" y="204" width="237" height="160" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="505" y="204" width="237" height="28" fill="#bdbdbd" stroke="#8c8c8c" />
+  <rect x="517" y="242" width="213" height="28" fill="#ffffff" stroke="#757575" />
+  <text x="525" y="261" font-size="14" text-anchor="start" font-weight="normal" fill="#333">Linear Algebra</text>
+  <rect x="517" y="280" width="14" height="14" fill="#ffffff" stroke="#757575" />
+  <text x="524" y="292" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <text x="539" y="292" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Semester 1</text>
+  <rect x="517" y="300" width="14" height="14" fill="#ffffff" stroke="#757575" />
+  <text x="539" y="312" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Semester 2</text>
+  <rect x="517" y="320" width="14" height="14" fill="#ffffff" stroke="#757575" />
+  <text x="524" y="332" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <text x="539" y="332" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Math</text>
+  <rect x="672" y="324" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="686.0" y="343.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <rect x="704" y="324" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="718.0" y="343.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <rect x="758" y="204" width="237" height="160" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="758" y="204" width="237" height="28" fill="#bdbdbd" stroke="#8c8c8c" />
+  <text x="770" y="260" font-size="16" text-anchor="start" font-weight="bold" fill="#333">Databases</text>
+  <rect x="770" y="274" width="82.0" height="20" fill="#d4d4d4" stroke="none" />
+  <text x="811.0" y="288" font-size="11" text-anchor="middle" font-weight="normal" fill="#333">Semester 2</text>
+  <rect x="925" y="324" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="939.0" y="343.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">✎</text>
+  <rect x="957" y="324" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="971.0" y="343.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <rect x="1011" y="204" width="237" height="160" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="1011" y="204" width="237" height="28" fill="#bdbdbd" stroke="#8c8c8c" />
+  <text x="1023" y="260" font-size="16" text-anchor="start" font-weight="bold" fill="#333">Machine Learning</text>
+  <rect x="1023" y="274" width="29.2" height="20" fill="#d4d4d4" stroke="none" />
+  <text x="1037.6" y="288" font-size="11" text-anchor="middle" font-weight="normal" fill="#333">CS</text>
+  <rect x="1058.2" y="274" width="29.2" height="20" fill="#d4d4d4" stroke="none" />
+  <text x="1072.8" y="288" font-size="11" text-anchor="middle" font-weight="normal" fill="#333">ML</text>
+  <rect x="1178" y="324" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="1192.0" y="343.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">✎</text>
+  <rect x="1210" y="324" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="1224.0" y="343.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <rect x="252" y="380" width="237" height="160" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="252" y="380" width="237" height="28" fill="#bdbdbd" stroke="#8c8c8c" />
+  <text x="264" y="436" font-size="16" text-anchor="start" font-weight="bold" fill="#333">Statistics</text>
+  <rect x="419" y="500" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="433.0" y="519.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">✎</text>
+  <rect x="451" y="500" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="465.0" y="519.0" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <text x="252" y="560" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Cards: 4 per row (flex grid), the fifth wraps. Grey bar = course color (default grey).</text>
+  <text x="252" y="576" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Second card shows the edit state: title becomes an input, tags become checkboxes, buttons save / cancel (assumed).</text>
+  <text x="252" y="592" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Navbar: Courses expands to the list of courses, Dashboard and Calendar are single entries.</text>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="sans-serif">
+  <rect x="0" y="0" width="1280" height="720" fill="#fafafa" stroke="none" stroke-width="1"/>
+  <rect x="0" y="0" width="1280" height="56" fill="#d9d9d9" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="24" y="36" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="430.0" y="130" width="420" height="422" fill="#f4f4f4" stroke="#8c8c8c" stroke-width="1"/>
+  <rect x="430.0" y="130" width="420" height="6" fill="#8c8c8c" stroke="none" stroke-width="1"/>
+  <text x="640.0" y="190" font-size="24" text-anchor="middle" font-weight="bold" fill="#333">Log in</text>
+  <rect x="462.0" y="214" width="356" height="44" fill="#ececec" stroke="#333" stroke-width="2"/>
+  <circle cx="482.0" cy="236" r="9" fill="#555"/>
+  <text x="482.0" y="240" font-size="12" text-anchor="middle" font-weight="bold" fill="#fff">!</text>
+  <text x="502.0" y="241" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Invalid email or password.</text>
+  <text x="462.0" y="290" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Email</text>
+  <rect x="462.0" y="296" width="356" height="44" fill="#ffffff" stroke="#757575" stroke-width="1"/>
+  <text x="476.0" y="324" font-size="13" text-anchor="start" font-weight="normal" fill="#333">user@example.com</text>
+  <text x="462.0" y="372" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Password</text>
+  <rect x="462.0" y="378" width="356" height="44" fill="#ffffff" stroke="#757575" stroke-width="1"/>
+  <text x="476.0" y="406" font-size="13" text-anchor="start" font-weight="normal" fill="#333">••••••••</text>
+  <rect x="570.0" y="442" width="140" height="40" fill="#d0d0d0" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="640.0" y="467" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Log in</text>
+  <text x="640.0" y="514" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">No account yet? Register</text>
+  <text x="24" y="678" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Logged out: the header only has the name, there is no navbar. The card is centered, its top bar is the (grey) accent color.</text>
+  <text x="24" y="694" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Error type 1, the whole form: a banner under the title, the same message for a wrong password and an unknown email.</text>
+</svg>

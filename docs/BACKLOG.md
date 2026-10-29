@@ -10,14 +10,14 @@ Statuses: `todo`, `in progress`, `done`, `stale` (the request or requirement it 
 | T-006  | SR-M-02             | done   | Add, rename and delete lecture and assignment rows in the table view (REQ-F-05 to 12, 51) |
 | T-007  | SR-M-03, M-04, M-05 | done   | Checkbox columns: add with label, rename, delete, and check or uncheck the cells (REQ-F-13 to 15, 20 to 23, 51, 52) |
 | T-008  | SR-M-06             | done   | Tags: create, rename, delete, assign to courses and filter the course list (REQ-F-24 to 30, 51, 52) |
-| T-009  | SR-M-07             | in progress | Dashboard per course with checked and unchecked counts per checkbox column (REQ-F-31, 32) |
-| T-010  | SR-M-08             | in progress | Dashboard lists of lectures and assignments with at least one unchecked checkbox (REQ-F-37, 38) |
-| T-011  | SR-S-01             | in progress | Number columns: add with optional min and max, edit values and bounds, delete (REQ-F-16 to 19) |
-| T-012  | SR-S-03             | in progress | Dashboard statistics for number columns: choose avg or sum, empty cells are ignored (REQ-F-33 to 36) |
-| T-013  | SR-S-02             | in progress | Restrict the dashboard to selected tags and courses (REQ-F-39, 40) |
-| T-014  | SR-M-09             | in progress | Verify that users only reach their own data on every endpoint (REQ-F-50, ST-21, ST-22) |
-| T-019  | SR-C-01, SR-C-02    | in progress | Calendar: assign lectures and assignments to days (REQ-F-41 to 46) |
-| T-020  | infra               | todo   | Design: wireframes, a color palette as a theme (CSS variables) and a UX pass (too many buttons, browser prompts for renaming rows and columns), applied to the screens built so far |
+| T-009  | SR-M-07             | done   | Dashboard per course with checked and unchecked counts per checkbox column (REQ-F-31, 32) |
+| T-010  | SR-M-08             | done   | Dashboard lists of lectures and assignments with at least one unchecked checkbox (REQ-F-37, 38) |
+| T-011  | SR-S-01             | done   | Number columns: add with optional min and max, edit values and bounds, delete (REQ-F-16 to 19) |
+| T-012  | SR-S-03             | done   | Dashboard statistics for number columns: choose avg or sum, empty cells are ignored (REQ-F-33 to 36) |
+| T-013  | SR-S-02             | done   | Restrict the dashboard to selected tags and courses (REQ-F-39, 40) |
+| T-014  | SR-M-09             | done   | Verify that users only reach their own data on every endpoint (REQ-F-50, ST-21, ST-22) |
+| T-019  | SR-C-01, SR-C-02    | done   | Calendar: assign lectures and assignments to days (REQ-F-41 to 46) |
+| T-020  | infra               | in progress | Design: wireframes, a color palette as a theme (CSS variables) and a UX pass (too many buttons, browser prompts for renaming rows and columns), applied to the screens built so far |
 | T-015  | infra               | todo   | Seed command that creates the users alice, bob and carol with demo data (ST-27) |
 | T-003  | infra               | todo   | Set up the acceptance tests: Playwright with playwright-bdd on Chromium, database restore and login fixtures (REQ-NF-02) |
 | T-016  | Vision              | todo   | Success criteria: timed tests and the 500 ms feedback check (AT-V-01 to 06, REQ-NF-01, 03) |

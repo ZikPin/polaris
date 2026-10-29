@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="sans-serif">
+  <rect x="0" y="0" width="1280" height="720" fill="#fafafa" stroke="none" stroke-width="1"/>
+  <rect x="0" y="0" width="1280" height="56" fill="#d9d9d9" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="24" y="36" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="900" y="12" width="64" height="32" fill="#e8e8e8" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="932" y="33" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">Tags</text>
+  <text x="1160" y="34" font-size="14" text-anchor="end" font-weight="normal" fill="#333">user@example.com</text>
+  <rect x="1176" y="12" width="80" height="32" fill="#e8e8e8" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="1216" y="33" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">Log out</text>
+  <rect x="0" y="56" width="220" height="664" fill="#e6e6e6" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="24" y="91" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Courses  ▾</text>
+  <rect x="8" y="111" width="204" height="26" fill="#cfcfcf" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="44" y="128" font-size="13" text-anchor="start" font-weight="bold" fill="#333">Algorithms</text>
+  <text x="44" y="154" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Linear Algebra</text>
+  <text x="44" y="180" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Databases</text>
+  <text x="44" y="206" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Machine Learning</text>
+  <text x="44" y="232" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Statistics</text>
+  <text x="24" y="277" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Dashboard</text>
+  <text x="24" y="321" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Calendar</text>
+  <text x="252" y="112" font-size="26" text-anchor="start" font-weight="bold" fill="#333">Algorithms</text>
+  <rect x="1088" y="84" width="160" height="36" fill="#e8e8e8" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="1168" y="107" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">←  Back to courses</text>
+  <text x="252" y="154" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Lectures</text>
+  <rect x="252" y="170" width="168" height="44" fill="#bdbdbd" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="264" y="197" font-size="11" text-anchor="start" font-weight="bold" fill="#333">Title</text>
+  <rect x="424" y="170" width="24" height="44" fill="#e6e6e6" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="436.0" y="198.0" font-size="18" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <rect x="252" y="218" width="168" height="24" fill="#e6e6e6" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="336.0" y="236" font-size="18" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <text x="468" y="154" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Assignments</text>
+  <rect x="468" y="170" width="168" height="44" fill="#bdbdbd" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="480" y="197" font-size="11" text-anchor="start" font-weight="bold" fill="#333">Title</text>
+  <rect x="640" y="170" width="24" height="44" fill="#e6e6e6" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="652.0" y="198.0" font-size="18" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <rect x="468" y="218" width="168" height="24" fill="#e6e6e6" stroke="#8c8c8c" stroke-width="1"/>
+  <text x="552.0" y="236" font-size="18" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <text x="252" y="678" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Empty tables: only the title column, no rows. The + buttons add the first column and the first row.</text>
+  <text x="252" y="694" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Default grey: header darker, title column lighter, body lightest. The thin + buttons are outside the table (a column on its right, a row below it).</text>
+</svg>

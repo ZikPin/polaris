@@ -1,0 +1,205 @@
+/* Polaris theme: "Pearl Blocks". Soft pearl surfaces, calm type, course cards filled with a darker-pastel accent.
+   Everything visual is a token in section 1. To re-theme, change tokens only; the rules below never use a raw color. */
+
+/* ========== 1. TOKENS ========== */
+:root{
+  /* surfaces */
+  --color-page:#EBDFDC;          /* page, header, navbar */
+  --color-sheet:#F6EFEC;         /* content sheet, dialogs, auth card */
+  --color-sheet-raised:#FBF7F5;  /* edit card, cell inputs: lighter than the sheet */
+  --color-field:#E3D4D0;         /* inputs, buttons, selects, + bars, selected day */
+  --color-panel:color-mix(in srgb,var(--color-field) 60%,var(--color-sheet));  /* option panels in dialogs */
+  --color-cell:color-mix(in srgb,var(--color-field) 35%,var(--color-sheet));   /* calendar day */
+  --color-cell-out:color-mix(in srgb,var(--color-field) 30%,transparent);      /* calendar day outside the month */
+
+  /* text and interaction */
+  --color-ink:#261627;           /* text, primary button, active navigation, today */
+  --color-ink-soft:#6E5862;      /* secondary text, labels, placeholders */
+  --color-on-ink:var(--color-page);   /* text and icons on an ink surface */
+  --color-hover:#4E3742;         /* hover of every button and navigation entry */
+  --color-focus:var(--color-ink);
+  --color-danger:#9B3D3D;        /* error icon, error outline */
+  --color-danger-tint:color-mix(in srgb,var(--color-danger) 12%,transparent);  /* error banner */
+  --color-scrim:color-mix(in srgb,var(--color-ink) 40%,transparent);           /* behind dialogs */
+
+  /* translucent layers: ink on light surfaces, white on accent colors */
+  --tint-1:color-mix(in srgb,var(--color-ink) 7%,transparent);    /* hover, ghost button */
+  --tint-2:color-mix(in srgb,var(--color-ink) 9%,transparent);    /* active sub entry, icon button on light */
+  --tint-3:color-mix(in srgb,var(--color-ink) 14%,transparent);   /* hover tools in tables */
+  --glass-1:rgba(255,255,255,.22);   /* corner circle */
+  --glass-2:rgba(255,255,255,.3);    /* "not done yet" box */
+  --glass-3:rgba(255,255,255,.4);    /* tags, icon buttons on a colored card */
+  --glass-4:rgba(255,255,255,.7);    /* checkbox in a table */
+  --color-ink-on-accent:color-mix(in srgb,var(--color-ink) 84%,transparent);   /* secondary text on an accent */
+
+  /* accent palette: course colors and tag colors (darker pastels, dark text reads on all of them) */
+  --accent-clay:#D49A85;
+  --accent-mustard:#D9B26A;
+  --accent-olive:#B9B97C;
+  --accent-sage:#8FB09C;
+  --accent-teal:#82B5B0;
+  --accent-blue:#8FA5C9;
+  --accent-periwinkle:#A59FD2;
+  --accent-plum:#B592B5;
+  --accent-rose:#D49BA9;
+  --accent-stone:#BCA79D;
+  --accent-default:var(--accent-clay);      /* used while a course or tag has no color of its own */
+  --course-color:var(--accent-default);     /* the color of the current course: set on the element, inherited by its parts */
+  --tag-color:var(--accent-default);        /* the color of the current tag */
+  --mix-table-title:38%;                    /* share of the course color in a table's title column */
+  --mix-table-body:15%;                     /* ... in the table body */
+  --mix-card-secondary:78%;                 /* ... in the second dashboard card of a course */
+  --mix-tag-row:30%;                        /* ... in a row of the tags dialog */
+
+  /* type */
+  --font-sans:"Manrope",ui-sans-serif,system-ui,sans-serif;
+  --fs-2xs:10px;       /* calendar entries */
+  --fs-xs:11.5px;      /* tags, table headers, small caps, day numbers */
+  --fs-sm:12.5px;      /* labels, checkbox labels, errors */
+  --fs-md:13.5px;      /* secondary and dense text: stats, table cells, lists */
+  --fs-base:14px;      /* body, buttons, inputs */
+  --fs-lg:16px;        /* card titles, option titles */
+  --fs-h2:18px;        /* section headings, brand */
+  --fs-dialog:20px;    /* dialog title */
+  --fs-auth:24px;      /* login and register title */
+  --fs-h1:26px;        /* page title */
+  --fw-medium:500;--fw-semibold:600;--fw-bold:700;--fw-extrabold:800;
+  --tracking-h1:-.03em;--tracking-heading:-.02em;--tracking-caps:.08em;
+  --icon-stroke:1.8;
+
+  /* shape */
+  --radius-xs:6px;     /* checkbox, calendar entry */
+  --radius-sm:10px;    /* icon buttons, table cells, sub entries, + bars, brand mark */
+  --radius-md:12px;    /* buttons, navigation entries, calendar days, list rows */
+  --radius-lg:14px;    /* inputs, large buttons, banners, boxes inside cards */
+  --radius-xl:18px;    /* option panels */
+  --radius-card:22px;  /* course and dashboard cards */
+  --radius-sheet:24px; /* the content sheet */
+  --radius-dialog:26px;/* dialogs, login and register card */
+  --radius-pill:999px;
+
+  /* size and motion */
+  --header-h:56px;--sidebar-w:220px;
+  --control-h:34px;    /* buttons, selects */
+  --field-h:44px;      /* inputs */
+  --duration:.15s;
+}
+
+/* ========== 2. BASE ========== */
+::placeholder{color:var(--color-ink-soft);opacity:1}
+h1{font-size:var(--fs-h1);font-weight:var(--fw-extrabold);letter-spacing:var(--tracking-h1)}
+.course-block h2,.tbl h2,.cal-nav h2,.day-panel h2{font-size:var(--fs-h2);font-weight:var(--fw-bold);letter-spacing:var(--tracking-heading)}
+.note,.muted{font-size:var(--fs-md);color:var(--color-ink-soft)}
+
+/* ========== 3. FRAME: header, navbar, sheet ========== */
+.brand{font-size:var(--fs-h2);font-weight:var(--fw-extrabold);letter-spacing:var(--tracking-heading)}
+.brand-mark{display:grid;place-items:center;width:30px;height:30px;border-radius:var(--radius-sm);background:var(--color-ink);color:var(--color-on-ink)}
+.brand-mark .ico{width:15px;height:15px}
+.user{font-size:var(--fs-md);color:var(--color-ink-soft)}
+.sidebar{padding:8px 12px}
+.main{margin:0 16px 16px 0;padding:28px 32px 40px;background:var(--color-sheet);border-radius:var(--radius-sheet)}
+.nav-item{border-radius:var(--radius-md);font-weight:var(--fw-semibold)}
+.nav-item:hover{background:var(--tint-1)}
+.nav-item.active{background:var(--color-ink);color:var(--color-on-ink)}
+.nav-sub a{height:32px;padding-left:42px;border-radius:var(--radius-sm);color:var(--color-ink-soft);font-weight:var(--fw-medium)}
+.nav-sub a:hover{background:var(--tint-1);color:var(--color-ink)}
+.nav-sub a.active{background:var(--tint-2);color:var(--color-ink);font-weight:var(--fw-bold)}
+
+/* ========== 4. CONTROLS ========== */
+.btn{border-radius:var(--radius-md);background:var(--color-field);font-weight:var(--fw-semibold);transition:background var(--duration)}
+.btn:hover{background:var(--color-hover);color:var(--color-on-ink)}
+.btn-ghost{background:var(--tint-1)}
+.btn-primary{background:var(--color-ink);color:var(--color-on-ink)}
+.btn.icon{width:var(--field-h);height:var(--field-h);padding:0;border-radius:var(--radius-lg)}
+.icon-btn{border-radius:var(--radius-sm);background:var(--glass-3);transition:background var(--duration)}
+.icon-btn:hover{background:var(--color-ink);color:var(--color-on-ink)}
+.input,.input-wrap{height:var(--field-h);padding:0 16px;border-radius:var(--radius-lg);background:var(--color-field)}
+.input:focus,.input-wrap:focus-within{outline:2px solid var(--color-focus)}
+.check{font-size:var(--fs-sm);font-weight:var(--fw-medium)}
+.check input{--check:var(--color-on-ink);border-radius:var(--radius-xs);background:var(--color-field)}
+.check input:checked{background:var(--color-ink)}
+.tag{padding:3px 10px;border-radius:var(--radius-pill);background:var(--glass-3);font-size:var(--fs-xs);font-weight:var(--fw-semibold)}
+.field>span{font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--color-ink-soft)}
+.field-error{padding-left:4px;font-size:var(--fs-sm);font-weight:var(--fw-semibold)}
+.banner{margin-bottom:6px;padding:12px 14px;border-radius:var(--radius-lg);background:var(--color-danger-tint);font-weight:var(--fw-medium)}
+.banner .ico{margin-top:1px;color:var(--color-danger)}
+
+/* ========== 5. CARDS: courses, dashboard ========== */
+.card{min-height:168px;padding:20px 18px 14px;overflow:hidden;border-radius:var(--radius-card);background:var(--course-color);color:var(--color-ink)}
+.deco{top:-30px;right:-30px;width:108px;height:108px;border-radius:50%;background:var(--glass-1)}
+.card-title{font-size:var(--fs-lg);font-weight:var(--fw-bold);letter-spacing:-.01em}
+.course.editing{background:var(--color-sheet-raised);outline:2px solid var(--color-ink);outline-offset:-2px}
+.course.editing .deco{background:color-mix(in srgb,var(--course-color) 24%,transparent)}
+.course.editing .input{height:36px;padding:0 12px;border-radius:var(--radius-sm);font-weight:var(--fw-semibold)}
+.course.editing .check-list{margin-top:8px}
+.course.editing .icon-btn{background:var(--tint-2)}
+.course.editing .icon-btn:hover{background:var(--color-hover);color:var(--color-on-ink)}
+.course.editing .icon-btn.ok{background:var(--color-ink);color:var(--color-on-ink)}
+
+.course-block{margin-top:30px}
+.course-block h2 .dot{width:10px;height:10px;border-radius:50%;background:var(--course-color)}
+.stat-card{min-height:0;padding:20px}
+.pair>.stat-card:nth-child(2){background:color-mix(in srgb,var(--course-color) var(--mix-card-secondary),var(--color-sheet))}
+.stat-card h3{font-size:var(--fs-lg);font-weight:var(--fw-bold)}
+.stat-card .muted{margin-top:10px}
+.stats{display:grid;gap:4px;margin-top:10px}
+.stats>div{justify-content:space-between;font-size:var(--fs-md)}
+.stats dt,.stat-card .muted,.todo h4{color:var(--color-ink-on-accent)}
+.stats dd{font-weight:var(--fw-semibold)}
+.todo{margin-top:14px;padding:10px 14px;border-radius:var(--radius-lg);background:var(--glass-2)}
+.todo h4{margin-bottom:4px;font-size:var(--fs-xs);font-weight:var(--fw-bold);letter-spacing:var(--tracking-caps);text-transform:uppercase}
+.todo li{display:flex;align-items:center;gap:8px;height:22px;font-size:var(--fs-md);font-weight:var(--fw-medium)}
+.todo li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--color-ink);opacity:.5}
+
+/* ========== 6. TABLES (course page) ========== */
+.tbl-grid th,.tbl-grid td{border-radius:var(--radius-sm);font-size:var(--fs-md)}
+.tbl-grid .t-head{background:var(--course-color);color:var(--color-ink);font-size:var(--fs-xs);font-weight:var(--fw-bold)}
+.tbl-grid .t-row{background:color-mix(in srgb,var(--course-color) var(--mix-table-title),var(--color-sheet));font-weight:var(--fw-semibold)}
+.tbl-grid td{background:color-mix(in srgb,var(--course-color) var(--mix-table-body),var(--color-sheet))}
+.add-col,.add-row-bar{border-radius:var(--radius-sm);background:var(--color-field);color:var(--color-ink-soft);transition:background var(--duration)}
+.add-col:hover,.add-row-bar:hover{background:var(--color-hover);color:var(--color-on-ink)}
+.add-col .ico,.add-row-bar .ico{width:14px;height:14px}
+.cell-check{--check:var(--color-on-ink);width:17px;height:17px;border-radius:var(--radius-xs);background:var(--glass-4)}
+.cell-check:checked{background:var(--color-ink)}
+.cell-input{border-radius:var(--radius-sm);background:var(--color-sheet-raised);color:var(--color-ink);font-weight:var(--fw-semibold);outline:2px solid var(--color-ink)}
+.tool{background:var(--tint-3)}
+.tool:hover{background:var(--color-ink);color:var(--color-on-ink)}
+
+/* ========== 7. CALENDAR ========== */
+.cal-nav .icon-btn,.entries .icon-btn{background:var(--tint-2);color:var(--color-ink)}
+.cal-nav .icon-btn:hover,.entries .icon-btn:hover{background:var(--color-hover);color:var(--color-on-ink)}
+.cal-dow{font-size:var(--fs-sm);font-weight:var(--fw-semibold);color:var(--color-ink-soft)}
+.day{padding:7px 7px 0;border-radius:var(--radius-md);background:var(--color-cell);transition:background .12s}
+.day:hover{background:var(--color-field)}
+.day.out{background:var(--color-cell-out)}
+.day .n{font-size:var(--fs-xs);font-weight:var(--fw-bold);color:var(--color-ink-soft)}
+.day.sel{background:var(--color-field);outline:2px solid var(--color-ink);outline-offset:-2px}
+.day.today{background:var(--color-ink)}
+.day.today .n{color:var(--color-on-ink)}
+.day.today.sel{outline-offset:1px}
+.ev li{padding:0 6px;border-radius:var(--radius-xs);background:var(--course-color);color:var(--color-ink);font-size:var(--fs-2xs);font-weight:var(--fw-bold)}
+.day-tools .btn.select{padding:0 14px}
+.day-tools .btn,.day-tools .btn.icon{height:40px}
+.day-tools .btn.icon{width:40px}
+.entries li{font-size:var(--fs-md);font-weight:var(--fw-semibold)}
+
+/* ========== 8. DIALOGS ========== */
+.scrim{background:var(--color-scrim)}
+.modal{padding:26px;border-radius:var(--radius-dialog);background:var(--color-sheet)}
+.modal-head h2{font-size:var(--fs-dialog);font-weight:var(--fw-extrabold);letter-spacing:var(--tracking-heading)}
+.tag-list li{border-radius:var(--radius-md);background:color-mix(in srgb,var(--tag-color) var(--mix-tag-row),var(--color-sheet));font-weight:var(--fw-semibold)}
+.modal-col h3{font-size:var(--fs-lg);font-weight:var(--fw-bold)}
+.opt{padding:16px 18px;border-radius:var(--radius-xl);background:var(--color-panel)}
+.opt .btn.select{background:var(--color-sheet)}
+.opt .btn.select:hover{background:var(--color-hover)}
+.opt .input{height:42px;padding:0 14px;background:var(--color-sheet);font-size:var(--fs-md)}
+
+/* ========== 9. LOGIN AND REGISTER ========== */
+.auth{padding-top:80px}
+.auth-card{min-height:0;padding:36px 32px 28px;border-radius:var(--radius-dialog);background:var(--color-sheet)}
+.auth-card .deco{top:-34px;right:-34px;width:124px;height:124px;background:color-mix(in srgb,var(--accent-default) 20%,transparent)}
+.auth-card h1{margin-bottom:20px;font-size:var(--fs-auth);text-align:center}
+.field{margin-top:14px}
+.auth-card .btn-primary{height:46px;margin-top:22px;border-radius:var(--radius-lg)}
+.alt{margin-top:18px;font-size:var(--fs-md);text-align:center;color:var(--color-ink-soft)}
+.alt a{font-weight:var(--fw-bold);color:var(--color-ink);text-decoration:underline}

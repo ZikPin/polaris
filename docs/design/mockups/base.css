@@ -1,0 +1,139 @@
+/* Structure only: the layout of the wireframes, nothing visual.
+   theme.css holds every token (color, type, shape, size) and the look. */
+
+*,*::before,*::after{box-sizing:border-box}
+body,h1,h2,h3,h4,p,ul,dl,dd{margin:0}
+ul{padding:0;list-style:none}
+body{min-height:100vh;font:var(--fs-base)/1.45 var(--font-sans);color:var(--color-ink);background:var(--color-page);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+button{border:0;background:none;padding:0;cursor:pointer}
+input{border:0;outline:0}
+:focus-visible{outline:2px solid var(--color-focus);outline-offset:2px}
+
+.ico{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:var(--icon-stroke);stroke-linecap:round;stroke-linejoin:round}
+.ico-fill{fill:currentColor;stroke:none}
+
+/* frame: header, navbar, content (sizes are tokens in theme.css) */
+.topbar{display:flex;align-items:center;gap:12px;height:var(--header-h);padding:0 24px}
+.brand{display:flex;align-items:center;gap:10px}
+.topbar-actions{display:flex;align-items:center;gap:12px;margin-left:auto}
+.shell{display:grid;grid-template-columns:var(--sidebar-w) minmax(0,1fr);min-height:calc(100vh - var(--header-h))}
+.sidebar{padding:12px 8px}
+.main{padding:24px 32px 40px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:var(--control-h);padding:0 14px;white-space:nowrap}
+.icon-btn{display:inline-grid;place-items:center;width:30px;height:30px}
+
+/* navbar: Courses (expandable list), Dashboard, Calendar */
+.nav-item{display:flex;align-items:center;gap:10px;height:36px;padding:0 12px}
+.nav-item .chev{margin-left:auto}
+.nav-group:not(.open) .chev{transform:rotate(-90deg)}
+.nav-group:not(.open) .nav-sub{display:none}
+.nav-sub{padding:4px 0 8px}
+.nav-sub a{display:flex;align-items:center;gap:10px;height:30px;padding:0 12px 0 40px}
+.nav-sub .dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--course-color)}
+
+/* page head, add-course row */
+.page-head{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.filters{display:flex;gap:8px;margin-left:auto}
+.add-row{display:flex;gap:8px;margin-bottom:20px}
+.grow{flex:1;min-width:0}
+.input,.input-wrap{display:block;width:100%;height:40px;padding:0 14px}
+.input-wrap{display:flex;align-items:center;gap:10px}
+.input-wrap input{flex:1;min-width:0;height:100%;padding:0;background:none}
+
+/* course cards: 4 per row */
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.card{position:relative;display:flex;flex-direction:column;min-height:168px;padding:16px}
+.card>:not(.deco){position:relative}
+.deco{position:absolute;pointer-events:none}
+.card-title{overflow-wrap:anywhere}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.card-actions{display:flex;justify-content:flex-end;gap:6px;margin-top:auto;padding-top:12px}
+.check{display:flex;align-items:center;gap:8px;height:24px;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;display:grid;place-items:center;width:16px;height:16px;margin:0;flex:none}
+.check input:checked::after{content:"";width:10px;height:10px;background:var(--check,currentColor);clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0,43% 62%)}
+
+/* dashboard: per course, two cards side by side, equal height */
+.course-block{margin-top:28px}
+.course-block h2{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.stat-card{min-height:0}
+.stats>div{display:flex;gap:8px}
+
+/* login */
+.auth{display:flex;justify-content:center;padding:72px 24px}
+.auth-card{width:100%;max-width:420px;min-height:0;padding:32px}
+.banner{display:flex;align-items:flex-start;gap:10px}
+.field{display:block}
+.field>span{display:block;margin-bottom:6px}
+.auth-card .btn-primary{width:100%}
+
+/* tags overlay */
+.scrim{position:fixed;inset:0;z-index:10;display:grid;place-items:center}
+.modal{position:relative;width:460px;max-width:calc(100vw - 32px)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.tag-new{display:flex;align-items:center;gap:8px}
+.tag-list{display:grid;gap:6px;margin-top:20px}
+.tag-list li{display:flex;align-items:center;gap:12px;height:38px;padding:0 12px}
+.swatch{flex:none;width:16px;height:16px;border-radius:50%;background:var(--tag-color)}
+
+/* field error (register): the input is outlined, the message sits right under it */
+.input.invalid{outline:2px solid var(--color-danger)}
+.field-error{display:flex;align-items:center;gap:6px;margin-top:6px}
+.field-error .ico{width:16px;height:16px;color:var(--color-danger)}
+
+/* course page: back button, tables (a title column, columns, rows), thin + bars outside the table */
+.page-head .btn{margin-left:auto}
+.nav-sub a.active{font-weight:700}
+.tables{display:flex;flex-wrap:wrap;align-items:flex-start;gap:28px 14px}
+.tbl h2{margin-bottom:8px}
+.tbl-body{display:grid;grid-template-columns:max-content 20px;grid-template-rows:max-content 20px;gap:4px}
+.tbl-grid{--cell-gap:2px;table-layout:fixed;border-collapse:separate;border-spacing:var(--cell-gap);
+  width:calc(168px + 144px * (var(--cols) - 1))}
+.tbl-grid th,.tbl-grid td{position:relative;height:40px;padding:0 12px;overflow:hidden;text-align:left;white-space:nowrap;text-overflow:ellipsis}
+.tbl-grid .t-head{height:44px}
+.tbl-grid .c-bool,.tbl-grid .c-num{padding:0;text-align:center}
+.tbl-grid .c-num{font-variant-numeric:tabular-nums}
+.add-col,.add-row-bar{display:grid;place-items:center}
+.add-col{grid-column:2;grid-row:1}
+.add-row-bar{grid-column:1;grid-row:2}
+.cell-check{appearance:none;-webkit-appearance:none;display:inline-grid;place-items:center;width:16px;height:16px;margin:0;vertical-align:middle}
+.cell-check:checked::after{content:"";width:10px;height:10px;background:var(--check,currentColor);clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0,43% 62%)}
+.cell-input{width:calc(100% - 16px);height:28px;margin:0 8px;padding:0 8px;font:inherit;text-align:inherit}
+.tbl-grid .editing{padding:0}
+.tools{position:absolute;top:50%;right:8px;display:flex;gap:6px;transform:translateY(-50%);opacity:0;pointer-events:none}
+.t-head:hover .tools,.t-head.hot .tools,.t-row:hover .tools,.t-row.hot .tools{opacity:1;pointer-events:auto}
+.tool{display:grid;place-items:center;width:18px;height:18px;border-radius:50%}
+.tool .ico{width:11px;height:11px;stroke-width:2.4}
+.note{margin-top:24px;max-width:720px}
+
+/* calendar: month grid, the selected day's list on the right (not a card) */
+.cal-layout{display:grid;grid-template-columns:minmax(0,1fr) 332px;gap:24px;align-items:start}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cal-nav .icon-btn{width:32px;height:32px}
+.cal-dow,.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+.cal-dow{margin-bottom:4px;text-align:center}
+.cal-grid{grid-auto-rows:96px}
+.day{display:block;min-width:0;overflow:hidden;padding:6px 6px 0}
+.day.out{pointer-events:none}
+.day .n{display:block;margin-bottom:3px}
+.ev{display:grid;gap:2px}
+.ev li{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;line-height:14px}
+.ev li:nth-child(n+5){display:none}
+.day-tools{display:flex;gap:12px;margin:14px 0 18px}
+.day-tools .select{min-width:0}
+.day-tools .select:first-child{width:104px}
+.day-tools .select:nth-child(2){flex:1}
+.day-tools .select span{overflow:hidden;text-overflow:ellipsis}
+.entries li{display:flex;align-items:center;gap:12px;min-height:40px}
+.entries li>span{flex:1;min-width:0}
+.entries .dot{flex:none;width:11px;height:11px;border-radius:50%;background:var(--course-color)}
+
+/* column dialogs */
+.opt{display:grid;gap:12px}
+.opt+.opt{margin-top:10px}
+.opt-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.opt-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opt-actions{display:flex;justify-content:center}

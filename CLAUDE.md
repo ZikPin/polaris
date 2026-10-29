@@ -9,6 +9,7 @@ Each one is derived from the one before:
 
 Test plans: `tests/plans/` (acceptance for vision and SRs, system for requirements and schema).
 Work: `docs/BACKLOG.md` (tickets), `docs/CHANGE_LOG.md`.
+Design: `docs/design/` (`BRIEF.md`, wireframes, HTML mock-ups with `theme.css`).
 
 ## Rules
 - Docs first. If the code has to differ from the docs, change the docs in the same change.
