@@ -65,8 +65,17 @@ Registration tests use new email addresses. Where a scenario below describes spe
 | AT-V-02 | Vision | Add a lecture, then an assignment, timed separately. | Median of 5 runs is under 20 s for each. |
 | AT-V-03 | Vision | Add a custom column with a label, and for a number column choose its statistic. | Median of 5 runs is under 60 s. |
 | AT-V-04 | Vision | Two courses with different lecture and assignment titles. Open each. | Each course view lists only its own titles and none from the other. |
-| AT-V-05 | Vision | Course with lectures and assignments, some done, some graded. Open its dashboard. | The dashboard shows the number of done assignments, the grade overview, the progress per lecture, and the number of lectures left. |
+| AT-V-05 | Vision | Course with lectures and assignments, some done, some graded. Open its dashboard. | The dashboard shows the number of done assignments, the grade overview, the progress per lecture, and the lectures left (the entries of the not-done list). |
 | AT-V-06 | Vision (timed tasks), REQ-NF-03 | On the seed data, perform each main interaction: add, rename and delete a row, check a box, open the dashboard. | Visible feedback appears within 500 ms each time. |
+
+#### Manual timed runs (AT-V-01 to 03)
+Done by a user who knows the app, with a stopwatch, as carol on a freshly seeded development database. Five runs per test, the median is compared with the limit. AT-V-04 to 06 are automated (`features/success.feature`), AT-V-06 measures the time from the action until the result is visible.
+
+| Test | Limit | Median | Date |
+| ---- | ----- | ------ | ---- |
+| AT-V-01 | 20 s | | |
+| AT-V-02 | 20 s | | |
+| AT-V-03 | 60 s | | |
 
 ### Out of scope (negative check)
 
