@@ -1,6 +1,8 @@
 # Change Log
 One line per finished ticket, newest first: date · ticket · one sentence.
 
+- 2026-11-01 · T-021 · Automated acceptance tests AT-02 to AT-14 as Gherkin features with step definitions for auth, courses, tables, tags, dashboard and calendar.
+- 2026-10-29 · T-018 · Deployment: one Docker image on Render that serves the Angular build from Flask over HTTPS, with Supabase Postgres and `flask db upgrade` on every start.
 - 2026-10-29 · T-017 · System suite on Postgres: `docker-compose.yml`, `TEST_DATABASE_URL` switch in the fixtures, Postgres driver, and prefixed `DB_*` production settings.
 - 2026-10-29 · T-003 · Acceptance test setup: Playwright with playwright-bdd on Chromium, own backend and frontend ports, pristine database restored before every test, login fixture.
 - 2026-10-29 · T-015 · Seed command `flask seed`: the users alice, bob and carol with demo data, safe to run twice.

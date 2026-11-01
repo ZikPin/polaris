@@ -1,5 +1,5 @@
 # Backlog
-Statuses: `todo`, `in progress`, `done`, `stale` (the request or requirement it depends on changed or was removed). Tickets are listed in the suggested order of implementation, the ids never change. Every ticket is a slice that includes API, UI and tests.
+Statuses: `todo`, `in progress`, `done`, `stale` (the request or requirement it depends on changed or was removed), `won't do` (dropped on purpose). Tickets are listed in the suggested order of implementation, the ids never change. Every ticket is a slice that includes API, UI and tests.
 
 | Ticket | Request             | Status | Description |
 | ------ | ------------------- | ------ | ----------- |
@@ -20,7 +20,7 @@ Statuses: `todo`, `in progress`, `done`, `stale` (the request or requirement it 
 | T-020  | infra               | done   | Design: wireframes, a color palette as a theme (CSS variables) and a UX pass (too many buttons, browser prompts for renaming rows and columns), applied to the screens built so far |
 | T-015  | infra               | done   | Seed command that creates the users alice, bob and carol with demo data (ST-27) |
 | T-003  | infra               | done   | Set up the acceptance tests: Playwright with playwright-bdd on Chromium, database restore and login fixtures (REQ-NF-02) |
-| T-021  | SR-M, SR-S, SR-C    | in progress | Automated acceptance tests AT-02 to AT-14 as Gherkin features with step definitions (AT-01 exists since T-003, the timed and negative checks belong to T-016 and are manual) |
-| T-016  | Vision              | in progress | Success criteria: timed tests and the 500 ms feedback check (AT-V-01 to 06, REQ-NF-01, 03) |
+| T-021  | SR-M, SR-S, SR-C    | done   | Automated acceptance tests AT-02 to AT-14 as Gherkin features with step definitions (AT-01 exists since T-003, the timed and negative checks belong to T-016 and are manual) |
+| T-016  | Vision              | won't do | Success criteria: timed tests and the 500 ms feedback check (AT-V-01 to 06, REQ-NF-01, 03) |
 | T-017  | infra               | done   | Run the system suite against Postgres with docker-compose |
-| T-018  | infra               | in progress | Decide hosting and deploy over HTTPS, with `flask db upgrade` as a deploy step before the new version starts (REQ-C-02, REQ-NF-05) |
+| T-018  | infra               | done   | Decide hosting and deploy over HTTPS, with `flask db upgrade` as a deploy step before the new version starts (REQ-C-02, REQ-NF-05) |

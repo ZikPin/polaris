@@ -25,6 +25,13 @@ Design: `docs/design/` (`BRIEF.md`, wireframes, HTML mock-ups with `theme.css`).
 - Install nothing globally: `pip` only inside `.venv`, `npm` only in the project.
 - Do not commit unless asked.
 
+## Code style
+- Minimal and surgical: the fewest lines and the fewest files that solve the problem. A small feature touches a handful of files, not twenty.
+- Integrate, do not bolt on. Extend the existing function, service or component, and reuse what is there, instead of adding a parallel structure beside it.
+- No speculative code: no extra options, abstractions, helpers used once, defensive checks for cases that cannot happen, or comments that repeat the code.
+- Match the surrounding code: its naming, idiom and comment density. Leave code you do not need to change alone, no drive-by refactoring or reformatting.
+- The result must be easy to review and read as if a senior engineer wrote it. Before finishing, reread the diff and cut everything that is not needed.
+
 ## Skills
 - `/plan-feature <request>`: request → requirements, docs, test plans, tickets
 - `/implement-feature <ticket>`: ticket → code, tests, docs, change log
