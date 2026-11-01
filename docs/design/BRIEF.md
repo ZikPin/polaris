@@ -89,14 +89,14 @@ Ten colors for courses and tags. They are darker pastels with moderate saturatio
 | `--accent-rose` | `#D49BA9` | 345 | 7.4 |
 | `--accent-stone` | `#BCA79D` | 19 (neutral) | 7.5 |
 
-**Default: `--accent-clay`**, set once as `--accent-default`. The app has no way to choose a color yet, so every course and tag uses the default, and it decides the whole first impression. Clay is the warmest of the ten, belongs to the pearl and ink base, and looks good as a full gallery. `stone` is the quiet alternative; changing the default is a one-line change.
+**Default: `--accent-clay`**, set once as `--accent-default`. A course has its color chosen in the course dialog (6.9) and starts with the default, tags have no choice yet and always use it. Clay is the warmest of the ten, belongs to the pearl and ink base, and looks good as a full gallery. `stone` is the quiet alternative; changing the default is a one-line change.
 
 How a color reaches a component:
 
 - A course element sets `--course-color` (for example `style="--course-color: var(--accent-sage)"`). Everything inside it reads that variable: the card fill, the dashboard cards, the table header, the calendar entries, the navbar dot.
 - A tag element sets `--tag-color` in the same way.
 - Without a value, both fall back to `--accent-default`.
-- The mock-ups use assorted accents to show the palette. The app uses the default until colors can be chosen.
+- The app sets `--course-color` from the `color` of the course (`clay` becomes `var(--accent-clay)`), on every element that shows the course: card, navbar dot, dashboard cards and heading dot, table, calendar entries and the circles in the day list. The dashboard and the calendar take it from the course list by `course_id`.
 
 Derived tones, all mixed from `--course-color` over `--color-sheet` and tunable in one place:
 
@@ -219,9 +219,9 @@ Pill (`--radius-pill`), `--glass-3` on the card, 11.5px semibold, padding 3px 10
 
 ### 6.5 Course card (courses page)
 
-The card is **filled with `--course-color`**, ink text, `--radius-card`, 168px high at least, padding 20px 18px 14px. A soft circle (`--glass-1`, 108px) hangs out of the top right corner, clipped by the card. Title 16px bold, tags under it, the two icon buttons (edit, delete) at the bottom right. Four cards per row, 16px gap.
+The card is **filled with `--course-color`**, ink text, `--radius-card`, 168px high at least, padding 20px 18px 14px. A soft circle (`--glass-1`, 108px) hangs out of the top right corner, clipped by the card. Title 16px bold, tags under it, then the description (13.5px, `--color-ink-on-accent`, cut after 150 characters with an ellipsis), the two icon buttons (edit, delete) at the bottom right. Clicking the card opens the course; the buttons do not. Four cards per row, 16px gap.
 
-**Edit state:** the card turns `--color-sheet-raised` with a 2px ink outline (inside the edge), the corner circle becomes a 24% tint of the course color, the title becomes a 36px input, the tags become checkbox rows, the buttons become save (primary) and cancel.
+Editing a course happens in the course dialog (6.9), the card has no edit state.
 
 ### 6.6 Dashboard cards
 
@@ -229,9 +229,9 @@ Per course: a heading (a dot in the course color and the name, 18px bold), then 
 
 ### 6.7 Course page tables
 
-- Columns: title column 168px, every other column 144px. Header row 44px, body rows 40px, 2px gap between cells, `--radius-sm` on every cell.
+- Columns: title column 224px, every other column 144px. Header row 44px, body rows 40px, 2px gap between cells, `--radius-sm` on every cell.
 - **Header cells** are the full course color with ink text (11.5px bold). **Title column** is `--mix-table-title`, semibold. **Body** is `--mix-table-body`.
-- Boolean cell: centered checkbox. Number cell: centered number, tabular figures.
+- A title that does not fit wraps onto further lines (`overflow-wrap: anywhere`), the row grows, its other cells stay vertically centered. Boolean cell: centered checkbox. Number cell: centered number, tabular figures.
 - **Add bars:** a 20px bar on the right of the table and a 20px bar below it, 4px away from the table, field tone, soft ink `+`, hover `--color-hover`.
 - **Hover tools:** on a column header (and a row title) two 18px circles appear at the right inside the cell (`--tint-3`): the edit circle (only on number columns) and the delete circle; on a row title only delete. Hover of a tool: ink fill.
 - **In-place edit:** the cell holds an input (`--color-sheet-raised`, `--radius-sm`, 2px ink outline, semibold). A new column starts with a default label that is edited this way. Enter or leaving the field saves, Escape drops the change. A new row starts with the title "Default lecture." or "Default assignment." and a new column with "Default bool-col." or "Default num-col.", and the new title or label is edited at once.
@@ -250,11 +250,24 @@ Per course: a heading (a dot in the course color and the name, 18px bold), then 
 A scrim (`--color-scrim`) over the whole page, a centered 460px panel: `--color-sheet`, `--radius-dialog`, padding 26px. Head: title (20px extrabold) and a close icon button. The page behind stays visible.
 
 - **Tags dialog:** new tag input with swatch and a square add button, then rows (38px, `--radius-md`, `--mix-tag-row` tint of the tag color, swatch and name). Click a name to rename it in place; the delete circle (same as the table tools) appears on hover at the right of the row. The swatch is not clickable yet.
+- **Course dialog** (title "Edit the course"): option panels like the column dialogs, one each for the title (input), the tags (checkbox rows like the tags filter), the description (multi-line input, 1000 characters at most) and the color (the ten accents as 28px circles in a wrapping row, the chosen one has the 2px ink outline). Save is primary, cancel a field-toned button, both at the bottom. Creating a course stays the name input with the `+` button on the courses page.
 - **Column dialogs:** option panels (`--color-panel`, `--radius-xl`, padding 16px 18px) with the title and its control on one line, inputs below in `--color-sheet` (42px), the action button centered at the bottom.
 
 ### 6.10 Login and register
 
 `--color-page` page under the plain header. A card 420px wide at most, `--color-sheet`, `--radius-dialog`, padding 36px 32px 28px, with a corner circle in a 20% tint of `--accent-default`. Centered title (24px). Login shows the error banner under the title; register shows the field error under the password input. Submit button full width. Below it the link to the other screen (bold, underlined).
+
+### 6.11 Mobile layout
+
+Below **768px** the layout changes, above it nothing does. Same tokens, no new colors.
+
+- **Header.** Brand left; right the Tags button (icon only) and a square burger button (ghost, 34px). The email and Log out leave the header.
+- **Navbar.** The burger opens it from the header downward over the content, full width, page tone, scrolling if it is taller than the window. The entries are the desktop ones (Courses expands to the course list, Dashboard, Calendar), **Log out is the last entry**, pushed to the bottom. Choosing an entry closes it.
+- **Content sheet.** Margin 0 8px 8px, padding 16px 16px 28px.
+- **Page head.** Stacked: the title, then directly under it the tags filter, the back button or the dashboard filters.
+- **One column.** Course cards, the lecture table above the assignment table, and the two dashboard cards are one per row. A table wider than the sheet scrolls inside its own area, the page never scrolls sideways.
+- **Calendar.** Month grid on top, the day panel below it at full width. A day shows its entries as dots in the course color (the text does not fit); the day panel lists them with names.
+- Dialogs are 100% wide minus a 16px margin, the content scrolls if it is higher than the window.
 
 ## 7. States
 
@@ -309,9 +322,9 @@ The interactions mock-up shows the hover states forced on at once with the class
 
 ## 11. Open points
 
-- **Choosing a course or tag color** is not part of the app yet. Until then everything uses `--accent-default`; the ten accents are ready for when it exists.
+- **Choosing a tag color** is not part of the app. Tags use `--accent-default`.
 - **Font delivery.** The mock-ups load Manrope from Google Fonts; the app should serve it itself.
 - **Disabled state** and **empty states** beyond the table and dashboard ones are not designed.
-- **Narrow windows.** The design is made for about 1280px wide. Mobile is not designed.
+- **Narrow windows.** Below 768px see 6.11; between 768px and about 1000px the wide layout is used as it is. Tablets are not designed.
 - **Calendar entries** are 10px text; if that is too small in use, the day cells need to grow.
 - **Dark theme** is not planned. It would be a second set of the tokens in section 3.

@@ -3,7 +3,7 @@ The schema is derived from the [domain model](DOMAIN_MODEL.md). Table names are 
 
 General rules:
 - No field is nullable, except `min` and `max` of `custom_range_columns` (empty means no bound) and `value` of `number_cells` (empty means no value yet)
-- Defaults: `bool_cells.value` is false, `custom_range_columns.preferred_statistic` is 'avg'
+- Defaults: `bool_cells.value` is false, `custom_range_columns.preferred_statistic` is 'avg', `courses.description` is '' and `courses.color` is 'clay' (so existing courses get them in the migration)
 - Every foreign key is `ON DELETE CASCADE`, so deleting a parent (for example a course) deletes everything below it
 - SQLite does not enforce foreign keys unless `PRAGMA foreign_keys=ON` is set on every connection
 - Tables have no inherent order, so every query that lists rows or columns uses `ORDER BY id`. The autoincrement id grows with every insert, so id order is creation order and no order field is needed (rows and columns cannot be reordered)
@@ -27,11 +27,13 @@ Tag has a composite constraint UNIQUE(user_id, value), a user cannot create mult
 | user_id | integer | FK(user_id -> users.id)   |
 ## courses
 
-| Fields  | Type    | Constraints               |
-| ------- | ------- | ------------------------- |
-| id      | integer | unique, autoincrement, PK |
-| title   | varchar |                           |
-| user_id | integer | FK(user_id -> users.id)   |
+| Fields      | Type    | Constraints                                                                                       |
+| ----------- | ------- | ------------------------------------------------------------------------------------------------- |
+| id          | integer | unique, autoincrement, PK                                                                         |
+| title       | varchar |                                                                                                   |
+| description | varchar | default ''                                                                                        |
+| color       | varchar | ('clay'\|'mustard'\|'olive'\|'sage'\|'teal'\|'blue'\|'periwinkle'\|'plum'\|'rose'\|'stone'), default 'clay' |
+| user_id     | integer | FK(user_id -> users.id)                                                                           |
 ## course_tags
 tag_id and course_id form a composite primary key
 

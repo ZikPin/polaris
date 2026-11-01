@@ -6,7 +6,7 @@
 
 | Stakeholder requirement | Covered by                           |
 | ----------------------- | ------------------------------------ |
-| SR-M-01                 | REQ-F-01, 02, 03, 04                 |
+| SR-M-01                 | REQ-F-01, 02, 03, 04, 53, 54         |
 | SR-M-02                 | REQ-F-05 to 12, 21                   |
 | SR-M-03                 | REQ-F-13, 15, 20                     |
 | SR-M-04                 | REQ-F-22, 23                         |
@@ -18,6 +18,9 @@
 | SR-S-01                 | REQ-F-16, 17, 18, 19                 |
 | SR-S-02                 | REQ-F-39, 40                         |
 | SR-S-03                 | REQ-F-33, 34, 35, 36                 |
+| SR-S-04                 | REQ-F-55 to 59                       |
+| SR-S-05                 | REQ-F-60 to 64, REQ-NF-06            |
+| SR-S-06                 | REQ-F-65, 66                         |
 | SR-C-01                 | REQ-F-41, 42, 45, 46                 |
 | SR-C-02                 | REQ-F-43, 44, 45, 46                 |
 
@@ -92,6 +95,25 @@ These do not come from a single stakeholder requirement.
 ### General
 - REQ-F-51: Titles, labels and tag values cannot be empty
 - REQ-F-52: The system asks for confirmation before deleting a course, a column or a tag
+### Course dialog
+- REQ-F-53: The edit action of a course opens a dialog "Edit the course" with the title, the tags, the description and the color of the course
+- REQ-F-54: Saving the dialog stores all its fields at once, cancelling it closes the dialog and changes nothing
+### Course description and color
+- REQ-F-55: The user can set and edit a description of a course. It can be empty and has at most 1000 characters. A new course has an empty description
+- REQ-F-56: The user can choose the color of a course from the ten colors of the accent palette. A new course has the default color (clay)
+- REQ-F-57: The course card shows the description under the tags. A description of more than 150 characters is cut after 150 and ends with an ellipsis
+- REQ-F-58: The course page shows the tags of the course under the title, and the full description under the tags
+- REQ-F-59: The color of a course is used wherever the course is shown: its card, its dot in the navigation, its cards in the dashboard, its entries in the calendar and in the list of a calendar day, and the headers of its tables
+### Mobile layout
+Below the width of 768 px (the breakpoint), the layout changes as follows
+- REQ-F-60: The header shows only the brand, the tags button and a burger button. The burger button opens and closes the navigation from the top of the page downward
+- REQ-F-61: The navigation lists the same entries as on a wide screen (Courses with the list of courses, Dashboard and Calendar), and Log out as its last entry
+- REQ-F-62: The page title comes first, directly under it are the tag filter (courses page), the back button (course page) or the filters (dashboard)
+- REQ-F-63: Course cards, the lecture and assignment tables, and the dashboard cards of a course are shown one per row
+- REQ-F-64: The calendar grid is shown above the list of the selected day
+### Tables
+- REQ-F-65: The default title column is wider than the custom columns
+- REQ-F-66: A title that does not fit its cell is wrapped onto further lines and is never cut off, the row grows with it
 
 ## Non-Functional Requirements
 - REQ-NF-01: Every change is saved on the server without a save action and is still there after a reload
@@ -99,6 +121,7 @@ These do not come from a single stakeholder requirement.
 - REQ-NF-03: Every user interaction gives visible feedback in under 500ms under normal network conditions
 - REQ-NF-04: Passwords are stored hashed
 - REQ-NF-05: In production, all traffic goes over HTTPS
+- REQ-NF-06: Every screen works on a viewport from 360 px wide, and the page itself never scrolls sideways (a table wider than the screen scrolls inside its own area)
 
 ## Constraints
 - REQ-C-01: The software is accessed through a browser as a webpage

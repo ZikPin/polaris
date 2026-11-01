@@ -15,6 +15,9 @@ Should have:
 - SR-S-01: I want to have columns not only with checkboxes but also with custom range fields with number inputs
 - SR-S-02: I want to restrict the dashboard to certain courses or specific tags
 - SR-S-03: I want to have a dashboard statistics for range field columns to choose between average and sum statistics (maybe average grade per assignment or sum of points to measure if bonus threshold is reached)
+- SR-S-04: I want to give each course a short description and a color from a fixed palette, so that I recognise my courses at a glance and the color follows the course everywhere it is shown
+- SR-S-05: I want to use the app in the browser of my phone, with a layout made for narrow screens (a web page, not an app)
+- SR-S-06: I want long lecture and assignment titles to be fully readable in the tables
 
 Could have:
 Calendar feature is thought to plan the studying, prepare for exams and have overview of when is what done, not to enforce specific time constraints and deadlines

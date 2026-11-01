@@ -12,6 +12,8 @@ There are 3 environments:
 - The Angular workspace is at the repository root (`package.json`, `angular.json`, `node_modules`), the sources are in `frontend/`
 - Angular standalone components are grouped in feature folders (`frontend/src/app/features`), shared code like the auth service and the route guard is in `core`
 - The frontend only talks to the backend through the API
+- One layout for all devices: the stylesheet switches to the mobile layout with a media query below 768 px (REQ-F-60 to 64), there is no separate mobile app or route. The wide layout is the default
+- The color of a course comes only with the course (`color`). The dashboard and the calendar carry the `course_id` and the UI takes the color from the course list it already loads
 - In development the Angular dev server proxies `/api` to Flask on port 5000 (`proxy.conf.json`), so the browser sees a single origin
 - Routes: `/login`, `/register`, and the guarded `/courses`, `/courses/:id`, `/dashboard` and `/calendar`. Tags have no route, they are managed in a dialog opened from the header. The route guard asks `GET api/auth/me` and redirects to `/login` if the user is not logged in or the check fails
 
@@ -116,10 +118,12 @@ GET    api/course/{course_id}     -> a course
 PATCH  api/course/{course_id}     -> edit the course
 DELETE api/course/{course_id}     -> delete the course with everything in it
 
-Payload (POST, PATCH):  {"title": "Algorithms", "tag_ids": [2, 5]}      tag_ids replaces all tags of the course
-Response:               {"id": 7, "title": "Algorithms", "tags": [{"id": 2, "value": "Semester 1"}]}
+Payload (POST, PATCH):  {"title": "Algorithms", "tag_ids": [2, 5], "description": "Spring term", "color": "sage"}
+                        tag_ids replaces all tags of the course. description and color are optional (empty, 'clay')
+Response:               {"id": 7, "title": "Algorithms", "description": "Spring term", "color": "sage",
+                         "tags": [{"id": 2, "value": "Semester 1"}]}
 ```
-The payload is the place for further course fields (the edit dialog). An unknown tag id (or one of another user) is a 400.
+The edit dialog sends all four fields in one PATCH (REQ-F-54). An unknown tag id (or one of another user) and a color outside the palette are a 400. The card cuts the description after 150 characters in the UI, the API always returns it whole.
 
 ### Tag
 ```

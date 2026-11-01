@@ -50,10 +50,14 @@ CourseQuerySchema                    GET api/course
 CourseRequestSchema                  POST, PATCH api/course
   title      NonEmptyStr             required (not on PATCH)
   tag_ids    List[Int]               optional, default [], unique values, replaces the tags of the course
+  description Str                    optional, may be empty, at most 1000 characters (stripped, not NonEmptyStr)
+  color      Str                     optional, one of the ten accent names (see RELATIONAL_SCHEMA.md)
 
 CourseResponseSchema                 GET, POST, PATCH api/course
   id         Int
   title      Str
+  description Str
+  color      Str
   tags       List[TagResponseSchema]
 ```
 

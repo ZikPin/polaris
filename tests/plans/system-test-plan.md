@@ -88,6 +88,14 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | ST-26 | REQ-NF-04 | Register two users with the same password. | The stored passwords are not the plain text, differ from each other, and each verifies against its own password. |
 | ST-27 | Acceptance plan: seed data | Run the seed command on an empty database, then run it again. | Users alice, bob and carol exist with the data described in the acceptance plan. The second run leaves exactly the same data. |
 
+### Course details
+
+| ID | Requirements | Scenario | Pass criterion |
+| --- | --- | --- | --- |
+| ST-32 | F-55, 56 | Create a course with only a title, read it. Edit its description and color, then edit only its title. Try the ten palette colors, a color outside the palette, and a description of 1000 and of 1001 characters. | A new course has the description "" and the color "clay". Description and color are returned as saved and survive a title-only edit. Every palette color and the 1000 characters are accepted. The other color and the 1001 characters are rejected with a 400 naming the field, and the stored values stay. |
+| ST-33 | F-53, 54 | One PATCH with a new title, other tags, a description and a color. Then one PATCH with valid new values and an unknown tag id. | The first changes all four fields. The second is rejected and none of its fields is stored. |
+| ST-34 | Schema: courses | Directly in the database: a course with a color outside the palette and one with NULL in description or color, then one inserted without both. Also migrate a database with an existing course from the previous revision to the newest. | The invalid inserts are rejected. The course inserted without them has "" and "clay", and so has the migrated course. |
+
 ### Non-functional
 
 | ID | Requirements | Scenario | Pass criterion |
@@ -96,7 +104,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | ST-29 | NF-03 | Call every endpoint once on a database with the amount of data of the acceptance seed. | Each response arrives in under 500 ms. This is a necessary condition for the UI test AT-V-06. |
 
 ## Checks outside the system tests
-- **UI only:** REQ-F-52 (delete confirmation) and REQ-NF-02 (browsers) are verified in the acceptance tests, and REQ-NF-03 also in AT-V-06.
+- **UI only:** REQ-F-52 (delete confirmation) and REQ-NF-02 (browsers) are verified in the acceptance tests, and REQ-NF-03 also in AT-V-06. REQ-F-53 and 54 (the dialog, its fields work in ST-33), REQ-F-57 to 66 and REQ-NF-06 (the layouts) are verified in AT-03 and AT-15 to AT-19.
 - **Deployment check:** REQ-NF-05 (HTTPS) is checked once against the production deployment, by requesting the site over HTTP and over HTTPS.
 - **Constraints:** REQ-C-01 to 03 are checked by inspection of the repository and deployment, not by tests.
 
@@ -127,12 +135,17 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | REQ-F-50 | ST-21, ST-22 |
 | REQ-F-51 | ST-23 |
 | REQ-F-52 | Acceptance (AT-03) |
+| REQ-F-53, 54 | ST-33, acceptance (AT-03) |
+| REQ-F-55, 56 | ST-32 |
+| REQ-F-57, 58, 59 | Acceptance (AT-15, AT-16) |
+| REQ-F-60 to 64, REQ-NF-06 | Acceptance (AT-17, AT-18) |
+| REQ-F-65, 66 | Acceptance (AT-19) |
 | REQ-NF-01 | ST-28, acceptance (AT-07) |
 | REQ-NF-02 | Acceptance (Chromium run) |
 | REQ-NF-03 | ST-29, acceptance (AT-V-06) |
 | REQ-NF-04 | ST-26 |
 | REQ-NF-05 | Deployment check |
-| Schema rules | ST-10, ST-24, ST-25 |
+| Schema rules | ST-10, ST-24, ST-25, ST-34 |
 | Error format | ST-30 |
 | Serving the frontend (one origin) | ST-31 |
 | Seed command | ST-27 |
