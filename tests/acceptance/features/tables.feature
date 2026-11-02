@@ -73,3 +73,12 @@ Feature: Tables of a course
     Then the column "Grade" of the row "Sheet 4" in the assignments table shows ""
     When I delete the column "Grade" from the assignments table
     Then the assignments table has no column "Grade"
+
+  @AT-19 @SR-S-06
+  Scenario: Long titles wrap in the title column
+    When I add the checkbox column "Watched" to the lectures table
+    And I add the row "Introduction to the analysis of algorithms and their asymptotic complexity, part one" to the lectures table
+    And I add the row "Short" to the lectures table
+    Then the title column of the lectures table is wider than the column "Watched"
+    And the title of the row "Introduction to the analysis of algorithms and their asymptotic complexity, part one" in the lectures table is fully visible
+    And the row "Introduction to the analysis of algorithms and their asymptotic complexity, part one" in the lectures table is taller than the row "Short"

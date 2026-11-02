@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import { Given, Then, When } from '../fixtures';
+import { navLink, openEditDialog } from '../locators';
 
 Given('I am logged in as {string}', async ({ loginAs }, user: string) => {
   await loginAs(user);
@@ -32,9 +33,19 @@ When('I add the course {string}', async ({ page }, title: string) => {
 });
 
 When('I rename the course {string} to {string}', async ({ page }, title: string, newTitle: string) => {
-  await page.getByRole('button', { name: `Edit ${title}`, exact: true }).click();
-  await page.getByLabel('Course title').fill(newTitle);
-  await page.getByRole('button', { name: 'Save' }).click();
+  const dialog = await openEditDialog(page, title);
+  await dialog.getByLabel('Title', { exact: true }).fill(newTitle);
+  await dialog.getByRole('button', { name: 'Save' }).click();
+  await expect(dialog).toHaveCount(0);
+});
+
+When('I rename the course {string} to {string} and cancel', async ({ page }, title: string, newTitle: string) => {
+  const dialog = await openEditDialog(page, title);
+  await expect(dialog.getByLabel('Description', { exact: true })).toBeVisible();
+  await expect(dialog.getByRole('group', { name: 'Color' })).toBeVisible();
+  await dialog.getByLabel('Title', { exact: true }).fill(newTitle);
+  await dialog.getByRole('button', { name: 'Cancel' }).click();
+  await expect(dialog).toHaveCount(0);
 });
 
 When('I delete the course {string} and {word} the confirmation', async ({ page }, title: string, answer: string) => {
@@ -43,7 +54,7 @@ When('I delete the course {string} and {word} the confirmation', async ({ page }
 });
 
 When('I open the course {string}', async ({ page }, title: string) => {
-  await page.locator('.nav-sub').getByRole('link', { name: title, exact: true }).click();
+  await (await navLink(page, title)).click();
   await expect(page.getByRole('heading', { level: 1, name: title, exact: true })).toBeVisible();
 });
 

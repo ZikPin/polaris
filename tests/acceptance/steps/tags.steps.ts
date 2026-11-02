@@ -1,5 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import { Then, When } from '../fixtures';
+import { openEditDialog } from '../locators';
 
 const openTagsDialog = async (page: Page) => {
   await page.getByRole('navigation', { name: 'Account' }).getByRole('button', { name: 'Tags' }).click();
@@ -28,12 +29,12 @@ When('I create the tags {string}', async ({ page }, names: string) => {
 });
 
 When('I tag the course {string} with {string}', async ({ page }, title: string, names: string) => {
-  await page.getByRole('button', { name: `Edit ${title}`, exact: true }).click();
+  const dialog = await openEditDialog(page, title);
   for (const name of names.split(', ')) {
-    await page.locator('article.editing').getByLabel(name, { exact: true }).check();
+    await dialog.getByLabel(name, { exact: true }).check();
   }
-  await page.getByRole('button', { name: 'Save' }).click();
-  await expect(page.locator('article.editing')).toHaveCount(0);
+  await dialog.getByRole('button', { name: 'Save' }).click();
+  await expect(dialog).toHaveCount(0);
 });
 
 When('I filter the courses by the tags {string}', async ({ page }, names: string) => {

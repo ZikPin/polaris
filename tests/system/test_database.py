@@ -79,6 +79,9 @@ VIOLATIONS = {
     "invalid preferred_statistic": "INSERT INTO custom_range_columns (id, preferred_statistic) VALUES (:bare, 'median')",
     "min greater than max": "INSERT INTO custom_range_columns (id, min, max) VALUES (:bare, 5, 1)",
     "course without title": "INSERT INTO courses (title, user_id) VALUES (NULL, :user)",
+    "course with a color outside the palette": "INSERT INTO courses (title, color, user_id) VALUES ('X', 'red', :user)",
+    "course without description": "INSERT INTO courses (title, description, user_id) VALUES ('X', NULL, :user)",
+    "course without color": "INSERT INTO courses (title, color, user_id) VALUES ('X', NULL, :user)",
     "row without title":
         "INSERT INTO course_rows (table_type, title, course_id) VALUES ('lecture', NULL, :course)",
 }
@@ -86,7 +89,7 @@ VIOLATIONS = {
 
 @pytest.mark.parametrize("sql", VIOLATIONS.values(), ids=VIOLATIONS.keys())
 def test_database_rejects(ids, sql):
-    """ST-25"""
+    """ST-25, ST-34"""
     with pytest.raises(IntegrityError):
         run(sql, ids)
 
@@ -106,6 +109,25 @@ def test_optional_values_and_defaults(ids):
     assert not run("SELECT value FROM bool_cells WHERE row_id = :row2", ids).scalar_one()
     assert run("SELECT value FROM number_cells WHERE row_id = :row", ids).scalar_one() is None
     assert tuple(run("SELECT min, max, preferred_statistic FROM custom_range_columns", ids).one()) == (None, None, "avg")
+
+
+def test_course_description_and_color_default(ids):
+    """ST-34"""
+    assert tuple(run("SELECT description, color FROM courses", ids).one()) == ("", "clay")
+
+
+def test_migration_keeps_existing_courses(app):
+    """ST-34"""
+    upgrade(directory=str(MIGRATIONS), revision="dd8508320ac3")
+    run("INSERT INTO users (email, password) VALUES ('a@example.com', 'x')")
+    run("INSERT INTO courses (title, user_id) VALUES ('Algorithms', 1)")
+    run("INSERT INTO course_rows (table_type, title, course_id) VALUES ('lecture', 'Chapter 1', 1)")
+    db.session.commit()
+
+    upgrade(directory=str(MIGRATIONS))
+
+    assert tuple(run("SELECT title, description, color FROM courses").one()) == ("Algorithms", "", "clay")
+    assert run("SELECT COUNT(*) FROM course_rows").scalar_one() == 1
 
 
 def test_deleting_a_course_deletes_everything_below_it(ids):

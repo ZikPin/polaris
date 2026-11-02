@@ -1,6 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import { Then, When } from '../fixtures';
-import { card, table } from '../locators';
+import { card, navLink, table } from '../locators';
 
 /** The menu of one of the dashboard filters ("Tags" or "Courses"), opened. */
 const openFilter = async (page: Page, name: string) => {
@@ -9,7 +9,7 @@ const openFilter = async (page: Page, name: string) => {
 };
 
 When('I open the dashboard', async ({ page }) => {
-  await page.getByRole('link', { name: 'Dashboard' }).click();
+  await (await navLink(page, 'Dashboard')).click();
   await expect(page.getByRole('heading', { level: 1, name: 'Dashboard' })).toBeVisible();
   await expect(page.locator('section.course-block').first()).toBeVisible();
 });

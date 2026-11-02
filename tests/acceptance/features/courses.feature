@@ -15,6 +15,8 @@ Feature: Courses
     When I open the courses page
     And I add the course "Algorithms"
     Then I see the courses "Algorithms"
+    When I rename the course "Algorithms" to "Algorithms 1" and cancel
+    Then I see the courses "Algorithms"
     When I rename the course "Algorithms" to "Algorithms 1"
     Then I see the courses "Algorithms 1"
     When I delete the course "Algorithms 1" and dismiss the confirmation

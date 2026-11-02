@@ -94,7 +94,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | --- | --- | --- | --- |
 | ST-32 | F-55, 56 | Create a course with only a title, read it. Edit its description and color, then edit only its title. Try the ten palette colors, a color outside the palette, and a description of 1000 and of 1001 characters. | A new course has the description "" and the color "clay". Description and color are returned as saved and survive a title-only edit. Every palette color and the 1000 characters are accepted. The other color and the 1001 characters are rejected with a 400 naming the field, and the stored values stay. |
 | ST-33 | F-53, 54 | One PATCH with a new title, other tags, a description and a color. Then one PATCH with valid new values and an unknown tag id. | The first changes all four fields. The second is rejected and none of its fields is stored. |
-| ST-34 | Schema: courses | Directly in the database: a course with a color outside the palette and one with NULL in description or color, then one inserted without both. Also migrate a database with an existing course from the previous revision to the newest. | The invalid inserts are rejected. The course inserted without them has "" and "clay", and so has the migrated course. |
+| ST-34 | Schema: courses | Directly in the database: a course with a color outside the palette and one with NULL in description or color, then one inserted without both. Also migrate a database with an existing course from the previous revision to the newest. | The invalid inserts are rejected. The course inserted without them has "" and "clay", and so has the migrated course, whose rows are kept. |
 
 ### Non-functional
 

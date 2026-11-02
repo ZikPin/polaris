@@ -1,5 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import { Then, When } from '../fixtures';
+import { navLink } from '../locators';
 
 const panel = (page: Page) => page.locator('.day-panel');
 
@@ -9,7 +10,7 @@ const choose = async (page: Page, placeholder: string, choice: string) => {
 };
 
 When('I open the calendar', async ({ page }) => {
-  await page.getByRole('link', { name: 'Calendar' }).click();
+  await (await navLink(page, 'Calendar')).click();
   await expect(page.getByRole('heading', { level: 1, name: 'Calendar' })).toBeVisible();
 });
 

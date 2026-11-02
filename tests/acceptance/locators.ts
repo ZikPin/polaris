@@ -5,6 +5,40 @@ export function exactly(text: string): RegExp {
   return new RegExp(`^\\s*${text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*$`);
 }
 
+/** A link of the main navigation. On a phone it is inside the menu, which is opened first. */
+export async function navLink(page: Page, name: string): Promise<Locator> {
+  const burger = page.getByRole('button', { name: 'Open the menu' });
+  if (await burger.isVisible()) {
+    await burger.click();
+  }
+  return page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name, exact: true });
+}
+
+/** The card of a course on the courses page. */
+export function courseCard(page: Page, title: string): Locator {
+  return page.locator('article.card').filter({ has: page.getByRole('heading', { level: 3, name: title, exact: true }) });
+}
+
+/** The color the browser resolves for an accent of the palette, to compare with a computed style. */
+export function accent(page: Page, name: string): Promise<string> {
+  return page.evaluate((accentName) => {
+    const probe = document.createElement('i');
+    probe.style.color = `var(--accent-${accentName})`;
+    document.body.append(probe);
+    const color = getComputedStyle(probe).color;
+    probe.remove();
+    return color;
+  }, name);
+}
+
+/** The edit dialog of a course, opened from its card. */
+export async function openEditDialog(page: Page, title: string): Promise<Locator> {
+  await page.getByRole('button', { name: `Edit ${title}`, exact: true }).click();
+  const dialog = page.getByRole('dialog', { name: 'Edit the course' });
+  await expect(dialog).toBeVisible();
+  return dialog;
+}
+
 /** "lecture", "lectures", "assignment" or "assignments": the heading of a table on the course page. */
 export function heading(kind: string): 'Lectures' | 'Assignments' {
   return kind.startsWith('lecture') ? 'Lectures' : 'Assignments';

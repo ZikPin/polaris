@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { When, Then } from '../fixtures';
-import { cell, row, table } from '../locators';
+import { cell, exactly, row, table } from '../locators';
 
 When('I add the row {string} to the {word} table', async ({ page }, title: string, kind: string) => {
   await table(page, kind).getByRole('button', { name: 'Add row' }).click();
@@ -108,4 +108,21 @@ Then('every box {string} in the {word} table is unchecked', async ({ page }, col
 
 Then('the column {string} of the row {string} in the {word} table shows {string}', async ({ page }, column: string, title: string, kind: string, value: string) => {
   await expect(await cell(page, kind, title, column)).toHaveText(value);
+});
+
+Then('the title column of the {word} table is wider than the column {string}', async ({ page }, kind: string, label: string) => {
+  const title = await table(page, kind).locator('thead th.t-title').boundingBox();
+  const column = await table(page, kind).locator('thead th.t-head', { hasText: exactly(label) }).boundingBox();
+  expect(title!.width).toBeGreaterThan(column!.width);
+});
+
+Then('the title of the row {string} in the {word} table is fully visible', async ({ page }, title: string, kind: string) => {
+  const fits = await row(page, kind, title).locator('th.t-row').evaluate((el) => el.scrollWidth <= el.clientWidth && el.scrollHeight <= el.clientHeight);
+  expect(fits).toBe(true);
+});
+
+Then('the row {string} in the {word} table is taller than the row {string}', async ({ page }, title: string, kind: string, other: string) => {
+  const tall = await row(page, kind, title).boundingBox();
+  const short = await row(page, kind, other).boundingBox();
+  expect(tall!.height).toBeGreaterThan(short!.height);
 });

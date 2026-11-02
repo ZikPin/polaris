@@ -1,5 +1,7 @@
 import pytest
 
+from backend.app.models.course import COLORS
+
 CREDENTIALS = {"email": "a@example.com", "password": "password1"}
 EMPTY_TABLES = {"lecture": {"columns": [], "rows": []}, "assignment": {"columns": [], "rows": []}}
 
@@ -45,6 +47,42 @@ def test_course_title_must_not_be_empty(user_client, course, title):
     assert user_client.post("/api/course", json={"title": title}).status_code == 400
     assert user_client.patch(f"/api/course/{course['id']}", json={"title": title}).status_code == 400
     assert user_client.get(f"/api/course/{course['id']}").get_json()["title"] == "Algorithms"
+
+
+def test_course_description_and_color(user_client, course):
+    """ST-32"""
+    url = f"/api/course/{course['id']}"
+    assert (course["description"], course["color"]) == ("", "clay")
+
+    user_client.patch(url, json={"description": "Spring term", "color": "sage"})
+    user_client.patch(url, json={"title": "Algorithms 1"})
+    saved = user_client.get(url).get_json()
+    assert (saved["description"], saved["color"]) == ("Spring term", "sage")
+
+    for color in COLORS:
+        assert user_client.patch(url, json={"color": color}).status_code == 200
+    assert user_client.patch(url, json={"description": "x" * 1000}).status_code == 200
+
+    for invalid in ({"color": "red"}, {"description": "x" * 1001}):
+        response = user_client.patch(url, json=invalid)
+        assert response.status_code == 400
+        assert list(invalid) == list(response.get_json()["fields"])
+    stored = user_client.get(url).get_json()
+    assert (stored["description"], stored["color"]) == ("x" * 1000, "stone")
+
+
+def test_course_edit_is_saved_at_once(user_client, course):
+    """ST-33"""
+    url = f"/api/course/{course['id']}"
+    tag = user_client.post("/api/tag", json={"value": "ML"}).get_json()
+
+    edit = {"title": "Algorithms 1", "tag_ids": [tag["id"]], "description": "Spring term", "color": "teal"}
+    saved = user_client.patch(url, json=edit).get_json()
+    assert saved == {"id": course["id"], "title": "Algorithms 1", "description": "Spring term", "color": "teal", "tags": [tag]}
+
+    rejected = user_client.patch(url, json={**edit, "title": "Other", "color": "rose", "tag_ids": [999]})
+    assert rejected.status_code == 400
+    assert user_client.get(url).get_json() == saved
 
 
 def test_data_is_still_there_after_logging_in_again(app, user_client, course):
