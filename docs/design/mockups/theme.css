@@ -128,13 +128,7 @@ h1{font-size:var(--fs-h1);font-weight:var(--fw-extrabold);letter-spacing:var(--t
 .card{min-height:168px;padding:20px 18px 14px;overflow:hidden;border-radius:var(--radius-card);background:var(--course-color);color:var(--color-ink)}
 .deco{top:-30px;right:-30px;width:108px;height:108px;border-radius:50%;background:var(--glass-1)}
 .card-title{font-size:var(--fs-lg);font-weight:var(--fw-bold);letter-spacing:-.01em}
-.course.editing{background:var(--color-sheet-raised);outline:2px solid var(--color-ink);outline-offset:-2px}
-.course.editing .deco{background:color-mix(in srgb,var(--course-color) 24%,transparent)}
-.course.editing .input{height:36px;padding:0 12px;border-radius:var(--radius-sm);font-weight:var(--fw-semibold)}
-.course.editing .check-list{margin-top:8px}
-.course.editing .icon-btn{background:var(--tint-2)}
-.course.editing .icon-btn:hover{background:var(--color-hover);color:var(--color-on-ink)}
-.course.editing .icon-btn.ok{background:var(--color-ink);color:var(--color-on-ink)}
+.card-desc{font-size:var(--fs-md);color:var(--color-ink-on-accent)}
 
 .course-block{margin-top:30px}
 .course-block h2 .dot{width:10px;height:10px;border-radius:50%;background:var(--course-color)}
@@ -165,6 +159,9 @@ h1{font-size:var(--fs-h1);font-weight:var(--fw-extrabold);letter-spacing:var(--t
 .tool{background:var(--tint-3)}
 .tool:hover{background:var(--color-ink);color:var(--color-on-ink)}
 
+.course-intro .tag{background:var(--color-field)}
+.course-desc{font-size:var(--fs-base)}
+
 /* ========== 7. CALENDAR ========== */
 .cal-nav .icon-btn,.entries .icon-btn{background:var(--tint-2);color:var(--color-ink)}
 .cal-nav .icon-btn:hover,.entries .icon-btn:hover{background:var(--color-hover);color:var(--color-on-ink)}
@@ -193,6 +190,11 @@ h1{font-size:var(--fs-h1);font-weight:var(--fw-extrabold);letter-spacing:var(--t
 .opt .btn.select{background:var(--color-sheet)}
 .opt .btn.select:hover{background:var(--color-hover)}
 .opt .input{height:42px;padding:0 14px;background:var(--color-sheet);font-size:var(--fs-md)}
+.opt textarea.input{height:auto;padding:12px 14px;line-height:1.45;resize:vertical}
+.opt-label{font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--color-ink-soft)}
+.opt-tags .check input{background:var(--color-sheet)}
+.opt-tags .check input:checked{background:var(--color-ink)}
+.color-option input:checked+span,.color-option input:focus-visible+span{outline:2px solid var(--color-ink);outline-offset:2px}
 
 /* ========== 9. LOGIN AND REGISTER ========== */
 .auth{padding-top:80px}
@@ -203,3 +205,14 @@ h1{font-size:var(--fs-h1);font-weight:var(--fw-extrabold);letter-spacing:var(--t
 .auth-card .btn-primary{height:46px;margin-top:22px;border-radius:var(--radius-lg)}
 .alt{margin-top:18px;font-size:var(--fs-md);text-align:center;color:var(--color-ink-soft)}
 .alt a{font-weight:var(--fw-bold);color:var(--color-ink);text-decoration:underline}
+
+/* ========== 10. NARROW SCREEN (below 768px) ========== */
+@media (max-width:767px){
+  .topbar,.sidebar{background:var(--color-page)}
+  .sidebar{padding:8px 16px 16px}
+  .main{margin:0 8px 8px;padding:16px 16px 28px}
+  .ev li{width:7px;height:7px;padding:0;border-radius:50%;font-size:0}
+  .modal{padding:20px}
+  .opt{padding:14px 16px}
+  .auth-card{padding:28px 20px 24px}
+}

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 948" width="360" height="948" font-family="sans-serif">
+  <rect x="0" y="0" width="360" height="948" fill="#fafafa" stroke="none" />
+  <rect x="0" y="0" width="360" height="56" fill="#d9d9d9" stroke="#8c8c8c" />
+  <text x="16" y="35" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="268" y="12" width="32" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <path d="M277.5 22.5h7l6 6-7 7-6-6z" fill="none" stroke="#333" stroke-width="1.4" />
+  <circle cx="281.5" cy="26.5" r="1.2" fill="#333" />
+  <rect x="308" y="12" width="36" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <line x1="317" y1="22" x2="335" y2="22" stroke="#333" stroke-width="2" />
+  <line x1="317" y1="28" x2="335" y2="28" stroke="#333" stroke-width="2" />
+  <line x1="317" y1="34" x2="335" y2="34" stroke="#333" stroke-width="2" />
+  <text x="16" y="108" font-size="26" text-anchor="start" font-weight="bold" fill="#333">Dashboard</text>
+  <rect x="16" y="124" width="120" height="32" fill="#e8e8e8" stroke="#757575" />
+  <text x="76" y="145" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Tags  ▾</text>
+  <rect x="144" y="124" width="120" height="32" fill="#e8e8e8" stroke="#757575" />
+  <text x="204" y="145" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Courses  ▾</text>
+  <text x="16" y="196" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Algorithms</text>
+  <rect x="16" y="208" width="328" height="202" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="16" y="208" width="328" height="6" fill="#8c8c8c" stroke="none" />
+  <text x="32" y="242" font-size="15" text-anchor="start" font-weight="bold" fill="#333">Lectures</text>
+  <text x="32" y="266" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Watched: 3 checked, 1 unchecked</text>
+  <text x="32" y="286" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Notes: 1 checked, 3 unchecked</text>
+  <text x="32" y="306" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Grade (average): 2.5</text>
+  <text x="32" y="326" font-size="13" text-anchor="start" font-weight="bold" fill="#333">Not done yet</text>
+  <text x="32" y="346" font-size="13" text-anchor="start" font-weight="normal" fill="#333">• Chapter 2</text>
+  <text x="32" y="366" font-size="13" text-anchor="start" font-weight="normal" fill="#333">• Chapter 3</text>
+  <text x="32" y="386" font-size="13" text-anchor="start" font-weight="normal" fill="#333">• Chapter 4</text>
+  <rect x="16" y="426" width="328" height="142" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="16" y="426" width="328" height="6" fill="#8c8c8c" stroke="none" />
+  <text x="32" y="460" font-size="15" text-anchor="start" font-weight="bold" fill="#333">Assignments</text>
+  <text x="32" y="484" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Solved: 1 checked, 1 unchecked</text>
+  <text x="32" y="504" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Points (sum): 14</text>
+  <text x="32" y="524" font-size="13" text-anchor="start" font-weight="bold" fill="#333">Not done yet</text>
+  <text x="32" y="544" font-size="13" text-anchor="start" font-weight="normal" fill="#333">• Sheet 2</text>
+  <text x="16" y="598" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Databases</text>
+  <rect x="16" y="610" width="328" height="102" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="16" y="610" width="328" height="6" fill="#8c8c8c" stroke="none" />
+  <text x="32" y="644" font-size="15" text-anchor="start" font-weight="bold" fill="#333">Lectures</text>
+  <text x="32" y="668" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Watched: 5 checked, 0 unchecked</text>
+  <text x="32" y="688" font-size="13" text-anchor="start" font-weight="normal" fill="#777">Nothing open.</text>
+  <rect x="16" y="728" width="328" height="102" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="16" y="728" width="328" height="6" fill="#8c8c8c" stroke="none" />
+  <text x="32" y="762" font-size="15" text-anchor="start" font-weight="bold" fill="#333">Assignments</text>
+  <text x="32" y="786" font-size="13" text-anchor="start" font-weight="normal" fill="#777">No custom columns.</text>
+  <text x="32" y="806" font-size="13" text-anchor="start" font-weight="normal" fill="#777">Nothing open.</text>
+  <text x="16" y="864" font-size="11" text-anchor="start" font-weight="normal" fill="#777">The filters sit directly under the title. Both cards</text>
+  <text x="16" y="880" font-size="11" text-anchor="start" font-weight="normal" fill="#777">of a course are one per row, each as tall as its</text>
+  <text x="16" y="896" font-size="11" text-anchor="start" font-weight="normal" fill="#777">content. The bar on top of a card is the course</text>
+  <text x="16" y="912" font-size="11" text-anchor="start" font-weight="normal" fill="#777">color.</text>
+</svg>

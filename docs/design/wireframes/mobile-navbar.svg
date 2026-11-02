@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 830" width="360" height="830" font-family="sans-serif">
+  <rect x="0" y="0" width="360" height="830" fill="#fafafa" stroke="none" />
+  <rect x="0" y="56" width="360" height="684" fill="#e6e6e6" stroke="#8c8c8c" />
+  <rect x="0" y="0" width="360" height="56" fill="#d9d9d9" stroke="#8c8c8c" />
+  <text x="16" y="35" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="268" y="12" width="32" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <path d="M277.5 22.5h7l6 6-7 7-6-6z" fill="none" stroke="#333" stroke-width="1.4" />
+  <circle cx="281.5" cy="26.5" r="1.2" fill="#333" />
+  <rect x="308" y="12" width="36" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <line x1="318" y1="22" x2="334" y2="34" stroke="#333" stroke-width="2" />
+  <line x1="334" y1="22" x2="318" y2="34" stroke="#333" stroke-width="2" />
+  <rect x="12" y="68" width="336" height="44" fill="#cfcfcf" stroke="#8c8c8c" />
+  <text x="28" y="96" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Courses  ▾</text>
+  <text x="52" y="134" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms</text>
+  <text x="52" y="174" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Linear Algebra</text>
+  <text x="52" y="214" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Databases</text>
+  <text x="52" y="254" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Machine Learning</text>
+  <text x="52" y="294" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Statistics</text>
+  <text x="28" y="332" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Dashboard</text>
+  <text x="28" y="376" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Calendar</text>
+  <rect x="12" y="676" width="336" height="44" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="28" y="703" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Log out</text>
+  <text x="16" y="764" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Opened by the burger (it shows a cross while open),</text>
+  <text x="16" y="780" font-size="11" text-anchor="start" font-weight="normal" fill="#777">from the header downward over the page. Log out is</text>
+  <text x="16" y="796" font-size="11" text-anchor="start" font-weight="normal" fill="#777">the last entry, pushed to the bottom. Choosing an</text>
+  <text x="16" y="812" font-size="11" text-anchor="start" font-weight="normal" fill="#777">entry closes it. Entries are 44px high, list entries</text>
+  <text x="16" y="828" font-size="11" text-anchor="start" font-weight="normal" fill="#777">40px (touch).</text>
+</svg>

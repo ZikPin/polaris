@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 963" width="360" height="963" font-family="sans-serif">
+  <rect x="0" y="0" width="360" height="963" fill="#fafafa" stroke="none" />
+  <rect x="0" y="0" width="360" height="56" fill="#d9d9d9" stroke="#8c8c8c" />
+  <text x="16" y="35" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="268" y="12" width="32" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <path d="M277.5 22.5h7l6 6-7 7-6-6z" fill="none" stroke="#333" stroke-width="1.4" />
+  <circle cx="281.5" cy="26.5" r="1.2" fill="#333" />
+  <rect x="308" y="12" width="36" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <line x1="317" y1="22" x2="335" y2="22" stroke="#333" stroke-width="2" />
+  <line x1="317" y1="28" x2="335" y2="28" stroke="#333" stroke-width="2" />
+  <line x1="317" y1="34" x2="335" y2="34" stroke="#333" stroke-width="2" />
+  <text x="16" y="108" font-size="26" text-anchor="start" font-weight="bold" fill="#333">Calendar</text>
+  <rect x="16" y="124" width="32" height="32" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="32" y="145" font-size="18" text-anchor="middle" font-weight="normal" fill="#333">‹</text>
+  <text x="180" y="146" font-size="16" text-anchor="middle" font-weight="bold" fill="#333">October 2026</text>
+  <rect x="312" y="124" width="32" height="32" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="328" y="145" font-size="18" text-anchor="middle" font-weight="normal" fill="#333">›</text>
+  <text x="38.1" y="178" font-size="10" text-anchor="middle" font-weight="bold" fill="#333">Mon</text>
+  <text x="85.4" y="178" font-size="10" text-anchor="middle" font-weight="bold" fill="#333">Tue</text>
+  <text x="132.8" y="178" font-size="10" text-anchor="middle" font-weight="bold" fill="#333">Wed</text>
+  <text x="180" y="178" font-size="10" text-anchor="middle" font-weight="bold" fill="#333">Thu</text>
+  <text x="227.3" y="178" font-size="10" text-anchor="middle" font-weight="bold" fill="#333">Fri</text>
+  <text x="274.6" y="178" font-size="10" text-anchor="middle" font-weight="bold" fill="#333">Sat</text>
+  <text x="321.9" y="178" font-size="10" text-anchor="middle" font-weight="bold" fill="#333">Sun</text>
+  <rect x="16" y="186" width="44.3" height="56" fill="#ececec" stroke="#8c8c8c" />
+  <rect x="63.3" y="186" width="44.3" height="56" fill="#ececec" stroke="#8c8c8c" />
+  <rect x="110.6" y="186" width="44.3" height="56" fill="#ececec" stroke="#8c8c8c" />
+  <rect x="157.9" y="186" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="161.9" y="199" font-size="10" text-anchor="start" font-weight="normal" fill="#333">1</text>
+  <rect x="205.2" y="186" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="209.2" y="199" font-size="10" text-anchor="start" font-weight="normal" fill="#333">2</text>
+  <rect x="252.5" y="186" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="256.5" y="199" font-size="10" text-anchor="start" font-weight="normal" fill="#333">3</text>
+  <rect x="299.8" y="186" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="303.8" y="199" font-size="10" text-anchor="start" font-weight="normal" fill="#333">4</text>
+  <rect x="16" y="245" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="20" y="258" font-size="10" text-anchor="start" font-weight="normal" fill="#333">5</text>
+  <circle cx="24" cy="271" r="3.5" fill="#e57373" />
+  <rect x="63.3" y="245" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="67.3" y="258" font-size="10" text-anchor="start" font-weight="normal" fill="#333">6</text>
+  <rect x="110.6" y="245" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="114.6" y="258" font-size="10" text-anchor="start" font-weight="normal" fill="#333">7</text>
+  <rect x="157.9" y="245" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="161.9" y="258" font-size="10" text-anchor="start" font-weight="normal" fill="#333">8</text>
+  <circle cx="165.9" cy="271" r="3.5" fill="#e57373" />
+  <circle cx="174.9" cy="271" r="3.5" fill="#64b5f6" />
+  <rect x="205.2" y="245" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="209.2" y="258" font-size="10" text-anchor="start" font-weight="normal" fill="#333">9</text>
+  <rect x="252.5" y="245" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="256.5" y="258" font-size="10" text-anchor="start" font-weight="normal" fill="#333">10</text>
+  <rect x="299.8" y="245" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="303.8" y="258" font-size="10" text-anchor="start" font-weight="normal" fill="#333">11</text>
+  <rect x="16" y="304" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="20" y="317" font-size="10" text-anchor="start" font-weight="normal" fill="#333">12</text>
+  <rect x="63.3" y="304" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="67.3" y="317" font-size="10" text-anchor="start" font-weight="normal" fill="#333">13</text>
+  <rect x="110.6" y="304" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="114.6" y="317" font-size="10" text-anchor="start" font-weight="normal" fill="#333">14</text>
+  <circle cx="118.6" cy="330" r="3.5" fill="#64b5f6" />
+  <rect x="157.9" y="304" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="161.9" y="317" font-size="10" text-anchor="start" font-weight="normal" fill="#333">15</text>
+  <circle cx="165.9" cy="330" r="3.5" fill="#e57373" />
+  <circle cx="174.9" cy="330" r="3.5" fill="#81c784" />
+  <rect x="205.2" y="304" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="209.2" y="317" font-size="10" text-anchor="start" font-weight="normal" fill="#333">16</text>
+  <rect x="252.5" y="304" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="256.5" y="317" font-size="10" text-anchor="start" font-weight="normal" fill="#333">17</text>
+  <rect x="299.8" y="304" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="303.8" y="317" font-size="10" text-anchor="start" font-weight="normal" fill="#333">18</text>
+  <rect x="16" y="363" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="20" y="376" font-size="10" text-anchor="start" font-weight="normal" fill="#333">19</text>
+  <rect x="63.3" y="363" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="67.3" y="376" font-size="10" text-anchor="start" font-weight="normal" fill="#333">20</text>
+  <rect x="110.6" y="363" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="114.6" y="376" font-size="10" text-anchor="start" font-weight="normal" fill="#333">21</text>
+  <rect x="157.9" y="363" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="161.9" y="376" font-size="10" text-anchor="start" font-weight="normal" fill="#333">22</text>
+  <circle cx="165.9" cy="389" r="3.5" fill="#e57373" />
+  <circle cx="174.9" cy="389" r="3.5" fill="#64b5f6" />
+  <circle cx="183.9" cy="389" r="3.5" fill="#e57373" />
+  <rect x="205.2" y="363" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="209.2" y="376" font-size="10" text-anchor="start" font-weight="normal" fill="#333">23</text>
+  <rect x="252.5" y="363" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="256.5" y="376" font-size="10" text-anchor="start" font-weight="normal" fill="#333">24</text>
+  <rect x="299.8" y="363" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="303.8" y="376" font-size="10" text-anchor="start" font-weight="normal" fill="#333">25</text>
+  <rect x="16" y="422" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="20" y="435" font-size="10" text-anchor="start" font-weight="normal" fill="#333">26</text>
+  <rect x="63.3" y="422" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="67.3" y="435" font-size="10" text-anchor="start" font-weight="normal" fill="#333">27</text>
+  <rect x="110.6" y="422" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="114.6" y="435" font-size="10" text-anchor="start" font-weight="normal" fill="#333">28</text>
+  <rect x="157.9" y="422" width="44.3" height="56" fill="#8a8a8a" stroke="#8c8c8c" />
+  <text x="161.9" y="435" font-size="10" text-anchor="start" font-weight="normal" fill="#fff">29</text>
+  <circle cx="165.9" cy="448" r="3.5" fill="#e57373" />
+  <circle cx="174.9" cy="448" r="3.5" fill="#e57373" />
+  <circle cx="183.9" cy="448" r="3.5" fill="#64b5f6" />
+  <circle cx="192.9" cy="448" r="3.5" fill="#81c784" />
+  <circle cx="165.9" cy="457" r="3.5" fill="#e57373" />
+  <circle cx="174.9" cy="457" r="3.5" fill="#64b5f6" />
+  <rect x="205.2" y="422" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="209.2" y="435" font-size="10" text-anchor="start" font-weight="normal" fill="#333">30</text>
+  <rect x="252.5" y="422" width="44.3" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="256.5" y="435" font-size="10" text-anchor="start" font-weight="normal" fill="#333">31</text>
+  <rect x="299.8" y="422" width="44.3" height="56" fill="#ececec" stroke="#8c8c8c" />
+  <rect x="157.9" y="422" width="44.3" height="56" fill="none" stroke="#333" />
+  <text x="16" y="507" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Thursday, 29 October 2026</text>
+  <rect x="16" y="521" width="104" height="40" fill="#e8e8e8" stroke="#757575" />
+  <text x="68" y="546" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Course  ▾</text>
+  <rect x="128" y="521" width="168" height="40" fill="#e8e8e8" stroke="#757575" />
+  <text x="212" y="546" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Row  ▾</text>
+  <rect x="304" y="521" width="40" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="324" y="546" font-size="20" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <circle cx="22" cy="593" r="5.5" fill="#e57373" />
+  <text x="34" y="597" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms: Chapter 9, lecture</text>
+  <rect x="316" y="577" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="330" y="596" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <circle cx="22" cy="633" r="5.5" fill="#e57373" />
+  <text x="34" y="637" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms: Chapter 10, lecture</text>
+  <rect x="316" y="617" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="330" y="636" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <circle cx="22" cy="673" r="5.5" fill="#64b5f6" />
+  <text x="34" y="677" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Databases: Chapter 3, lecture</text>
+  <rect x="316" y="657" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="330" y="676" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <circle cx="22" cy="713" r="5.5" fill="#81c784" />
+  <text x="34" y="717" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Machine Learning: Chapter 12, lecture</text>
+  <rect x="316" y="697" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="330" y="716" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <circle cx="22" cy="753" r="5.5" fill="#e57373" />
+  <text x="34" y="757" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms: Sheet 4, assignment</text>
+  <rect x="316" y="737" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="330" y="756" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <circle cx="22" cy="793" r="5.5" fill="#64b5f6" />
+  <text x="34" y="797" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Databases: Sheet 2, assignment</text>
+  <rect x="316" y="777" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="330" y="796" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <text x="16" y="847" font-size="11" text-anchor="start" font-weight="normal" fill="#777">The month grid on top, the list of the selected day</text>
+  <text x="16" y="863" font-size="11" text-anchor="start" font-weight="normal" fill="#777">below it at full width.</text>
+  <text x="16" y="879" font-size="11" text-anchor="start" font-weight="normal" fill="#777">A day shows its entries as dots in the course color</text>
+  <text x="16" y="895" font-size="11" text-anchor="start" font-weight="normal" fill="#777">(the text does not fit).</text>
+  <text x="16" y="911" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Today (darkest) is selected (thick outline). The</text>
+  <text x="16" y="927" font-size="11" text-anchor="start" font-weight="normal" fill="#777">list shows lectures first, then assignments.</text>
+</svg>

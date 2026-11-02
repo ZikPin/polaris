@@ -24,7 +24,7 @@ Statuses: `todo`, `in progress`, `done`, `stale` (the request or requirement it 
 | T-016  | Vision              | won't do | Success criteria: timed tests and the 500 ms feedback check (AT-V-01 to 06, REQ-NF-01, 03) |
 | T-017  | infra               | done   | Run the system suite against Postgres with docker-compose |
 | T-018  | infra               | done   | Decide hosting and deploy over HTTPS, with `flask db upgrade` as a deploy step before the new version starts (REQ-C-02, REQ-NF-05) |
-| T-022  | infra               | todo   | Design: wireframes and mock-ups for the course dialog, the course card with description, the course page with tags and description, and the mobile screens (BRIEF 3.4, 6.5, 6.7, 6.9, 6.11) |
+| T-022  | infra               | done   | Design: wireframes and mock-ups for the course dialog, the course card with description, the course page with tags and description, and the mobile screens (BRIEF 3.4, 6.5, 6.7, 6.9, 6.11) |
 | T-023  | SR-M-01, SR-S-04    | todo   | Course edit dialog with title, tags, description and color: `description` and `color` in model, migration, API and UI, replacing the inline card edit (REQ-F-53 to 56, ST-32 to 34, AT-03 and AT-08 updated) |
 | T-024  | SR-S-04             | todo   | Show the trimmed description on the course card and the tags plus the full description on the course page (REQ-F-57, 58, AT-15) |
 | T-025  | SR-S-04             | todo   | Apply the course color to the card, navigation dot, dashboard, calendar and table headers (REQ-F-59, AT-16) |
