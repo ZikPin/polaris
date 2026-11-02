@@ -13,6 +13,7 @@ export type IconName =
   | 'dashboard'
   | 'edit'
   | 'logout'
+  | 'menu'
   | 'plus'
   | 'star'
   | 'tag';
@@ -60,6 +61,9 @@ export type IconName =
         }
         @case ('logout') {
           <path d="M10 4H5v16h5M15 8l4 4-4 4M19 12H9" />
+        }
+        @case ('menu') {
+          <path d="M4 7h16M4 12h16M4 17h16" />
         }
         @case ('plus') {
           <path d="M12 5v14M5 12h14" />

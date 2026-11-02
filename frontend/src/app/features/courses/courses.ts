@@ -3,15 +3,17 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { EMPTY, Observable, Subject, catchError, switchMap } from 'rxjs';
 import { errorMessage } from '../../core/api-error';
+import { CourseColor } from '../../core/course-color';
 import { Icon } from '../../core/icon';
 import { toggleId } from '../../core/ids';
 import { MultiSelect } from '../../core/multi-select';
 import { TagApi } from '../tags/tag-api';
-import { Course, CourseApi } from './course-api';
+import { Course, CourseApi, CourseChanges } from './course-api';
+import { EditCourseDialog } from './edit-course-dialog';
 
 @Component({
   selector: 'app-courses',
-  imports: [RouterLink, Icon, MultiSelect],
+  imports: [RouterLink, CourseColor, Icon, MultiSelect, EditCourseDialog],
   templateUrl: './courses.html',
 })
 export class Courses {
@@ -24,8 +26,7 @@ export class Courses {
     this.tags().map((tag) => ({ id: tag.id, label: tag.value })),
   );
   protected readonly filter = signal<number[]>([]);
-  protected readonly editingId = signal<number | null>(null);
-  protected readonly editTagIds = signal<number[]>([]);
+  protected readonly editing = signal<Course | null>(null);
   protected readonly error = signal('');
 
   /** Every reload goes through this stream, `switchMap` drops the answers of outdated requests. */
@@ -77,24 +78,13 @@ export class Courses {
     this.run(this.courseApi.create(input.value), () => (input.value = ''));
   }
 
-  protected edit(course: Course) {
-    this.editingId.set(course.id);
-    this.editTagIds.set(course.tags.map((tag) => tag.id));
+  /** The description as shown on a card: the first 150 characters. */
+  protected short(description: string) {
+    return description.length > 150 ? description.slice(0, 150) + '…' : description;
   }
 
-  protected toggleEditTag(tagId: number) {
-    this.editTagIds.update((ids) => toggleId(ids, tagId));
-  }
-
-  protected save(event: Event, course: Course, title: string) {
-    event.preventDefault();
-    this.run(this.courseApi.update(course.id, { title, tag_ids: this.editTagIds() }), () =>
-      this.editingId.set(null),
-    );
-  }
-
-  protected cancel() {
-    this.editingId.set(null);
+  protected save(course: Course, changes: CourseChanges) {
+    this.run(this.courseApi.update(course.id, changes), () => this.editing.set(null));
   }
 
   protected remove(course: Course) {

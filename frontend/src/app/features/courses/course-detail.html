@@ -5,9 +5,26 @@
   <a class="btn" routerLink="/courses"><app-icon name="arrow-left" />Back to courses</a>
 </div>
 
-@if (tables(); as tables) {
-  <div class="tables">
-    <app-table-view [courseId]="courseId()" tableType="lecture" [table]="tables.lecture" (changed)="reload()" />
-    <app-table-view [courseId]="courseId()" tableType="assignment" [table]="tables.assignment" (changed)="reload()" />
-  </div>
+@if (course(); as course) {
+  @if (course.tags.length || course.description) {
+    <div class="course-intro">
+      @if (course.tags.length) {
+        <ul class="tags">
+          @for (tag of course.tags; track tag.id) {
+            <li class="tag">{{ tag.value }}</li>
+          }
+        </ul>
+      }
+      @if (course.description) {
+        <p class="course-desc">{{ course.description }}</p>
+      }
+    </div>
+  }
+
+  @if (tables(); as tables) {
+    <div class="tables" [appCourseColor]="course.color">
+      <app-table-view [courseId]="courseId()" tableType="lecture" [table]="tables.lecture" (changed)="reload()" />
+      <app-table-view [courseId]="courseId()" tableType="assignment" [table]="tables.assignment" (changed)="reload()" />
+    </div>
+  }
 }

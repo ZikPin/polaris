@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EMPTY, Observable, Subject, catchError, switchMap, tap } from 'rxjs';
 import { Tag } from '../tags/tag-api';
@@ -7,7 +7,16 @@ import { Tag } from '../tags/tag-api';
 export interface Course {
   id: number;
   title: string;
+  description: string;
+  color: string;
   tags: Tag[];
+}
+
+export interface CourseChanges {
+  title?: string;
+  description?: string;
+  color?: string;
+  tag_ids?: number[];
 }
 
 @Injectable({ providedIn: 'root' })
@@ -16,6 +25,9 @@ export class CourseApi {
 
   /** All courses of the user, for the navigation and the dashboard filter. Reloaded after every change. */
   readonly all = signal<Course[]>([]);
+
+  /** The color of every course by its id, for the places that only know the id of a course. */
+  readonly colors = computed(() => Object.fromEntries(this.all().map((course) => [course.id, course.color])));
 
   /** `switchMap` drops the answers of outdated requests. */
   private readonly refresh$ = new Subject<void>();
@@ -47,7 +59,7 @@ export class CourseApi {
     return this.http.post<Course>('/api/course', { title }).pipe(tap(() => this.refresh()));
   }
 
-  update(id: number, changes: { title?: string; tag_ids?: number[] }): Observable<Course> {
+  update(id: number, changes: CourseChanges): Observable<Course> {
     return this.http.patch<Course>(`/api/course/${id}`, changes).pipe(tap(() => this.refresh()));
   }
 

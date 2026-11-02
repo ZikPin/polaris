@@ -5,16 +5,19 @@
   </a>
   @if (auth.user(); as user) {
     <nav class="topbar-actions" aria-label="Account">
-      <button class="btn btn-ghost" type="button" (click)="tagsOpen.set(true)"><app-icon name="tag" />Tags</button>
+      <button class="btn btn-ghost btn-tags" type="button" aria-label="Tags" (click)="tagsOpen.set(true)"><app-icon name="tag" /><span class="label">Tags</span></button>
       <span class="user">{{ user.email }}</span>
-      <button class="btn btn-ghost" type="button" (click)="logout()"><app-icon name="logout" />Log out</button>
+      <button class="btn btn-ghost btn-logout" type="button" (click)="logout()"><app-icon name="logout" />Log out</button>
+      <button class="btn btn-ghost burger" type="button" [attr.aria-label]="menuOpen() ? 'Close the menu' : 'Open the menu'" (click)="menuOpen.set(!menuOpen())">
+        <app-icon [name]="menuOpen() ? 'close' : 'menu'" />
+      </button>
     </nav>
   }
 </header>
 <div [class.shell]="auth.user()">
   @if (auth.user()) {
-    <aside class="sidebar">
-      <nav aria-label="Main">
+    <aside class="sidebar" [class.open]="menuOpen()">
+      <nav aria-label="Main" (click)="closeMenuOnLink($event)">
         <div class="nav-group" [class.open]="coursesOpen()">
           <div class="nav-row">
             <a class="nav-item" routerLink="/courses" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="coursesOpen.set(true)">
@@ -26,7 +29,7 @@
           </div>
           <ul class="nav-sub">
             @for (course of courseApi.all(); track course.id) {
-              <li>
+              <li [appCourseColor]="course.color">
                 <a [routerLink]="['/courses', course.id]" routerLinkActive="active" [attr.title]="course.title"><i class="dot"></i><span>{{ course.title }}</span></a>
               </li>
             }
@@ -34,6 +37,7 @@
         </div>
         <a class="nav-item" routerLink="/dashboard" routerLinkActive="active"><app-icon name="dashboard" />Dashboard</a>
         <a class="nav-item" routerLink="/calendar" routerLinkActive="active"><app-icon name="calendar" />Calendar</a>
+        <button class="nav-item nav-logout" type="button" (click)="logout()"><app-icon name="logout" />Log out</button>
       </nav>
     </aside>
   }

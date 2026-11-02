@@ -2,6 +2,7 @@ import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EMPTY, Subject, catchError, switchMap } from 'rxjs';
 import { errorMessage } from '../../core/api-error';
+import { CourseColor } from '../../core/course-color';
 import { Icon } from '../../core/icon';
 import { Select } from '../../core/select';
 import { CourseApi } from '../courses/course-api';
@@ -11,7 +12,7 @@ import { buildWeeks, dateKey, monthKey } from './month-grid';
 
 @Component({
   selector: 'app-calendar',
-  imports: [Icon, Select],
+  imports: [CourseColor, Icon, Select],
   templateUrl: './calendar.html',
 })
 export class Calendar implements OnInit {
@@ -19,6 +20,7 @@ export class Calendar implements OnInit {
   private readonly courseApi = inject(CourseApi);
   private readonly tableApi = inject(TableApi);
 
+  protected readonly colors = this.courseApi.colors;
   protected readonly today = dateKey(new Date());
   protected readonly view = signal({
     year: new Date().getFullYear(),

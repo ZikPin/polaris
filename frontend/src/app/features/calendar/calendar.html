@@ -33,7 +33,7 @@
               <span class="n">{{ day.day }}</span>
               <span class="ev">
                 @for (row of days()[day.date] ?? []; track row.id) {
-                  <span>{{ row.title }}</span>
+                  <span [appCourseColor]="colors()[row.course_id]">{{ row.title }}</span>
                 }
               </span>
             </button>
@@ -57,7 +57,7 @@
       </div>
       <ul class="entries">
         @for (row of selectedRows(); track row.id) {
-          <li>
+          <li [appCourseColor]="colors()[row.course_id]">
             <i class="dot"></i>
             <span>{{ courseTitle(row.course_id) }}: {{ row.title }}, {{ row.table_type }}</span>
             <button class="icon-btn" type="button" aria-label="Remove entry" (click)="remove(row)"><app-icon name="close" /></button>

@@ -12,7 +12,7 @@
   <button class="btn btn-primary icon" type="submit" aria-label="Add course"><app-icon name="plus" /></button>
 </form>
 
-@if (error()) {
+@if (error() && !editing()) {
   <div class="banner" role="alert">
     <app-icon name="alert" />
     <span>{{ error() }}</span>
@@ -21,46 +21,33 @@
 
 <div class="grid">
   @for (course of courses(); track course.id) {
-    <article class="card course" [class.editing]="editingId() === course.id">
+    <article class="card course" [appCourseColor]="course.color">
       <i class="deco"></i>
-      @if (editingId() === course.id) {
-        <form (submit)="save($event, course, editTitle.value)">
-          <input #editTitle class="input" [value]="course.title" aria-label="Course title" required />
-          <ul class="check-list">
-            @for (tag of tags(); track tag.id) {
-              <li>
-                <label class="check">
-                  <input type="checkbox" [checked]="editTagIds().includes(tag.id)" (change)="toggleEditTag(tag.id)" />
-                  {{ tag.value }}
-                </label>
-              </li>
-            }
-          </ul>
-          <div class="card-actions">
-            <button class="icon-btn ok" type="submit" aria-label="Save"><app-icon name="check" /></button>
-            <button class="icon-btn" type="button" aria-label="Cancel" (click)="cancel()"><app-icon name="close" /></button>
-          </div>
-        </form>
-      } @else {
-        <h3 class="card-title"><a [routerLink]="['/courses', course.id]">{{ course.title }}</a></h3>
-        @if (course.tags.length) {
-          <ul class="tags">
-            @for (tag of course.tags; track tag.id) {
-              <li class="tag">{{ tag.value }}</li>
-            }
-          </ul>
-        }
-        <div class="card-actions">
-          <button class="icon-btn" type="button" [attr.aria-label]="'Edit ' + course.title" (click)="edit(course)">
-            <app-icon name="edit" />
-          </button>
-          <button class="icon-btn" type="button" [attr.aria-label]="'Delete ' + course.title" (click)="remove(course)">
-            <app-icon name="close" />
-          </button>
-        </div>
+      <h3 class="card-title"><a [routerLink]="['/courses', course.id]">{{ course.title }}</a></h3>
+      @if (course.tags.length) {
+        <ul class="tags">
+          @for (tag of course.tags; track tag.id) {
+            <li class="tag">{{ tag.value }}</li>
+          }
+        </ul>
       }
+      @if (course.description) {
+        <p class="card-desc">{{ short(course.description) }}</p>
+      }
+      <div class="card-actions">
+        <button class="icon-btn" type="button" [attr.aria-label]="'Edit ' + course.title" (click)="editing.set(course)">
+          <app-icon name="edit" />
+        </button>
+        <button class="icon-btn" type="button" [attr.aria-label]="'Delete ' + course.title" (click)="remove(course)">
+          <app-icon name="close" />
+        </button>
+      </div>
     </article>
   } @empty {
     <p class="muted">No courses.</p>
   }
 </div>
+
+@if (editing(); as course) {
+  <app-edit-course-dialog [course]="course" [error]="error()" (closed)="editing.set(null)" (saved)="save(course, $event)" />
+}

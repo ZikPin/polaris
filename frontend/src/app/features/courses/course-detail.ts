@@ -3,6 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EMPTY, Subject, catchError, map, merge, switchMap, tap } from 'rxjs';
+import { CourseColor } from '../../core/course-color';
 import { Icon } from '../../core/icon';
 import { TableApi, Tables } from '../table/table-api';
 import { TableView } from '../table/table-view';
@@ -10,7 +11,7 @@ import { Course, CourseApi } from './course-api';
 
 @Component({
   selector: 'app-course-detail',
-  imports: [RouterLink, Icon, TableView],
+  imports: [RouterLink, CourseColor, Icon, TableView],
   templateUrl: './course-detail.html',
 })
 export class CourseDetail {

@@ -3,6 +3,7 @@ import { Component, computed, effect, inject, signal, untracked } from '@angular
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EMPTY, Subject, catchError, forkJoin, switchMap } from 'rxjs';
 import { errorMessage } from '../../core/api-error';
+import { CourseColor } from '../../core/course-color';
 import { Icon } from '../../core/icon';
 import { toggleId } from '../../core/ids';
 import { MultiSelect } from '../../core/multi-select';
@@ -44,7 +45,7 @@ function card(
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DecimalPipe, Icon, MultiSelect],
+  imports: [CourseColor, DecimalPipe, Icon, MultiSelect],
   templateUrl: './dashboard.html',
 })
 export class Dashboard {
@@ -52,6 +53,7 @@ export class Dashboard {
   private readonly courseApi = inject(CourseApi);
   private readonly tagApi = inject(TagApi);
 
+  protected readonly colors = this.courseApi.colors;
   protected readonly tags = this.tagApi.all;
   protected readonly tagOptions = computed(() =>
     this.tags().map((tag) => ({ id: tag.id, label: tag.value })),
