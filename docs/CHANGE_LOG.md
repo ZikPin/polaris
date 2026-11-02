@@ -2,6 +2,11 @@
 One line per finished ticket, newest first: date · ticket · one sentence.
 
 - 2026-11-02 · T-022 · Design: wireframes and mock-ups for the course dialog, the course card with description, the course page with tags and description, and the mobile screens, with the brief updated.
+- 2026-11-02 · T-027 · Mobile layout below 768 px: header with a burger menu, navigation with Log out at the bottom, stacked page heads, one column of cards and tables, and the calendar grid above the day list.
+- 2026-11-02 · T-026 · Course tables: wider title column and long titles wrap instead of being cut off.
+- 2026-11-02 · T-025 · The color of a course is used on its card, navigation dot, dashboard cards, calendar entries and table headers.
+- 2026-11-02 · T-024 · The course card shows the description (cut after 150 characters) and the course page shows the tags and the full description.
+- 2026-11-02 · T-023 · Edit dialog for a course with title, tags, description and one of ten colors, with `description` and `color` in the model, migration and API.
 - 2026-11-01 · T-021 · Automated acceptance tests AT-02 to AT-14 as Gherkin features with step definitions for auth, courses, tables, tags, dashboard and calendar.
 - 2026-10-29 · T-018 · Deployment: one Docker image on Render that serves the Angular build from Flask over HTTPS, with Supabase Postgres and `flask db upgrade` on every start.
 - 2026-10-29 · T-017 · System suite on Postgres: `docker-compose.yml`, `TEST_DATABASE_URL` switch in the fixtures, Postgres driver, and prefixed `DB_*` production settings.
