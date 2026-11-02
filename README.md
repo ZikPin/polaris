@@ -1,5 +1,5 @@
 # Polaris
-A web-based study planner. Track lectures and assignments per course, add your own checkbox and number columns, and see per-course statistics, instead of maintaining a spreadsheet.
+A web-based study planner. Track lectures and assignments per course, add your own checkbox and number columns, and see per-course statistics, instead of maintaining a spreadsheet. [Go to the page:](https://polaris-5r82.onrender.com/)
 
 ## Structure and approach
 An Angular single-page app talks JSON to a Flask backend (`routes` → `services` → `models`, Marshmallow `schemas`, pure functions in `utils`) on SQLite in development and Postgres in production. Login is a session cookie and the browser sees one origin, so there is no CORS. The project is documentation-driven: the docs in `docs/` (start with [VISION](docs/VISION.md), each document derives from the one before) are the source of truth and the code follows them. Work is tracked in [BACKLOG](docs/BACKLOG.md) and [CHANGE_LOG](docs/CHANGE_LOG.md), the working rules are in [CLAUDE.md](CLAUDE.md), the test plans are in [tests/plans](tests/plans).
