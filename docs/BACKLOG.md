@@ -25,8 +25,8 @@ Statuses: `todo`, `in progress`, `done`, `stale` (the request or requirement it 
 | T-017  | infra               | done   | Run the system suite against Postgres with docker-compose |
 | T-018  | infra               | done   | Decide hosting and deploy over HTTPS, with `flask db upgrade` as a deploy step before the new version starts (REQ-C-02, REQ-NF-05) |
 | T-022  | infra               | done   | Design: wireframes and mock-ups for the course dialog, the course card with description, the course page with tags and description, and the mobile screens (BRIEF 3.4, 6.5, 6.7, 6.9, 6.11) |
-| T-023  | SR-M-01, SR-S-04    | todo   | Course edit dialog with title, tags, description and color: `description` and `color` in model, migration, API and UI, replacing the inline card edit (REQ-F-53 to 56, ST-32 to 34, AT-03 and AT-08 updated) |
-| T-024  | SR-S-04             | todo   | Show the trimmed description on the course card and the tags plus the full description on the course page (REQ-F-57, 58, AT-15) |
-| T-025  | SR-S-04             | todo   | Apply the course color to the card, navigation dot, dashboard, calendar and table headers (REQ-F-59, AT-16) |
-| T-026  | SR-S-06             | todo   | Wider title column in the tables, long titles wrap (REQ-F-65, 66, AT-19) |
-| T-027  | SR-S-05             | todo   | Mobile layout below 768 px: header with burger, navigation, stacked head, cards, tables and calendar, plus the phone-viewport acceptance tests (REQ-F-60 to 64, REQ-NF-06, AT-17, 18) |
+| T-023  | SR-M-01, SR-S-04    | in progress | Course edit dialog with title, tags, description and color: `description` and `color` in model, migration, API and UI, replacing the inline card edit (REQ-F-53 to 56, ST-32 to 34, AT-03 and AT-08 updated) |
+| T-024  | SR-S-04             | in progress | Show the trimmed description on the course card and the tags plus the full description on the course page (REQ-F-57, 58, AT-15) |
+| T-025  | SR-S-04             | in progress | Apply the course color to the card, navigation dot, dashboard, calendar and table headers (REQ-F-59, AT-16) |
+| T-026  | SR-S-06             | in progress | Wider title column in the tables, long titles wrap (REQ-F-65, 66, AT-19) |
+| T-027  | SR-S-05             | in progress | Mobile layout below 768 px: header with burger, navigation, stacked head, cards, tables and calendar, plus the phone-viewport acceptance tests (REQ-F-60 to 64, REQ-NF-06, AT-17, 18) |
