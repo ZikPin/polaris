@@ -21,10 +21,17 @@ def get_course(user_id, course_id):
     )
 
 
-def create_course(user_id, data):
-    course = Course(user_id=user_id, title=data["title"])
+def _apply(course, data):
+    for field in ("title", "description", "color"):
+        if field in data:
+            setattr(course, field, data[field])
     if "tag_ids" in data:
-        course.tags = tag_service.get_tags(user_id, data["tag_ids"])
+        course.tags = tag_service.get_tags(course.user_id, data["tag_ids"])
+
+
+def create_course(user_id, data):
+    course = Course(user_id=user_id)
+    _apply(course, data)
     db.session.add(course)
     db.session.commit()
     return course
@@ -32,10 +39,7 @@ def create_course(user_id, data):
 
 def update_course(user_id, course_id, data):
     course = get_course(user_id, course_id)
-    if "title" in data:
-        course.title = data["title"]
-    if "tag_ids" in data:
-        course.tags = tag_service.get_tags(user_id, data["tag_ids"])
+    _apply(course, data)
     db.session.commit()
     return course
 
