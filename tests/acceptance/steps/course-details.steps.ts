@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { Given, Then, When } from '../fixtures';
 import { accent, courseCard, exactly, openEditDialog } from '../locators';
 
@@ -82,18 +82,19 @@ Then('the table headers have the color {string}', async ({ page }, color: string
   await expect(page.locator('thead th.t-head').first()).toHaveCSS('background-color', await accent(page, color));
 });
 
-When('I hide the course {string} from the menu', async ({ page }, title: string) => {
+async function setHidden(page: Page, title: string, hidden: boolean) {
   const dialog = await openEditDialog(page, title);
-  await dialog.getByLabel('Hide from the menu').check();
+  await dialog.getByLabel('Hide from the menu').setChecked(hidden);
   await dialog.getByRole('button', { name: 'Save' }).click();
   await expect(dialog).toHaveCount(0);
+}
+
+When('I hide the course {string} from the menu', async ({ page }, title: string) => {
+  await setHidden(page, title, true);
 });
 
 When('I show the course {string} in the menu again', async ({ page }, title: string) => {
-  const dialog = await openEditDialog(page, title);
-  await dialog.getByLabel('Hide from the menu').uncheck();
-  await dialog.getByRole('button', { name: 'Save' }).click();
-  await expect(dialog).toHaveCount(0);
+  await setHidden(page, title, false);
 });
 
 Then('the menu lists the course {string}', async ({ page }, title: string) => {

@@ -575,7 +575,7 @@ app-multi-select, app-select { position: relative; }
 .tag-name, .tag-input { flex: 1; min-width: 0; height: 100%; padding: 0; text-align: left; font-weight: var(--fw-semibold); background: none; }
 .tag-list .tool { opacity: 0; }
 .tag-list li:hover .tool, .tag-list li:focus-within .tool { opacity: 1; }
-.modal-col h3 { font-size: var(--fs-lg); font-weight: var(--fw-bold); }
+.modal-col h3, .welcome-item h3 { font-size: var(--fs-lg); font-weight: var(--fw-bold); }
 .opt { display: grid; gap: 12px; padding: 16px 18px; border-radius: var(--radius-xl); background: var(--color-panel); }
 .opt + .opt { margin-top: 10px; }
 .opt-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -593,13 +593,11 @@ app-multi-select, app-select { position: relative; }
 .opt .btn.select:hover { background: var(--color-hover); }
 .opt .input { height: 42px; padding: 0 14px; background: var(--color-sheet); font-size: var(--fs-md); }
 .opt textarea.input { height: auto; padding: 12px 14px; line-height: 1.45; resize: vertical; }
-.opt-hide { padding: 0 18px; }
-.modal-course .opt-hide { margin-top: 14px; }
+.modal-course .opt-hide { margin-top: 14px; padding: 0 18px; }
 
 /* welcome dialog: a few rough shapes (the hint) beside each description */
 .modal-welcome .modal-head { align-items: flex-start; }
 .modal-welcome .opt { display: flex; align-items: center; gap: 14px; }
-.welcome-item h3 { font-size: var(--fs-lg); font-weight: var(--fw-bold); }
 .welcome-item p { margin-top: 2px; font-size: var(--fs-md); font-weight: var(--fw-medium); color: var(--color-ink-soft); }
 .hint { flex: none; display: grid; width: 92px; height: 68px; padding: 8px; gap: 4px; border-radius: var(--radius-md); background: var(--color-sheet); }
 .hint i { border-radius: var(--radius-xs); background: var(--course-color); }
@@ -661,7 +659,7 @@ app-multi-select, app-select { position: relative; }
 @media (min-width: 1000px) {
   .modal-welcome .modal { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; width: min(1200px, 80vw); padding: 32px; }
   .modal-welcome .modal-head { grid-column: 1 / -1; margin-bottom: 8px; }
-  .modal-welcome .opt, .modal-welcome .opt + .opt { flex-direction: column; align-items: stretch; gap: 0; margin-top: 0; padding: 22px 24px 24px; }
+  .modal-welcome .opt { flex-direction: column; align-items: stretch; gap: 0; margin-top: 0; padding: 22px 24px 24px; }
   .welcome-item h3 { font-size: var(--fs-h2); }
   .welcome-item p { min-height: calc(1.45em * 4); font-size: var(--fs-base); }
   .hint { order: 1; width: auto; height: auto; aspect-ratio: 4 / 3; margin-top: 20px; padding: 14px; gap: 8px; border-radius: var(--radius-lg); }
@@ -747,7 +745,7 @@ app-multi-select, app-select { position: relative; }
   .opt-fields { grid-template-columns: 1fr; }
   .swatches { display: grid; grid-template-columns: repeat(5, 28px); justify-content: space-between; gap: 12px 0; }
   .modal-course .opt-actions { margin-top: 12px; }
-  .opt-hide { padding: 0 16px; }
+  .modal-course .opt-hide { padding: 0 16px; }
   .modal-welcome .opt { flex: 1; gap: 12px; }
   .modal-welcome .modal { display: flex; flex-direction: column; height: calc(100vh - var(--header-h) - 24px); max-height: none; }
   .hint { width: 68px; height: 52px; padding: 6px; gap: 3px; }
