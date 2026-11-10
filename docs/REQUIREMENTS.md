@@ -21,6 +21,8 @@
 | SR-S-04                 | REQ-F-55 to 59                       |
 | SR-S-05                 | REQ-F-60 to 64, REQ-NF-06            |
 | SR-S-06                 | REQ-F-65, 66                         |
+| SR-S-07                 | REQ-F-67, 68                         |
+| SR-S-08                 | REQ-F-69                             |
 | SR-C-01                 | REQ-F-41, 42, 45, 46                 |
 | SR-C-02                 | REQ-F-43, 44, 45, 46                 |
 
@@ -96,7 +98,7 @@ These do not come from a single stakeholder requirement.
 - REQ-F-51: Titles, labels and tag values cannot be empty
 - REQ-F-52: The system asks for confirmation before deleting a course, a column or a tag
 ### Course dialog
-- REQ-F-53: The edit action of a course opens a dialog "Edit the course" with the title, the tags, the description and the color of the course
+- REQ-F-53: The edit action of a course opens a dialog "Edit the course" with the title, the tags, the description, the color and the option to hide the course from the navigation
 - REQ-F-54: Saving the dialog stores all its fields at once, cancelling it closes the dialog and changes nothing
 ### Course description and color
 - REQ-F-55: The user can set and edit a description of a course. It can be empty and has at most 1000 characters. A new course has an empty description
@@ -114,6 +116,11 @@ Below the width of 768 px (the breakpoint), the layout changes as follows
 ### Tables
 - REQ-F-65: The default title column is wider than the custom columns
 - REQ-F-66: A title that does not fit its cell is wrapped onto further lines and is never cut off, the row grows with it
+### Hiding courses
+- REQ-F-67: The user can hide a course from the navigation and show it again with the option in the course dialog. A new course is not hidden
+- REQ-F-68: A hidden course is not listed in the navigation (wide and mobile layout). It stays on the courses page, the course page, the dashboard and the calendar
+### Welcome dialog
+- REQ-F-69: After a successful registration the courses page opens with a welcome dialog that the user can close. Logging in does not show it
 
 ## Non-Functional Requirements
 - REQ-NF-01: Every change is saved on the server without a save action and is still there after a reload

@@ -52,12 +52,14 @@ CourseRequestSchema                  POST, PATCH api/course
   tag_ids    List[Int]               optional, default [], unique values, replaces the tags of the course
   description Str                    optional, may be empty, at most 1000 characters
   color      Str                     optional, one of the ten accent names (see RELATIONAL_SCHEMA.md)
+  hidden     Bool                    optional
 
 CourseResponseSchema                 GET, POST, PATCH api/course
   id         Int
   title      Str
   description Str
   color      Str
+  hidden     Bool
   tags       List[TagResponseSchema]
 ```
 

@@ -24,6 +24,7 @@ Represents the course entity to which the lectures and assignments belong
 | title       | yes      |                                                                                       |
 | description | yes      | free text, empty by default, at most 1000 characters                                  |
 | color       | yes      | name of an accent color of the design brief (clay, mustard, olive, sage, teal, blue, periwinkle, plum, rose, stone), default 'clay' |
+| hidden      | yes      | whether the course is left out of the navigation, default false                       |
 ### Row
 Represents one lecture or one assignment. The title of the row is the default title column of its table, which cannot be removed. The distinction between the tables is done through the "table_type" attribute. Rows are displayed in the order they were created
 

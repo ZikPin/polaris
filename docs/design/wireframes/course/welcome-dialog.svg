@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 760" width="1280" height="760" font-family="sans-serif">
+  <rect x="0" y="0" width="1280" height="760" fill="#fafafa" stroke="none" />
+  <rect x="0" y="56" width="220" height="704" fill="#e6e6e6" stroke="#8c8c8c" />
+  <rect x="0" y="0" width="1280" height="56" fill="#d9d9d9" stroke="#8c8c8c" />
+  <text x="24" y="36" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="900" y="12" width="64" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <text x="932" y="33" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">Tags</text>
+  <text x="1160" y="34" font-size="14" text-anchor="end" font-weight="normal" fill="#333">user@example.com</text>
+  <rect x="1176" y="12" width="80" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <text x="1216" y="33" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">Log out</text>
+  <rect x="8" y="68" width="204" height="36" fill="#cfcfcf" stroke="#8c8c8c" />
+  <text x="24" y="91" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Courses  ▾</text>
+  <text x="252" y="112" font-size="26" text-anchor="start" font-weight="bold" fill="#333">Courses</text>
+  <rect x="1128" y="84" width="120" height="32" fill="#e8e8e8" stroke="#757575" />
+  <text x="1188" y="105" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Tags  ▾</text>
+  <rect x="252" y="132" width="948" height="40" fill="#ffffff" stroke="#757575" />
+  <text x="266" y="157" font-size="14" text-anchor="start" font-weight="normal" fill="#999">Title of a new course</text>
+  <rect x="1208" y="132" width="40" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="1228" y="157" font-size="20" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <text x="24" y="135" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Dashboard</text>
+  <text x="24" y="171" font-size="14" text-anchor="start" font-weight="bold" fill="#333">Calendar</text>
+  <rect x="0" y="0" width="1280" height="760" fill="#000000" stroke="none" opacity="0.35" />
+  <rect x="128" y="131" width="1024" height="498" fill="#ffffff" stroke="#757575" />
+  <text x="154" y="174" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Welcome to Polaris</text>
+  <text x="154" y="198" font-size="13" text-anchor="start" font-weight="normal" fill="#555">Your guiding star through the semester</text>
+  <rect x="1100" y="157" width="24" height="24" fill="#e0e0e0" stroke="#8c8c8c" />
+  <text x="1112" y="174" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <rect x="154" y="229" width="313" height="374" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="178" y="271" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Courses</text>
+  <text x="178" y="293" font-size="13" text-anchor="start" font-weight="normal" fill="#555">Add a card for every course and give it a</text>
+  <text x="178" y="313.3" font-size="13" text-anchor="start" font-weight="normal" fill="#555">color and tags. Open one to track its</text>
+  <text x="178" y="333.6" font-size="13" text-anchor="start" font-weight="normal" fill="#555">lectures and assignments in simple</text>
+  <text x="178" y="353.9" font-size="13" text-anchor="start" font-weight="normal" fill="#555">tables.</text>
+  <rect x="178" y="380" width="265" height="199" fill="#ffffff" stroke="#8c8c8c" />
+  <rect x="192" y="394" width="219" height="12" fill="#d4d4d4" stroke="none" />
+  <rect x="417" y="394" width="12" height="12" fill="#555" stroke="none" />
+  <rect x="192" y="414" width="114.5" height="71.5" fill="#bdbdbd" stroke="none" />
+  <rect x="201" y="423" width="63" height="5" fill="#555" stroke="none" />
+  <rect x="201" y="438" width="20" height="7" fill="#d4d4d4" stroke="none" />
+  <rect x="225" y="438" width="20" height="7" fill="#d4d4d4" stroke="none" />
+  <rect x="201" y="450" width="96.5" height="4" fill="#d4d4d4" stroke="none" />
+  <rect x="201" y="458" width="67.5" height="4" fill="#d4d4d4" stroke="none" />
+  <rect x="314.5" y="414" width="114.5" height="71.5" fill="#bdbdbd" stroke="none" />
+  <rect x="323.5" y="423" width="63" height="5" fill="#555" stroke="none" />
+  <rect x="323.5" y="438" width="20" height="7" fill="#d4d4d4" stroke="none" />
+  <rect x="347.5" y="438" width="20" height="7" fill="#d4d4d4" stroke="none" />
+  <rect x="323.5" y="450" width="96.5" height="4" fill="#d4d4d4" stroke="none" />
+  <rect x="323.5" y="458" width="67.5" height="4" fill="#d4d4d4" stroke="none" />
+  <rect x="192" y="493.5" width="114.5" height="71.5" fill="#bdbdbd" stroke="none" />
+  <rect x="201" y="502.5" width="63" height="5" fill="#555" stroke="none" />
+  <rect x="201" y="517.5" width="20" height="7" fill="#d4d4d4" stroke="none" />
+  <rect x="225" y="517.5" width="20" height="7" fill="#d4d4d4" stroke="none" />
+  <rect x="201" y="529.5" width="96.5" height="4" fill="#d4d4d4" stroke="none" />
+  <rect x="201" y="537.5" width="67.5" height="4" fill="#d4d4d4" stroke="none" />
+  <rect x="314.5" y="493.5" width="114.5" height="71.5" fill="#bdbdbd" stroke="none" />
+  <rect x="323.5" y="502.5" width="63" height="5" fill="#555" stroke="none" />
+  <rect x="323.5" y="517.5" width="20" height="7" fill="#d4d4d4" stroke="none" />
+  <rect x="347.5" y="517.5" width="20" height="7" fill="#d4d4d4" stroke="none" />
+  <rect x="323.5" y="529.5" width="96.5" height="4" fill="#d4d4d4" stroke="none" />
+  <rect x="323.5" y="537.5" width="67.5" height="4" fill="#d4d4d4" stroke="none" />
+  <rect x="483" y="229" width="314" height="374" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="507" y="271" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Dashboard</text>
+  <text x="507" y="293" font-size="13" text-anchor="start" font-weight="normal" fill="#555">See how far you are in every course, with</text>
+  <text x="507" y="313.3" font-size="13" text-anchor="start" font-weight="normal" fill="#555">the numbers and everything still open.</text>
+  <text x="507" y="333.6" font-size="13" text-anchor="start" font-weight="normal" fill="#555">Filter by tag to focus on what matters</text>
+  <text x="507" y="353.9" font-size="13" text-anchor="start" font-weight="normal" fill="#555">now.</text>
+  <rect x="507" y="380" width="265" height="199" fill="#ffffff" stroke="#8c8c8c" />
+  <circle cx="524" cy="397" r="3" fill="#bdbdbd" stroke="none" />
+  <rect x="532" y="395" width="44" height="4" fill="#8c8c8c" stroke="none" />
+  <rect x="521" y="406" width="115.5" height="69.5" fill="#bdbdbd" stroke="none" />
+  <rect x="529" y="413" width="57.8" height="5" fill="#555" stroke="none" />
+  <rect x="529" y="424" width="39.3" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="612.3" y="424" width="16.2" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="529" y="432" width="39.3" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="612.3" y="432" width="16.2" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="642.5" y="406" width="115.5" height="69.5" fill="#d4d4d4" stroke="none" />
+  <rect x="650.5" y="413" width="57.8" height="5" fill="#555" stroke="none" />
+  <rect x="650.5" y="424" width="99.5" height="44.5" fill="#e8e8e8" stroke="none" />
+  <rect x="656.5" y="435" width="87.5" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="656.5" y="443" width="52.5" height="3" fill="#8c8c8c" stroke="none" />
+  <circle cx="524" cy="486.5" r="3" fill="#bdbdbd" stroke="none" />
+  <rect x="532" y="484.5" width="44" height="4" fill="#8c8c8c" stroke="none" />
+  <rect x="521" y="495.5" width="115.5" height="69.5" fill="#bdbdbd" stroke="none" />
+  <rect x="529" y="502.5" width="57.8" height="5" fill="#555" stroke="none" />
+  <rect x="529" y="513.5" width="39.3" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="612.3" y="513.5" width="16.2" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="529" y="521.5" width="39.3" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="612.3" y="521.5" width="16.2" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="642.5" y="495.5" width="115.5" height="69.5" fill="#d4d4d4" stroke="none" />
+  <rect x="650.5" y="502.5" width="57.8" height="5" fill="#555" stroke="none" />
+  <rect x="650.5" y="513.5" width="99.5" height="44.5" fill="#e8e8e8" stroke="none" />
+  <rect x="656.5" y="524.5" width="87.5" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="656.5" y="532.5" width="52.5" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="813" y="229" width="313" height="374" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="837" y="271" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Calendar</text>
+  <text x="837" y="293" font-size="13" text-anchor="start" font-weight="normal" fill="#555">Plan your study days. Add lectures and</text>
+  <text x="837" y="313.3" font-size="13" text-anchor="start" font-weight="normal" fill="#555">assignments to a day and see</text>
+  <text x="837" y="333.6" font-size="13" text-anchor="start" font-weight="normal" fill="#555">everything in your course colors.</text>
+  <rect x="837" y="380" width="265" height="199" fill="#ffffff" stroke="#8c8c8c" />
+  <rect x="851" y="394" width="12" height="12" fill="#e8e8e8" stroke="none" />
+  <rect x="1076" y="394" width="12" height="12" fill="#e8e8e8" stroke="none" />
+  <rect x="937.5" y="397" width="64" height="5" fill="#555" stroke="none" />
+  <rect x="851" y="414" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="855" y="418" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="885.3" y="414" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="889.3" y="418" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="889.3" y="424" width="23.3" height="4" fill="#b5b5b5" stroke="none" />
+  <rect x="919.6" y="414" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="923.6" y="418" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="953.9" y="414" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="957.9" y="418" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="988.1" y="414" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="992.1" y="418" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="992.1" y="424" width="23.3" height="4" fill="#b5b5b5" stroke="none" />
+  <rect x="1022.4" y="414" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="1026.4" y="418" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="1056.7" y="414" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="1060.7" y="418" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="851" y="452.5" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="855" y="456.5" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="885.3" y="452.5" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="889.3" y="456.5" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="919.6" y="452.5" width="31.3" height="35.5" fill="#555" stroke="none" />
+  <rect x="923.6" y="456.5" width="7" height="3" fill="#fafafa" stroke="none" />
+  <rect x="923.6" y="462.5" width="23.3" height="4" fill="#b5b5b5" stroke="none" />
+  <rect x="953.9" y="452.5" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="957.9" y="456.5" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="988.1" y="452.5" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="992.1" y="456.5" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="992.1" y="462.5" width="23.3" height="4" fill="#b5b5b5" stroke="none" />
+  <rect x="1022.4" y="452.5" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="1026.4" y="456.5" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="1056.7" y="452.5" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="1060.7" y="456.5" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="851" y="491" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="855" y="495" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="855" y="501" width="23.3" height="4" fill="#b5b5b5" stroke="none" />
+  <rect x="885.3" y="491" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="889.3" y="495" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="919.6" y="491" width="31.3" height="35.5" fill="#d4d4d4" stroke="#333" stroke-width="2" />
+  <rect x="923.6" y="495" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="923.6" y="501" width="23.3" height="4" fill="#b5b5b5" stroke="none" />
+  <rect x="953.9" y="491" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="957.9" y="495" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="988.1" y="491" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="992.1" y="495" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="1022.4" y="491" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="1026.4" y="495" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="1026.4" y="501" width="23.3" height="4" fill="#b5b5b5" stroke="none" />
+  <rect x="1056.7" y="491" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="1060.7" y="495" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="851" y="529.5" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="855" y="533.5" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="885.3" y="529.5" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="889.3" y="533.5" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="889.3" y="539.5" width="23.3" height="4" fill="#b5b5b5" stroke="none" />
+  <rect x="919.6" y="529.5" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="923.6" y="533.5" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="953.9" y="529.5" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="957.9" y="533.5" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="988.1" y="529.5" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="992.1" y="533.5" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="1022.4" y="529.5" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="1026.4" y="533.5" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <rect x="1026.4" y="539.5" width="23.3" height="4" fill="#b5b5b5" stroke="none" />
+  <rect x="1056.7" y="529.5" width="31.3" height="35.5" fill="#e8e8e8" stroke="none" />
+  <rect x="1060.7" y="533.5" width="7" height="3" fill="#8c8c8c" stroke="none" />
+  <text x="252" y="716" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Opens over the courses page right after registering, logging in skips it. The cross is the only way to close it, there is no other button.</text>
+  <text x="252" y="732" font-size="11" text-anchor="start" font-weight="normal" fill="#777">From 1000px wide: three columns, 80% of the window wide (at most 1200px), as high as its content. In each: title, text of at most three sentences, then a hint of the page.</text>
+  <text x="252" y="748" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Below 1000px the columns become rows with a small hint beside the text, the dialog keeps its normal width (see the phone wireframe).</text>
+</svg>

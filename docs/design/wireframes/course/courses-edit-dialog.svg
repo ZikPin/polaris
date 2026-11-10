@@ -90,53 +90,56 @@
   <text x="252" y="683" font-size="11" text-anchor="start" font-weight="normal" fill="#777">The edit button opens the course dialog (courses-edit-dialog.svg), there is no inline edit. The delete button asks for a confirmation. Adding a course stays the input above the cards.</text>
   <text x="252" y="699" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Navbar: Courses expands to the list of courses, Dashboard and Calendar are single entries.</text>
   <rect x="0" y="0" width="1280" height="760" fill="#000000" stroke="none" opacity="0.35" />
-  <rect x="410" y="78" width="460" height="604" fill="#ffffff" stroke="#757575" />
-  <text x="434" y="118" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Edit the course</text>
-  <rect x="826" y="92" width="24" height="24" fill="#e0e0e0" stroke="#8c8c8c" />
-  <text x="838" y="109" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
-  <rect x="434" y="142" width="412" height="94" fill="#f4f4f4" stroke="#8c8c8c" />
-  <text x="450" y="169" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Title</text>
-  <rect x="450" y="180" width="380" height="40" fill="#ffffff" stroke="#757575" />
-  <text x="464" y="205" font-size="14" text-anchor="start" font-weight="normal" fill="#333">Algorithms</text>
-  <rect x="434" y="246" width="412" height="132" fill="#f4f4f4" stroke="#8c8c8c" />
-  <text x="450" y="273" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Tags</text>
-  <rect x="450" y="289" width="15" height="15" fill="#ffffff" stroke="#757575" />
-  <text x="457.5" y="301" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
-  <text x="474" y="301" font-size="12" text-anchor="start" font-weight="normal" fill="#333">CS</text>
-  <rect x="640" y="289" width="15" height="15" fill="#ffffff" stroke="#757575" />
-  <text x="664" y="301" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Exam</text>
-  <rect x="450" y="317" width="15" height="15" fill="#ffffff" stroke="#757575" />
-  <text x="474" y="329" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Math</text>
-  <rect x="640" y="317" width="15" height="15" fill="#ffffff" stroke="#757575" />
-  <text x="664" y="329" font-size="12" text-anchor="start" font-weight="normal" fill="#333">ML</text>
-  <rect x="450" y="345" width="15" height="15" fill="#ffffff" stroke="#757575" />
-  <text x="457.5" y="357" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
-  <text x="474" y="357" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Semester 1</text>
-  <rect x="640" y="345" width="15" height="15" fill="#ffffff" stroke="#757575" />
-  <text x="664" y="357" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Semester 2</text>
-  <rect x="434" y="388" width="412" height="126" fill="#f4f4f4" stroke="#8c8c8c" />
-  <text x="450" y="415" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Description</text>
-  <rect x="450" y="426" width="380" height="72" fill="#ffffff" stroke="#757575" />
-  <text x="462" y="446" font-size="12" text-anchor="start" font-weight="normal" fill="#555">Sorting, graphs, dynamic programming and complexity</text>
-  <text x="462" y="462" font-size="12" text-anchor="start" font-weight="normal" fill="#555">analysis. The exam is open book, so the plan is to</text>
-  <text x="462" y="478" font-size="12" text-anchor="start" font-weight="normal" fill="#555">finish every assignment sheet by the end of November</text>
-  <rect x="434" y="524" width="412" height="82" fill="#f4f4f4" stroke="#8c8c8c" />
-  <text x="450" y="551" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Color</text>
-  <circle cx="464" cy="578" r="14" fill="#b5b5b5" stroke="#8c8c8c" />
-  <circle cx="464" cy="578" r="17" fill="none" stroke="#333" />
-  <circle cx="500" cy="578" r="14" fill="#c2c2c2" stroke="#8c8c8c" />
-  <circle cx="536" cy="578" r="14" fill="#cdcdcd" stroke="#8c8c8c" />
-  <circle cx="572" cy="578" r="14" fill="#b0b0b0" stroke="#8c8c8c" />
-  <circle cx="608" cy="578" r="14" fill="#bdbdbd" stroke="#8c8c8c" />
-  <circle cx="644" cy="578" r="14" fill="#c8c8c8" stroke="#8c8c8c" />
-  <circle cx="680" cy="578" r="14" fill="#ababab" stroke="#8c8c8c" />
-  <circle cx="716" cy="578" r="14" fill="#bababa" stroke="#8c8c8c" />
-  <circle cx="752" cy="578" r="14" fill="#c5c5c5" stroke="#8c8c8c" />
-  <circle cx="788" cy="578" r="14" fill="#a8a8a8" stroke="#8c8c8c" />
-  <rect x="540" y="622" width="100" height="40" fill="#e8e8e8" stroke="#8c8c8c" />
-  <text x="590" y="647" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Cancel</text>
-  <rect x="652" y="622" width="100" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
-  <text x="702" y="647" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Save</text>
+  <rect x="410" y="58" width="460" height="642" fill="#ffffff" stroke="#757575" />
+  <text x="434" y="98" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Edit the course</text>
+  <rect x="826" y="72" width="24" height="24" fill="#e0e0e0" stroke="#8c8c8c" />
+  <text x="838" y="89" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <rect x="434" y="122" width="412" height="94" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="450" y="149" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Title</text>
+  <rect x="450" y="160" width="380" height="40" fill="#ffffff" stroke="#757575" />
+  <text x="464" y="185" font-size="14" text-anchor="start" font-weight="normal" fill="#333">Algorithms</text>
+  <rect x="434" y="226" width="412" height="132" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="450" y="253" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Tags</text>
+  <rect x="450" y="269" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="457.5" y="281" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <text x="474" y="281" font-size="12" text-anchor="start" font-weight="normal" fill="#333">CS</text>
+  <rect x="640" y="269" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="664" y="281" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Exam</text>
+  <rect x="450" y="297" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="474" y="309" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Math</text>
+  <rect x="640" y="297" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="664" y="309" font-size="12" text-anchor="start" font-weight="normal" fill="#333">ML</text>
+  <rect x="450" y="325" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="457.5" y="337" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <text x="474" y="337" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Semester 1</text>
+  <rect x="640" y="325" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="664" y="337" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Semester 2</text>
+  <rect x="434" y="368" width="412" height="126" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="450" y="395" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Description</text>
+  <rect x="450" y="406" width="380" height="72" fill="#ffffff" stroke="#757575" />
+  <text x="462" y="426" font-size="12" text-anchor="start" font-weight="normal" fill="#555">Sorting, graphs, dynamic programming and complexity</text>
+  <text x="462" y="442" font-size="12" text-anchor="start" font-weight="normal" fill="#555">analysis. The exam is open book, so the plan is to</text>
+  <text x="462" y="458" font-size="12" text-anchor="start" font-weight="normal" fill="#555">finish every assignment sheet by the end of November</text>
+  <rect x="434" y="504" width="412" height="82" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="450" y="531" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Color</text>
+  <circle cx="464" cy="558" r="14" fill="#b5b5b5" stroke="#8c8c8c" />
+  <circle cx="464" cy="558" r="17" fill="none" stroke="#333" />
+  <circle cx="500" cy="558" r="14" fill="#c2c2c2" stroke="#8c8c8c" />
+  <circle cx="536" cy="558" r="14" fill="#cdcdcd" stroke="#8c8c8c" />
+  <circle cx="572" cy="558" r="14" fill="#b0b0b0" stroke="#8c8c8c" />
+  <circle cx="608" cy="558" r="14" fill="#bdbdbd" stroke="#8c8c8c" />
+  <circle cx="644" cy="558" r="14" fill="#c8c8c8" stroke="#8c8c8c" />
+  <circle cx="680" cy="558" r="14" fill="#ababab" stroke="#8c8c8c" />
+  <circle cx="716" cy="558" r="14" fill="#bababa" stroke="#8c8c8c" />
+  <circle cx="752" cy="558" r="14" fill="#c5c5c5" stroke="#8c8c8c" />
+  <circle cx="788" cy="558" r="14" fill="#a8a8a8" stroke="#8c8c8c" />
+  <rect x="450" y="605" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="474" y="617" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Hide from the menu</text>
+  <rect x="540" y="640" width="100" height="40" fill="#e8e8e8" stroke="#8c8c8c" />
+  <text x="590" y="665" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Cancel</text>
+  <rect x="652" y="640" width="100" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="702" y="665" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Save</text>
   <text x="252" y="716" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Opened by the edit button of a card, on top of the page, like the tag overlay. Adding a course does not use it: the input above the cards stays.</text>
   <text x="252" y="732" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Option panels like the column dialogs: title, tags (two checkbox rows per line), description (multi-line, at most 1000 characters), color (the ten accents, one chosen, default the first).</text>
+  <text x="252" y="748" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Under the panels, outside them: the checkbox "Hide from the menu", off for a new course. A hidden course only leaves the navbar. Cancel and Save follow below it.</text>
 </svg>

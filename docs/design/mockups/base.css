@@ -55,6 +55,8 @@ input{border:0;outline:0}
 .card-desc{margin-top:10px;overflow-wrap:anywhere}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .card-actions{z-index:1;display:flex;justify-content:flex-end;gap:6px;margin-top:auto;padding-top:12px}
+.card>.hidden-mark{position:absolute;top:9px;right:9px;display:grid;place-items:center;width:30px;height:30px;pointer-events:none}
+.hidden-mark+.card-title{padding-right:28px}
 .check{display:flex;align-items:center;gap:8px;height:24px;cursor:pointer}
 .check input{appearance:none;-webkit-appearance:none;display:grid;place-items:center;width:16px;height:16px;margin:0;flex:none}
 .check input:checked::after{content:"";width:10px;height:10px;background:var(--check,currentColor);clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0,43% 62%)}
@@ -148,12 +150,74 @@ input{border:0;outline:0}
 .opt-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .opt-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .opt-actions{display:flex;justify-content:center;gap:8px}
+.modal-course .opt-hide{margin-top:14px}
 .modal-course .opt-actions{margin-top:16px}
 .opt-tags{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}
 .swatches{display:flex;gap:8px}
 .color-option{position:relative;display:block;width:28px;height:28px}
 .color-option input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
 .color-option span{display:block;width:100%;height:100%;border-radius:50%;background:var(--course-color)}
+
+/* welcome dialog: a few rough shapes (the hint) beside each description */
+.modal-welcome .modal-head{align-items:flex-start}
+.modal-welcome .opt{display:flex;align-items:center;gap:14px}
+.hint{flex:none;display:grid;width:92px;height:68px;padding:8px;gap:4px}
+.hint-courses{grid-template:1fr 1fr/1fr 1fr}
+.hint-dash{grid-template-rows:1fr 1fr}
+.hint-dash b{display:grid;grid-template:5px 1fr/1fr 1fr;gap:4px}
+.hint-dash .bar{grid-column:1/-1;width:28px}
+.hint-cal{grid-template:repeat(3,1fr)/repeat(5,1fr);gap:3px}
+
+/* welcome dialog, detailed hints (wide screen only): the same shapes as the page they stand for */
+.fine{display:none}
+.fine u,.fine s{display:block}
+.fine i{position:relative;display:flex;flex-direction:column;overflow:hidden}
+.fine .t{height:5px}
+.fine .ln{height:4px}
+.fine .ln.short{width:70%}
+.fine-courses{flex-direction:column;gap:8px}
+.fine-courses .add{flex:none;display:flex;gap:6px;height:12px}
+.fine-courses .add u:first-child{flex:1}
+.fine-courses .add u:last-child{width:12px}
+.fine-courses .cards{flex:1;min-height:0;display:grid;grid-template:1fr 1fr/1fr 1fr;gap:8px}
+.fine-courses i{gap:5px;padding:9px}
+.fine-courses i::after{content:"";position:absolute;top:-14px;right:-14px;width:36px;height:36px}
+.fine-courses .t{width:55%}
+.fine-courses .tags{display:flex;gap:4px}
+.fine-courses .tags s{width:20px;height:7px}
+.fine-dash{grid-template-rows:1fr 1fr;gap:8px}
+.fine-dash .group{display:grid;grid-template:auto 1fr/1fr 1fr;gap:6px;min-height:0}
+.fine-dash .head{grid-column:1/-1;display:flex;align-items:center;gap:5px}
+.fine-dash .head s:first-child{width:6px;height:6px}
+.fine-dash .head s:last-child{width:44px;height:4px}
+.fine-dash i{gap:5px;padding:7px 8px}
+.fine-dash .t{width:50%}
+.fine-dash .row{display:flex;justify-content:space-between}
+.fine-dash .row s,.fine-dash .box s{height:3px}
+.fine-dash .row s:first-child{width:34%}
+.fine-dash .row s:last-child{width:14%}
+.fine-dash .box{flex:1;display:grid;align-content:center;gap:4px;padding:0 6px}
+.fine-dash .box s:last-child{width:60%}
+.fine-cal{flex-direction:column;gap:8px}
+.fine-cal .mhead{flex:none;display:flex;align-items:center;justify-content:space-between}
+.fine-cal .mhead u{width:12px;height:12px}
+.fine-cal .mhead .title{width:64px;height:5px}
+.fine-cal .days{flex:1;min-height:0;display:grid;grid-template:repeat(4,1fr)/repeat(7,1fr);gap:3px}
+.fine-cal i{gap:3px;padding:4px}
+.fine-cal s{width:7px;height:3px}
+.fine-cal u{height:4px}
+
+/* wide screen: three columns, title and text on top, the detailed hint under them */
+@media (min-width:1000px){
+  .modal-welcome{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;width:min(1200px,80vw);padding:32px}
+  .modal-welcome .modal-head{grid-column:1/-1;margin-bottom:8px}
+  .modal-welcome .opt,.modal-welcome .opt+.opt{flex-direction:column;align-items:stretch;gap:0;margin-top:0;padding:22px 24px 24px}
+  .welcome-item p{min-height:calc(1.45em*4)}
+  .hint{order:1;width:auto;height:auto;aspect-ratio:4/3;margin-top:20px;padding:14px;gap:8px}
+  .hint:not(.fine){display:none}
+  .fine-courses,.fine-cal{display:flex}
+  .fine-dash{display:grid}
+}
 
 /* narrow screen: the burger opens the navbar over the page, everything else is one column */
 .burger,.nav-logout{display:none}
@@ -191,4 +255,11 @@ input{border:0;outline:0}
   .opt-fields{grid-template-columns:1fr}
   .opt+.opt{margin-top:8px}
   .modal-course .opt-actions{margin-top:12px}
+  .modal-welcome .opt{gap:12px}
+  .hint{width:68px;height:52px;padding:6px;gap:3px}
+  .hint-dash b{grid-template-rows:4px 1fr;gap:3px}
+  .hint-dash .bar{width:20px}
+  .hint-cal{gap:2px}
+  .modal-welcome{display:flex;flex-direction:column;height:calc(100vh - var(--header-h) - 24px);max-height:none}
+  .modal-welcome .opt{flex:1}
 }

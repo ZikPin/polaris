@@ -23,7 +23,7 @@ Registration tests use new email addresses. Where a scenario below describes spe
 
 ## Pass criteria for the release
 - All **Must have** tests (AT-01 to AT-10) and all success-criteria tests (AT-V-*) pass.
-- All **Should have** tests (AT-11 to AT-13 and AT-15 to AT-19) pass, or the failure is recorded with a decision to defer it.
+- All **Should have** tests (AT-11 to AT-13 and AT-15 to AT-20) pass, or the failure is recorded with a decision to defer it.
 - **Could have** tests (AT-14) are not release blockers.
 
 ## Test cases
@@ -32,9 +32,9 @@ Registration tests use new email addresses. Where a scenario below describes spe
 
 | ID | Source | Scenario | Pass criterion |
 | --- | --- | --- | --- |
-| AT-01 | SR-M-09 | Register as user A, log out, then log in again. | After registering, the main page opens. After logout, opening any app page redirects to login. After login, the main page opens again. Wrong password is rejected with an error. |
+| AT-01 | SR-M-09 | Register as user A, log out, then log in again. | After registering, the main page opens with a welcome dialog. After logout, opening any app page redirects to login. After login, the main page opens again. Wrong password is rejected with an error. |
 | AT-02 | SR-M-09 | Alice (seed) has the course "Algorithms". Bob logs in and opens the URL of Alice's course. | Bob's course list contains only his own courses. Opening Alice's course sends him back to the course list (the API answers "not found") and shows no data from Alice. |
-| AT-03 | SR-M-01 | Add course "Algorithms". Open its edit dialog, type another title and cancel. Open the dialog again and save the title "Algorithms 1". Delete it. | The course appears in the list after adding. The dialog is titled "Edit the course" and shows the title, the description and the color (and the tags, if the user has any). Cancelling keeps the old title, saving shows the new one, and the course is gone after deleting (also after a reload). Before deleting, the app asks for confirmation, and cancelling keeps the course. A new course with the same title starts with empty lecture and assignment tables. |
+| AT-03 | SR-M-01 | Add course "Algorithms". Open its edit dialog, type another title and cancel. Open the dialog again and save the title "Algorithms 1". Delete it. | The course appears in the list after adding. The dialog is titled "Edit the course" and shows the title, the description, the color and the hide option (and the tags, if the user has any). Cancelling keeps the old title, saving shows the new one, and the course is gone after deleting (also after a reload). Before deleting, the app asks for confirmation, and cancelling keeps the course. A new course with the same title starts with empty lecture and assignment tables. |
 | AT-04 | SR-M-02 | In one course, add lecture "Intro" and assignment "Sheet 1". Rename both. Delete both. | Each row appears only in its own table. Rename and delete work in both tables, and the changes survive a reload. |
 | AT-05 | SR-M-03, SR-M-04 | Add the checkbox column "Watched" to the lectures table, with 2 lectures present. Then add a third lecture. | The column appears with the label "Watched". All three rows show it unchecked. The assignments table is unchanged. |
 | AT-06 | SR-M-03 | Delete the "Watched" column. | The column and its values disappear. Lecture titles remain. |
@@ -55,6 +55,7 @@ Registration tests use new email addresses. Where a scenario below describes spe
 | AT-17 | SR-S-05 | On a phone viewport open the courses page. Open the burger menu, open the courses list, go to the calendar, then open the menu again and log out. | The header only has the brand, the tags button and the burger button. The menu opens from the top and lists Courses (with the course list), Dashboard and Calendar, and Log out as its last entry. Choosing an entry opens the page and closes the menu. Log out ends the session. |
 | AT-18 | SR-S-05 | On a phone viewport (390 px and 360 px wide) open the courses page, a course, the dashboard and the calendar. Also open the courses page on a wide window. | The tag filter, the back button and the dashboard filters are directly under the title. Course cards, the two tables and the dashboard cards are one per row. The calendar grid is above the list of the day. The page never scrolls sideways. The wide window still shows the desktop layout. |
 | AT-19 | SR-S-06 | In a course add a lecture with a title of more than 100 characters and one short lecture. | The title column is wider than a custom column. The long title wraps onto several lines and is fully visible, its row is taller than the short one. |
+| AT-20 | SR-S-07 | Add the courses A and B. Open the edit dialog of A, tick the option to hide it and save. Look at the navigation (also the burger menu on a phone viewport), the courses page, the course page of A, the dashboard and the calendar. Reload, then untick the option. | A is missing in the navigation and B is still there. A is still on the courses page, its course page opens, and it is in the dashboard and the calendar. It stays hidden after the reload. After unticking, A is in the navigation again. |
 
 ### Could have
 
@@ -107,6 +108,8 @@ Done by a user who knows the app, with a stopwatch, as carol on a freshly seeded
 | SR-S-04 | AT-15, AT-16 |
 | SR-S-05 | AT-17, AT-18 |
 | SR-S-06 | AT-19 |
+| SR-S-07 | AT-20 |
+| SR-S-08 | AT-01 |
 | SR-C-01, SR-C-02 | AT-14 |
 | Vision success criteria | AT-V-01 to AT-V-05 |
 | Won't have | AT-N-01 |

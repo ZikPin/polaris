@@ -14,7 +14,7 @@ Design: `docs/design/` (`BRIEF.md`, wireframes, HTML mock-ups with `theme.css`).
 ## Rules
 - Docs first. If the code has to differ from the docs, change the docs in the same change.
 - A change of behavior updates every affected doc and test plan down the chain above, including traceability tables.
-- Work on a BACKLOG ticket. Set its status when you start and when you finish.
+- Work on a BACKLOG ticket. Set its status when you start and when you finish, and move its row to the matching block of `docs/BACKLOG.md` (in progress on top, done at the bottom).
 - When a ticket is finished (the user approved it), add one CHANGE_LOG line: date, ticket id and one sentence. Log nothing else.
 - IDs (SR-, REQ-, T-, ST-, AT-) are never renumbered or reused. New ones get the next number. A removed requirement is marked removed, and the tickets that depend on it become stale.
 - DOMAIN_MODEL and RELATIONAL_SCHEMA stay consistent: same fields, entities singular, tables plural.

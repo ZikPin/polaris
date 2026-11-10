@@ -20,8 +20,8 @@ Light, soft and calm. A study planner should feel quiet, not busy.
 | ---- | ---------- |
 | `mockups/base.css` | Structure only: layout, sizes of the frame, table and calendar grids. No colors. |
 | `mockups/theme.css` | **All tokens** (section 1 of the file) and the look of every component (sections 2 to 9). |
-| `mockups/*.html` | The static screens (section 10), and `mobile-*.html`, the same pages in a phone-sized frame. Open `mockups/index.html` for an overview. |
-| `wireframes/` | The structure of every screen. The layout comes from here. |
+| `mockups/<page>/*.html` | The static screens (section 10), one folder per page: `course`, `tables`, `auth`, `dashboard`, `calendar`. Every page is responsive: narrow the window, or use the device mode of the browser's developer tools, to see the phone layout. `mockups/index.html` lists them all. |
+| `wireframes/<page>/*.svg` | The structure of every screen, in the same folders. The layout comes from here, the phone versions are `mobile-*.svg`. |
 | `inspo/` | The mood: the original palette and three dashboards. |
 
 **Raw colors exist only in the token block of `theme.css`** (and of `frontend/src/styles.css`). Everything below it uses `var(--...)`. To change the look, change tokens.
@@ -206,6 +206,8 @@ Pill (`--radius-pill`), `--glass-3` on the card, 11.5px semibold, padding 3px 10
 
 The card is **filled with `--course-color`**, ink text, `--radius-card`, 168px high at least, padding 20px 18px 14px. A soft circle (`--glass-1`, 108px) hangs out of the top right corner, clipped by the card. Title 16px bold, tags under it, then the description (13.5px, `--color-ink-on-accent`, cut after 150 characters with an ellipsis), and the two icon buttons (edit, delete) at the bottom right. Clicking the card opens the course, the buttons do not. Four cards per row, 16px gap. Editing happens in the course dialog (6.9), the card has no edit state.
 
+A course hidden from the navigation keeps its color and tone and shows an eye-off glyph (`--color-ink-on-accent`, no background) centered in the corner circle, and the title leaves room for it. The glyph is no button, it carries the name "Hidden from the menu".
+
 ### 6.6 Dashboard cards
 
 Per course: a heading (a dot in the course color and the name, 18px bold), then two cards side by side, as tall as the taller one. Both are filled with the course color; the second (Assignments) is `--mix-card-secondary`. Inside: title 16px bold; stats as label and value on one line (label in `--color-ink-on-accent`, value semibold, right aligned); the "not done yet" list in a `--glass-2` box with a `--radius-lg`, small caps heading, 6px ink dots. Empty states are plain text in `--color-ink-on-accent`.
@@ -234,7 +236,8 @@ Per course: a heading (a dot in the course color and the name, 18px bold), then 
 A scrim (`--color-scrim`) over the whole page, a centered 460px panel: `--color-sheet`, `--radius-dialog`, padding 26px. Head: title (20px extrabold) and a close icon button. The page behind stays visible. A dialog higher than the window scrolls (at most the window height minus 32px).
 
 - **Tags dialog:** new tag input with swatch and a square add button, then rows (38px, `--radius-md`, `--mix-tag-row` tint of the tag color, swatch and name). Click a name to rename it in place; the delete circle (same as the table tools) appears on hover at the right of the row. The swatch is not clickable yet.
-- **Course dialog** (title "Edit the course", opened by the edit button of a card; adding a course stays the input above the cards): four option panels like the column dialogs, each with a label (12.5px bold, soft ink): the title (input), the tags (checkbox rows like the tags filter, two per line, boxes in `--color-sheet`), the description (multi-line input, three rows, can be resized) and the color (the ten accents as 28px circles with an 8px gap, the chosen one with a 2px ink outline 2px away from the circle). Cancel (field tone) and Save (primary) sit centered at the bottom.
+- **Course dialog** (title "Edit the course", opened by the edit button of a card; adding a course stays the input above the cards): four option panels like the column dialogs, each with a label (12.5px bold, soft ink): the title (input), the tags (checkbox rows like the tags filter, two per line, boxes in `--color-sheet`), the description (multi-line input, three rows, can be resized) and the color (the ten accents as 28px circles with an 8px gap, the chosen one with a 2px ink outline 2px away from the circle). Under the panels, outside them, the checkbox "Hide from the menu" (aligned with the panel contents, boxes in field tone). Cancel (field tone) and Save (primary) sit centered at the bottom.
+- **Welcome dialog** (title "Welcome to Polaris", subtitle "Your guiding star through the semester" in soft ink): shown once after registering, the cross is its only button. One option panel per navigation entry, in menu order: the name (18px bold on wide screens, 16px below), a text of at most three sentences (soft ink) and a hint, a rough drawing of the page in its own colors on a `--color-sheet` area. From **1000px** wide the dialog is 80% of the window wide (at most 1200px) and as high as its content, padding 32px, the three panels stand side by side with the name and text on top (at least four lines high, so the hints line up) and a 4:3 hint below. These hints are detailed: the add row and course cards with title, tags and the corner circle; per course a heading and the two cards with stats and the "not done yet" box; a month with entries, today in ink and one selected day. Below 1000px the panels are rows with a 92x68px hint of plain shapes (2x2 cards, two pairs of cards, a month of 5x3 days) beside the text, in the normal 460px dialog.
 - **Column dialogs:** option panels (`--color-panel`, `--radius-xl`, padding 16px 18px) with the title and its control on one line, inputs below in `--color-sheet` (42px), the action button centered at the bottom.
 
 ### 6.10 Login and register
@@ -251,8 +254,8 @@ Below **768px** the layout changes, above it nothing does. Same tokens, no new c
 - **Page head.** Stacked: the title, then directly under it the tags filter, the back button or the dashboard filters.
 - **One column.** Course cards, the lecture table above the assignment table, and the two dashboard cards are one per row. A table wider than the sheet scrolls inside its own area, the page never scrolls sideways.
 - **Calendar.** Month grid on top, the day panel below it at full width. Rows are 56px high. A day shows its entries as 7px dots in the course color, up to eight (the text does not fit); the day panel lists them with names.
-- **Dialogs.** 100% wide minus a 16px margin, padding 20px, option panels 14px 16px. A dialog starts 12px below the header, which the scrim covers like the rest of the page, and is at most as high as the space under it (window height minus the header and 28px); the content scrolls if it is higher. In the course dialog the ten colors wrap into **two rows of five**, spread over the full width, and the number inputs of the column dialogs stand one under the other. There is no wireframe or mock-up of its own for this: it is the desktop dialog with these changes, `courses-edit-dialog.html` shows it in a window narrower than 768px.
-- **Preview.** `mobile-*.html` show the responsive pages in a 360px wide frame (the narrowest supported screen). `mobile-navbar.html` opens the navbar through the address `#nav`, which the burger uses too.
+- **Dialogs.** 100% wide minus a 16px margin, padding 20px, option panels 14px 16px. A dialog starts 12px below the header, which the scrim covers like the rest of the page, and is at most as high as the space under it (window height minus the header and 28px); the content scrolls if it is higher. In the course dialog the ten colors wrap into **two rows of five**, spread over the full width, and the number inputs of the column dialogs stand one under the other. There is no wireframe of its own for this: it is the desktop dialog with these changes, the phone frame of `courses-edit-dialog.html` shows it. The welcome dialog is the exception: it is as high as the space under the header, with the same 12px gap below it, the three panels share the height and the hints are the small ones (68x52px), see `mobile-welcome-dialog.svg`.
+- **Preview.** The mock-ups are the responsive pages themselves, check them at 360px wide (the narrowest supported screen). The address `course/courses.html#nav` opens the navbar, the burger uses it too.
 
 ## 7. States
 
@@ -266,7 +269,7 @@ Hover, active and selected states are described with their component. The rest:
 
 ## 8. Icons
 
-Inline SVG, 24px grid, shown at 18px (11px inside the hover tools, 14px in the `+` bars), stroke only, `currentColor`, round caps and joins. Used: courses (book), dashboard (four squares), calendar, tag, log out, pencil, cross, check, plus, chevrons (down, left, right), arrow left, burger, alert (circle with a mark). The brand mark is a filled four-point star.
+Inline SVG, 24px grid, shown at 18px (11px inside the hover tools, 14px in the `+` bars), stroke only, `currentColor`, round caps and joins. Used: courses (book), dashboard (four squares), calendar, tag, log out, pencil, cross, check, plus, chevrons (down, left, right), arrow left, burger, alert (circle with a mark), eye-off. The brand mark is a filled four-point star.
 
 ## 9. Rules for new components
 
@@ -279,37 +282,30 @@ Inline SVG, 24px grid, shown at 18px (11px inside the hover tools, 14px in the `
 
 ## 10. Screens
 
-| Screen | Wireframe | Mock-up |
-| ------ | --------- | ------- |
-| Courses | `courses.svg` | `courses.html` |
-| Tags dialog | `courses-tags-overlay.svg` | `courses-tags-overlay.html` |
-| Course dialog (edit) | `courses-edit-dialog.svg` | `courses-edit-dialog.html` |
-| Dashboard | `dashboard.svg` | `dashboard.html` |
-| Log in (error banner) | `auth-login.svg` | `auth-login.html` |
-| Register (field error) | `auth-register.svg` | `auth-register.html` |
-| Course, tables side by side | `course-tables-side-by-side.svg` | `course-tables-side-by-side.html` |
-| Course, tables stacked | `course-tables-stacked.svg` | `course-tables-stacked.html` |
-| Course, empty tables | `course-tables-empty.svg` | `course-tables-empty.html` |
-| Course, table interactions | `course-table-interactions.svg` | `course-table-interactions.html` |
-| Add column dialog | `course-add-column-dialog.svg` | `course-add-column-dialog.html` |
-| Edit column dialog | `course-edit-column-dialog.svg` | `course-edit-column-dialog.html` |
-| Calendar, today selected | `calendar-today-selected.svg` | `calendar-today-selected.html` |
-| Calendar, other day selected | `calendar-other-day-selected.svg` | `calendar-other-day-selected.html` |
+One folder per page, the same names in `wireframes/` and `mockups/`. The phone wireframes (below 768px, section 6.11) are the `mobile-*.svg`; a mock-up shows the phone layout when the window is narrow.
+
+| Folder | Screen | Wireframe | Phone wireframe | Mock-up |
+| ------ | ------ | --------- | --------------- | ------- |
+| `course/` | Courses | `courses.svg` | `mobile-courses.svg` | `courses.html` |
+| | Navbar open | | `mobile-navbar.svg` | `courses.html#nav` |
+| | Tags dialog | `courses-tags-overlay.svg` | | `courses-tags-overlay.html` |
+| | Course dialog (edit) | `courses-edit-dialog.svg` | | `courses-edit-dialog.html` |
+| | Welcome dialog | `welcome-dialog.svg` | `mobile-welcome-dialog.svg` | `welcome-dialog.html` |
+| `tables/` | Course, tables side by side | `course-tables-side-by-side.svg` | | `course-tables-side-by-side.html` |
+| | Course, tables stacked | `course-tables-stacked.svg` | `mobile-course.svg` | `course-tables-stacked.html` |
+| | Course, empty tables | `course-tables-empty.svg` | | `course-tables-empty.html` |
+| | Course, table interactions | `course-table-interactions.svg` | | `course-table-interactions.html` |
+| | Add column dialog | `course-add-column-dialog.svg` | | `course-add-column-dialog.html` |
+| | Edit column dialog | `course-edit-column-dialog.svg` | | `course-edit-column-dialog.html` |
+| `auth/` | Log in (error banner) | `auth-login.svg` | `mobile-login.svg` | `auth-login.html` |
+| | Register (field error) | `auth-register.svg` | | `auth-register.html` |
+| `dashboard/` | Dashboard | `dashboard.svg` | `mobile-dashboard.svg` | `dashboard.html` |
+| `calendar/` | Calendar, today selected | `calendar-today-selected.svg` | `mobile-calendar.svg` | `calendar-today-selected.html` |
+| | Calendar, other day selected | `calendar-other-day-selected.svg` | | `calendar-other-day-selected.html` |
 
 The interactions mock-up shows the hover states forced on at once with the class `hot`; in the app they come from `:hover`. The text under it is a note for the mock-up only.
 
 The tables side by side now only fit with few columns, because the title column is wider (224px): Lectures with two number or checkbox columns next to Assignments with one. Everything else wraps under each other.
-
-Mobile (below 768px, section 6.11):
-
-| Screen | Wireframe | Mock-up |
-| ------ | --------- | ------- |
-| Courses | `mobile-courses.svg` | `mobile-courses.html` |
-| Course (tables one under the other) | `mobile-course.svg` | `mobile-course.html` |
-| Dashboard | `mobile-dashboard.svg` | `mobile-dashboard.html` |
-| Calendar | `mobile-calendar.svg` | `mobile-calendar.html` |
-| Log in | `mobile-login.svg` | `mobile-login.html` |
-| Navbar open | `mobile-navbar.svg` | `mobile-navbar.html` |
 
 ## 11. Open points
 

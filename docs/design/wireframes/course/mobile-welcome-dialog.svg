@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 860" width="360" height="860" font-family="sans-serif">
+  <rect x="0" y="0" width="360" height="860" fill="#fafafa" stroke="none" />
+  <rect x="0" y="0" width="360" height="56" fill="#d9d9d9" stroke="#8c8c8c" />
+  <text x="16" y="35" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="268" y="12" width="32" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <path d="M277.5 22.5h7l6 6-7 7-6-6z" fill="none" stroke="#333" stroke-width="1.4" />
+  <circle cx="281.5" cy="26.5" r="1.2" fill="#333" />
+  <rect x="308" y="12" width="36" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <line x1="317" y1="22" x2="335" y2="22" stroke="#333" stroke-width="2" />
+  <line x1="317" y1="28" x2="335" y2="28" stroke="#333" stroke-width="2" />
+  <line x1="317" y1="34" x2="335" y2="34" stroke="#333" stroke-width="2" />
+  <text x="16" y="108" font-size="26" text-anchor="start" font-weight="bold" fill="#333">Courses</text>
+  <rect x="16" y="124" width="120" height="32" fill="#e8e8e8" stroke="#757575" />
+  <text x="76" y="145" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Tags  ▾</text>
+  <rect x="16" y="172" width="280" height="40" fill="#ffffff" stroke="#757575" />
+  <text x="30" y="197" font-size="14" text-anchor="start" font-weight="normal" fill="#999">Title of a new course</text>
+  <rect x="304" y="172" width="40" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="324" y="197" font-size="20" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <rect x="0" y="0" width="360" height="760" fill="#000000" stroke="none" opacity="0.35" />
+  <rect x="16" y="68" width="328" height="680" fill="#ffffff" stroke="#757575" />
+  <text x="36" y="109" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Welcome to Polaris</text>
+  <text x="36" y="130" font-size="12" text-anchor="start" font-weight="normal" fill="#555">Your guiding star through the semester</text>
+  <rect x="298" y="91" width="24" height="24" fill="#e0e0e0" stroke="#8c8c8c" />
+  <text x="310" y="108" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <rect x="36" y="153" width="288" height="186.3" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="52" y="220.2" width="68" height="52" fill="#ffffff" stroke="#8c8c8c" />
+  <rect x="58" y="226.2" width="26.5" height="18.5" fill="#b5b5b5" stroke="none" />
+  <rect x="87.5" y="226.2" width="26.5" height="18.5" fill="#b5b5b5" stroke="none" />
+  <rect x="58" y="247.7" width="26.5" height="18.5" fill="#b5b5b5" stroke="none" />
+  <rect x="87.5" y="247.7" width="26.5" height="18.5" fill="#b5b5b5" stroke="none" />
+  <text x="132" y="202.7" font-size="16" text-anchor="start" font-weight="bold" fill="#333">Courses</text>
+  <text x="132" y="224.7" font-size="12" text-anchor="start" font-weight="normal" fill="#555">Add a card for every course</text>
+  <text x="132" y="243.7" font-size="12" text-anchor="start" font-weight="normal" fill="#555">and give it a color and tags.</text>
+  <text x="132" y="262.7" font-size="12" text-anchor="start" font-weight="normal" fill="#555">Open one to track its</text>
+  <text x="132" y="281.7" font-size="12" text-anchor="start" font-weight="normal" fill="#555">lectures and assignments</text>
+  <text x="132" y="300.7" font-size="12" text-anchor="start" font-weight="normal" fill="#555">in simple tables.</text>
+  <rect x="36" y="347.3" width="288" height="186.3" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="52" y="414.5" width="68" height="52" fill="#ffffff" stroke="#8c8c8c" />
+  <rect x="58" y="420.5" width="20" height="4" fill="#b5b5b5" stroke="none" />
+  <rect x="58" y="427.5" width="26.5" height="11.5" fill="#b5b5b5" stroke="none" />
+  <rect x="87.5" y="427.5" width="26.5" height="11.5" fill="#d4d4d4" stroke="none" />
+  <rect x="58" y="442" width="20" height="4" fill="#b5b5b5" stroke="none" />
+  <rect x="58" y="449" width="26.5" height="11.5" fill="#b5b5b5" stroke="none" />
+  <rect x="87.5" y="449" width="26.5" height="11.5" fill="#d4d4d4" stroke="none" />
+  <text x="132" y="397" font-size="16" text-anchor="start" font-weight="bold" fill="#333">Dashboard</text>
+  <text x="132" y="419" font-size="12" text-anchor="start" font-weight="normal" fill="#555">See how far you are in every</text>
+  <text x="132" y="438" font-size="12" text-anchor="start" font-weight="normal" fill="#555">course, with the numbers and</text>
+  <text x="132" y="457" font-size="12" text-anchor="start" font-weight="normal" fill="#555">everything still open. Filter</text>
+  <text x="132" y="476" font-size="12" text-anchor="start" font-weight="normal" fill="#555">by tag to focus on what</text>
+  <text x="132" y="495" font-size="12" text-anchor="start" font-weight="normal" fill="#555">matters now.</text>
+  <rect x="36" y="541.7" width="288" height="186.3" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="52" y="608.8" width="68" height="52" fill="#ffffff" stroke="#8c8c8c" />
+  <rect x="58" y="614.8" width="9.6" height="12" fill="#e8e8e8" stroke="none" />
+  <rect x="69.6" y="614.8" width="9.6" height="12" fill="#b5b5b5" stroke="none" />
+  <rect x="81.2" y="614.8" width="9.6" height="12" fill="#e8e8e8" stroke="none" />
+  <rect x="92.8" y="614.8" width="9.6" height="12" fill="#e8e8e8" stroke="none" />
+  <rect x="104.4" y="614.8" width="9.6" height="12" fill="#b5b5b5" stroke="none" />
+  <rect x="58" y="628.8" width="9.6" height="12" fill="#e8e8e8" stroke="none" />
+  <rect x="69.6" y="628.8" width="9.6" height="12" fill="#e8e8e8" stroke="none" />
+  <rect x="81.2" y="628.8" width="9.6" height="12" fill="#555" stroke="none" />
+  <rect x="92.8" y="628.8" width="9.6" height="12" fill="#e8e8e8" stroke="none" />
+  <rect x="104.4" y="628.8" width="9.6" height="12" fill="#b5b5b5" stroke="none" />
+  <rect x="58" y="642.8" width="9.6" height="12" fill="#b5b5b5" stroke="none" />
+  <rect x="69.6" y="642.8" width="9.6" height="12" fill="#e8e8e8" stroke="none" />
+  <rect x="81.2" y="642.8" width="9.6" height="12" fill="#e8e8e8" stroke="none" />
+  <rect x="92.8" y="642.8" width="9.6" height="12" fill="#b5b5b5" stroke="none" />
+  <rect x="104.4" y="642.8" width="9.6" height="12" fill="#e8e8e8" stroke="none" />
+  <text x="132" y="600.8" font-size="16" text-anchor="start" font-weight="bold" fill="#333">Calendar</text>
+  <text x="132" y="622.8" font-size="12" text-anchor="start" font-weight="normal" fill="#555">Plan your study days. Add</text>
+  <text x="132" y="641.8" font-size="12" text-anchor="start" font-weight="normal" fill="#555">lectures and assignments</text>
+  <text x="132" y="660.8" font-size="12" text-anchor="start" font-weight="normal" fill="#555">to a day and see everything</text>
+  <text x="132" y="679.8" font-size="12" text-anchor="start" font-weight="normal" fill="#555">in your course colors.</text>
+  <text x="16" y="786" font-size="11" text-anchor="start" font-weight="normal" fill="#777">The desktop dialog in a phone window: the hint is</text>
+  <text x="16" y="802" font-size="11" text-anchor="start" font-weight="normal" fill="#777">small and the texts are narrow. The dialog is as high</text>
+  <text x="16" y="818" font-size="11" text-anchor="start" font-weight="normal" fill="#777">as the space under the header, with 12px above and</text>
+  <text x="16" y="834" font-size="11" text-anchor="start" font-weight="normal" fill="#777">below it. The three panels share the height.</text>
+</svg>

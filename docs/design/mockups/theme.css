@@ -129,6 +129,7 @@ h1{font-size:var(--fs-h1);font-weight:var(--fw-extrabold);letter-spacing:var(--t
 .deco{top:-30px;right:-30px;width:108px;height:108px;border-radius:50%;background:var(--glass-1)}
 .card-title{font-size:var(--fs-lg);font-weight:var(--fw-bold);letter-spacing:-.01em}
 .card-desc{font-size:var(--fs-md);color:var(--color-ink-on-accent)}
+.hidden-mark{color:var(--color-ink-on-accent)}
 
 .course-block{margin-top:30px}
 .course-block h2 .dot{width:10px;height:10px;border-radius:50%;background:var(--course-color)}
@@ -185,12 +186,47 @@ h1{font-size:var(--fs-h1);font-weight:var(--fw-extrabold);letter-spacing:var(--t
 .modal{padding:26px;border-radius:var(--radius-dialog);background:var(--color-sheet)}
 .modal-head h2{font-size:var(--fs-dialog);font-weight:var(--fw-extrabold);letter-spacing:var(--tracking-heading)}
 .tag-list li{border-radius:var(--radius-md);background:color-mix(in srgb,var(--tag-color) var(--mix-tag-row),var(--color-sheet));font-weight:var(--fw-semibold)}
-.modal-col h3{font-size:var(--fs-lg);font-weight:var(--fw-bold)}
+.modal-col h3,.welcome-item h3{font-size:var(--fs-lg);font-weight:var(--fw-bold)}
+.welcome-item p{margin-top:2px;font-size:var(--fs-md);font-weight:var(--fw-medium);color:var(--color-ink-soft)}
+.hint{border-radius:var(--radius-md);background:var(--color-sheet)}
+.hint i{border-radius:var(--radius-xs);background:var(--course-color)}
+.hint-dash .bar{border-radius:var(--radius-pill)}
+.hint-dash .light,.fine-dash .light{background:color-mix(in srgb,var(--course-color) var(--mix-card-secondary),var(--color-sheet))}
+.hint-cal i{border-radius:calc(var(--radius-xs)/2);background:var(--color-field)}
+.hint-cal .on{background:var(--course-color)}
+.hint-cal .today{background:var(--color-ink)}
+@media (min-width:1000px){
+  .welcome-item h3{font-size:var(--fs-h2)}
+  .welcome-item p{font-size:var(--fs-base)}
+  .hint{border-radius:var(--radius-lg)}
+}
+.fine i{border-radius:var(--radius-sm)}
+.fine .t,.fine .ln,.fine-courses .tags s,.fine-dash .head s:last-child,.fine-dash .row s,.fine-dash .box s,.fine-cal .mhead .title,.fine-cal s{border-radius:var(--radius-pill)}
+.fine .t{background:var(--color-ink-on-accent)}
+.fine .ln{background:var(--glass-3)}
+.fine-courses .add u,.fine-dash .box,.fine-cal .mhead u,.fine-cal i,.fine-cal u{border-radius:var(--radius-xs)}
+.fine-courses .add u:first-child{background:var(--color-field)}
+.fine-courses .add u:last-child{background:var(--color-ink)}
+.fine-courses i::after{border-radius:50%;background:var(--glass-1)}
+.fine-courses .tags s{background:var(--glass-3)}
+.fine-dash .head s:first-child{border-radius:50%;background:var(--course-color)}
+.fine-dash .head s:last-child{background:var(--color-ink-soft)}
+.fine-dash .row s,.fine-dash .box s{background:var(--color-ink-on-accent);opacity:.5}
+.fine-dash .box{background:var(--glass-2)}
+.fine-cal .mhead u{background:var(--tint-2)}
+.fine-cal .mhead .title{background:var(--color-ink)}
+.fine-cal i{background:var(--color-cell)}
+.fine-cal s{background:var(--color-ink-soft)}
+.fine-cal u{background:var(--course-color)}
+.fine-cal .today{background:var(--color-ink)}
+.fine-cal .today s{background:var(--color-on-ink)}
+.fine-cal .sel{background:var(--color-field);outline:2px solid var(--color-ink);outline-offset:-2px}
 .opt{padding:16px 18px;border-radius:var(--radius-xl);background:var(--color-panel)}
 .opt .btn.select{background:var(--color-sheet)}
 .opt .btn.select:hover{background:var(--color-hover)}
 .opt .input{height:42px;padding:0 14px;background:var(--color-sheet);font-size:var(--fs-md)}
 .opt textarea.input{height:auto;padding:12px 14px;line-height:1.45;resize:vertical}
+.opt-hide{padding:0 18px}
 .opt-label{font-size:var(--fs-sm);font-weight:var(--fw-bold);color:var(--color-ink-soft)}
 .opt-tags .check input{background:var(--color-sheet)}
 .opt-tags .check input:checked{background:var(--color-ink)}
@@ -214,5 +250,6 @@ h1{font-size:var(--fs-h1);font-weight:var(--fw-extrabold);letter-spacing:var(--t
   .ev li{width:7px;height:7px;padding:0;border-radius:50%;font-size:0}
   .modal{padding:20px}
   .opt{padding:14px 16px}
+  .opt-hide{padding:0 16px}
   .auth-card{padding:28px 20px 24px}
 }

@@ -1,5 +1,47 @@
 # Backlog
-Statuses: `todo`, `in progress`, `done`, `stale` (the request or requirement it depends on changed or was removed), `won't do` (dropped on purpose). Tickets are listed in the suggested order of implementation, the ids never change. Every ticket is a slice that includes API, UI and tests.
+Statuses: `todo`, `in progress`, `done`, `stale` (the request or requirement it depends on changed or was removed), `won't do` (dropped on purpose). Every ticket is a slice that includes API, UI and tests. The ids never change.
+
+The tickets are split into three blocks. A ticket moves to the next block when its status changes, the rows are never re-sorted:
+- **In progress**: in the order they are implemented.
+- **To do**: in the order they are implemented, `stale` tickets stay here until decided. New tickets are inserted at the place they should be built.
+- **Done**: in the order they were finished, a ticket that is done or `won't do` is added at the bottom.
+
+## In progress
+
+| Ticket | Request             | Status | Description |
+| ------ | ------------------- | ------ | ----------- |
+| T-028  | SR-S-07             | in progress | Hide a course from the navigation with an option in the course edit dialog, it stays on every other page (REQ-F-53, 67, 68, ST-33 to 35, AT-20) |
+| T-029  | SR-S-08             | in progress | Welcome dialog over the courses page after registration, logging in skips it, the content is decided during implementation (REQ-F-69, AT-01 updated) |
+
+## To do
+
+| Ticket | Request             | Status | Description |
+| ------ | ------------------- | ------ | ----------- |
+| T-030  | TBD                 | todo   | Password reset: request a reset link by email, single-use token with expiry, form to set the new password (in dev the link is written to the log) |
+| T-031  | TBD                 | todo   | Password reset: send the reset email through an SMTP provider in prod, configured by environment variables |
+| T-034  | TBD                 | todo   | Custom table types: create, rename and delete your own table types, like tags; Lectures and Assignments stay as the undeletable defaults |
+| T-035  | TBD                 | todo   | Assign custom table types to a course, with rows, checkbox columns and number columns working like in the default tables |
+| T-036  | TBD                 | todo   | Dashboard of a course includes the statistics and unchecked lists of its custom tables |
+| T-037  | TBD                 | todo   | Calendar: assign rows of custom tables to days |
+| T-038  | TBD                 | todo   | Media log: page and navigation entry, media cards with title and type (movie, book, anime, game): add, rename and delete |
+| T-039  | TBD                 | todo   | Media log: edit dialog with description and color, shown on the media card and page |
+| T-040  | TBD                 | todo   | Media log: own tags (create, rename, delete, assign, filter), separate from course tags |
+| T-041  | TBD                 | todo   | Media log: custom tables on media items, reusing the custom table types |
+| T-042  | TBD                 | todo   | Media log: decide whether it needs a dashboard and what it shows. Output: a decision, and a follow-up ticket if yes |
+| T-033  | TBD                 | todo   | Analysis: rethink the table concept (rows, columns, cells) for efficiency before more table features build on it. Output: findings, a decision and follow-up tickets |
+| T-043  | TBD                 | todo   | Analysis: generalize the frontend, find duplicated dialogs, cards, lists and forms that can become generic components. Output: findings and follow-up tickets |
+| T-044  | TBD                 | todo   | Analysis: simplify the backend, find duplicated routes, services and schemas between courses, tags, tables and media. Output: findings and follow-up tickets |
+| T-045  | TBD                 | todo   | Subtasks: add, rename and delete subrows under a row of a table, expandable in the UI, no statistics |
+| T-046  | TBD                 | todo   | Subtasks: subrows have their own values for the checkbox and number columns of the parent table, independent of the parent row |
+| T-047  | TBD                 | todo   | Custom logs: update VISION and STAKEHOLDER_REQ for the wider audience (courses and media become two kinds of log) |
+| T-048  | TBD                 | todo   | Custom logs: create, rename and delete your own log categories, with their own entry in the navigation |
+| T-049  | TBD                 | todo   | Custom logs: items (cards) inside a custom log, reusing the generic card, edit dialog and page |
+| T-050  | TBD                 | todo   | Custom logs: own tags per log category |
+| T-051  | TBD                 | todo   | Custom logs: custom tables on the items of a custom log |
+| T-052  | TBD                 | todo   | Custom logs: fold courses and the media log into default log categories, without losing data (migration) |
+| T-032  | TBD                 | todo   | Support button in the UI linking to an external donation page (PayPal, Buy Me a Coffee), URL taken from the config |
+
+## Done
 
 | Ticket | Request             | Status | Description |
 | ------ | ------------------- | ------ | ----------- |

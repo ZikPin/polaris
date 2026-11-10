@@ -18,6 +18,8 @@ Should have:
 - SR-S-04: I want to give each course a short description and a color from a fixed palette, so that I recognise my courses at a glance and the color follows the course everywhere it is shown
 - SR-S-05: I want to use the app in the browser of my phone, with a layout made for narrow screens (a web page, not an app)
 - SR-S-06: I want long lecture and assignment titles to be fully readable in the tables
+- SR-S-07: I want to hide a course from the navigation menu, so that the menu stays short while the course stays on the courses page
+- SR-S-08: I want to see a short welcome dialog right after I register, so that I know what I can do in Polaris and where to start
 
 Could have:
 Calendar feature is thought to plan the studying, prepare for exams and have overview of when is what done, not to enforce specific time constraints and deadlines

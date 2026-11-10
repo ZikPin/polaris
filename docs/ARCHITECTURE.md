@@ -118,12 +118,12 @@ GET    api/course/{course_id}     -> a course
 PATCH  api/course/{course_id}     -> edit the course
 DELETE api/course/{course_id}     -> delete the course with everything in it
 
-Payload (POST, PATCH):  {"title": "Algorithms", "tag_ids": [2, 5], "description": "Spring term", "color": "sage"}
-                        tag_ids replaces all tags of the course. description and color are optional (empty, 'clay')
-Response:               {"id": 7, "title": "Algorithms", "description": "Spring term", "color": "sage",
+Payload (POST, PATCH):  {"title": "Algorithms", "tag_ids": [2, 5], "description": "Spring term", "color": "sage", "hidden": false}
+                        tag_ids replaces all tags of the course. description, color and hidden are optional (empty, 'clay', false)
+Response:               {"id": 7, "title": "Algorithms", "description": "Spring term", "color": "sage", "hidden": false,
                          "tags": [{"id": 2, "value": "Semester 1"}]}
 ```
-The edit dialog sends all four fields in one PATCH (REQ-F-54). An unknown tag id (or one of another user) and a color outside the palette are a 400. The card cuts the description after 150 characters in the UI, the API always returns it whole.
+The edit dialog sends all five fields in one PATCH (REQ-F-54). `hidden` only changes the navigation in the UI (REQ-F-68), the course list still returns hidden courses. An unknown tag id (or one of another user) and a color outside the palette are a 400. The card cuts the description after 150 characters in the UI, the API always returns it whole.
 
 ### Tag
 ```
