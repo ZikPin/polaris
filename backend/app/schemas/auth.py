@@ -13,6 +13,15 @@ class LoginRequestSchema(Schema):
     password = fields.String(required=True)
 
 
+class ForgotPasswordRequestSchema(Schema):
+    email = EmailStr(required=True)
+
+
+class ResetPasswordRequestSchema(Schema):
+    token = fields.String(required=True)
+    password = fields.String(required=True, validate=validate.Length(min=8))
+
+
 class UserResponseSchema(Schema):
     id = fields.Int()
     email = fields.String()

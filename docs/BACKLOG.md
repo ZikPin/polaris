@@ -10,15 +10,13 @@ The tickets are split into three blocks. A ticket moves to the next block when i
 
 | Ticket | Request             | Status | Description |
 | ------ | ------------------- | ------ | ----------- |
-| T-028  | SR-S-07             | in progress | Hide a course from the navigation with an option in the course edit dialog, it stays on every other page (REQ-F-53, 67, 68, ST-33 to 35, AT-20) |
-| T-029  | SR-S-08             | in progress | Welcome dialog over the courses page after registration, logging in skips it, the content is decided during implementation (REQ-F-69, AT-01 updated) |
+| T-030  | SR-S-09             | in progress | Password reset: forgot-password and reset-password endpoints with a signed one-hour token, the two pages and the link on the login page, the reset logs in (REQ-F-70 to 74) |
+| T-031  | SR-S-09             | in progress | Password reset: send the email in prod through Resend (key, sender and app address from the environment), with an HTML message in the style of the page (REQ-F-72) |
 
 ## To do
 
 | Ticket | Request             | Status | Description |
 | ------ | ------------------- | ------ | ----------- |
-| T-030  | TBD                 | todo   | Password reset: request a reset link by email, single-use token with expiry, form to set the new password (in dev the link is written to the log) |
-| T-031  | TBD                 | todo   | Password reset: send the reset email through an SMTP provider in prod, configured by environment variables |
 | T-034  | TBD                 | todo   | Custom table types: create, rename and delete your own table types, like tags; Lectures and Assignments stay as the undeletable defaults |
 | T-035  | TBD                 | todo   | Assign custom table types to a course, with rows, checkbox columns and number columns working like in the default tables |
 | T-036  | TBD                 | todo   | Dashboard of a course includes the statistics and unchecked lists of its custom tables |
@@ -72,3 +70,5 @@ The tickets are split into three blocks. A ticket moves to the next block when i
 | T-025  | SR-S-04             | done   | Apply the course color to the card, navigation dot, dashboard, calendar and table headers (REQ-F-59, AT-16) |
 | T-026  | SR-S-06             | done   | Wider title column in the tables, long titles wrap (REQ-F-65, 66, AT-19) |
 | T-027  | SR-S-05             | done   | Mobile layout below 768 px: header with burger, navigation, stacked head, cards, tables and calendar, plus the phone-viewport acceptance tests (REQ-F-60 to 64, REQ-NF-06, AT-17, 18) |
+| T-028  | SR-S-07             | done   | Hide a course from the navigation with an option in the course edit dialog, it stays on every other page (REQ-F-53, 67, 68, ST-33 to 35, AT-20) |
+| T-029  | SR-S-08             | done   | Welcome dialog over the courses page after registration, logging in skips it, the content is decided during implementation (REQ-F-69, AT-01 updated) |

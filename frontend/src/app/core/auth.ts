@@ -52,6 +52,17 @@ export class Auth {
     return registered;
   }
 
+  forgotPassword(email: string): Observable<void> {
+    return this.http.post<void>('/api/auth/forgot-password', { email });
+  }
+
+  /** A valid reset also logs the user in. */
+  resetPassword(token: string, password: string): Observable<User> {
+    return this.http
+      .post<User>('/api/auth/reset-password', { token, password })
+      .pipe(tap((user) => this.user.set(user)));
+  }
+
   logout(): Observable<void> {
     return this.http.post<void>('/api/auth/logout', {}).pipe(tap(() => this.user.set(null)));
   }

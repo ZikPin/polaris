@@ -27,7 +27,14 @@ LoginRequestSchema                   POST api/auth/login
   email      Email                   required, stripped and lower-cased
   password   Str                     required, no length rule
 
-UserResponseSchema                   register, login, me
+ForgotPasswordRequestSchema          POST api/auth/forgot-password
+  email      Email                   required, stripped and lower-cased
+
+ResetPasswordRequestSchema           POST api/auth/reset-password
+  token      Str                     required
+  password   Str                     required, at least 8 characters
+
+UserResponseSchema                   register, login, me, reset-password
   id         Int
   email      Str
 ```

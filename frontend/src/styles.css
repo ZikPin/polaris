@@ -697,8 +697,10 @@ app-multi-select, app-select { position: relative; }
   margin-top: 22px;
   border-radius: var(--radius-lg);
 }
+.auth-card > .muted { text-align: center; }
 .alt { margin-top: 18px; font-size: var(--fs-md); text-align: center; color: var(--color-ink-soft); }
 .alt a { font-weight: var(--fw-bold); color: var(--color-ink); text-decoration: underline; }
+.alt + .alt { margin-top: 8px; }
 
 /* ========== 10. NARROW SCREEN (below 768px): the burger opens the navbar over the page, everything else is one column ========== */
 @media (max-width: 767px) {

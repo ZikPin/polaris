@@ -107,6 +107,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 ## Checks outside the system tests
 - **UI only:** REQ-F-52 (delete confirmation) and REQ-NF-02 (browsers) are verified in the acceptance tests, and REQ-NF-03 also in AT-V-06. REQ-F-53 and 54 (the dialog, its fields work in ST-33), REQ-F-57 to 66, 68, 69 and REQ-NF-06 (the layouts, the navigation and the welcome dialog) are verified in AT-01, AT-03 and AT-15 to AT-20.
 - **Deployment check:** REQ-NF-05 (HTTPS) is checked once against the production deployment, by requesting the site over HTTP and over HTTPS.
+- **Password reset:** REQ-F-70 to 74 have no automated test, they are tried by hand: the logged (or emailed) link sets a new password and logs in, a second use of the link, a changed password and an unknown address behave as required.
 - **Constraints:** REQ-C-01 to 03 are checked by inspection of the repository and deployment, not by tests.
 
 ## Traceability

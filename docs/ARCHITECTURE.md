@@ -15,10 +15,10 @@ There are 3 environments:
 - One layout for all devices: the stylesheet switches to the mobile layout with a media query below 768 px (REQ-F-60 to 64), there is no separate mobile app or route. The wide layout is the default
 - The color of a course comes only with the course (`color`). The dashboard and the calendar carry the `course_id` and the UI takes the color from the course list it already loads
 - In development the Angular dev server proxies `/api` to Flask on port 5000 (`proxy.conf.json`), so the browser sees a single origin
-- Routes: `/login`, `/register`, and the guarded `/courses`, `/courses/:id`, `/dashboard` and `/calendar`. Tags have no route, they are managed in a dialog opened from the header. The route guard asks `GET api/auth/me` and redirects to `/login` if the user is not logged in or the check fails
+- Routes: `/login`, `/register`, `/forgot-password`, `/reset-password` (opened from the email link, the token is in `?token=`), and the guarded `/courses`, `/courses/:id`, `/dashboard` and `/calendar`. Tags have no route, they are managed in a dialog opened from the header. The route guard asks `GET api/auth/me` and redirects to `/login` if the user is not logged in or the check fails
 
 ## Backend Architecture
-The backend is created by an app factory `create_app(config, overrides)` with a development, a test and a production configuration. The configuration is chosen by name or by the `APP_ENV` variable (default `development`). Production reads `SECRET_KEY` and the database settings `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT` and `DB_NAME` (a Postgres over SSL) from the environment and does not start without them. The extensions (SQLAlchemy, migrations, login) are initialized inside the factory. `requirements.txt` and the virtual environment are at the repository root, the sources are in `backend/`.
+The backend is created by an app factory `create_app(config, overrides)` with a development, a test and a production configuration. The configuration is chosen by name or by the `APP_ENV` variable (default `development`). Production reads `SECRET_KEY`, `RESEND_API_KEY`, `APP_URL` (the public address of the app) and the database settings `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT` and `DB_NAME` (a Postgres over SSL) from the environment and does not start without them. The extensions (SQLAlchemy, migrations, login) are initialized inside the factory. `requirements.txt` and the virtual environment are at the repository root, the sources are in `backend/`.
 
 ```
 backend/app/
@@ -57,6 +57,7 @@ Calendar dates are shared between users (the date table has no owner). Setting a
 ### Authentication and security
 - Authentication uses Flask-Login with Flask's signed cookie session. Protected endpoints are guarded with `login_required`
 - Passwords are hashed with Werkzeug
+- A password reset link carries a signed token (see Password reset)
 - The session cookie is `HttpOnly` and `SameSite=Lax`, and also `Secure` in production
 - The browser always talks to a single origin (the dev proxy in development, one origin in production), so no CORS configuration is needed
 - Request bodies are JSON only, and no CSRF tokens are used
@@ -69,7 +70,7 @@ One Docker image (`Dockerfile`): a Node stage builds the Angular app, a Python s
 ### Blueprints
 | Blueprint | Responsibility                                                              |
 | --------- | --------------------------------------------------------------------------- |
-| auth      | registration, login, logout, current user                                   |
+| auth      | registration, login, logout, current user, password reset                   |
 | course    | course level: overview and edits of a course, including its tags            |
 | tag       | the tags of the user                                                        |
 | table     | the tables of a course: columns, rows and cells                             |
@@ -107,7 +108,14 @@ POST api/auth/register   {email, password}  -> 201 {id, email}, the user is logg
 POST api/auth/login      {email, password}  -> 200 {id, email}, 401 with a generic message
 POST api/auth/logout                        -> 204
 GET  api/auth/me                            -> 200 {id, email}, 401 if there is no session
+POST api/auth/forgot-password {email}       -> 204, the same whether or not the account exists
+POST api/auth/reset-password {token, password} -> 200 {id, email}, the user is logged in, 400 for an invalid token
 ```
+
+#### Password reset
+`forgot-password` emails a link `{APP_URL}/reset-password?token=…` to an existing account, and answers 204 for every address (REQ-F-71). The token is signed with the `SECRET_KEY` (itsdangerous, salt `password-reset`) and holds the user id and the last characters of the current password hash. It is valid for one hour. A password change alters the hash, so a used link cannot be used again, and no token is stored (REQ-F-72). `reset-password` checks the token, saves the new password and logs the user in (REQ-F-73). An invalid, expired or used token is a 400 "This link is invalid or has expired." (REQ-F-74).
+
+The email is sent by `services/mail.py` through the Resend API (`RESEND_API_KEY`), from `MAIL_FROM` (default `Polaris <onboarding@resend.dev>`, which Resend only delivers to the owner of the account until a domain is verified). The message is rendered from `backend/app/templates/reset_password_email.html` and has a plain text part. Without a key (development) the text with the link is written to the log instead. A failed send is logged and does not change the answer.
 
 ### Course
 Tables are not created or deleted on their own: a course always has both, and they are empty after the course is created.

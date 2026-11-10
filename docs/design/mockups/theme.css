@@ -241,6 +241,8 @@ h1{font-size:var(--fs-h1);font-weight:var(--fw-extrabold);letter-spacing:var(--t
 .auth-card .btn-primary{height:46px;margin-top:22px;border-radius:var(--radius-lg)}
 .alt{margin-top:18px;font-size:var(--fs-md);text-align:center;color:var(--color-ink-soft)}
 .alt a{font-weight:var(--fw-bold);color:var(--color-ink);text-decoration:underline}
+.alt+.alt{margin-top:8px}
+.auth-card>.muted{text-align:center}
 
 /* ========== 10. NARROW SCREEN (below 768px) ========== */
 @media (max-width:767px){

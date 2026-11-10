@@ -8,16 +8,21 @@ class Base:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = "Lax"
+    MAIL_FROM = os.environ.get("MAIL_FROM", "Polaris <onboarding@resend.dev>")
 
 
 class Development(Base):
     SECRET_KEY = "dev"
+    RESEND_API_KEY = os.environ.get("RESEND_API_KEY")  # without it the emails are only logged
+    APP_URL = "http://localhost:4200"
     SQLALCHEMY_DATABASE_URI = "sqlite:///polaris.db"  # relative to the instance folder
 
 
 class Test(Base):
     TESTING = True
     SECRET_KEY = "test"
+    RESEND_API_KEY = None
+    APP_URL = "http://localhost:4200"
     SQLALCHEMY_DATABASE_URI = "sqlite://"  # in memory, the tests pass their own file
 
 
@@ -45,6 +50,8 @@ class Production(Base):
     SESSION_COOKIE_SECURE = True
     FRONTEND_DIR = str(Path(__file__).resolve().parents[2] / "dist" / "polaris" / "browser")  # the built Angular app
     SECRET_KEY = os.environ.get("SECRET_KEY")
+    RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
+    APP_URL = os.environ.get("APP_URL")
     SQLALCHEMY_DATABASE_URI = _production_database()
 
 

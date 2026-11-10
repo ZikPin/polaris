@@ -20,6 +20,7 @@ Should have:
 - SR-S-06: I want long lecture and assignment titles to be fully readable in the tables
 - SR-S-07: I want to hide a course from the navigation menu, so that the menu stays short while the course stays on the courses page
 - SR-S-08: I want to see a short welcome dialog right after I register, so that I know what I can do in Polaris and where to start
+- SR-S-09: I want to reset a forgotten password through a link in an email, so that I can get back into my account
 
 Could have:
 Calendar feature is thought to plan the studying, prepare for exams and have overview of when is what done, not to enforce specific time constraints and deadlines

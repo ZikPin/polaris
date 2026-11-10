@@ -1,6 +1,8 @@
 # Change Log
 One line per finished ticket, newest first: date · ticket · one sentence.
 
+- 2026-11-10 · T-029 · Welcome dialog over the courses page after registering, shown once and not after logging in.
+- 2026-11-10 · T-028 · Courses can be hidden from the navigation with an option in the course dialog, hidden cards show a mark and the course stays on every other page.
 - 2026-11-02 · T-022 · Design: wireframes and mock-ups for the course dialog, the course card with description, the course page with tags and description, and the mobile screens, with the brief updated.
 - 2026-11-02 · T-027 · Mobile layout below 768 px: header with a burger menu, navigation with Log out at the bottom, stacked page heads, one column of cards and tables, and the calendar grid above the day list.
 - 2026-11-02 · T-026 · Course tables: wider title column and long titles wrap instead of being cut off.

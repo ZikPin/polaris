@@ -1,5 +1,6 @@
 # Render blueprint: one web service built from the Dockerfile. The database is Supabase, so the five DB_* values
-# are entered in the Render dashboard (from Supabase: Connect, Session pooler). SECRET_KEY is generated.
+# are entered in the Render dashboard (from Supabase: Connect, Session pooler), and so are RESEND_API_KEY and APP_URL
+# (the address of the app, for the links in emails). SECRET_KEY is generated.
 services:
   - type: web
     name: polaris
@@ -8,6 +9,10 @@ services:
     envVars:
       - key: SECRET_KEY
         generateValue: true
+      - key: RESEND_API_KEY
+        sync: false
+      - key: APP_URL
+        sync: false
       - key: DB_USER
         sync: false
       - key: DB_PASSWORD

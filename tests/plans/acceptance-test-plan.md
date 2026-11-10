@@ -110,6 +110,7 @@ Done by a user who knows the app, with a stopwatch, as carol on a freshly seeded
 | SR-S-06 | AT-19 |
 | SR-S-07 | AT-20 |
 | SR-S-08 | AT-01 |
+| SR-S-09 | checked by hand (see the system test plan) |
 | SR-C-01, SR-C-02 | AT-14 |
 | Vision success criteria | AT-V-01 to AT-V-05 |
 | Won't have | AT-N-01 |

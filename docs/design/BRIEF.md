@@ -242,7 +242,9 @@ A scrim (`--color-scrim`) over the whole page, a centered 460px panel: `--color-
 
 ### 6.10 Login and register
 
-`--color-page` page under the plain header. A card 420px wide at most, `--color-sheet`, `--radius-dialog`, padding 36px 32px 28px, with a corner circle in a 20% tint of `--accent-default`. Centered title (24px). Login shows the error banner under the title; register shows the field error under the password input. Submit button full width. Below it the link to the other screen (bold, underlined).
+`--color-page` page under the plain header. A card 420px wide at most, `--color-sheet`, `--radius-dialog`, padding 36px 32px 28px, with a corner circle in a 20% tint of `--accent-default`. Centered title (24px). Login shows the error banner under the title; register shows the field error under the password input. Submit button full width. Below it the links (bold, underlined, 8px apart): on login "Forgot password?" and then the link to register, on register the link to login.
+
+The **forgot password** and **new password** pages use the same card and have no mock-ups of their own. Forgot password: the title "Forgot password?", one sentence of soft ink, the email field, the button "Send link" and the link "Back to login"; after sending, the sentence is replaced by the confirmation and the form disappears. New password (opened from the email): the title "New password", the password field, the button "Set password", the error banner when the link is invalid and the link "Request a new link".
 
 ### 6.11 Mobile layout
 
@@ -256,6 +258,10 @@ Below **768px** the layout changes, above it nothing does. Same tokens, no new c
 - **Calendar.** Month grid on top, the day panel below it at full width. Rows are 56px high. A day shows its entries as 7px dots in the course color, up to eight (the text does not fit); the day panel lists them with names.
 - **Dialogs.** 100% wide minus a 16px margin, padding 20px, option panels 14px 16px. A dialog starts 12px below the header, which the scrim covers like the rest of the page, and is at most as high as the space under it (window height minus the header and 28px); the content scrolls if it is higher. In the course dialog the ten colors wrap into **two rows of five**, spread over the full width, and the number inputs of the column dialogs stand one under the other. There is no wireframe of its own for this: it is the desktop dialog with these changes, the phone frame of `courses-edit-dialog.html` shows it. The welcome dialog is the exception: it is as high as the space under the header, with the same 12px gap below it, the three panels share the height and the hints are the small ones (68x52px), see `mobile-welcome-dialog.svg`.
 - **Preview.** The mock-ups are the responsive pages themselves, check them at 360px wide (the narrowest supported screen). The address `course/courses.html#nav` opens the navbar, the burger uses it too.
+
+### 6.12 Reset email
+
+`backend/app/templates/reset_password_email.html`: the page tone around a `--color-sheet` card (460px at most, `--radius-dialog`, padding 36px 32px) with the brand name, a title (24px extrabold), one sentence of soft ink and a button-shaped link (`--color-ink` background, `--color-on-ink` text, `--radius-lg`). Mail clients ignore CSS variables, so this file is the one place outside the token block that holds the values of the tokens as literals, as inline styles.
 
 ## 7. States
 

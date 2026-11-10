@@ -23,6 +23,7 @@
 | SR-S-06                 | REQ-F-65, 66                         |
 | SR-S-07                 | REQ-F-67, 68                         |
 | SR-S-08                 | REQ-F-69                             |
+| SR-S-09                 | REQ-F-70 to 74                       |
 | SR-C-01                 | REQ-F-41, 42, 45, 46                 |
 | SR-C-02                 | REQ-F-43, 44, 45, 46                 |
 
@@ -121,6 +122,12 @@ Below the width of 768 px (the breakpoint), the layout changes as follows
 - REQ-F-68: A hidden course is not listed in the navigation (wide and mobile layout). It stays on the courses page, the course page, the dashboard and the calendar
 ### Welcome dialog
 - REQ-F-69: After a successful registration the courses page opens with a welcome dialog that the user can close. Logging in does not show it
+### Password reset
+- REQ-F-70: The login page has a link "Forgot password?" to a page where the user enters their email address
+- REQ-F-71: After sending the address, the page shows the same message whether or not an account exists for it
+- REQ-F-72: If an account exists, the system emails it a link to set a new password. The link works for one hour and stops working once the password has been changed
+- REQ-F-73: The link opens a page where the user enters a new password of at least 8 characters. A valid reset saves the password hashed and logs the user in
+- REQ-F-74: An invalid, expired or already used link is rejected with an error message and the password stays as it was
 
 ## Non-Functional Requirements
 - REQ-NF-01: Every change is saved on the server without a save action and is still there after a reload
