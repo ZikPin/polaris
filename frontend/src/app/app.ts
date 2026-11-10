@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Auth } from './core/auth';
 import { CourseColor } from './core/course-color';
@@ -21,6 +21,7 @@ export class App {
   protected readonly tagsOpen = signal(false);
   protected readonly coursesOpen = signal(true);
   protected readonly menuOpen = signal(false);
+  protected readonly menuCourses = computed(() => this.courseApi.all().filter((course) => !course.hidden));
 
   constructor() {
     // The navigation and the filters list the courses and tags of whoever is logged in.

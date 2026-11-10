@@ -34,3 +34,26 @@ Feature: Course description and color
     And the calendar entries of "Databases" have the color "blue"
     When I open the course "Algorithms"
     Then the table headers have the color "sage"
+
+  @AT-20 @SR-S-07
+  Scenario: Hide a course from the menu
+    Given I am logged in as "carol"
+    And I have the course "Algorithms" in the color "sage" with a lecture and an assignment
+    And I have the course "Databases" in the color "blue" with a lecture and an assignment
+    And all the lectures and assignments are planned for today
+    When I open the courses page
+    And I hide the course "Algorithms" from the menu
+    Then the menu does not list the course "Algorithms"
+    And the menu lists the course "Databases"
+    And the card of "Algorithms" is marked as hidden
+    When I reload the page
+    Then the menu does not list the course "Algorithms"
+    When I click the card of "Algorithms"
+    Then I see the course page of "Algorithms"
+    When I open the dashboard
+    Then the dashboard shows the courses "Algorithms, Databases"
+    When I open the calendar
+    Then the calendar shows an entry of "Algorithms"
+    When I open the courses page
+    And I show the course "Algorithms" in the menu again
+    Then the menu lists the course "Algorithms"

@@ -28,7 +28,7 @@
             </button>
           </div>
           <ul class="nav-sub">
-            @for (course of courseApi.all(); track course.id) {
+            @for (course of menuCourses(); track course.id) {
               <li [appCourseColor]="course.color">
                 <a [routerLink]="['/courses', course.id]" routerLinkActive="active" [attr.title]="course.title"><i class="dot"></i><span>{{ course.title }}</span></a>
               </li>

@@ -14,6 +14,7 @@ class CourseRequestSchema(Schema):
     tag_ids = fields.List(fields.Int(), validate=unique)
     description = fields.String(validate=validate.Length(max=1000))
     color = fields.String(validate=validate.OneOf(COLORS))
+    hidden = fields.Boolean()
 
 
 class CourseResponseSchema(Schema):
@@ -21,4 +22,5 @@ class CourseResponseSchema(Schema):
     title = fields.String()
     description = fields.String()
     color = fields.String()
+    hidden = fields.Boolean()
     tags = fields.Nested(TagResponseSchema, many=True)

@@ -1,4 +1,4 @@
-from sqlalchemy import func
+from sqlalchemy import false, func
 
 from ..extensions import db
 from .tag import Tag, course_tags
@@ -19,6 +19,7 @@ class Course(db.Model):
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False, default="", server_default="")
     color = db.Column(db.String, nullable=False, default="clay", server_default="clay")
+    hidden = db.Column(db.Boolean, nullable=False, default=False, server_default=false())
     user_id = db.Column(db.ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
 
     tags = db.relationship(

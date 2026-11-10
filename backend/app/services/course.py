@@ -22,7 +22,7 @@ def get_course(user_id, course_id):
 
 
 def _apply(course, data):
-    for field in ("title", "description", "color"):
+    for field in ("title", "description", "color", "hidden"):
         if field in data:
             setattr(course, field, data[field])
     if "tag_ids" in data:

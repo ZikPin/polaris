@@ -12,6 +12,7 @@ export type IconName =
   | 'courses'
   | 'dashboard'
   | 'edit'
+  | 'eye-off'
   | 'logout'
   | 'menu'
   | 'plus'
@@ -58,6 +59,9 @@ export type IconName =
         }
         @case ('edit') {
           <path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4z" /><path d="M13.5 6.5l4 4" />
+        }
+        @case ('eye-off') {
+          <path d="M10.7 5.1A10.7 10.7 0 0 1 21.9 11.7a1 1 0 0 1 0 .7 10.7 10.7 0 0 1-1.4 2.5M14.1 14.2a3 3 0 0 1-4.2-4.2M17.5 17.5A10.7 10.7 0 0 1 2.1 12.3a1 1 0 0 1 0-.7 10.7 10.7 0 0 1 4.4-5.1M2 2l20 20" />
         }
         @case ('logout') {
           <path d="M10 4H5v16h5M15 8l4 4-4 4M19 12H9" />

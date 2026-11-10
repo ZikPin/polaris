@@ -23,6 +23,9 @@
   @for (course of courses(); track course.id) {
     <article class="card course" [appCourseColor]="course.color">
       <i class="deco"></i>
+      @if (course.hidden) {
+        <span class="hidden-mark" role="img" aria-label="Hidden from the menu" title="Hidden from the menu"><app-icon name="eye-off" /></span>
+      }
       <h3 class="card-title"><a [routerLink]="['/courses', course.id]">{{ course.title }}</a></h3>
       @if (course.tags.length) {
         <ul class="tags">
@@ -47,6 +50,10 @@
     <p class="muted">No courses.</p>
   }
 </div>
+
+@if (welcome()) {
+  <app-welcome-dialog (closed)="welcome.set(false)" />
+}
 
 @if (editing(); as course) {
   <app-edit-course-dialog [course]="course" [error]="error()" (closed)="editing.set(null)" (saved)="save(course, $event)" />

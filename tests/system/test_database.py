@@ -82,6 +82,7 @@ VIOLATIONS = {
     "course with a color outside the palette": "INSERT INTO courses (title, color, user_id) VALUES ('X', 'red', :user)",
     "course without description": "INSERT INTO courses (title, description, user_id) VALUES ('X', NULL, :user)",
     "course without color": "INSERT INTO courses (title, color, user_id) VALUES ('X', NULL, :user)",
+    "course without hidden": "INSERT INTO courses (title, hidden, user_id) VALUES ('X', NULL, :user)",
     "row without title":
         "INSERT INTO course_rows (table_type, title, course_id) VALUES ('lecture', NULL, :course)",
 }
@@ -111,9 +112,9 @@ def test_optional_values_and_defaults(ids):
     assert tuple(run("SELECT min, max, preferred_statistic FROM custom_range_columns", ids).one()) == (None, None, "avg")
 
 
-def test_course_description_and_color_default(ids):
+def test_course_description_color_and_hidden_default(ids):
     """ST-34"""
-    assert tuple(run("SELECT description, color FROM courses", ids).one()) == ("", "clay")
+    assert tuple(run("SELECT description, color, hidden FROM courses", ids).one()) == ("", "clay", False)
 
 
 def test_migration_keeps_existing_courses(app):
@@ -126,7 +127,7 @@ def test_migration_keeps_existing_courses(app):
 
     upgrade(directory=str(MIGRATIONS))
 
-    assert tuple(run("SELECT title, description, color FROM courses").one()) == ("Algorithms", "", "clay")
+    assert tuple(run("SELECT title, description, color, hidden FROM courses").one()) == ("Algorithms", "", "clay", False)
     assert run("SELECT COUNT(*) FROM course_rows").scalar_one() == 1
 
 

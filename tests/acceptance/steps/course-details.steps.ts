@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { Given, Then, When } from '../fixtures';
-import { accent, courseCard, openEditDialog } from '../locators';
+import { accent, courseCard, exactly, openEditDialog } from '../locators';
 
 const DESCRIPTION = 'abcdefghij'.repeat(20);
 
@@ -80,4 +80,38 @@ Then('the calendar entries of {string} have the color {string}', async ({ page }
 
 Then('the table headers have the color {string}', async ({ page }, color: string) => {
   await expect(page.locator('thead th.t-head').first()).toHaveCSS('background-color', await accent(page, color));
+});
+
+When('I hide the course {string} from the menu', async ({ page }, title: string) => {
+  const dialog = await openEditDialog(page, title);
+  await dialog.getByLabel('Hide from the menu').check();
+  await dialog.getByRole('button', { name: 'Save' }).click();
+  await expect(dialog).toHaveCount(0);
+});
+
+When('I show the course {string} in the menu again', async ({ page }, title: string) => {
+  const dialog = await openEditDialog(page, title);
+  await dialog.getByLabel('Hide from the menu').uncheck();
+  await dialog.getByRole('button', { name: 'Save' }).click();
+  await expect(dialog).toHaveCount(0);
+});
+
+Then('the menu lists the course {string}', async ({ page }, title: string) => {
+  await expect(page.locator('.nav-sub li').filter({ hasText: exactly(title) })).toHaveCount(1);
+});
+
+Then('the menu does not list the course {string}', async ({ page }, title: string) => {
+  await expect(page.locator('.nav-sub li').filter({ hasText: exactly(title) })).toHaveCount(0);
+});
+
+Then('the card of {string} is marked as hidden', async ({ page }, title: string) => {
+  await expect(courseCard(page, title).getByRole('img', { name: 'Hidden from the menu' })).toBeVisible();
+});
+
+Then('I see the course page of {string}', async ({ page }, title: string) => {
+  await expect(page.getByRole('heading', { level: 1, name: title, exact: true })).toBeVisible();
+});
+
+Then('the calendar shows an entry of {string}', async ({ page }, title: string) => {
+  await expect(page.locator('.entries li', { hasText: title }).first()).toBeVisible();
 });

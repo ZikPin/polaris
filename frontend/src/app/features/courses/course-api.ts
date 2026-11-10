@@ -9,6 +9,7 @@ export interface Course {
   title: string;
   description: string;
   color: string;
+  hidden: boolean;
   tags: Tag[];
 }
 
@@ -16,6 +17,7 @@ export interface CourseChanges {
   title?: string;
   description?: string;
   color?: string;
+  hidden?: boolean;
   tag_ids?: number[];
 }
 

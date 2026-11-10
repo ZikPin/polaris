@@ -53,6 +53,10 @@ import { Course, CourseChanges } from './course-api';
             }
           </div>
         </div>
+        <label class="check opt-hide">
+          <input type="checkbox" [checked]="hidden()" (change)="hidden.set(!hidden())" />
+          Hide from the menu
+        </label>
         <div class="opt-actions">
           <button class="btn" type="button" (click)="closed.emit()">Cancel</button>
           <button class="btn btn-primary" type="submit">Save</button>
@@ -72,9 +76,10 @@ export class EditCourseDialog {
   protected readonly toggle = toggleId;
   protected readonly tagIds = linkedSignal(() => this.course().tags.map((tag) => tag.id));
   protected readonly color = linkedSignal(() => this.course().color);
+  protected readonly hidden = linkedSignal(() => this.course().hidden);
 
   protected save(event: Event, title: string, description: string) {
     event.preventDefault();
-    this.saved.emit({ title, description, tag_ids: this.tagIds(), color: this.color() });
+    this.saved.emit({ title, description, tag_ids: this.tagIds(), color: this.color(), hidden: this.hidden() });
   }
 }
