@@ -13,6 +13,7 @@ export class Auth {
 
   /** The logged-in user, null if there is none. */
   readonly user = signal<User | null>(null);
+  private justRegistered = false;
 
   /** Asks the API for the logged-in user. No session (401) gives null, other errors are thrown. */
   me(): Observable<User | null> {
@@ -36,9 +37,19 @@ export class Auth {
 
   /** Registering also logs the user in. */
   register(email: string, password: string): Observable<User> {
-    return this.http
-      .post<User>('/api/auth/register', { email, password })
-      .pipe(tap((user) => this.user.set(user)));
+    return this.http.post<User>('/api/auth/register', { email, password }).pipe(
+      tap((user) => {
+        this.user.set(user);
+        this.justRegistered = true;
+      }),
+    );
+  }
+
+  /** True once after registering, for the welcome dialog. Logging in later does not set it. */
+  takeJustRegistered(): boolean {
+    const registered = this.justRegistered;
+    this.justRegistered = false;
+    return registered;
   }
 
   logout(): Observable<void> {

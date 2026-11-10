@@ -21,6 +21,20 @@ When('I log out', async ({ page }) => {
   await page.getByRole('button', { name: 'Log out' }).click();
 });
 
+Then('I see the welcome dialog', async ({ page }) => {
+  await expect(page.getByRole('dialog', { name: 'Welcome to Polaris' })).toBeVisible();
+});
+
+When('I close the welcome dialog', async ({ page }) => {
+  const dialog = page.getByRole('dialog', { name: 'Welcome to Polaris' });
+  await dialog.getByRole('button', { name: 'Close' }).click();
+  await expect(dialog).toHaveCount(0);
+});
+
+Then('I see no welcome dialog', async ({ page }) => {
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+});
+
 Then('I am on the login page', async ({ page }) => {
   await expect(page).toHaveURL(/\/login$/);
   await expect(page.getByRole('heading', { name: 'Log in' })).toBeVisible();

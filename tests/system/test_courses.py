@@ -76,13 +76,40 @@ def test_course_edit_is_saved_at_once(user_client, course):
     url = f"/api/course/{course['id']}"
     tag = user_client.post("/api/tag", json={"value": "ML"}).get_json()
 
-    edit = {"title": "Algorithms 1", "tag_ids": [tag["id"]], "description": "Spring term", "color": "teal"}
+    edit = {"title": "Algorithms 1", "tag_ids": [tag["id"]], "description": "Spring term", "color": "teal", "hidden": True}
     saved = user_client.patch(url, json=edit).get_json()
-    assert saved == {"id": course["id"], "title": "Algorithms 1", "description": "Spring term", "color": "teal", "tags": [tag]}
+    assert saved == {
+        "id": course["id"], "title": "Algorithms 1", "description": "Spring term", "color": "teal", "hidden": True,
+        "tags": [tag],
+    }
 
     rejected = user_client.patch(url, json={**edit, "title": "Other", "color": "rose", "tag_ids": [999]})
     assert rejected.status_code == 400
     assert user_client.get(url).get_json() == saved
+
+
+def test_hidden_course(user_client, course, add_row):
+    """ST-35"""
+    url = f"/api/course/{course['id']}"
+    assert course["hidden"] is False
+
+    user_client.patch(url, json={"hidden": True})
+    user_client.patch(url, json={"title": "Algorithms 1"})
+    assert user_client.get(url).get_json()["hidden"] is True
+
+    rejected = user_client.patch(url, json={"hidden": "abc"})
+    assert rejected.status_code == 400
+    assert list(rejected.get_json()["fields"]) == ["hidden"]
+    assert user_client.get(url).get_json()["hidden"] is True
+
+    row = add_row(course["id"], "lecture", "Chapter 1")
+    assert user_client.put("/api/calendar/2026-11-03", json={"row_ids": [row["id"]]}).status_code == 200
+    assert [c["id"] for c in user_client.get("/api/course").get_json()] == [course["id"]]
+    assert [c["course_id"] for c in user_client.get("/api/dashboard/lecture/not_done").get_json()] == [course["id"]]
+    assert [r["id"] for r in user_client.get("/api/calendar?month=2026-11").get_json()[0]["rows"]] == [row["id"]]
+
+    user_client.patch(url, json={"hidden": False})
+    assert user_client.get(url).get_json()["hidden"] is False
 
 
 def test_data_is_still_there_after_logging_in_again(app, user_client, course):

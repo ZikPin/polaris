@@ -16,7 +16,12 @@ import { Icon } from './icon';
         (click)="$event.stopPropagation()"
       >
         <header class="modal-head">
-          <h2>{{ heading() }}</h2>
+          <div>
+            <h2>{{ heading() }}</h2>
+            @if (subtitle()) {
+              <p class="muted">{{ subtitle() }}</p>
+            }
+          </div>
           <button class="icon-btn" type="button" aria-label="Close" (click)="closed.emit()">
             <app-icon name="close" />
           </button>
@@ -28,5 +33,6 @@ import { Icon } from './icon';
 })
 export class Dialog {
   readonly heading = input.required<string>();
+  readonly subtitle = input('');
   readonly closed = output<void>();
 }

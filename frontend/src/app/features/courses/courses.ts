@@ -3,6 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { EMPTY, Observable, Subject, catchError, switchMap } from 'rxjs';
 import { errorMessage } from '../../core/api-error';
+import { Auth } from '../../core/auth';
 import { CourseColor } from '../../core/course-color';
 import { Icon } from '../../core/icon';
 import { toggleId } from '../../core/ids';
@@ -10,10 +11,11 @@ import { MultiSelect } from '../../core/multi-select';
 import { TagApi } from '../tags/tag-api';
 import { Course, CourseApi, CourseChanges } from './course-api';
 import { EditCourseDialog } from './edit-course-dialog';
+import { WelcomeDialog } from './welcome-dialog';
 
 @Component({
   selector: 'app-courses',
-  imports: [RouterLink, CourseColor, Icon, MultiSelect, EditCourseDialog],
+  imports: [RouterLink, CourseColor, Icon, MultiSelect, EditCourseDialog, WelcomeDialog],
   templateUrl: './courses.html',
 })
 export class Courses {
@@ -28,6 +30,7 @@ export class Courses {
   protected readonly filter = signal<number[]>([]);
   protected readonly editing = signal<Course | null>(null);
   protected readonly error = signal('');
+  protected readonly welcome = signal(inject(Auth).takeJustRegistered());
 
   /** Every reload goes through this stream, `switchMap` drops the answers of outdated requests. */
   private readonly load$ = new Subject<void>();
