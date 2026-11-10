@@ -4,7 +4,7 @@ import pytest
 
 from backend.app import create_app
 
-PUBLIC = {"auth.register", "auth.login", "static"}
+PUBLIC = {"auth.register", "auth.login", "auth.forgot_password", "auth.reset_password", "static"}
 
 
 def concrete(rule):
