@@ -8,7 +8,7 @@ Validates [VISION.md](../../docs/VISION.md) and [STAKEHOLDER_REQ.md](../../docs/
 - **Style (BDD):** the scenarios below are written as Given/When/Then. Acceptance tests are implemented as Gherkin `.feature` files in `tests/acceptance/features/`, one scenario per test case and tagged with its id (for example `@AT-07 @SR-M-05`), plus step definitions. They run on Playwright through playwright-bdd, which compiles the feature files into Playwright tests, so Playwright fixtures can be used inside steps. Other test levels stay plain tests.
 - **Browser:** the automated suite runs in Chromium only. Other Chromium-based browsers (for example Edge) are expected to behave the same (REQ-NF-02). The mobile tests (AT-17, AT-18) run in Chromium with a phone viewport of 390 × 844 px, AT-18 also at 360 px wide (REQ-NF-06).
 - **Fixtures:** Playwright fixtures (setup/teardown units requested by tests) provide the database restore and logging in as a seeded user.
-- **Terms:** a lecture or assignment is "done" when every checkbox column in its row is checked. It is "not done" when at least one checkbox column is unchecked.
+- **Terms:** a lecture or assignment is "done" when every checkbox column in its row is checked. It is "not done" when at least one checkbox column is unchecked. A course that a scenario adds has no tables, so a scenario that uses its lecture or assignment tables first ticks Lectures and Assignments in the add card or the dialog.
 
 ## Seed data
 The seed is created by the `flask seed` command (`backend/app/seed.py`), which also serves as demo data for development. All seed users have the password `polaris-demo`. A user that already exists is skipped, so a second run changes nothing. The pristine database used for the restore is built from it: `tests/acceptance/server.py` applies the migrations and the seed to a new file every time the suite starts.
@@ -19,11 +19,11 @@ The seed is created by the `flask seed` command (`backend/app/seed.py`), which a
 | bob   | Tag Lab and the courses Biology and Chemistry | Isolation test AT-02 |
 | carol | Registered, no courses | Tests that create, rename or delete data, and the timed tests |
 
-Registration tests use new email addresses. Where a scenario below describes specific data (for example "L1 to L4 with L1 to L3 checked"), either alice's seed contains exactly that (AT-09 and AT-13 do: Algorithms and Linear Algebra), or the test creates it first as carol.
+Every seed user has the table types Lectures and Assignments, and the seeded courses have both. Registration tests use new email addresses. Where a scenario below describes specific data (for example "L1 to L4 with L1 to L3 checked"), either alice's seed contains exactly that (AT-09 and AT-13 do: Algorithms and Linear Algebra), or the test creates it first as carol.
 
 ## Pass criteria for the release
 - All **Must have** tests (AT-01 to AT-10) and all success-criteria tests (AT-V-*) pass.
-- All **Should have** tests (AT-11 to AT-13 and AT-15 to AT-20) pass, or the failure is recorded with a decision to defer it.
+- All **Should have** tests (AT-11 to AT-13 and AT-15 to AT-23) pass, or the failure is recorded with a decision to defer it.
 - **Could have** tests (AT-14) are not release blockers.
 
 ## Test cases
@@ -34,8 +34,8 @@ Registration tests use new email addresses. Where a scenario below describes spe
 | --- | --- | --- | --- |
 | AT-01 | SR-M-09 | Register as user A, log out, then log in again. | After registering, the main page opens with a welcome dialog. After logout, opening any app page redirects to login. After login, the main page opens again. Wrong password is rejected with an error. |
 | AT-02 | SR-M-09 | Alice (seed) has the course "Algorithms". Bob logs in and opens the URL of Alice's course. | Bob's course list contains only his own courses. Opening Alice's course sends him back to the course list (the API answers "not found") and shows no data from Alice. |
-| AT-03 | SR-M-01 | Add course "Algorithms". Open its edit dialog, type another title and cancel. Open the dialog again and save the title "Algorithms 1". Delete it. | The course appears in the list after adding. The dialog is titled "Edit the course" and shows the title, the description, the color and the hide option (and the tags, if the user has any). Cancelling keeps the old title, saving shows the new one, and the course is gone after deleting (also after a reload). Before deleting, the app asks for confirmation, and cancelling keeps the course. A new course with the same title starts with empty lecture and assignment tables. |
-| AT-04 | SR-M-02 | In one course, add lecture "Intro" and assignment "Sheet 1". Rename both. Delete both. | Each row appears only in its own table. Rename and delete work in both tables, and the changes survive a reload. |
+| AT-03 | SR-M-01 | Add course "Algorithms". Open its edit dialog, type another title and cancel. Open the dialog again and save the title "Algorithms 1". Delete it. | The course appears in the list after adding. The dialog is titled "Edit the course" and shows the title, the description, the color and the hide option (and the tags and the table types, if the user has any). Cancelling keeps the old title, saving shows the new one, and the course is gone after deleting (also after a reload). Before deleting, the app asks for confirmation, and cancelling keeps the course. A new course with the same title starts without tables. |
+| AT-04 | SR-M-02 | In one course with Lectures and Assignments, add lecture "Intro" and assignment "Sheet 1". Rename both. Delete both. | Each row appears only in its own table. Rename and delete work in both tables, and the changes survive a reload. |
 | AT-05 | SR-M-03, SR-M-04 | Add the checkbox column "Watched" to the lectures table, with 2 lectures present. Then add a third lecture. | The column appears with the label "Watched". All three rows show it unchecked. The assignments table is unchanged. |
 | AT-06 | SR-M-03 | Delete the "Watched" column. | The column and its values disappear. Lecture titles remain. |
 | AT-07 | SR-M-05 | Check a box, reload, then uncheck it and reload again. | The checked state persists after the first reload and the unchecked state after the second. |
@@ -56,6 +56,9 @@ Registration tests use new email addresses. Where a scenario below describes spe
 | AT-18 | SR-S-05 | On a phone viewport (390 px and 360 px wide) open the courses page, a course, the dashboard and the calendar. Also open the courses page on a wide window. | The tag filter, the back button and the dashboard filters are directly under the title. Course cards, the two tables and the dashboard cards are one per row. The calendar grid is above the list of the day. The page never scrolls sideways. The wide window still shows the desktop layout. |
 | AT-19 | SR-S-06 | In a course add a lecture with a title of more than 100 characters and one short lecture. | The title column is wider than a custom column. The long title wraps onto several lines and is fully visible, its row is taller than the short one. |
 | AT-20 | SR-S-07 | Add the courses A and B. Open the edit dialog of A, tick the option to hide it and save. Look at the navigation, the courses page, the course page of A, the dashboard and the calendar. Reload, then untick the option. | A is missing in the navigation and B is still there. A is still on the courses page, its course page opens, and it is in the dashboard and the calendar. It stays hidden after the reload. After unticking, A is in the navigation again. |
+| AT-21 | SR-S-10 | Alice has the tag Semester 1. On the courses page the add card is collapsed. Expand it, enter the title "Operating Systems", choose the tag, a description, the color sage and tick the hide option, collapse and expand it again, then add. Then add "Networks" with the card collapsed. Last, enter only spaces as a title and add. | The expanded card shows the tags, the description, the color and the hide option, and the values are still there after collapsing and expanding. "Operating Systems" appears with the tag, the description, the color sage and the hidden mark, and is missing in the navigation, also after a reload. The card is empty again and stays expanded. "Networks" has no tags, the default color and is in the navigation. Adding the spaces shows an error, adds no course and keeps the card as it was. |
+| AT-22 | SR-S-11 | Alice (seed) opens the table types dialog. Add "Labs" and "Exams", try "Labs" again, rename "Exams" to "Quizzes". Delete "Lectures", first cancelling the confirmation. Then open the dashboard and her course Algorithms. | The types are listed in alphabetical order. The duplicate is rejected with an error. The dialog shows the danger mark from the start, saying that deleting a type removes its rows, columns and values from all courses, and the app asks for confirmation. Cancelling keeps Lectures. After confirming, Lectures is gone from the list, from Algorithms and from every other course and from the dashboard, with all its rows and columns, while Assignments is unchanged. It stays this way after a reload. |
+| AT-23 | SR-S-11 | Carol (seed, no courses) adds the type "Labs", then the course "Physics" with no type ticked. Open the course. Edit it: tick Labs and Assignments and save. In Labs add a row and a checkbox column and check the box. Look at the dashboard, assign the Labs row and a row of Assignments to a day in the calendar. Open the dialog, look at the table options, untick Labs and save. | The course page of the empty course shows a message about creating table types and choosing them in the dialog, and the dashboard lists the course with a note that it has none. After saving, the tables Assignments and Labs are shown in this order, each with the default title column. The dashboard shows both for Physics in this order, Labs with the checked box. The list of the day shows the assignment row before the Labs row. The table options of the dialog show the danger mark before anything is unticked. After the second save the Labs table is gone, so is its entry in the calendar and the dashboard, and the Assignments table is unchanged. |
 
 ### Could have
 
@@ -111,6 +114,8 @@ Done by a user who knows the app, with a stopwatch, as carol on a freshly seeded
 | SR-S-07 | AT-20 |
 | SR-S-08 | AT-01 |
 | SR-S-09 | checked by hand (see the system test plan) |
+| SR-S-10 | AT-21 |
+| SR-S-11 | AT-22, AT-23 |
 | SR-C-01, SR-C-02 | AT-14 |
 | Vision success criteria | AT-V-01 to AT-V-05 |
 | Won't have | AT-N-01 |

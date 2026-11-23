@@ -15,7 +15,7 @@ Polaris is a web-based study planner that lets students track course progress at
 ## Scope
 - In scope
     - Adding courses and tagging them to group them (for example by semester)
-    - Managing lectures and assignments, including custom columns
+    - Managing lectures, assignments and own table types, including custom columns
     - Having a dashboard with overview of the materials
     - User accounts with private, isolated data (multi-tenant)
     - Calendar view for planning study days (planned for a later release)

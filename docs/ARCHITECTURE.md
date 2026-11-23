@@ -73,14 +73,15 @@ One Docker image (`Dockerfile`): a Node stage builds the Angular app, a Python s
 | auth      | registration, login, logout, current user, password reset                   |
 | course    | course level: overview and edits of a course, including its tags            |
 | tag       | the tags of the user                                                        |
+| table_type | the table types of the user                                                |
 | table     | the tables of a course: columns, rows and cells                             |
-| calendar  | assigning lectures and assignments to days                                  |
+| calendar  | assigning rows of the tables to days                                        |
 | dashboard | aggregated statistics over courses                                          |
 
 ### Conventions
 - Requests and responses are JSON. Every endpoint except register and login needs a logged-in user
-- A new item is created under its parent (`POST api/table/{course_id}/{table_type}/row`). An existing item is addressed by its own id only (`PATCH api/table/row/{row_id}`). The service finds the course, and with it the owner, through the item
-- `{table_type}` is `lecture` or `assignment`. Any other value is a 404
+- A new item is created under its parent (`POST api/table/{course_id}/{table_type_id}/row`). An existing item is addressed by its own id only (`PATCH api/table/row/{row_id}`). The service finds the course, and with it the owner, through the item
+- `{table_type_id}` is the id of a table type that is assigned to the course. Any other value is a 404
 - Filters are repeated query parameters (`?tag_id=1&tag_id=2`). Several values mean at least one match
 - Methods and success responses:
     - GET reads (200)
@@ -95,7 +96,7 @@ One Docker image (`Dockerfile`): a Node stage builds the Angular app, a Python s
 | 400    | Invalid payload: wrong shape, a violated business rule, or an unknown id inside the body      |
 | 401    | Not logged in, or wrong credentials on login                                                  |
 | 404    | The resource of the URL does not exist or belongs to another user                             |
-| 409    | Duplicate (email on registration, tag value)                                                  |
+| 409    | Duplicate (email on registration, tag value, table type name)                                 |
 
 - Every error body has an `error` message. A 400 also has `fields` with the messages per field:
 ```
@@ -118,7 +119,7 @@ POST api/auth/reset-password {token, password} -> 200 {id, email}, the user is l
 The email is sent by `services/mail.py` through the Resend API (`RESEND_API_KEY`), from `MAIL_FROM` (default `Polaris <onboarding@resend.dev>`, which Resend only delivers to the owner of the account until a domain is verified). The message is rendered from `backend/app/templates/reset_password_email.html` and has a plain text part. Without a key (development) the text with the link is written to the log instead. A failed send is logged and does not change the answer.
 
 ### Course
-Tables are not created or deleted on their own: a course always has both, and they are empty after the course is created.
+A table exists for every table type assigned to the course (`table_type_ids`) and is empty at first. A new course has none unless ids are sent (REQ-F-86).
 ```
 GET    api/course?tag_id=         -> courses of the user, filtered by tags if given
 POST   api/course                 -> create a course
@@ -126,12 +127,13 @@ GET    api/course/{course_id}     -> a course
 PATCH  api/course/{course_id}     -> edit the course
 DELETE api/course/{course_id}     -> delete the course with everything in it
 
-Payload (POST, PATCH):  {"title": "Algorithms", "tag_ids": [2, 5], "description": "Spring term", "color": "sage", "hidden": false}
-                        tag_ids replaces all tags of the course. description, color and hidden are optional (empty, 'clay', false)
+Payload (POST, PATCH):  {"title": "Algorithms", "tag_ids": [2, 5], "table_type_ids": [1, 3], "description": "Spring term", "color": "sage", "hidden": false}
+                        tag_ids and table_type_ids replace all tags and table types of the course (default none). description, color and hidden are optional (empty, 'clay', false)
 Response:               {"id": 7, "title": "Algorithms", "description": "Spring term", "color": "sage", "hidden": false,
-                         "tags": [{"id": 2, "value": "Semester 1"}]}
+                         "tags": [{"id": 2, "value": "Semester 1"}],
+                         "table_types": [{"id": 1, "name": "Assignments"}, {"id": 3, "name": "Lectures"}]}
 ```
-The edit dialog sends all five fields in one PATCH (REQ-F-54). `hidden` only changes the navigation in the UI (REQ-F-68), the course list still returns hidden courses. An unknown tag id (or one of another user) and a color outside the palette are a 400. The card cuts the description after 150 characters in the UI, the API always returns it whole.
+The edit dialog sends all six fields in one PATCH (REQ-F-54), the add card in one POST (REQ-F-77). `hidden` only changes the navigation in the UI (REQ-F-68), the course list still returns hidden courses. Removing a table type from a course deletes that course's rows and columns of the type (REQ-F-85). An unknown tag or table type id (or one of another user) and a color outside the palette are a 400. The card cuts the description after 150 characters in the UI, the API always returns it whole.
 
 ### Tag
 ```
@@ -144,23 +146,37 @@ Payload:   {"value": "Semester 1"}
 Response:  {"id": 2, "value": "Semester 1"}
 ```
 
+### Table type
+```
+GET    api/table_type                    -> table types of the user in alphabetical order
+POST   api/table_type                    -> create a table type
+PATCH  api/table_type/{table_type_id}    -> rename the table type
+DELETE api/table_type/{table_type_id}    -> delete the table type with its tables in all courses
+
+Payload:   {"name": "Lectures"}
+Response:  {"id": 1, "name": "Lectures"}
+```
+A new user gets Lectures and Assignments at registration (REQ-F-83).
+
 ### Table
 ```
-GET    api/table/{course_id}                                   -> both tables of the course
-POST   api/table/{course_id}/{table_type}/column               -> add a column
+GET    api/table/{course_id}                                   -> the tables of the course
+POST   api/table/{course_id}/{table_type_id}/column            -> add a column
 PATCH  api/table/column/{column_id}                            -> edit a column
 DELETE api/table/column/{column_id}                            -> delete a column with its cells
-POST   api/table/{course_id}/{table_type}/row                  -> add a row
+POST   api/table/{course_id}/{table_type_id}/row               -> add a row
 PATCH  api/table/row/{row_id}                                  -> edit the title of a row
 DELETE api/table/row/{row_id}                                  -> delete a row with its cells
 PUT    api/table/cell/{row_id}/{column_id}                     -> set the value of a cell
 ```
 The title of a row is the default title column. It is not part of `columns` and cannot be deleted.
 
-A table (the response of the `GET`) is not stored anywhere, the service builds it. The cells of a row are keyed by column id:
+A table (the response of the `GET`) is not stored anywhere, the service builds it for every table type of the course, ordered by the name of the type (REQ-F-87). The cells of a row are keyed by column id:
 ```
-{
-  "lecture": {
+[
+  {"table_type": {"id": 1, "name": "Assignments"}, "columns": [], "rows": []},
+  {
+    "table_type": {"id": 3, "name": "Lectures"},
     "columns": [
       {"id": 3, "label": "Watched", "column_type": "bool"},
       {"id": 4, "label": "Grade", "column_type": "number", "min": 1, "max": 5, "preferred_statistic": "avg"}
@@ -168,9 +184,8 @@ A table (the response of the `GET`) is not stored anywhere, the service builds i
     "rows": [
       {"id": 10, "title": "Chapter 1", "cells": {"3": true, "4": 2.5}}
     ]
-  },
-  "assignment": {"columns": [], "rows": []}
-}
+  }
+]
 ```
 Payloads:
 ```
@@ -191,15 +206,15 @@ GET api/calendar?month=2026-11   -> the days of the month that have rows
 PUT api/calendar/{date}          -> set the rows of the day
 
 Payload (PUT):   {"row_ids": [10, 11, 25]}      replaces the rows of the day, an empty list clears it
-Response:        {"date": "2026-11-03", "rows": [{"id": 10, "title": "Chapter 1", "table_type": "lecture", "course_id": 7}]}
+Response:        {"date": "2026-11-03", "rows": [{"id": 10, "title": "Chapter 1", "table_type": {"id": 3, "name": "Lectures"}, "course_id": 7}]}
 ```
-The rows of a day are listed lectures first, then assignments, each in creation order.
+The rows of a day are listed by the name of their table type, then in creation order (REQ-F-46).
 
 ### Dashboard
-All endpoints support the filters `tag_id` and `course_id`. If both are given, a course has to match both. The response contains an entry per matching course.
+All endpoints support the filters `tag_id` and `course_id`. If both are given, a course has to match both. The response contains an entry per matching course that has the table type assigned. The UI asks for every table type of the user and groups the answers by course.
 ```
-GET api/dashboard/{table_type}/column_statistics   -> statistics for every custom column of the table
-GET api/dashboard/{table_type}/not_done            -> rows with at least one unchecked checkbox
+GET api/dashboard/{table_type_id}/column_statistics   -> statistics for every custom column of the table
+GET api/dashboard/{table_type_id}/not_done            -> rows with at least one unchecked checkbox
 ```
 Response of `column_statistics` (`value` is `null` if there is no data):
 ```

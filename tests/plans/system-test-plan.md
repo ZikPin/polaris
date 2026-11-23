@@ -7,7 +7,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 - **How:** the app is created by the app factory with a test configuration. Tests send requests through Flask's test client, which runs them in-process without a network server and keeps cookies, so sessions work. Tests that check the database itself use the database session of the same app.
 - **Environment:** a fresh temporary SQLite database for every test, with foreign keys enabled. Tests build their own data through the API, so they do not use the seed data. Before a release the whole suite also runs on Postgres (started with docker-compose), because SQLite and Postgres differ in constraints, aggregates and result order.
 - **Clients:** most tests use one logged-in client. Tests with two users use two clients with separate cookies.
-- **Terms:** a lecture or assignment is "not done" when at least one checkbox column of its row is unchecked.
+- **Terms:** a row is "not done" when at least one checkbox column of its row is unchecked. A new user has the table types Lectures and Assignments. A new course has no tables, so unless a case says otherwise the test courses get both types assigned (`table_type_ids`) first.
 
 ## Pass criteria for the release
 - All tests pass on SQLite and on Postgres.
@@ -18,8 +18,8 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 
 | ID | Requirements | Scenario | Pass criterion |
 | --- | --- | --- | --- |
-| ST-01 | F-01, 02, 03, 04 | Create a course, read its tables, rename the course, delete it. | The new course has a lecture table and an assignment table, each empty, with no rows and no custom columns. The rename and the delete take effect. |
-| ST-02 | F-03 | Course with rows, columns, cell values, tags and a calendar link. Delete the course. | All of it is gone, and its tables can no longer be read. The user and the tag remain. A new course with the same title has empty tables. |
+| ST-01 | F-01, 02, 03 | Create a course, read its tables, rename the course, delete it. | The new course has no tables. The rename and the delete take effect. |
+| ST-02 | F-03 | Course with rows, columns, cell values, tags and a calendar link. Delete the course. | All of it is gone, and its tables can no longer be read. The user and the tag remain. A new course with the same title has no tables. |
 
 ### Rows
 
@@ -60,7 +60,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 
 | ID | Requirements | Scenario | Pass criterion |
 | --- | --- | --- | --- |
-| ST-18 | F-41 to 46 | Set a day to two lectures and an assignment (sent in mixed order), set a second day to the first lecture, then set the first day again without one lecture. Delete the other lecture. A second user sets the same date to their own row. | The day lists the lectures first, then the assignments, each in creation order. Setting a day replaces its rows, and the date is created on first use. Deleting a row removes its calendar links. The second user's row on the same date is untouched and not shown to the first user. |
+| ST-18 | F-41 to 46 | Set a day to two lectures and an assignment (sent in mixed order), set a second day to the first lecture, then set the first day again without one lecture. Delete the other lecture. A second user sets the same date to their own row. | The day lists the assignment first, then the lectures (alphabetical by table type), each in creation order. Setting a day replaces its rows, and the date is created on first use. Deleting a row removes its calendar links. The second user's row on the same date is untouched and not shown to the first user. |
 
 ### Authentication and isolation
 
@@ -69,7 +69,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | ST-19 | F-47 | Register with a valid email and a good password. Then try an existing email, an invalid email, and a 7-character password. | The first succeeds. The other three are rejected, and no account is created for them. |
 | ST-20 | F-48, 49 | Log in with the right credentials, a wrong password, and an unknown email. Then log out and call a protected endpoint. | The right credentials create a session. The two failures are rejected with the same generic error message. After the logout the call is rejected as unauthenticated. |
 | ST-21 | F-50 | Without logging in, call every protected endpoint. | Every call is rejected as unauthenticated. |
-| ST-22 | F-50 | User A creates a course with rows, columns, a tag and cell values. User B reads, edits and deletes each of these by id, and gives B's course A's tag. Both users also create a tag with the same value and courses with the same title. | Every attempt on A's data is rejected, no data of A is returned, and A's data is unchanged. The equal tag values and titles are accepted, and each user's lists only contain their own entries. |
+| ST-22 | F-50 | User A creates a course with rows, columns, a tag, a table type and cell values. User B reads, edits and deletes each of these by id, and gives B's course A's tag and A's table type. Both users also create a tag with the same value and courses with the same title. | Every attempt on A's data is rejected, no data of A is returned, and A's data is unchanged. The equal tag values and titles are accepted, and each user's lists only contain their own entries. |
 
 ### Validation
 
@@ -84,7 +84,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | ID | Source | Scenario | Pass criterion |
 | --- | --- | --- | --- |
 | ST-24 | Schema | Run all migrations on an empty database, then ask the migration tool for a diff against the models. | Every table of RELATIONAL_SCHEMA exists, and there is no diff. |
-| ST-25 | Schema: constraints | Directly in the database, one case per rule: a course with an unknown user_id, a duplicate email, a duplicate tag value for the same user, a duplicate date, a duplicate cell, a duplicate course-tag link, an invalid table_type, column_type or preferred_statistic, a range column with min greater than max, and a NULL in a required field. Also insert records without optional values, and delete a course directly. | Every violation is rejected. A bool cell is false by default, preferred_statistic is 'avg', and min, max and number cell value can be NULL. Deleting the course also deletes its rows, columns, cells, tag links and calendar links, while the user, the tag and the date remain. |
+| ST-25 | Schema: constraints | Directly in the database, one case per rule: a course with an unknown user_id, a duplicate email, a duplicate tag value for the same user, a duplicate date, a duplicate cell, a duplicate course-tag link, a duplicate table type name for the same user, a duplicate course-table-type link, a row or column with an unknown table_type_id, an invalid column_type or preferred_statistic, a range column with min greater than max, and a NULL in a required field. Also insert records without optional values, and delete a course directly. | Every violation is rejected. A bool cell is false by default, preferred_statistic is 'avg', and min, max and number cell value can be NULL. Deleting the course also deletes its rows, columns, cells, tag links, table type links and calendar links, while the user, the tag, the table type and the date remain. Deleting a table type directly also deletes its rows, columns, cells and course links. |
 | ST-26 | REQ-NF-04 | Register two users with the same password. | The stored passwords are not the plain text, differ from each other, and each verifies against its own password. |
 | ST-27 | Acceptance plan: seed data | Run the seed command on an empty database, then run it again. | Users alice, bob and carol exist with the data described in the acceptance plan. The second run leaves exactly the same data. |
 
@@ -93,9 +93,15 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | ID | Requirements | Scenario | Pass criterion |
 | --- | --- | --- | --- |
 | ST-32 | F-55, 56 | Create a course with only a title, read it. Edit its description and color, then edit only its title. Try the ten palette colors, a color outside the palette, and a description of 1000 and of 1001 characters. | A new course has the description "" and the color "clay". Description and color are returned as saved and survive a title-only edit. Every palette color and the 1000 characters are accepted. The other color and the 1001 characters are rejected with a 400 naming the field, and the stored values stay. |
-| ST-33 | F-53, 54 | One PATCH with a new title, other tags, a description, a color and hidden. Then one PATCH with valid new values and an unknown tag id. | The first changes all five fields. The second is rejected and none of its fields is stored. |
+| ST-33 | F-53, 54 | One PATCH with a new title, other tags, other table types, a description, a color and hidden. Then one PATCH with valid new values and an unknown tag id. | The first changes all six fields. The second is rejected and none of its fields is stored. |
 | ST-34 | Schema: courses | Directly in the database: a course with a color outside the palette and one with NULL in description, color or hidden, then one inserted without them. Also migrate a database with an existing course from the previous revision to the newest. | The invalid inserts are rejected. The course inserted without them has "", "clay" and hidden false, and so has the migrated course, whose rows are kept. |
 | ST-35 | F-67, 68 | Create a course, read it. Set hidden, then edit only its title, then unset hidden. Send a hidden value that is not a boolean. With a hidden course present, read the course list, the dashboard and the calendar. | A new course has hidden false. The value is returned as saved and survives a title-only edit. The non-boolean is rejected with a 400 naming the field, and the stored value stays. A hidden course is still returned by the course list, the dashboard and the calendar. |
+| ST-36 | F-77 | One POST with a title, tags, table types, a description, a color and hidden. Then one POST with only a title, and one POST with a valid title and an unknown tag id. | The first course is created with all six values as sent. The second one has no tags, no tables, the description "", the color "clay" and hidden false. The third is rejected with a 400 and no course is created. |
+| ST-37 | F-80, 81, 83 | Register a user and read the table types. Create "Labs" and "Exams", rename "Exams" to "Quizzes". Try "Labs" again, an empty name and a name of only spaces. A second user creates "Labs" too. | The new user has Assignments and Lectures. The list is in alphabetical order: Assignments, Labs, Lectures, Quizzes. The duplicate is rejected with a 409, the empty names with a 400 naming the field. The second user can create "Labs" and only sees their own types. |
+| ST-38 | F-84, 85, 86 | Create a course, read its tables. PATCH it with the types Lectures and Labs. Add a row, a column and a cell value in each table, set a calendar day to the Labs row, and do the same in a second course. PATCH the first course to only Lectures. Then PATCH with an unknown type id and with the type of another user, and add a row to a table type the course does not have. | A new course has no tables. After the first PATCH it has one empty table per type. Removing Labs deletes the Labs rows, columns, cell values and calendar link of the first course. Its Lectures table and the second course are unchanged. The unknown and the foreign id are rejected with a 400 and nothing changes, the row for a type the course does not have with a 404. |
+| ST-39 | F-82 | Two courses with the types Lectures and Labs, each with rows, columns, cell values and a calendar link. Delete Labs. Another user tries to delete a type of this user. | Labs is gone from the type list and from both courses with all its rows, columns, cell values and calendar links. Lectures is unchanged, and so are the other types. The attempt of the other user is rejected with a 404. |
+| ST-40 | F-46, 87, 88 | Course with the types Lectures, Labs and Assignments assigned in this order. Labs gets two rows, a checkbox column and a number column with values. Read the tables, the dashboard of Labs and of Lectures, and set a day to a lecture, a Labs row and an assignment (sent in mixed order). | The tables are listed Assignments, Labs, Lectures. Labs rows, columns, values, statistics and the not-done list work like those of lectures, and the Labs dashboard only contains courses that have Labs. The day lists the assignment, the Labs row and the lecture. |
+| ST-41 | F-83, schema: table types | Migrate a database from the previous revision with two users and courses that have rows, columns, cell values and calendar links in the lecture and the assignment table to the newest revision. | Every user has the types Lectures and Assignments, every course has both assigned, and each row and column belongs to the type of its old table. All cell values, columns, rows and calendar links are kept. |
 
 ### Non-functional
 
@@ -105,7 +111,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | ST-29 | NF-03 | Call every endpoint once on a database with the amount of data of the acceptance seed. | Each response arrives in under 500 ms. This is a necessary condition for the UI test AT-V-06. |
 
 ## Checks outside the system tests
-- **UI only:** REQ-F-52 (delete confirmation) and REQ-NF-02 (browsers) are verified in the acceptance tests, and REQ-NF-03 also in AT-V-06. REQ-F-53 and 54 (the dialog, its fields work in ST-33), REQ-F-57 to 66, 68, 69 and REQ-NF-06 (the layouts, the navigation and the welcome dialog) are verified in AT-01, AT-03 and AT-15 to AT-20.
+- **UI only:** REQ-F-52 (delete confirmation) and REQ-NF-02 (browsers) are verified in the acceptance tests, and REQ-NF-03 also in AT-V-06. REQ-F-53 and 54 (the dialog, its fields work in ST-33), REQ-F-57 to 66, 68, 69, 75, 76, 78, 79, 89 to 91 and REQ-NF-06 (the layouts, the navigation, the welcome dialog, the add card and the messages and warnings of the tables) are verified in AT-01, AT-03 and AT-15 to AT-23.
 - **Deployment check:** REQ-NF-05 (HTTPS) is checked once against the production deployment, by requesting the site over HTTP and over HTTPS.
 - **Password reset:** REQ-F-70 to 74 have no automated test, they are tried by hand: the logged (or emailed) link sets a new password and logs in, a second use of the link, a changed password and an unknown address behave as required.
 - **Constraints:** REQ-C-01 to 03 are checked by inspection of the repository and deployment, not by tests.
@@ -114,7 +120,7 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 
 | Requirement | Tests |
 | --- | --- |
-| REQ-F-01, 02, 04 | ST-01 |
+| REQ-F-01, 02 | ST-01 |
 | REQ-F-03 | ST-01, ST-02 |
 | REQ-F-05, 06, 08, 09, 10, 12 | ST-03 |
 | REQ-F-07, 11 | ST-04 |
@@ -131,25 +137,34 @@ Validates [REQUIREMENTS.md](../../docs/REQUIREMENTS.md), [DOMAIN_MODEL.md](../..
 | REQ-F-33 to 36 | ST-15 |
 | REQ-F-37, 38 | ST-16 |
 | REQ-F-39, 40 | ST-17 |
-| REQ-F-41 to 46 | ST-18 |
+| REQ-F-41 to 45 | ST-18 |
+| REQ-F-46 | ST-18, ST-40 |
 | REQ-F-47 | ST-19 |
 | REQ-F-48, 49 | ST-20 |
 | REQ-F-50 | ST-21, ST-22 |
 | REQ-F-51 | ST-23 |
-| REQ-F-52 | Acceptance (AT-03) |
-| REQ-F-53, 54 | ST-33, acceptance (AT-03) |
+| REQ-F-52 | Acceptance (AT-03, AT-22) |
+| REQ-F-53, 54 | ST-33, ST-38, acceptance (AT-03) |
 | REQ-F-55, 56 | ST-32 |
 | REQ-F-57, 58, 59 | Acceptance (AT-15, AT-16) |
 | REQ-F-60 to 64, REQ-NF-06 | Acceptance (AT-17, AT-18) |
 | REQ-F-65, 66 | Acceptance (AT-19) |
 | REQ-F-67, 68 | ST-35, acceptance (AT-20) |
 | REQ-F-69 | Acceptance (AT-01) |
+| REQ-F-75, 76, 78, 79 | Acceptance (AT-21) |
+| REQ-F-77 | ST-36, acceptance (AT-21) |
+| REQ-F-80, 81 | ST-37 |
+| REQ-F-82 | ST-39, acceptance (AT-22) |
+| REQ-F-83 | ST-37, ST-41 |
+| REQ-F-84, 85, 86 | ST-38, acceptance (AT-23) |
+| REQ-F-87, 88 | ST-40, acceptance (AT-23) |
+| REQ-F-89, 90, 91 | Acceptance (AT-22, AT-23) |
 | REQ-NF-01 | ST-28, acceptance (AT-07) |
 | REQ-NF-02 | Acceptance (Chromium run) |
 | REQ-NF-03 | ST-29, acceptance (AT-V-06) |
 | REQ-NF-04 | ST-26 |
 | REQ-NF-05 | Deployment check |
-| Schema rules | ST-10, ST-24, ST-25, ST-34 |
+| Schema rules | ST-10, ST-24, ST-25, ST-34, ST-41 |
 | Error format | ST-30 |
 | Serving the frontend (one origin) | ST-31 |
 | Seed command | ST-27 |

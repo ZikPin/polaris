@@ -21,6 +21,8 @@ Should have:
 - SR-S-07: I want to hide a course from the navigation menu, so that the menu stays short while the course stays on the courses page
 - SR-S-08: I want to see a short welcome dialog right after I register, so that I know what I can do in Polaris and where to start
 - SR-S-09: I want to reset a forgotten password through a link in an email, so that I can get back into my account
+- SR-S-10: I want to set the tags, the description, the color and the menu visibility of a course already when I add it, so that I do not have to edit every new course afterwards
+- SR-S-11: I want to define my own table types next to lectures and assignments (for example labs or exams) and choose which ones each course has, so that I can track more than two kinds of items per course
 
 Could have:
 Calendar feature is thought to plan the studying, prepare for exams and have overview of when is what done, not to enforce specific time constraints and deadlines

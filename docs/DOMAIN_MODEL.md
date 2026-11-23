@@ -15,8 +15,15 @@ A simple tag entity for conceptual grouping of the courses
 | ------ | --------- | ------------------------- |
 | id     | yes       | primary identifier        |
 | value  | yes       | unique per user           |
+### TableType
+A kind of table that a course can have, like Lectures or Assignments. The user defines them, like tags. New users get Lectures and Assignments, which can be renamed and deleted like any other
+
+| Fields | Required  | Notes                     |
+| ------ | --------- | ------------------------- |
+| id     | yes       | primary identifier        |
+| name   | yes       | unique per user           |
 ### Course
-Represents the course entity to which the lectures and assignments belong
+Represents the course entity to which the tables (rows and columns of its table types) belong
 
 | Fields      | Required | Notes                                                                                 |
 | ----------- | -------- | ------------------------------------------------------------------------------------- |
@@ -26,12 +33,11 @@ Represents the course entity to which the lectures and assignments belong
 | color       | yes      | name of an accent color of the design brief (clay, mustard, olive, sage, teal, blue, periwinkle, plum, rose, stone), default 'clay' |
 | hidden      | yes      | whether the course is left out of the navigation, default false                       |
 ### Row
-Represents one lecture or one assignment. The title of the row is the default title column of its table, which cannot be removed. The distinction between the tables is done through the "table_type" attribute. Rows are displayed in the order they were created
+Represents one row of a table, for example one lecture or one assignment. The title of the row is the default title column of its table, which cannot be removed. The table of a row is the table type it belongs to in its course. Rows are displayed in the order they were created
 
 | Fields     | Required | Notes                                          |
 | ---------- | -------- | ---------------------------------------------- |
 | id         | yes      | primary identifier                             |
-| table_type | yes      | identifies the table ('lecture' or 'assignment') |
 | title      | yes      | the actual title                               |
 ### Column *(abstract)*
 Base entity for all custom column types in a table. Columns are displayed in the order they were created
@@ -40,7 +46,6 @@ Base entity for all custom column types in a table. Columns are displayed in the
 |------------|----------|------------------------------------|
 | id         | Yes      | Unique identifier                  |
 | label      | Yes      | User-defined column name           |
-| table_type | Yes      | Either 'lecture' or 'assignment'   |
 
 Subtypes: CheckboxColumn, CustomRangeColumn
 ### CheckboxColumn
@@ -93,11 +98,15 @@ Stores the calendar dates which have lectures and/or assignments assigned to
 | Entity        | Cardinality | Entity | Notes                                                                                             |
 | ------------- | ----------- | ------ | ------------------------------------------------------------------------------------------------- |
 | User          | 1:N         | Tag    | A user can define many tags. Tags are not shared between users, so two users can have the same tag value |
+| User          | 1:N         | TableType | A user can define many table types. They are not shared between users, so two users can have the same name |
 | User          | 1:N         | Course | A user can define many courses. Courses are not shared between users                              |
+| Course        | N:M         | TableType | The tables of a course: one for each table type assigned to it, none if nothing is assigned     |
+| TableType     | 1:N         | Row    | A row belongs to one table type. Deleting the type deletes its rows                               |
+| TableType     | 1:N         | Column | A column belongs to one table type. Deleting the type deletes its columns                         |
 | Tag           | N:M         | Course | Courses can have multiple tags and tags can be assigned to multiple courses                       |
 | Course        | 1:N         | Row    | Each row belongs to only one course. Titles like "introduction" are just duplicated for each course |
 | Course        | 1:N         | Column | Represents all the columns belonging to a course                                                  |
 | CalendarDate  | N:M         | Row    | One date can have multiple rows and one row can be assigned to multiple dates                     |
 | Row, Column   | 1:1:1       | Cell   | One (Row, Column) pair corresponds to exactly one Cell                                            |
 The fields that help identify the relationships are derived later in the relational schema. For example:
-the user_id for Tag and Course, the course_id for Row and Column and etc.
+the user_id for Tag, TableType and Course, the course_id and table_type_id for Row and Column and etc.

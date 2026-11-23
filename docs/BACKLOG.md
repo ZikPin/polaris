@@ -10,27 +10,27 @@ The tickets are split into three blocks. A ticket moves to the next block when i
 
 | Ticket | Request             | Status | Description |
 | ------ | ------------------- | ------ | ----------- |
-| T-030  | SR-S-09             | in progress | Password reset: forgot-password and reset-password endpoints with a signed one-hour token, the two pages and the link on the login page, the reset logs in (REQ-F-70 to 74) |
-| T-031  | SR-S-09             | in progress | Password reset: send the email in prod through Resend (key, sender and app address from the environment), with an HTML message in the style of the page (REQ-F-72) |
+| T-053  | SR-S-10             | in progress | Design: wireframes and mock-ups for the add card, collapsed and expanded, on wide and phone screens (BRIEF 6.5, 6.9, 10) |
+| T-054  | SR-S-10             | in progress | Add card on the courses page: title and add button as card header, expandable with the tags, description, color and hide fields shared with the course dialog as one component (title and buttons stay in each host), created in one POST (REQ-F-75 to 79, ST-36, AT-21) |
+| T-055  | SR-S-11             | in progress | Design: wireframes and mock-ups for table types: the Tables button and dialog, the table options with the always visible danger mark in the course dialog, the Tables dialog with the same mark, the empty course page and dashboard note, the dashboard with several tables per course (BRIEF 6.1, 6.5 to 6.9, 10) |
+| T-034  | SR-S-11             | in progress | Table types as data: `table_types` and `course_table_types`, rows and columns reference a type, a migration that keeps all data, Lectures and Assignments for new users and the seed, tables, dashboard and calendar loop over the types of a course, tick them in the course dialog (with the danger mark) and the add card, a new course starts without tables (REQ-F-46, 83 to 88, 90, ST-38, 40, 41, AT-04 to AT-14 adapted) |
+| T-035  | SR-S-11             | in progress | Manage table types: Tables button and dialog to create, rename and delete, the danger mark is always shown, deleting asks for confirmation and removes the type from all courses (REQ-F-52, 80 to 82, 90, ST-37, 39, AT-22) |
+| T-036  | SR-S-11             | in progress | Empty states and several tables: message on the course page and a note in the dashboard for a course without tables, the dashboard cards wrap for more than two tables (REQ-F-89, 91, AT-23) |
 
 ## To do
 
 | Ticket | Request             | Status | Description |
 | ------ | ------------------- | ------ | ----------- |
-| T-034  | TBD                 | todo   | Custom table types: create, rename and delete your own table types, like tags; Lectures and Assignments stay as the undeletable defaults |
-| T-035  | TBD                 | todo   | Assign custom table types to a course, with rows, checkbox columns and number columns working like in the default tables |
-| T-036  | TBD                 | todo   | Dashboard of a course includes the statistics and unchecked lists of its custom tables |
-| T-037  | TBD                 | todo   | Calendar: assign rows of custom tables to days |
+| T-045  | TBD                 | todo   | Subtasks: add, rename and delete subrows under a row of a table, expandable in the UI, no statistics |
+| T-046  | TBD                 | todo   | Subtasks: subrows have their own values for the checkbox and number columns of the parent table, independent of the parent row |
 | T-038  | TBD                 | todo   | Media log: page and navigation entry, media cards with title and type (movie, book, anime, game): add, rename and delete |
 | T-039  | TBD                 | todo   | Media log: edit dialog with description and color, shown on the media card and page |
 | T-040  | TBD                 | todo   | Media log: own tags (create, rename, delete, assign, filter), separate from course tags |
 | T-041  | TBD                 | todo   | Media log: custom tables on media items, reusing the custom table types |
 | T-042  | TBD                 | todo   | Media log: decide whether it needs a dashboard and what it shows. Output: a decision, and a follow-up ticket if yes |
-| T-033  | TBD                 | todo   | Analysis: rethink the table concept (rows, columns, cells) for efficiency before more table features build on it. Output: findings, a decision and follow-up tickets |
+| T-033  | TBD                 | todo   | Analysis: the possibility of async table rendering (each table loaded and rendered when it arrives), measured first with a large seed, compared with cheaper options like local updates after an edit. Output: findings, a decision and follow-up tickets |
 | T-043  | TBD                 | todo   | Analysis: generalize the frontend, find duplicated dialogs, cards, lists and forms that can become generic components. Output: findings and follow-up tickets |
 | T-044  | TBD                 | todo   | Analysis: simplify the backend, find duplicated routes, services and schemas between courses, tags, tables and media. Output: findings and follow-up tickets |
-| T-045  | TBD                 | todo   | Subtasks: add, rename and delete subrows under a row of a table, expandable in the UI, no statistics |
-| T-046  | TBD                 | todo   | Subtasks: subrows have their own values for the checkbox and number columns of the parent table, independent of the parent row |
 | T-047  | TBD                 | todo   | Custom logs: update VISION and STAKEHOLDER_REQ for the wider audience (courses and media become two kinds of log) |
 | T-048  | TBD                 | todo   | Custom logs: create, rename and delete your own log categories, with their own entry in the navigation |
 | T-049  | TBD                 | todo   | Custom logs: items (cards) inside a custom log, reusing the generic card, edit dialog and page |
@@ -72,3 +72,6 @@ The tickets are split into three blocks. A ticket moves to the next block when i
 | T-027  | SR-S-05             | done   | Mobile layout below 768 px: header with burger, navigation, stacked head, cards, tables and calendar, plus the phone-viewport acceptance tests (REQ-F-60 to 64, REQ-NF-06, AT-17, 18) |
 | T-028  | SR-S-07             | done   | Hide a course from the navigation with an option in the course edit dialog, it stays on every other page (REQ-F-53, 67, 68, ST-33 to 35, AT-20) |
 | T-029  | SR-S-08             | done   | Welcome dialog over the courses page after registration, logging in skips it, the content is decided during implementation (REQ-F-69, AT-01 updated) |
+| T-030  | SR-S-09             | done   | Password reset: forgot-password and reset-password endpoints with a signed one-hour token, the two pages and the link on the login page, the reset logs in (REQ-F-70 to 74) |
+| T-031  | SR-S-09             | done   | Password reset: send the email in prod through Resend (key, sender and app address from the environment), with an HTML message in the style of the page (REQ-F-72) |
+| T-037  | SR-S-11             | won't do | Calendar: assign rows of custom tables to days, folded into T-034 where the calendar lists the rows by table type |

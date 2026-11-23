@@ -6,7 +6,7 @@
 
 | Stakeholder requirement | Covered by                           |
 | ----------------------- | ------------------------------------ |
-| SR-M-01                 | REQ-F-01, 02, 03, 04, 53, 54         |
+| SR-M-01                 | REQ-F-01, 02, 03, 53, 54             |
 | SR-M-02                 | REQ-F-05 to 12, 21                   |
 | SR-M-03                 | REQ-F-13, 15, 20                     |
 | SR-M-04                 | REQ-F-22, 23                         |
@@ -24,6 +24,8 @@
 | SR-S-07                 | REQ-F-67, 68                         |
 | SR-S-08                 | REQ-F-69                             |
 | SR-S-09                 | REQ-F-70 to 74                       |
+| SR-S-10                 | REQ-F-75 to 79                       |
+| SR-S-11                 | REQ-F-80 to 91                       |
 | SR-C-01                 | REQ-F-41, 42, 45, 46                 |
 | SR-C-02                 | REQ-F-43, 44, 45, 46                 |
 
@@ -43,7 +45,7 @@ These do not come from a single stakeholder requirement.
 - REQ-F-01: The user can add a course
 - REQ-F-02: The user can edit a course title
 - REQ-F-03: The user can delete a course with its lectures and assignments
-- REQ-F-04: The system creates two empty tables, one for lectures and one for assignments, when a course is created. Each table has a default title column
+- REQ-F-04: *Removed, replaced by REQ-F-86*
 ### Lecture and Assignment Management
 - REQ-F-05: The user can add a lecture in the lecture table
 - REQ-F-06: The user can edit a lecture title in the lecture table
@@ -89,7 +91,7 @@ These do not come from a single stakeholder requirement.
 - REQ-F-43: The user can assign assignments to specific days in the calendar view
 - REQ-F-44: The user can remove assignments from specific days in the calendar view
 - REQ-F-45: The lectures and assignments of a day are shown together in one list in the calendar view
-- REQ-F-46: The list of a day shows the lectures first and then the assignments, each in creation order
+- REQ-F-46: The list of a day shows the rows ordered by the name of their table type (alphabetical) and then in creation order
 ### Authentication
 - REQ-F-47: The user can register with a valid email and a password of at least 8 characters. An email can be registered only once
 - REQ-F-48: The user can log in to an existing account with email and password. A failed login shows a generic "invalid email or password" error
@@ -97,9 +99,9 @@ These do not come from a single stakeholder requirement.
 - REQ-F-50: A user can only see and change their own courses, tags and the data inside them
 ### General
 - REQ-F-51: Titles, labels and tag values cannot be empty
-- REQ-F-52: The system asks for confirmation before deleting a course, a column or a tag
+- REQ-F-52: The system asks for confirmation before deleting a course, a column, a tag or a table type
 ### Course dialog
-- REQ-F-53: The edit action of a course opens a dialog "Edit the course" with the title, the tags, the description, the color and the option to hide the course from the navigation
+- REQ-F-53: The edit action of a course opens a dialog "Edit the course" with the title, the tags, the table types, the description, the color and the option to hide the course from the navigation
 - REQ-F-54: Saving the dialog stores all its fields at once, cancelling it closes the dialog and changes nothing
 ### Course description and color
 - REQ-F-55: The user can set and edit a description of a course. It can be empty and has at most 1000 characters. A new course has an empty description
@@ -128,6 +130,26 @@ Below the width of 768 px (the breakpoint), the layout changes as follows
 - REQ-F-72: If an account exists, the system emails it a link to set a new password. The link works for one hour and stops working once the password has been changed
 - REQ-F-73: The link opens a page where the user enters a new password of at least 8 characters. A valid reset saves the password hashed and logs the user in
 - REQ-F-74: An invalid, expired or already used link is rejected with an error message and the password stays as it was
+### Add card
+- REQ-F-75: The courses page has an add card with a title field, an add button and a button that expands and collapses the card. The card is collapsed when the page opens
+- REQ-F-76: The expanded card also shows the tags, the table types, the description, the color and the option to hide the course from the navigation, the same fields as the course dialog (REQ-F-53). Collapsing the card keeps the values entered
+- REQ-F-77: Adding creates the course with the title and the values of all fields at once. Fields that were left alone have the defaults of a new course (REQ-F-55, 56, 67), without tags
+- REQ-F-78: After a course was added the card is empty again (empty title, no tags, empty description, default color, not hidden) and stays expanded or collapsed as it was
+- REQ-F-79: If adding fails (for example an empty title, REQ-F-51), the card keeps everything entered and shows the error
+### Table types
+A table type is a kind of table a course can have, like Lectures or Assignments. A course has one table per table type assigned to it.
+- REQ-F-80: The user can create a table type with a name. The name is unique per user and cannot be empty (REQ-F-51)
+- REQ-F-81: The user can rename a table type
+- REQ-F-82: The user can delete a table type. Its tables are removed from all courses of the user, with all their rows, columns and values
+- REQ-F-83: Every new account has the table types Lectures and Assignments, which can be renamed and deleted like any other. Existing accounts get them with their current tables and data kept
+- REQ-F-84: The user can choose which table types a course has, none included. The course shows one table per chosen type, each with the default title column
+- REQ-F-85: Removing a table type from a course deletes the rows and columns of that table in this course, with their values. Other courses are not changed
+- REQ-F-86: A new course has no tables, unless table types are chosen when it is added (REQ-F-77)
+- REQ-F-87: The tables of a course and the tables of a course in the dashboard are ordered by the name of their table type (alphabetical)
+- REQ-F-88: Rows, columns, values, statistics, not-done lists and calendar entries work in every table like they do for lectures and assignments (REQ-F-05 to 46)
+- REQ-F-89: The course page of a course without tables shows a message that the user can create table types and choose them for the course in its dialog
+- REQ-F-90: The table options of the course dialog and the table types dialog always show a danger mark, whatever the user has done so far, saying that removing a table type from a course or deleting a table type deletes its rows, columns and values. The add card does not show it, nothing can be lost there
+- REQ-F-91: The dashboard lists a course without tables with a note that it has none
 
 ## Non-Functional Requirements
 - REQ-NF-01: Every change is saved on the server without a save action and is still there after a reload

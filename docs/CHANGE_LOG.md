@@ -1,6 +1,8 @@
 # Change Log
 One line per finished ticket, newest first: date · ticket · one sentence.
 
+- 2026-11-10 · T-031 · The reset email is sent through Resend with an HTML message in the style of the app, without a key the link is only logged.
+- 2026-11-10 · T-030 · Password reset: a link with a signed one-hour token, reached from the login page, sets a new password and logs the user in.
 - 2026-11-10 · T-029 · Welcome dialog over the courses page after registering, shown once and not after logging in.
 - 2026-11-10 · T-028 · Courses can be hidden from the navigation with an option in the course dialog, hidden cards show a mark and the course stays on every other page.
 - 2026-11-02 · T-022 · Design: wireframes and mock-ups for the course dialog, the course card with description, the course page with tags and description, and the mobile screens, with the brief updated.

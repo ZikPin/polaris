@@ -49,6 +49,16 @@ TagResponseSchema                    GET, POST, PATCH api/tag, nested in courses
   value      Str
 ```
 
+## Table type
+```
+TableTypeRequestSchema               POST, PATCH api/table_type
+  name       NonEmptyStr             required
+
+TableTypeResponseSchema              GET, POST, PATCH api/table_type, nested in courses and tables
+  id         Int
+  name       Str
+```
+
 ## Course
 ```
 CourseQuerySchema                    GET api/course
@@ -57,6 +67,7 @@ CourseQuerySchema                    GET api/course
 CourseRequestSchema                  POST, PATCH api/course
   title      NonEmptyStr             required (not on PATCH)
   tag_ids    List[Int]               optional, default [], unique values, replaces the tags of the course
+  table_type_ids List[Int]           optional, default [], unique values, replaces the table types of the course
   description Str                    optional, may be empty, at most 1000 characters
   color      Str                     optional, one of the ten accent names (see RELATIONAL_SCHEMA.md)
   hidden     Bool                    optional
@@ -68,11 +79,12 @@ CourseResponseSchema                 GET, POST, PATCH api/course
   color      Str
   hidden     Bool
   tags       List[TagResponseSchema]
+  table_types List[TableTypeResponseSchema]
 ```
 
 ## Table
 ```
-ColumnCreateRequestSchema            POST api/table/{course_id}/{table_type}/column
+ColumnCreateRequestSchema            POST api/table/{course_id}/{table_type_id}/column
   column_type          Str           required, 'bool' or 'number'
   label                NonEmptyStr   required
   min                  Float         optional, nullable, only for 'number'
@@ -96,7 +108,7 @@ ColumnResponseSchema                 POST, PATCH column, items of columns in a t
   max                  Float|null    only for 'number'
   preferred_statistic  Str           only for 'number'
 
-RowRequestSchema                     POST api/table/{course_id}/{table_type}/row, PATCH api/table/row/{row_id}
+RowRequestSchema                     POST api/table/{course_id}/{table_type_id}/row, PATCH api/table/row/{row_id}
   title      NonEmptyStr             required
 
 RowResponseSchema                    POST, PATCH row
@@ -118,12 +130,11 @@ TableRowResponseSchema               items of rows in a table
   cells      Dict[Str, Bool|Float|null]   column id as key
 
 TableResponseSchema                  one table
+  table_type TableTypeResponseSchema
   columns    List[ColumnResponseSchema]
   rows       List[TableRowResponseSchema]
 
-CourseTablesResponseSchema           GET api/table/{course_id}
-  lecture    TableResponseSchema
-  assignment TableResponseSchema
+CourseTablesResponseSchema           GET api/table/{course_id}, a list of TableResponseSchema ordered by the name of the table type
 ```
 
 ## Calendar
@@ -137,18 +148,18 @@ CalendarDayRequestSchema             PUT api/calendar/{date}
 CalendarRowResponseSchema
   id         Int
   title      Str
-  table_type Str                     'lecture' or 'assignment'
+  table_type TableTypeResponseSchema
   course_id  Int
 
 CalendarDayResponseSchema            GET (list), PUT
   date       Date                    YYYY-MM-DD
-  rows       List[CalendarRowResponseSchema]    lectures first, then assignments, each in creation order
+  rows       List[CalendarRowResponseSchema]    ordered by the name of the table type, then in creation order
 ```
 The `{date}` in the path must be a valid `YYYY-MM-DD`, otherwise the response is a 400.
 
 ## Dashboard
 ```
-DashboardQuerySchema                 GET api/dashboard/{table_type}/column_statistics, .../not_done
+DashboardQuerySchema                 GET api/dashboard/{table_type_id}/column_statistics, .../not_done
   tag_id     List[Int]               optional
   course_id  List[Int]               optional
 

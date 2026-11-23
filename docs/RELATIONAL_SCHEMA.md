@@ -7,8 +7,8 @@ General rules:
 - Every foreign key is `ON DELETE CASCADE`, so deleting a parent (for example a course) deletes everything below it
 - SQLite does not enforce foreign keys unless `PRAGMA foreign_keys=ON` is set on every connection
 - Tables have no inherent order, so every query that lists rows or columns uses `ORDER BY id`. The autoincrement id grows with every insert, so id order is creation order and no order field is needed (rows and columns cannot be reordered)
-- When a row or column is created, its cells are created with it (one cell per pair of row and column of the same course and table_type)
-- The following cannot be expressed with simple foreign keys, so the service layer enforces them: a cell's table matches its column's `column_type`, row and column belong to the same course and the same `table_type`, and number cell values, if not empty, are within the `min` and `max` of the column if set
+- When a row or column is created, its cells are created with it (one cell per pair of row and column of the same course and table type)
+- The following cannot be expressed with simple foreign keys, so the service layer enforces them: a cell's table matches its column's `column_type`, row and column belong to the same course and the same `table_type_id`, a row's or column's table type is assigned to its course (`course_table_types`), and number cell values, if not empty, are within the `min` and `max` of the column if set
 
 ## users
 
@@ -24,6 +24,14 @@ Tag has a composite constraint UNIQUE(user_id, value), a user cannot create mult
 | ------- | ------- | ------------------------- |
 | id      | integer | unique, autoincrement, PK |
 | value   | varchar |                           |
+| user_id | integer | FK(user_id -> users.id)   |
+## table_types
+Table type has a composite constraint UNIQUE(user_id, name). A new user gets 'Lectures' and 'Assignments' when registering. The migration that introduced the table did the same for the existing users and moved the old `table_type` strings of rows and columns to them
+
+| Fields  | Type    | Constraints               |
+| ------- | ------- | ------------------------- |
+| id      | integer | unique, autoincrement, PK |
+| name    | varchar |                           |
 | user_id | integer | FK(user_id -> users.id)   |
 ## courses
 
@@ -42,13 +50,20 @@ tag_id and course_id form a composite primary key
 | --------- | ------- | --------------------------- |
 | tag_id    | integer | FK(tag_id -> tags.id)       |
 | course_id | integer | FK(course_id -> courses.id) |
+## course_table_types
+table_type_id and course_id form a composite primary key. Removing a row of this table does not cascade to the rows and columns of the course and the type, the service deletes them
+
+| Fields        | Type    | Constraints                     |
+| ------------- | ------- | ------------------------------- |
+| table_type_id | integer | FK(table_type_id -> table_types.id) |
+| course_id     | integer | FK(course_id -> courses.id)     |
 ## course_rows
 
 | Fields     | Type    | Constraints                 |
 | ---------- | ------- | --------------------------- |
 | id         | integer | unique, autoincrement, PK   |
-| table_type | varchar | ('lecture'\|'assignment')   |
 | title      | varchar |                             |
+| table_type_id | integer | FK(table_type_id -> table_types.id) |
 | course_id  | integer | FK(course_id -> courses.id) |
 ## calendar_dates
 
@@ -70,8 +85,8 @@ The subtype of the column is stored in `column_type`. A 'bool' column is a check
 | ----------- | ------- | --------------------------- |
 | id          | integer | unique, autoincrement, PK   |
 | column_type | varchar | ('bool'\|'number')          |
-| table_type  | varchar | ('lecture'\|'assignment')   |
 | label       | varchar |                             |
+| table_type_id | integer | FK(table_type_id -> table_types.id) |
 | course_id   | integer | FK(course_id -> courses.id) |
 ## custom_range_columns
 `min` and `max` are nullable. If both are set, min <= max
