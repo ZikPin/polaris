@@ -1,6 +1,7 @@
 from marshmallow import Schema, ValidationError, fields, validate, validates_schema
 
 from .common import NonEmptyStr
+from .table_type import TableTypeResponseSchema
 
 NUMBER_ONLY = ("min", "max", "preferred_statistic")
 
@@ -79,10 +80,6 @@ class TableRowResponseSchema(Schema):
 
 
 class TableResponseSchema(Schema):
+    table_type = fields.Nested(TableTypeResponseSchema)
     columns = fields.Nested(ColumnResponseSchema, many=True)
     rows = fields.Nested(TableRowResponseSchema, many=True)
-
-
-class CourseTablesResponseSchema(Schema):
-    lecture = fields.Nested(TableResponseSchema)
-    assignment = fields.Nested(TableResponseSchema)

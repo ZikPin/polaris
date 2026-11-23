@@ -129,12 +129,10 @@ TableRowResponseSchema               items of rows in a table
   title      Str
   cells      Dict[Str, Bool|Float|null]   column id as key
 
-TableResponseSchema                  one table
+TableResponseSchema                  GET api/table/{course_id} returns a list of these, ordered by the name of the table type
   table_type TableTypeResponseSchema
   columns    List[ColumnResponseSchema]
   rows       List[TableRowResponseSchema]
-
-CourseTablesResponseSchema           GET api/table/{course_id}, a list of TableResponseSchema ordered by the name of the table type
 ```
 
 ## Calendar

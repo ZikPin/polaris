@@ -1,12 +1,11 @@
 from marshmallow import ValidationError
 from sqlalchemy import select
+from werkzeug.exceptions import NotFound
 
 from ..extensions import db
 from ..models import BoolCell, CheckboxColumn, Course, CourseColumn, CourseRow, CustomRangeColumn, NumberCell
 from ..utils.cells import validate_cell_value
 from . import course as course_service
-
-TABLE_TYPES = ("lecture", "assignment")
 
 
 def _row(user_id, row_id):
@@ -27,8 +26,17 @@ def _column(user_id, column_id):
     )
 
 
+def _course(user_id, course_id, table_type_id):
+    """The course, if it has a table of this type. Any other table type is not found."""
+    course = course_service.get_course(user_id, course_id)
+    if table_type_id not in {table_type.id for table_type in course.table_types}:
+        raise NotFound("Table not found.")
+    return course
+
+
 def get_tables(user_id, course_id):
-    """Both tables of a course: the custom columns and the rows with their cells (keyed by column id)."""
+    """The tables of a course, one per table type ordered by its name: the custom columns and the rows with their
+    cells (keyed by column id)."""
     course = course_service.get_course(user_id, course_id)
     columns = db.session.scalars(
         select(CourseColumn).where(CourseColumn.course_id == course.id).order_by(CourseColumn.id)
@@ -41,17 +49,18 @@ def get_tables(user_id, course_id):
         statement = select(model).join(CourseRow, model.row_id == CourseRow.id).where(CourseRow.course_id == course.id)
         for cell in db.session.scalars(statement):
             cells.setdefault(cell.row_id, {})[str(cell.column_id)] = cell.value
-    return {
-        table_type: {
-            "columns": [column for column in columns if column.table_type == table_type],
+    return [
+        {
+            "table_type": table_type,
+            "columns": [column for column in columns if column.table_type_id == table_type.id],
             "rows": [
                 {"id": row.id, "title": row.title, "cells": cells.get(row.id, {})}
                 for row in rows
-                if row.table_type == table_type
+                if row.table_type_id == table_type.id
             ],
         }
-        for table_type in TABLE_TYPES
-    }
+        for table_type in course.table_types
+    ]
 
 
 def _cell(column, row):
@@ -60,13 +69,13 @@ def _cell(column, row):
     )
 
 
-def add_row(user_id, course_id, table_type, title):
-    course = course_service.get_course(user_id, course_id)
-    row = CourseRow(course_id=course.id, table_type=table_type, title=title)
+def add_row(user_id, course_id, table_type_id, title):
+    course = _course(user_id, course_id, table_type_id)
+    row = CourseRow(course_id=course.id, table_type_id=table_type_id, title=title)
     db.session.add(row)
     db.session.flush()
     columns = db.session.scalars(
-        select(CourseColumn).where(CourseColumn.course_id == course.id, CourseColumn.table_type == table_type)
+        select(CourseColumn).where(CourseColumn.course_id == course.id, CourseColumn.table_type_id == table_type_id)
     ).all()
     db.session.add_all(_cell(column, row) for column in columns)
     db.session.commit()
@@ -85,9 +94,9 @@ def delete_row(user_id, row_id):
     db.session.commit()
 
 
-def add_column(user_id, course_id, table_type, data):
-    course = course_service.get_course(user_id, course_id)
-    common = {"course_id": course.id, "table_type": table_type, "label": data["label"]}
+def add_column(user_id, course_id, table_type_id, data):
+    course = _course(user_id, course_id, table_type_id)
+    common = {"course_id": course.id, "table_type_id": table_type_id, "label": data["label"]}
     if data["column_type"] == "bool":
         column = CheckboxColumn(**common)
     else:
@@ -100,7 +109,7 @@ def add_column(user_id, course_id, table_type, data):
     db.session.add(column)
     db.session.flush()
     rows = db.session.scalars(
-        select(CourseRow).where(CourseRow.course_id == course.id, CourseRow.table_type == table_type)
+        select(CourseRow).where(CourseRow.course_id == course.id, CourseRow.table_type_id == table_type_id)
     ).all()
     db.session.add_all(_cell(column, row) for row in rows)
     db.session.commit()
@@ -132,7 +141,7 @@ def delete_column(user_id, column_id):
 def set_cell(user_id, row_id, column_id, value):
     row = _row(user_id, row_id)
     column = _column(user_id, column_id)
-    if row.course_id != column.course_id or row.table_type != column.table_type:
+    if row.course_id != column.course_id or row.table_type_id != column.table_type_id:
         raise ValidationError({"column_id": ["Row and column are not in the same table."]})
     error = validate_cell_value(
         column.column_type, value, getattr(column, "min", None), getattr(column, "max", None)

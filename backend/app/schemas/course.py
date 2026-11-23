@@ -2,6 +2,7 @@ from marshmallow import Schema, fields, validate
 
 from ..models.course import COLORS
 from .common import NonEmptyStr, unique
+from .table_type import TableTypeResponseSchema
 from .tag import TagResponseSchema
 
 
@@ -12,6 +13,7 @@ class CourseQuerySchema(Schema):
 class CourseRequestSchema(Schema):
     title = NonEmptyStr(required=True)
     tag_ids = fields.List(fields.Int(), validate=unique)
+    table_type_ids = fields.List(fields.Int(), validate=unique)
     description = fields.String(validate=validate.Length(max=1000))
     color = fields.String(validate=validate.OneOf(COLORS))
     hidden = fields.Boolean()
@@ -24,3 +26,4 @@ class CourseResponseSchema(Schema):
     color = fields.String()
     hidden = fields.Boolean()
     tags = fields.Nested(TagResponseSchema, many=True)
+    table_types = fields.Nested(TableTypeResponseSchema, many=True)

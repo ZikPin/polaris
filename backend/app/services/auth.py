@@ -6,7 +6,7 @@ from werkzeug.exceptions import BadRequest, Conflict, Unauthorized
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from ..extensions import db
-from ..models import User
+from ..models import TableType, User
 from . import mail
 
 RESET_MAX_AGE = 60 * 60  # seconds
@@ -20,7 +20,9 @@ def _by_email(email):
 def register(email, password):
     if _by_email(email) is not None:
         raise Conflict("Email is already registered.")
-    user = User(email=email, password=generate_password_hash(password))
+    # Every new account starts with these table types (REQ-F-83)
+    table_types = [TableType(name=name) for name in ("Lectures", "Assignments")]
+    user = User(email=email, password=generate_password_hash(password), table_types=table_types)
     db.session.add(user)
     try:
         db.session.commit()

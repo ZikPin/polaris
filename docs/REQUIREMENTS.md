@@ -111,7 +111,7 @@ These do not come from a single stakeholder requirement.
 - REQ-F-59: The color of a course is used wherever the course is shown: its card, its dot in the navigation, its cards in the dashboard, its entries in the calendar and in the list of a calendar day, and the headers of its tables
 ### Mobile layout
 Below the width of 768 px (the breakpoint), the layout changes as follows
-- REQ-F-60: The header shows only the brand, the tags button and a burger button. The burger button opens and closes the navigation from the top of the page downward
+- REQ-F-60: The header shows only the brand, the tables and tags buttons and a burger button. The burger button opens and closes the navigation from the top of the page downward
 - REQ-F-61: The navigation lists the same entries as on a wide screen (Courses with the list of courses, Dashboard and Calendar), and Log out as its last entry
 - REQ-F-62: The page title comes first, directly under it are the tag filter (courses page), the back button (course page) or the filters (dashboard)
 - REQ-F-63: Course cards, the lecture and assignment tables, and the dashboard cards of a course are shown one per row

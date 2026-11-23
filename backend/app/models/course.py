@@ -1,6 +1,7 @@
 from sqlalchemy import false, func
 
 from ..extensions import db
+from .table_type import TableType, course_table_types
 from .tag import Tag, course_tags
 
 
@@ -27,6 +28,13 @@ class Course(db.Model):
         secondary=course_tags,
         back_populates="courses",
         order_by=lambda: func.lower(Tag.value),
+        passive_deletes=True,
+    )
+    # One table per table type, ordered by the name of the type (REQ-F-87)
+    table_types = db.relationship(
+        "TableType",
+        secondary=course_table_types,
+        order_by=lambda: func.lower(TableType.name),
         passive_deletes=True,
     )
     # Rows and columns are listed in creation order (see RELATIONAL_SCHEMA.md)

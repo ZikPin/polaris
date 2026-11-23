@@ -1,6 +1,7 @@
 from marshmallow import Schema, fields, validate
 
 from .common import unique
+from .table_type import TableTypeResponseSchema
 
 
 class CalendarQuerySchema(Schema):
@@ -14,7 +15,7 @@ class CalendarDayRequestSchema(Schema):
 class CalendarRowResponseSchema(Schema):
     id = fields.Int()
     title = fields.String()
-    table_type = fields.String()
+    table_type = fields.Nested(TableTypeResponseSchema)
     course_id = fields.Int()
 
 

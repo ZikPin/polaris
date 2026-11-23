@@ -2,17 +2,17 @@ from sqlalchemy import false
 
 from ..extensions import db
 
-TABLE_TYPE_CHECK = "table_type IN ('lecture', 'assignment')"
-
 
 class CourseRow(db.Model):
     __tablename__ = "course_rows"
-    __table_args__ = (db.CheckConstraint(TABLE_TYPE_CHECK, name="table_type"), {"sqlite_autoincrement": True})
+    __table_args__ = {"sqlite_autoincrement": True}
 
     id = db.Column(db.Integer, primary_key=True)
-    table_type = db.Column(db.String, nullable=False)
     title = db.Column(db.String, nullable=False)
+    table_type_id = db.Column(db.ForeignKey("table_types.id", ondelete="CASCADE"), nullable=False)
     course_id = db.Column(db.ForeignKey("courses.id", ondelete="CASCADE"), nullable=False)
+
+    table_type = db.relationship("TableType")
 
 
 class CourseColumn(db.Model):
@@ -21,14 +21,13 @@ class CourseColumn(db.Model):
     __tablename__ = "course_columns"
     __table_args__ = (
         db.CheckConstraint("column_type IN ('bool', 'number')", name="column_type"),
-        db.CheckConstraint(TABLE_TYPE_CHECK, name="table_type"),
         {"sqlite_autoincrement": True},
     )
 
     id = db.Column(db.Integer, primary_key=True)
     column_type = db.Column(db.String, nullable=False)
-    table_type = db.Column(db.String, nullable=False)
     label = db.Column(db.String, nullable=False)
+    table_type_id = db.Column(db.ForeignKey("table_types.id", ondelete="CASCADE"), nullable=False)
     course_id = db.Column(db.ForeignKey("courses.id", ondelete="CASCADE"), nullable=False)
 
     __mapper_args__ = {"polymorphic_on": column_type}

@@ -15,7 +15,7 @@ There are 3 environments:
 - One layout for all devices: the stylesheet switches to the mobile layout with a media query below 768 px (REQ-F-60 to 64), there is no separate mobile app or route. The wide layout is the default
 - The color of a course comes only with the course (`color`). The dashboard and the calendar carry the `course_id` and the UI takes the color from the course list it already loads
 - In development the Angular dev server proxies `/api` to Flask on port 5000 (`proxy.conf.json`), so the browser sees a single origin
-- Routes: `/login`, `/register`, `/forgot-password`, `/reset-password` (opened from the email link, the token is in `?token=`), and the guarded `/courses`, `/courses/:id`, `/dashboard` and `/calendar`. Tags have no route, they are managed in a dialog opened from the header. The route guard asks `GET api/auth/me` and redirects to `/login` if the user is not logged in or the check fails
+- Routes: `/login`, `/register`, `/forgot-password`, `/reset-password` (opened from the email link, the token is in `?token=`), and the guarded `/courses`, `/courses/:id`, `/dashboard` and `/calendar`. Tags and table types have no route, they are managed in dialogs opened from the header. The route guard asks `GET api/auth/me` and redirects to `/login` if the user is not logged in or the check fails
 
 ## Backend Architecture
 The backend is created by an app factory `create_app(config, overrides)` with a development, a test and a production configuration. The configuration is chosen by name or by the `APP_ENV` variable (default `development`). Production reads `SECRET_KEY`, `RESEND_API_KEY`, `APP_URL` (the public address of the app) and the database settings `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT` and `DB_NAME` (a Postgres over SSL) from the environment and does not start without them. The extensions (SQLAlchemy, migrations, login) are initialized inside the factory. `requirements.txt` and the virtual environment are at the repository root, the sources are in `backend/`.
@@ -211,7 +211,7 @@ Response:        {"date": "2026-11-03", "rows": [{"id": 10, "title": "Chapter 1"
 The rows of a day are listed by the name of their table type, then in creation order (REQ-F-46).
 
 ### Dashboard
-All endpoints support the filters `tag_id` and `course_id`. If both are given, a course has to match both. The response contains an entry per matching course that has the table type assigned. The UI asks for every table type of the user and groups the answers by course.
+All endpoints support the filters `tag_id` and `course_id`. If both are given, a course has to match both. The response contains an entry per matching course that has the table type assigned. The UI asks for every table type of the user and for the courses with their table types, and groups the answers by course, so a course without tables is listed too (REQ-F-91).
 ```
 GET api/dashboard/{table_type_id}/column_statistics   -> statistics for every custom column of the table
 GET api/dashboard/{table_type_id}/not_done            -> rows with at least one unchecked checkbox

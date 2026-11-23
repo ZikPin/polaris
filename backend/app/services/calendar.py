@@ -1,10 +1,10 @@
 from datetime import date
 
 from marshmallow import ValidationError
-from sqlalchemy import case, delete, insert, select
+from sqlalchemy import delete, func, insert, select
 
 from ..extensions import db
-from ..models import CalendarDate, Course, CourseRow, calendar_date_rows
+from ..models import CalendarDate, Course, CourseRow, TableType, calendar_date_rows
 
 
 def _own_rows(user_id):
@@ -12,15 +12,16 @@ def _own_rows(user_id):
 
 
 def _days(user_id):
-    """The (date, row) pairs of the user: by date, then lectures before assignments, then by creation."""
+    """The (date, row) pairs of the user: by date, then by the name of the table type, then by creation (REQ-F-46)."""
     return (
         select(CalendarDate.date, CourseRow)
         .select_from(CalendarDate)
         .join(calendar_date_rows, calendar_date_rows.c.calendar_date_id == CalendarDate.id)
         .join(CourseRow, CourseRow.id == calendar_date_rows.c.row_id)
         .join(Course, Course.id == CourseRow.course_id)
+        .join(TableType, TableType.id == CourseRow.table_type_id)
         .where(Course.user_id == user_id)
-        .order_by(CalendarDate.date, case((CourseRow.table_type == "lecture", 0), else_=1), CourseRow.id)
+        .order_by(CalendarDate.date, func.lower(TableType.name), CourseRow.id)
     )
 
 

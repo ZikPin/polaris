@@ -14,7 +14,6 @@ from .services import table as table_service
 from .services import tag as tag_service
 
 PASSWORD = "polaris-demo"
-TABLE_TYPES = ("lecture", "assignment")
 
 
 def _check(label):
@@ -25,8 +24,9 @@ def _number(label, min=None, max=None, statistic="avg"):
     return {"column_type": "number", "label": label, "min": min, "max": max, "preferred_statistic": statistic}
 
 
-# A course is {title, tags, lecture, assignment}. A table is {columns, rows}, a row is (title, {column label: value}).
-# Cells that are not named keep their default (unchecked, empty).
+# A course is {title, tags, Lectures, Assignments} and has both tables (the default table types of every user).
+# A table is {columns, rows}, a row is (title, {column label: value}). Cells that are not named keep their default
+# (unchecked, empty).
 USERS = {
     "alice@example.com": {
         "tags": ["Semester 1", "Semester 2", "CS", "Math", "ML"],
@@ -34,7 +34,7 @@ USERS = {
             {
                 "title": "Algorithms",
                 "tags": ["Semester 1", "CS"],
-                "lecture": {
+                "Lectures": {
                     "columns": [_check("Watched"), _check("Notes")],
                     "rows": [
                         ("Chapter 1", {"Watched": True, "Notes": True}),
@@ -43,7 +43,7 @@ USERS = {
                         ("Chapter 4", {}),
                     ],
                 },
-                "assignment": {
+                "Assignments": {
                     "columns": [_check("Solved"), _number("Points", 0, 20, "sum")],
                     "rows": [
                         ("Sheet 1", {"Solved": True, "Points": 14}),
@@ -55,11 +55,11 @@ USERS = {
             {
                 "title": "Linear Algebra",
                 "tags": ["Semester 1", "Math"],
-                "lecture": {
+                "Lectures": {
                     "columns": [_check("Watched")],
                     "rows": [("Chapter 1", {"Watched": True}), ("Chapter 2", {"Watched": True})],
                 },
-                "assignment": {
+                "Assignments": {
                     "columns": [_check("Solved"), _number("Grade", 1, 6)],
                     "rows": [
                         ("Sheet 1", {"Solved": True, "Grade": 1}),
@@ -71,7 +71,7 @@ USERS = {
             {
                 "title": "Databases",
                 "tags": ["Semester 2", "CS"],
-                "lecture": {
+                "Lectures": {
                     "columns": [_check("Watched"), _check("Notes")],
                     "rows": [("Introduction", {"Watched": True}), ("SQL basics", {}), ("Normalization", {})],
                 },
@@ -79,7 +79,7 @@ USERS = {
             {
                 "title": "Machine Learning",
                 "tags": ["Semester 2", "CS", "ML"],
-                "lecture": {
+                "Lectures": {
                     "columns": [_check("Watched")],
                     "rows": [
                         ("Regression", {"Watched": True}),
@@ -87,7 +87,7 @@ USERS = {
                         ("Neural networks", {}),
                     ],
                 },
-                "assignment": {
+                "Assignments": {
                     "columns": [_check("Solved"), _number("Score", 0, 100)],
                     "rows": [
                         ("Project 1", {"Solved": True, "Score": 85}),
@@ -110,16 +110,16 @@ USERS = {
             {
                 "title": "Biology",
                 "tags": ["Lab"],
-                "lecture": {
+                "Lectures": {
                     "columns": [_check("Watched")],
                     "rows": [("Cells", {"Watched": True}), ("Genetics", {})],
                 },
-                "assignment": {"columns": [_check("Solved")], "rows": [("Report 1", {})]},
+                "Assignments": {"columns": [_check("Solved")], "rows": [("Report 1", {})]},
             },
             {
                 "title": "Chemistry",
                 "tags": [],
-                "lecture": {"columns": [_check("Watched")], "rows": [("Atoms", {})]},
+                "Lectures": {"columns": [_check("Watched")], "rows": [("Atoms", {})]},
             },
         ],
     },
@@ -128,17 +128,23 @@ USERS = {
 
 
 def _create_course(user, spec, tag_ids, rows):
+    table_types = {table_type.name: table_type.id for table_type in user.table_types}
     course = course_service.create_course(
-        user.id, {"title": spec["title"], "tag_ids": [tag_ids[value] for value in spec["tags"]]}
+        user.id,
+        {
+            "title": spec["title"],
+            "tag_ids": [tag_ids[value] for value in spec["tags"]],
+            "table_type_ids": list(table_types.values()),
+        },
     )
-    for table_type in TABLE_TYPES:
-        table = spec.get(table_type, {})
+    for name, table_type_id in table_types.items():
+        table = spec.get(name, {})
         columns = {
-            column["label"]: table_service.add_column(user.id, course.id, table_type, column)
+            column["label"]: table_service.add_column(user.id, course.id, table_type_id, column)
             for column in table.get("columns", [])
         }
         for title, cells in table.get("rows", []):
-            row = table_service.add_row(user.id, course.id, table_type, title)
+            row = table_service.add_row(user.id, course.id, table_type_id, title)
             rows[(spec["title"], title)] = row.id
             for label, value in cells.items():
                 table_service.set_cell(user.id, row.id, columns[label].id, value)

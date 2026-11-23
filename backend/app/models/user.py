@@ -11,6 +11,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
 
+    table_types = db.relationship("TableType", passive_deletes=True)
+
 
 @login_manager.user_loader
 def load_user(user_id):
