@@ -3,6 +3,10 @@
   <rect x="0" y="56" width="360" height="684" fill="#e6e6e6" stroke="#8c8c8c" />
   <rect x="0" y="0" width="360" height="56" fill="#d9d9d9" stroke="#8c8c8c" />
   <text x="16" y="35" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="228" y="12" width="32" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <rect x="236" y="21" width="16" height="14" fill="none" stroke="#333" stroke-width="1.4" />
+  <line x1="236" y1="26" x2="252" y2="26" stroke="#333" stroke-width="1.4" />
+  <line x1="242" y1="26" x2="242" y2="35" stroke="#333" stroke-width="1.4" />
   <rect x="268" y="12" width="32" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
   <path d="M277.5 22.5h7l6 6-7 7-6-6z" fill="none" stroke="#333" stroke-width="1.4" />
   <circle cx="281.5" cy="26.5" r="1.2" fill="#333" />

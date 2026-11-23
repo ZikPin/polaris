@@ -2,6 +2,8 @@
   <rect x="0" y="0" width="1280" height="720" fill="#fafafa" stroke="none" stroke-width="1"/>
   <rect x="0" y="0" width="1280" height="56" fill="#d9d9d9" stroke="#8c8c8c" stroke-width="1"/>
   <text x="24" y="36" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="828" y="12" width="64" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <text x="860" y="33" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">Tables</text>
   <rect x="900" y="12" width="64" height="32" fill="#e8e8e8" stroke="#8c8c8c" stroke-width="1"/>
   <text x="932" y="33" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">Tags</text>
   <text x="1160" y="34" font-size="14" text-anchor="end" font-weight="normal" fill="#333">user@example.com</text>
@@ -124,17 +126,17 @@
   <rect x="1208" y="176" width="40" height="40" fill="#d0d0d0" stroke="#8c8c8c" stroke-width="1"/>
   <text x="1228" y="203" font-size="20" text-anchor="middle" font-weight="normal" fill="#333">+</text>
   <circle cx="922" cy="254" r="5.5" fill="#e57373" stroke="#ffffff" stroke-width="1"/>
-  <text x="934" y="258" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms: Chapter 7, lecture</text>
+  <text x="934" y="258" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms: Sheet 3, Assignments</text>
   <rect x="1220" y="240" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" stroke-width="1"/>
   <text x="1234" y="259" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
-  <circle cx="922" cy="294" r="5.5" fill="#64b5f6" stroke="#ffffff" stroke-width="1"/>
-  <text x="934" y="298" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Databases: Chapter 5, lecture</text>
+  <circle cx="922" cy="294" r="5.5" fill="#e57373" stroke="#ffffff" stroke-width="1"/>
+  <text x="934" y="298" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms: Chapter 7, Lectures</text>
   <rect x="1220" y="280" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" stroke-width="1"/>
   <text x="1234" y="299" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
-  <circle cx="922" cy="334" r="5.5" fill="#e57373" stroke="#ffffff" stroke-width="1"/>
-  <text x="934" y="338" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms: Sheet 3, assignment</text>
+  <circle cx="922" cy="334" r="5.5" fill="#64b5f6" stroke="#ffffff" stroke-width="1"/>
+  <text x="934" y="338" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Databases: Chapter 5, Lectures</text>
   <rect x="1220" y="320" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" stroke-width="1"/>
   <text x="1234" y="339" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
   <text x="252" y="690" font-size="11" text-anchor="start" font-weight="normal" fill="#777">The 21st is selected (lighter, thick outline) without overflow. The 12th overflows (six entries, four shown). Today (darkest) has two entries.</text>
-  <text x="252" y="704" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Month navigation above the grid is an assumption. The list on the right is not a card. Entries: lectures first, then assignments. Circles = course color (placeholder colors).</text>
+  <text x="252" y="704" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Month navigation above the grid is an assumption. The list on the right is not a card. Entries: by the name of the table type, then in creation order. Circles = course color (placeholder colors).</text>
 </svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 990" width="360" height="990" font-family="sans-serif">
+  <rect x="0" y="0" width="360" height="990" fill="#fafafa" stroke="none" />
+  <rect x="0" y="0" width="360" height="56" fill="#d9d9d9" stroke="#8c8c8c" />
+  <text x="16" y="35" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="228" y="12" width="32" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <rect x="236" y="21" width="16" height="14" fill="none" stroke="#333" stroke-width="1.4" />
+  <line x1="236" y1="26" x2="252" y2="26" stroke="#333" stroke-width="1.4" />
+  <line x1="242" y1="26" x2="242" y2="35" stroke="#333" stroke-width="1.4" />
+  <rect x="268" y="12" width="32" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <path d="M277.5 22.5h7l6 6-7 7-6-6z" fill="none" stroke="#333" stroke-width="1.4" />
+  <circle cx="281.5" cy="26.5" r="1.2" fill="#333" />
+  <rect x="308" y="12" width="36" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <line x1="317" y1="22" x2="335" y2="22" stroke="#333" stroke-width="2" />
+  <line x1="317" y1="28" x2="335" y2="28" stroke="#333" stroke-width="2" />
+  <line x1="317" y1="34" x2="335" y2="34" stroke="#333" stroke-width="2" />
+  <text x="16" y="108" font-size="26" text-anchor="start" font-weight="bold" fill="#333">Courses</text>
+  <rect x="16" y="124" width="120" height="32" fill="#e8e8e8" stroke="#757575" />
+  <text x="76" y="145" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Tags  ▾</text>
+  <rect x="16" y="168" width="328" height="484" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="24" y="176" width="216" height="40" fill="#ffffff" stroke="#757575" />
+  <text x="38" y="201" font-size="14" text-anchor="start" font-weight="normal" fill="#333">Operating Systems</text>
+  <rect x="248" y="176" width="40" height="40" fill="#e8e8e8" stroke="#8c8c8c" />
+  <text x="268" y="201" font-size="16" text-anchor="middle" font-weight="normal" fill="#333">▴</text>
+  <rect x="296" y="176" width="40" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="316" y="201" font-size="20" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <text x="28" y="240" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Tags</text>
+  <rect x="28" y="252" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="35.5" y="264" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <text x="52" y="264" font-size="12" text-anchor="start" font-weight="normal" fill="#333">CS</text>
+  <rect x="180" y="252" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="204" y="264" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Exam</text>
+  <rect x="28" y="278" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="52" y="290" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Math</text>
+  <rect x="180" y="278" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="204" y="290" font-size="12" text-anchor="start" font-weight="normal" fill="#333">ML</text>
+  <rect x="28" y="304" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="35.5" y="316" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <text x="52" y="316" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Semester 1</text>
+  <rect x="180" y="304" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="204" y="316" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Semester 2</text>
+  <text x="28" y="342" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Tables</text>
+  <rect x="28" y="354" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="35.5" y="366" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <text x="52" y="366" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Assignments</text>
+  <rect x="180" y="354" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="204" y="366" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Labs</text>
+  <rect x="28" y="380" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="35.5" y="392" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <text x="52" y="392" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Lectures</text>
+  <text x="28" y="418" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Description</text>
+  <rect x="28" y="430" width="304" height="72" fill="#ffffff" stroke="#757575" />
+  <text x="40" y="450" font-size="12" text-anchor="start" font-weight="normal" fill="#555">Processes, threads, scheduling and memory.</text>
+  <text x="40" y="466" font-size="12" text-anchor="start" font-weight="normal" fill="#555">Labs every second week.</text>
+  <text x="28" y="526" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Color</text>
+  <circle cx="44" cy="554" r="14" fill="#b5b5b5" stroke="#8c8c8c" />
+  <circle cx="112" cy="554" r="14" fill="#c2c2c2" stroke="#8c8c8c" />
+  <circle cx="180" cy="554" r="14" fill="#cdcdcd" stroke="#8c8c8c" />
+  <circle cx="248" cy="554" r="14" fill="#b0b0b0" stroke="#8c8c8c" />
+  <circle cx="248" cy="554" r="17" fill="none" stroke="#333" />
+  <circle cx="316" cy="554" r="14" fill="#bdbdbd" stroke="#8c8c8c" />
+  <circle cx="44" cy="590" r="14" fill="#c8c8c8" stroke="#8c8c8c" />
+  <circle cx="112" cy="590" r="14" fill="#ababab" stroke="#8c8c8c" />
+  <circle cx="180" cy="590" r="14" fill="#bababa" stroke="#8c8c8c" />
+  <circle cx="248" cy="590" r="14" fill="#c5c5c5" stroke="#8c8c8c" />
+  <circle cx="316" cy="590" r="14" fill="#a8a8a8" stroke="#8c8c8c" />
+  <rect x="28" y="618" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="52" y="630" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Hide from the menu</text>
+  <rect x="16" y="668" width="328" height="209" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="16" y="668" width="328" height="28" fill="#bdbdbd" stroke="#8c8c8c" />
+  <text x="28" y="724" font-size="16" text-anchor="start" font-weight="bold" fill="#333">Algorithms</text>
+  <rect x="28" y="738" width="82" height="20" fill="#d4d4d4" stroke="none" />
+  <text x="69" y="752" font-size="11" text-anchor="middle" font-weight="normal" fill="#333">Semester 1</text>
+  <rect x="116" y="738" width="27.6" height="20" fill="#d4d4d4" stroke="none" />
+  <text x="129.8" y="752" font-size="11" text-anchor="middle" font-weight="normal" fill="#333">CS</text>
+  <text x="28" y="778" font-size="11" text-anchor="start" font-weight="normal" fill="#555">Sorting, graphs, dynamic programming and</text>
+  <text x="28" y="793" font-size="11" text-anchor="start" font-weight="normal" fill="#555">complexity analysis. The exam is open</text>
+  <text x="28" y="808" font-size="11" text-anchor="start" font-weight="normal" fill="#555">book, so the plan is to finish every</text>
+  <text x="28" y="823" font-size="11" text-anchor="start" font-weight="normal" fill="#555">assignment sheet by the end of Nov…</text>
+  <rect x="274" y="837" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="288" y="856" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">✎</text>
+  <rect x="306" y="837" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="320" y="856" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
+  <text x="180" y="900" font-size="12" text-anchor="middle" font-weight="normal" fill="#777">…  more cards, one per row</text>
+  <text x="16" y="930" font-size="11" text-anchor="start" font-weight="normal" fill="#777">The expanded add card lists the fields one under the</text>
+  <text x="16" y="946" font-size="11" text-anchor="start" font-weight="normal" fill="#777">other, the colors in two rows of five. No danger mark,</text>
+  <text x="16" y="962" font-size="11" text-anchor="start" font-weight="normal" fill="#777">nothing can be lost when adding.</text>
+</svg>

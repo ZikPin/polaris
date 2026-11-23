@@ -1,8 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 760" width="1280" height="760" font-family="sans-serif">
-  <rect x="0" y="0" width="1280" height="760" fill="#fafafa" stroke="none" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 922" width="1280" height="922" font-family="sans-serif">
+  <rect x="0" y="0" width="1280" height="922" fill="#fafafa" stroke="none" />
   <rect x="0" y="56" width="220" height="704" fill="#e6e6e6" stroke="#8c8c8c" />
   <rect x="0" y="0" width="1280" height="56" fill="#d9d9d9" stroke="#8c8c8c" />
   <text x="24" y="36" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="828" y="12" width="64" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <text x="860" y="33" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">Tables</text>
   <rect x="900" y="12" width="64" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
   <text x="932" y="33" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">Tags</text>
   <text x="1160" y="34" font-size="14" text-anchor="end" font-weight="normal" fill="#333">user@example.com</text>
@@ -20,10 +22,13 @@
   <text x="252" y="112" font-size="26" text-anchor="start" font-weight="bold" fill="#333">Courses</text>
   <rect x="1128" y="84" width="120" height="32" fill="#e8e8e8" stroke="#757575" />
   <text x="1188" y="105" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Tags  ▾</text>
-  <rect x="252" y="132" width="948" height="40" fill="#ffffff" stroke="#757575" />
-  <text x="266" y="157" font-size="14" text-anchor="start" font-weight="normal" fill="#999">Title of a new course</text>
-  <rect x="1208" y="132" width="40" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
-  <text x="1228" y="157" font-size="20" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <rect x="252" y="128" width="996" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="260" y="136" width="884" height="40" fill="#ffffff" stroke="#757575" />
+  <text x="274" y="161" font-size="14" text-anchor="start" font-weight="normal" fill="#999">Title of a new course</text>
+  <rect x="1152" y="136" width="40" height="40" fill="#e8e8e8" stroke="#8c8c8c" />
+  <text x="1172" y="161" font-size="16" text-anchor="middle" font-weight="normal" fill="#333">▾</text>
+  <rect x="1200" y="136" width="40" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="1220" y="161" font-size="20" text-anchor="middle" font-weight="normal" fill="#333">+</text>
   <rect x="252" y="204" width="237" height="239" fill="#f4f4f4" stroke="#8c8c8c" />
   <rect x="252" y="204" width="237" height="28" fill="#bdbdbd" stroke="#8c8c8c" />
   <text x="264" y="260" font-size="16" text-anchor="start" font-weight="bold" fill="#333">Algorithms</text>
@@ -87,10 +92,10 @@
   <text x="465" y="598" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
   <text x="252" y="651" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Cards: 4 per row (flex grid), the fifth wraps. Grey bar = course color (default grey). The Tags filter next to the title is the same select as on the dashboard.</text>
   <text x="252" y="667" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Under the tags a card shows the description, cut after 150 characters with an ellipsis (Algorithms). Clicking a card opens the course, the buttons do not.</text>
-  <text x="252" y="683" font-size="11" text-anchor="start" font-weight="normal" fill="#777">The edit button opens the course dialog (courses-edit-dialog.svg), there is no inline edit. The delete button asks for a confirmation. Adding a course stays the input above the cards.</text>
+  <text x="252" y="683" font-size="11" text-anchor="start" font-weight="normal" fill="#777">The edit button opens the course dialog (courses-edit-dialog.svg), there is no inline edit. The delete button asks for a confirmation.</text>
   <text x="252" y="699" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Navbar: Courses expands to the list of courses, Dashboard and Calendar are single entries.</text>
-  <rect x="0" y="0" width="1280" height="760" fill="#000000" stroke="none" opacity="0.35" />
-  <rect x="410" y="58" width="460" height="642" fill="#ffffff" stroke="#757575" />
+  <rect x="0" y="0" width="1280" height="922" fill="#000000" stroke="none" opacity="0.35" />
+  <rect x="410" y="58" width="460" height="784" fill="#ffffff" stroke="#757575" />
   <text x="434" y="98" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Edit the course</text>
   <rect x="826" y="72" width="24" height="24" fill="#e0e0e0" stroke="#8c8c8c" />
   <text x="838" y="89" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
@@ -114,32 +119,45 @@
   <text x="474" y="337" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Semester 1</text>
   <rect x="640" y="325" width="15" height="15" fill="#ffffff" stroke="#757575" />
   <text x="664" y="337" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Semester 2</text>
-  <rect x="434" y="368" width="412" height="126" fill="#f4f4f4" stroke="#8c8c8c" />
-  <text x="450" y="395" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Description</text>
-  <rect x="450" y="406" width="380" height="72" fill="#ffffff" stroke="#757575" />
-  <text x="462" y="426" font-size="12" text-anchor="start" font-weight="normal" fill="#555">Sorting, graphs, dynamic programming and complexity</text>
-  <text x="462" y="442" font-size="12" text-anchor="start" font-weight="normal" fill="#555">analysis. The exam is open book, so the plan is to</text>
-  <text x="462" y="458" font-size="12" text-anchor="start" font-weight="normal" fill="#555">finish every assignment sheet by the end of November</text>
-  <rect x="434" y="504" width="412" height="82" fill="#f4f4f4" stroke="#8c8c8c" />
-  <text x="450" y="531" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Color</text>
-  <circle cx="464" cy="558" r="14" fill="#b5b5b5" stroke="#8c8c8c" />
-  <circle cx="464" cy="558" r="17" fill="none" stroke="#333" />
-  <circle cx="500" cy="558" r="14" fill="#c2c2c2" stroke="#8c8c8c" />
-  <circle cx="536" cy="558" r="14" fill="#cdcdcd" stroke="#8c8c8c" />
-  <circle cx="572" cy="558" r="14" fill="#b0b0b0" stroke="#8c8c8c" />
-  <circle cx="608" cy="558" r="14" fill="#bdbdbd" stroke="#8c8c8c" />
-  <circle cx="644" cy="558" r="14" fill="#c8c8c8" stroke="#8c8c8c" />
-  <circle cx="680" cy="558" r="14" fill="#ababab" stroke="#8c8c8c" />
-  <circle cx="716" cy="558" r="14" fill="#bababa" stroke="#8c8c8c" />
-  <circle cx="752" cy="558" r="14" fill="#c5c5c5" stroke="#8c8c8c" />
-  <circle cx="788" cy="558" r="14" fill="#a8a8a8" stroke="#8c8c8c" />
-  <rect x="450" y="605" width="15" height="15" fill="#ffffff" stroke="#757575" />
-  <text x="474" y="617" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Hide from the menu</text>
-  <rect x="540" y="640" width="100" height="40" fill="#e8e8e8" stroke="#8c8c8c" />
-  <text x="590" y="665" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Cancel</text>
-  <rect x="652" y="640" width="100" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
-  <text x="702" y="665" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Save</text>
-  <text x="252" y="716" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Opened by the edit button of a card, on top of the page, like the tag overlay. Adding a course does not use it: the input above the cards stays.</text>
-  <text x="252" y="732" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Option panels like the column dialogs: title, tags (two checkbox rows per line), description (multi-line, at most 1000 characters), color (the ten accents, one chosen, default the first).</text>
-  <text x="252" y="748" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Under the panels, outside them: the checkbox "Hide from the menu", off for a new course. A hidden course only leaves the navbar. Cancel and Save follow below it.</text>
+  <rect x="434" y="368" width="412" height="132" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="450" y="395" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Tables</text>
+  <rect x="450" y="411" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="457.5" y="423" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <text x="474" y="423" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Assignments</text>
+  <rect x="640" y="411" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="664" y="423" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Labs</text>
+  <rect x="450" y="439" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="457.5" y="451" font-size="12" text-anchor="middle" font-weight="normal" fill="#333">✓</text>
+  <text x="474" y="451" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Lectures</text>
+  <text x="450" y="472" font-size="11" text-anchor="start" font-weight="bold" fill="#333">⚠  Unticking a table deletes its rows, columns and</text>
+  <text x="466" y="487" font-size="11" text-anchor="start" font-weight="bold" fill="#333">values in this course.</text>
+  <rect x="434" y="510" width="412" height="126" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="450" y="537" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Description</text>
+  <rect x="450" y="548" width="380" height="72" fill="#ffffff" stroke="#757575" />
+  <text x="462" y="568" font-size="12" text-anchor="start" font-weight="normal" fill="#555">Sorting, graphs, dynamic programming and complexity</text>
+  <text x="462" y="584" font-size="12" text-anchor="start" font-weight="normal" fill="#555">analysis. The exam is open book, so the plan is to</text>
+  <text x="462" y="600" font-size="12" text-anchor="start" font-weight="normal" fill="#555">finish every assignment sheet by the end of November</text>
+  <rect x="434" y="646" width="412" height="82" fill="#f4f4f4" stroke="#8c8c8c" />
+  <text x="450" y="673" font-size="12" text-anchor="start" font-weight="bold" fill="#333">Color</text>
+  <circle cx="464" cy="700" r="14" fill="#b5b5b5" stroke="#8c8c8c" />
+  <circle cx="464" cy="700" r="17" fill="none" stroke="#333" />
+  <circle cx="500" cy="700" r="14" fill="#c2c2c2" stroke="#8c8c8c" />
+  <circle cx="536" cy="700" r="14" fill="#cdcdcd" stroke="#8c8c8c" />
+  <circle cx="572" cy="700" r="14" fill="#b0b0b0" stroke="#8c8c8c" />
+  <circle cx="608" cy="700" r="14" fill="#bdbdbd" stroke="#8c8c8c" />
+  <circle cx="644" cy="700" r="14" fill="#c8c8c8" stroke="#8c8c8c" />
+  <circle cx="680" cy="700" r="14" fill="#ababab" stroke="#8c8c8c" />
+  <circle cx="716" cy="700" r="14" fill="#bababa" stroke="#8c8c8c" />
+  <circle cx="752" cy="700" r="14" fill="#c5c5c5" stroke="#8c8c8c" />
+  <circle cx="788" cy="700" r="14" fill="#a8a8a8" stroke="#8c8c8c" />
+  <rect x="450" y="747" width="15" height="15" fill="#ffffff" stroke="#757575" />
+  <text x="474" y="759" font-size="12" text-anchor="start" font-weight="normal" fill="#333">Hide from the menu</text>
+  <rect x="540" y="782" width="100" height="40" fill="#e8e8e8" stroke="#8c8c8c" />
+  <text x="590" y="807" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Cancel</text>
+  <rect x="652" y="782" width="100" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="702" y="807" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Save</text>
+  <text x="252" y="858" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Opened by the edit button of a card, on top of the page, like the tag overlay. The add card shows the same fields (courses-add-expanded.svg).</text>
+  <text x="252" y="874" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Option panels like the column dialogs: title, tags (two checkbox rows per line), tables (the table types, with the danger mark), description (multi-line, at most 1000 characters), color (the ten accents, one chosen, default the first).</text>
+  <text x="252" y="890" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Under the panels, outside them: the checkbox "Hide from the menu", off for a new course. A hidden course only leaves the navbar. Cancel and Save follow below it.</text>
+  <text x="252" y="906" font-size="11" text-anchor="start" font-weight="normal" fill="#777">The danger mark of the tables is always shown, also before anything is unticked.</text>
 </svg>

@@ -2,6 +2,10 @@
   <rect x="0" y="0" width="360" height="860" fill="#fafafa" stroke="none" />
   <rect x="0" y="0" width="360" height="56" fill="#d9d9d9" stroke="#8c8c8c" />
   <text x="16" y="35" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="228" y="12" width="32" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <rect x="236" y="21" width="16" height="14" fill="none" stroke="#333" stroke-width="1.4" />
+  <line x1="236" y1="26" x2="252" y2="26" stroke="#333" stroke-width="1.4" />
+  <line x1="242" y1="26" x2="242" y2="35" stroke="#333" stroke-width="1.4" />
   <rect x="268" y="12" width="32" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
   <path d="M277.5 22.5h7l6 6-7 7-6-6z" fill="none" stroke="#333" stroke-width="1.4" />
   <circle cx="281.5" cy="26.5" r="1.2" fill="#333" />
@@ -12,10 +16,13 @@
   <text x="16" y="108" font-size="26" text-anchor="start" font-weight="bold" fill="#333">Courses</text>
   <rect x="16" y="124" width="120" height="32" fill="#e8e8e8" stroke="#757575" />
   <text x="76" y="145" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">Tags  ▾</text>
-  <rect x="16" y="172" width="280" height="40" fill="#ffffff" stroke="#757575" />
-  <text x="30" y="197" font-size="14" text-anchor="start" font-weight="normal" fill="#999">Title of a new course</text>
-  <rect x="304" y="172" width="40" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
-  <text x="324" y="197" font-size="20" text-anchor="middle" font-weight="normal" fill="#333">+</text>
+  <rect x="16" y="164" width="328" height="56" fill="#f4f4f4" stroke="#8c8c8c" />
+  <rect x="24" y="172" width="216" height="40" fill="#ffffff" stroke="#757575" />
+  <text x="38" y="197" font-size="14" text-anchor="start" font-weight="normal" fill="#999">Title of a new course</text>
+  <rect x="248" y="172" width="40" height="40" fill="#e8e8e8" stroke="#8c8c8c" />
+  <text x="268" y="197" font-size="16" text-anchor="middle" font-weight="normal" fill="#333">▾</text>
+  <rect x="296" y="172" width="40" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
+  <text x="316" y="197" font-size="20" text-anchor="middle" font-weight="normal" fill="#333">+</text>
   <rect x="0" y="0" width="360" height="760" fill="#000000" stroke="none" opacity="0.35" />
   <rect x="16" y="68" width="328" height="680" fill="#ffffff" stroke="#757575" />
   <text x="36" y="109" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Welcome to Polaris</text>

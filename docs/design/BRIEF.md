@@ -99,7 +99,7 @@ Derived tones, all mixed from `--course-color` over `--color-sheet` and tunable 
 | ----- | ------------------------- | ----- |
 | `--mix-table-title` | 38% | Title column of a table (the table header is the full color). |
 | `--mix-table-body` | 15% | Body cells of a table. |
-| `--mix-card-secondary` | 78% | The second dashboard card of a course (Assignments), slightly lighter than the first. |
+| `--mix-card-secondary` | 78% | Every second dashboard card of a course, slightly lighter than the one before. |
 | `--mix-tag-row` | 30% | A row in the tags dialog. |
 
 An eleventh color needs at least 4.5:1 contrast with ink at 84%, at least 25 degrees of hue distance to its neighbors, and about the same saturation and lightness as the others.
@@ -171,7 +171,7 @@ The structure of each screen comes from the wireframes. This section says how ea
 
 ### 6.1 Frame
 
-- **Header.** 56px, page tone (no bar). Brand left: a 30px ink rounded square (`--radius-sm`) with a four-point star, then "Polaris" in extrabold 18px. Right: the Tags button, the user email in soft ink, the Log out button, both buttons ghost (`--tint-1`) with a leading icon. Login and register show only the brand.
+- **Header.** 56px, page tone (no bar). Brand left: a 30px ink rounded square (`--radius-sm`) with a four-point star, then "Polaris" in extrabold 18px. Right: the Tables button (table types), the Tags button, the user email in soft ink, the Log out button, all buttons ghost (`--tint-1`) with a leading icon. Login and register show only the brand.
 - **Navbar.** 220px, page tone, no divider. Entries: icon, label, semibold, `--radius-md`, hover `--tint-1`, **active = ink fill with `--color-on-ink` text**. "Courses" expands (chevron rotates) to the course list: dot in the course color, 13.5px, soft ink; hover `--tint-1`; the current course is `--tint-2` and bold.
 - **Content sheet.** `--color-sheet`, `--radius-sheet`, fills the rest of the window.
 - **Page head.** Title (h1) left, actions right: the back button, the dashboard filters, and on the courses page the Tags filter (the same select as on the dashboard).
@@ -195,6 +195,7 @@ All buttons: `--control-h`, `--radius-md`, semibold, field tone, **hover = `--co
 - **Text input.** 44px, `--radius-lg`, field tone, padding 0 16px, no border. Placeholder `--color-ink-soft`. Focus: 2px `--color-focus` outline, 2px offset (inputs outline themselves).
 - **Input with a swatch** (new tag): the field has the tag color swatch (16px circle) inside at the left.
 - **Invalid input.** 2px `--color-danger` outline, and the message under it: 16px danger icon plus ink text, 12.5px semibold. A whole-form error is a banner instead (`--color-danger-tint`, `--radius-lg`, danger icon, ink text).
+- **Danger mark.** The look of the field message (16px danger icon, ink text 12.5px semibold), but always shown, not only after an error: it warns that an action deletes data. Used in the table options of the course dialog and in the Tables dialog (REQ-F-90).
 - **Checkbox.** 16px, `--radius-xs`, field tone; checked = ink fill with an on-ink checkmark. In tables 17px with `--glass-4` instead of field tone.
 - **Label.** 12.5px bold, soft ink, above the input.
 
@@ -206,11 +207,13 @@ Pill (`--radius-pill`), `--glass-3` on the card, 11.5px semibold, padding 3px 10
 
 The card is **filled with `--course-color`**, ink text, `--radius-card`, 168px high at least, padding 20px 18px 14px. A soft circle (`--glass-1`, 108px) hangs out of the top right corner, clipped by the card. Title 16px bold, tags under it, then the description (13.5px, `--color-ink-on-accent`, cut after 150 characters with an ellipsis), and the two icon buttons (edit, delete) at the bottom right. Clicking the card opens the course, the buttons do not. Four cards per row, 16px gap. Editing happens in the course dialog (6.9), the card has no edit state.
 
+**Add card.** Above the cards, full width: `--color-panel`, `--radius-card`, padding 14px. Collapsed (when the page opens) it is one row: the title input, a square toggle button with a chevron and the square primary add button, the input and the toggle in `--color-sheet`. The toggle expands the card (the chevron turns up): below the row follow the fields of the course dialog (6.9) without the title, in two columns and without their panels (tags and tables, description and color, then the hide option). There is no danger mark here, nothing can be lost when adding. Collapsing keeps the values. After adding, the card is empty again and stays as it was; a failed add keeps everything and shows the error banner under it.
+
 A course hidden from the navigation keeps its color and tone and shows an eye-off glyph (`--color-ink-on-accent`, no background) centered in the corner circle, and the title leaves room for it. The glyph is no button, it carries the name "Hidden from the menu".
 
 ### 6.6 Dashboard cards
 
-Per course: a heading (a dot in the course color and the name, 18px bold), then two cards side by side, as tall as the taller one. Both are filled with the course color; the second (Assignments) is `--mix-card-secondary`. Inside: title 16px bold; stats as label and value on one line (label in `--color-ink-on-accent`, value semibold, right aligned); the "not done yet" list in a `--glass-2` box with a `--radius-lg`, small caps heading, 6px ink dots. Empty states are plain text in `--color-ink-on-accent`.
+Per course: a heading (a dot in the course color and the name, 18px bold), then one card per table of the course, in the alphabetical order of the table types, two per row (a third one wraps), the cards of a row as tall as the taller one. All are filled with the course color; every second card is `--mix-card-secondary`. A course without tables shows "No tables." in soft ink under its heading. Inside: title 16px bold; stats as label and value on one line (label in `--color-ink-on-accent`, value semibold, right aligned); the "not done yet" list in a `--glass-2` box with a `--radius-lg`, small caps heading, 6px ink dots. Empty states are plain text in `--color-ink-on-accent`.
 
 ### 6.7 Course page tables
 
@@ -220,8 +223,9 @@ Per course: a heading (a dot in the course color and the name, 18px bold), then 
 - **Long titles** wrap onto further lines instead of being cut. The row grows, its other cells stay vertically centered.
 - **Add bars.** A 20px bar on the right of the table and a 20px bar below it, 4px away from the table, field tone, soft ink `+`, hover `--color-hover`.
 - **Hover tools.** On a column header two 18px circles appear at the right inside the cell (`--tint-3`): edit (number columns only) and delete. A row title only has delete. Hover of a tool: ink fill.
-- **In-place edit.** The cell holds an input (`--color-sheet-raised`, `--radius-sm`, 2px ink outline, semibold). Enter or leaving the field saves, Escape drops the change. A new row starts as "Default lecture." or "Default assignment." and a new column as "Default bool-col." or "Default num-col.", already in edit mode.
-- The two tables sit side by side while they fit and wrap under each other when they do not.
+- **In-place edit.** The cell holds an input (`--color-sheet-raised`, `--radius-sm`, 2px ink outline, semibold). Enter or leaving the field saves, Escape drops the change. A new row starts as "Default row." and a new column as "Default bool-col." or "Default num-col.", already in edit mode.
+- One table per table type of the course, headed by the name of the type, in alphabetical order. The tables flow like words in a line: next to each other while they fit, and a table that does not fit the rest of the row starts the next row. The page never scrolls sideways.
+- A course without tables shows a message in soft ink instead: create table types with Tables in the header, then tick them in the dialog of the course.
 
 ### 6.8 Calendar
 
@@ -236,8 +240,9 @@ Per course: a heading (a dot in the course color and the name, 18px bold), then 
 A scrim (`--color-scrim`) over the whole page, a centered 460px panel: `--color-sheet`, `--radius-dialog`, padding 26px. Head: title (20px extrabold) and a close icon button. The page behind stays visible. A dialog higher than the window scrolls (at most the window height minus 32px).
 
 - **Tags dialog:** new tag input with swatch and a square add button, then rows (38px, `--radius-md`, `--mix-tag-row` tint of the tag color, swatch and name). Click a name to rename it in place; the delete circle (same as the table tools) appears on hover at the right of the row. The swatch is not clickable yet.
-- **Course dialog** (title "Edit the course", opened by the edit button of a card; adding a course stays the input above the cards): four option panels like the column dialogs, each with a label (12.5px bold, soft ink): the title (input), the tags (checkbox rows like the tags filter, two per line, boxes in `--color-sheet`), the description (multi-line input, three rows, can be resized) and the color (the ten accents as 28px circles with an 8px gap, the chosen one with a 2px ink outline 2px away from the circle). Under the panels, outside them, the checkbox "Hide from the menu" (aligned with the panel contents, boxes in field tone). Cancel (field tone) and Save (primary) sit centered at the bottom.
-- **Welcome dialog** (title "Welcome to Polaris", subtitle "Your guiding star through the semester" in soft ink): shown once after registering, the cross is its only button. One option panel per navigation entry, in menu order: the name (18px bold on wide screens, 16px below), a text of at most three sentences (soft ink) and a hint, a rough drawing of the page in its own colors on a `--color-sheet` area. From **1000px** wide the dialog is 80% of the window wide (at most 1200px) and as high as its content, padding 32px, the three panels stand side by side with the name and text on top (at least four lines high, so the hints line up) and a 4:3 hint below. These hints are detailed: the add row and course cards with title, tags and the corner circle; per course a heading and the two cards with stats and the "not done yet" box; a month with entries, today in ink and one selected day. Below 1000px the panels are rows with a 92x68px hint of plain shapes (2x2 cards, two pairs of cards, a month of 5x3 days) beside the text, in the normal 460px dialog.
+- **Tables dialog** (title "Tables", opened by the Tables button of the header): the tags dialog without colors. The new table type input and the add button, under them the danger mark (deleting a table type removes its table from every course), then the rows in `--color-panel`, renamed in place and deleted with the hover circle after a confirmation.
+- **Course dialog** (title "Edit the course", opened by the edit button of a card; the add card shares its fields): five option panels like the column dialogs, each with a label (12.5px bold, soft ink): the title (input), the tags (checkbox rows like the tags filter, two per line, boxes in `--color-sheet`), the tables (the table types as the same checkbox rows, with the danger mark under them, always shown), the description (multi-line input, three rows, can be resized) and the color (the ten accents as 28px circles with an 8px gap, the chosen one with a 2px ink outline 2px away from the circle). Under the panels, outside them, the checkbox "Hide from the menu" (aligned with the panel contents, boxes in field tone). Cancel (field tone) and Save (primary) sit centered at the bottom.
+- **Welcome dialog** (title "Welcome to Polaris", subtitle "Your guiding star through the semester" in soft ink): shown once after registering, the cross is its only button. One option panel per navigation entry, in menu order: the name (18px bold on wide screens, 16px below), a text of at most three sentences (soft ink) and a hint, a rough drawing of the page in its own colors on a `--color-sheet` area. From **1000px** wide the dialog is 80% of the window wide (at most 1200px) and as high as its content, padding 32px, the three panels stand side by side with the name and text on top (at least four lines high, so the hints line up) and a 4:3 hint below. These hints are detailed: the add card and course cards with title, tags and the corner circle; per course a heading and the two cards with stats and the "not done yet" box; a month with entries, today in ink and one selected day. Below 1000px the panels are rows with a 92x68px hint of plain shapes (2x2 cards, two pairs of cards, a month of 5x3 days) beside the text, in the normal 460px dialog.
 - **Column dialogs:** option panels (`--color-panel`, `--radius-xl`, padding 16px 18px) with the title and its control on one line, inputs below in `--color-sheet` (42px), the action button centered at the bottom.
 
 ### 6.10 Login and register
@@ -250,11 +255,11 @@ The **forgot password** and **new password** pages use the same card and have no
 
 Below **768px** the layout changes, above it nothing does. Same tokens, no new colors.
 
-- **Header.** Stays at the top while the page scrolls. Brand left; right the Tags button (icon only) and a square burger button (ghost, 34px), which turns into a cross while the navbar is open. The email and Log out leave the header.
+- **Header.** Stays at the top while the page scrolls. Brand left; right the Tables and Tags buttons (icon only) and a square burger button (ghost, 34px), which turns into a cross while the navbar is open. The email and Log out leave the header.
 - **Navbar.** The burger opens it from the header downward over the content, full width, page tone, scrolling if it is taller than the window. The entries are the desktop ones (Courses expands to the course list, Dashboard, Calendar), **Log out is the last entry**, pushed to the bottom. Choosing an entry closes it. Entries are 44px high and list entries 40px, so they are easy to hit.
 - **Content sheet.** Margin 0 8px 8px, padding 16px 16px 28px.
 - **Page head.** Stacked: the title, then directly under it the tags filter, the back button or the dashboard filters.
-- **One column.** Course cards, the lecture table above the assignment table, and the two dashboard cards are one per row. A table wider than the sheet scrolls inside its own area, the page never scrolls sideways.
+- **One column.** Course cards, the tables, the dashboard cards and the fields of the expanded add card are one per row. A table wider than the sheet scrolls inside its own area, the page never scrolls sideways.
 - **Calendar.** Month grid on top, the day panel below it at full width. Rows are 56px high. A day shows its entries as 7px dots in the course color, up to eight (the text does not fit); the day panel lists them with names.
 - **Dialogs.** 100% wide minus a 16px margin, padding 20px, option panels 14px 16px. A dialog starts 12px below the header, which the scrim covers like the rest of the page, and is at most as high as the space under it (window height minus the header and 28px); the content scrolls if it is higher. In the course dialog the ten colors wrap into **two rows of five**, spread over the full width, and the number inputs of the column dialogs stand one under the other. There is no wireframe of its own for this: it is the desktop dialog with these changes, the phone frame of `courses-edit-dialog.html` shows it. The welcome dialog is the exception: it is as high as the space under the header, with the same 12px gap below it, the three panels share the height and the hints are the small ones (68x52px), see `mobile-welcome-dialog.svg`.
 - **Preview.** The mock-ups are the responsive pages themselves, check them at 360px wide (the narrowest supported screen). The address `course/courses.html#nav` opens the navbar, the burger uses it too.
@@ -275,7 +280,7 @@ Hover, active and selected states are described with their component. The rest:
 
 ## 8. Icons
 
-Inline SVG, 24px grid, shown at 18px (11px inside the hover tools, 14px in the `+` bars), stroke only, `currentColor`, round caps and joins. Used: courses (book), dashboard (four squares), calendar, tag, log out, pencil, cross, check, plus, chevrons (down, left, right), arrow left, burger, alert (circle with a mark), eye-off. The brand mark is a filled four-point star.
+Inline SVG, 24px grid, shown at 18px (11px inside the hover tools, 14px in the `+` bars), stroke only, `currentColor`, round caps and joins. Used: courses (book), dashboard (four squares), calendar, table (a frame with a header row and a title column), tag, log out, pencil, cross, check, plus, chevrons (down, left, right), arrow left, burger, alert (circle with a mark), eye-off. The brand mark is a filled four-point star.
 
 ## 9. Rules for new components
 
@@ -292,14 +297,17 @@ One folder per page, the same names in `wireframes/` and `mockups/`. The phone w
 
 | Folder | Screen | Wireframe | Phone wireframe | Mock-up |
 | ------ | ------ | --------- | --------------- | ------- |
-| `course/` | Courses | `courses.svg` | `mobile-courses.svg` | `courses.html` |
+| `course/` | Courses (add card collapsed) | `courses.svg` | `mobile-courses.svg` | `courses.html` |
+| | Add card expanded | `courses-add-expanded.svg` | `mobile-courses-add-expanded.svg` | `courses-add-expanded.html` |
 | | Navbar open | | `mobile-navbar.svg` | `courses.html#nav` |
 | | Tags dialog | `courses-tags-overlay.svg` | | `courses-tags-overlay.html` |
+| | Tables dialog | `courses-tables-overlay.svg` | | `courses-tables-overlay.html` |
 | | Course dialog (edit) | `courses-edit-dialog.svg` | | `courses-edit-dialog.html` |
 | | Welcome dialog | `welcome-dialog.svg` | `mobile-welcome-dialog.svg` | `welcome-dialog.html` |
-| `tables/` | Course, tables side by side | `course-tables-side-by-side.svg` | | `course-tables-side-by-side.html` |
-| | Course, tables stacked | `course-tables-stacked.svg` | `mobile-course.svg` | `course-tables-stacked.html` |
-| | Course, empty tables | `course-tables-empty.svg` | | `course-tables-empty.html` |
+| `tables/` | Course, three lean tables in one row | `course-tables-side-by-side.svg` | | `course-tables-side-by-side.html` |
+| | Course, four tables that wrap | `course-tables-stacked.svg` | `mobile-course.svg` | `course-tables-stacked.html` |
+| | Course, one empty table | `course-tables-empty.svg` | | `course-tables-empty.html` |
+| | Course without tables | `course-no-tables.svg` | | `course-no-tables.html` |
 | | Course, table interactions | `course-table-interactions.svg` | | `course-table-interactions.html` |
 | | Add column dialog | `course-add-column-dialog.svg` | | `course-add-column-dialog.html` |
 | | Edit column dialog | `course-edit-column-dialog.svg` | | `course-edit-column-dialog.html` |
@@ -311,7 +319,7 @@ One folder per page, the same names in `wireframes/` and `mockups/`. The phone w
 
 The interactions mock-up shows the hover states forced on at once with the class `hot`; in the app they come from `:hover`. The text under it is a note for the mock-up only.
 
-The tables side by side now only fit with few columns, because the title column is wider (224px): Lectures with two number or checkbox columns next to Assignments with one. Everything else wraps under each other.
+Only lean tables share a row, because the title column is wide (224px): at 1280px three tables with a title and at most one more column fit (side by side). As soon as one is wider, the tables after it wrap to the next row (stacked: Labs with two columns, then Lectures with four).
 
 ## 11. Open points
 

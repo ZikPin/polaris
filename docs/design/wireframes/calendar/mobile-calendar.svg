@@ -2,6 +2,10 @@
   <rect x="0" y="0" width="360" height="963" fill="#fafafa" stroke="none" />
   <rect x="0" y="0" width="360" height="56" fill="#d9d9d9" stroke="#8c8c8c" />
   <text x="16" y="35" font-size="18" text-anchor="start" font-weight="bold" fill="#333">Polaris</text>
+  <rect x="228" y="12" width="32" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
+  <rect x="236" y="21" width="16" height="14" fill="none" stroke="#333" stroke-width="1.4" />
+  <line x1="236" y1="26" x2="252" y2="26" stroke="#333" stroke-width="1.4" />
+  <line x1="242" y1="26" x2="242" y2="35" stroke="#333" stroke-width="1.4" />
   <rect x="268" y="12" width="32" height="32" fill="#e8e8e8" stroke="#8c8c8c" />
   <path d="M277.5 22.5h7l6 6-7 7-6-6z" fill="none" stroke="#333" stroke-width="1.4" />
   <circle cx="281.5" cy="26.5" r="1.2" fill="#333" />
@@ -112,27 +116,27 @@
   <rect x="304" y="521" width="40" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
   <text x="324" y="546" font-size="20" text-anchor="middle" font-weight="normal" fill="#333">+</text>
   <circle cx="22" cy="593" r="5.5" fill="#e57373" />
-  <text x="34" y="597" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms: Chapter 9, lecture</text>
+  <text x="34" y="597" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms: Sheet 4, Assignments</text>
   <rect x="316" y="577" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
   <text x="330" y="596" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
-  <circle cx="22" cy="633" r="5.5" fill="#e57373" />
-  <text x="34" y="637" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms: Chapter 10, lecture</text>
+  <circle cx="22" cy="633" r="5.5" fill="#64b5f6" />
+  <text x="34" y="637" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Databases: Sheet 2, Assignments</text>
   <rect x="316" y="617" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
   <text x="330" y="636" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
-  <circle cx="22" cy="673" r="5.5" fill="#64b5f6" />
-  <text x="34" y="677" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Databases: Chapter 3, lecture</text>
+  <circle cx="22" cy="673" r="5.5" fill="#e57373" />
+  <text x="34" y="677" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms: Chapter 9, Lectures</text>
   <rect x="316" y="657" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
   <text x="330" y="676" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
-  <circle cx="22" cy="713" r="5.5" fill="#81c784" />
-  <text x="34" y="717" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Machine Learning: Chapter 12, lecture</text>
+  <circle cx="22" cy="713" r="5.5" fill="#e57373" />
+  <text x="34" y="717" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms: Chapter 10, Lectures</text>
   <rect x="316" y="697" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
   <text x="330" y="716" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
-  <circle cx="22" cy="753" r="5.5" fill="#e57373" />
-  <text x="34" y="757" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Algorithms: Sheet 4, assignment</text>
+  <circle cx="22" cy="753" r="5.5" fill="#64b5f6" />
+  <text x="34" y="757" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Databases: Chapter 3, Lectures</text>
   <rect x="316" y="737" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
   <text x="330" y="756" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
-  <circle cx="22" cy="793" r="5.5" fill="#64b5f6" />
-  <text x="34" y="797" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Databases: Sheet 2, assignment</text>
+  <circle cx="22" cy="793" r="5.5" fill="#81c784" />
+  <text x="34" y="797" font-size="13" text-anchor="start" font-weight="normal" fill="#333">Machine Learning: Chapter 12, Lectures</text>
   <rect x="316" y="777" width="28" height="28" fill="#d0d0d0" stroke="#8c8c8c" />
   <text x="330" y="796" font-size="14" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
   <text x="16" y="847" font-size="11" text-anchor="start" font-weight="normal" fill="#777">The month grid on top, the list of the selected day</text>
@@ -140,5 +144,5 @@
   <text x="16" y="879" font-size="11" text-anchor="start" font-weight="normal" fill="#777">A day shows its entries as dots in the course color</text>
   <text x="16" y="895" font-size="11" text-anchor="start" font-weight="normal" fill="#777">(the text does not fit).</text>
   <text x="16" y="911" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Today (darkest) is selected (thick outline). The</text>
-  <text x="16" y="927" font-size="11" text-anchor="start" font-weight="normal" fill="#777">list shows lectures first, then assignments.</text>
+  <text x="16" y="927" font-size="11" text-anchor="start" font-weight="normal" fill="#777">list orders the entries by table type.</text>
 </svg>
