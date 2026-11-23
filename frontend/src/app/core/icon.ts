@@ -17,6 +17,7 @@ export type IconName =
   | 'menu'
   | 'plus'
   | 'star'
+  | 'table'
   | 'tag';
 
 /** An outline icon (24px grid, drawn in the current text color). The star is filled. */
@@ -74,6 +75,9 @@ export type IconName =
         }
         @case ('star') {
           <path d="M12 2c.6 4.6 2.8 8 10 10-7.2 2-9.4 5.4-10 10-.6-4.6-2.8-8-10-10 7.2-2 9.4-5.4 10-10z" />
+        }
+        @case ('table') {
+          <rect x="4" y="5" width="16" height="14" rx="2" /><path d="M4 10h16M10 10v9" />
         }
         @case ('tag') {
           <path d="M3.5 12.5V4.5h8l9 9-8 8z" /><circle cx="8" cy="9" r="1" />

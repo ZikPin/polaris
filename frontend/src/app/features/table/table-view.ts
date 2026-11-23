@@ -6,14 +6,14 @@ import { Icon } from '../../core/icon';
 import { parseNumber } from '../../core/numbers';
 import { AddColumnDialog, NumberColumnOptions } from './add-column-dialog';
 import { ColumnChanges, EditColumnDialog } from './edit-column-dialog';
-import { Column, Row, Table, TableApi, TableType } from './table-api';
+import { Column, Row, Table, TableApi } from './table-api';
 
 const rowKey = (row: Row) => `row:${row.id}`;
 const columnKey = (columnId: number) => `column:${columnId}`;
 const cellKey = (row: Row, column: Column) => `cell:${row.id}:${column.id}`;
 
 /**
- * One table (lectures or assignments) of a course. Every change is saved at once and reported through `changed`.
+ * One table of a course, the table of one of its table types. Every change is saved at once and reported through `changed`.
  * Titles, labels and numbers are edited in place: `editing` holds the key of the one being edited, Enter or leaving
  * the field saves it, Escape drops it.
  */
@@ -26,7 +26,6 @@ export class TableView {
   private readonly api = inject(TableApi);
 
   readonly courseId = input.required<number>();
-  readonly tableType = input.required<TableType>();
   readonly table = input.required<Table>();
   readonly changed = output<void>();
 
@@ -39,8 +38,8 @@ export class TableView {
   protected readonly columnKey = columnKey;
   protected readonly cellKey = cellKey;
 
-  protected get heading(): string {
-    return this.tableType() === 'lecture' ? 'Lectures' : 'Assignments';
+  private get tableTypeId(): number {
+    return this.table().table_type.id;
   }
 
   private fail(e: unknown) {
@@ -101,8 +100,7 @@ export class TableView {
 
   /** A new row has a default title, edited in place right away. */
   protected addRow() {
-    const title = `Default ${this.tableType()}.`;
-    this.api.addRow(this.courseId(), this.tableType(), title).subscribe({
+    this.api.addRow(this.courseId(), this.tableTypeId, 'Default row.').subscribe({
       next: (row) => {
         this.error.set('');
         this.editing.set(`row:${row.id}`);
@@ -117,11 +115,11 @@ export class TableView {
   }
 
   protected createCheckboxColumn() {
-    this.createColumn(this.api.addCheckboxColumn(this.courseId(), this.tableType(), 'Default bool-col.'));
+    this.createColumn(this.api.addCheckboxColumn(this.courseId(), this.tableTypeId, 'Default bool-col.'));
   }
 
   protected createNumberColumn(options: NumberColumnOptions) {
-    this.createColumn(this.api.addNumberColumn(this.courseId(), this.tableType(), 'Default num-col.', options));
+    this.createColumn(this.api.addNumberColumn(this.courseId(), this.tableTypeId, 'Default num-col.', options));
   }
 
   /** The new column has a default label, edited in place right away. */

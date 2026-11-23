@@ -59,7 +59,7 @@
         @for (row of selectedRows(); track row.id) {
           <li [appCourseColor]="colors()[row.course_id]">
             <i class="dot"></i>
-            <span>{{ courseTitle(row.course_id) }}: {{ row.title }}, {{ row.table_type }}</span>
+            <span>{{ courseTitle(row.course_id) }}: {{ row.title }}, {{ row.table_type.name }}</span>
             <button class="icon-btn" type="button" aria-label="Remove entry" (click)="remove(row)"><app-icon name="close" /></button>
           </li>
         } @empty {

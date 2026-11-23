@@ -1,8 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { NamedApi } from '../../core/named-api';
 
-export type TableType = 'lecture' | 'assignment';
+/** A kind of table a course can have, like Lectures. */
+export interface TableType {
+  id: number;
+  name: string;
+}
+
+@Injectable({ providedIn: 'root' })
+export class TableTypeApi extends NamedApi<TableType> {
+  constructor() {
+    super('/api/table_type', 'name');
+  }
+}
+
 export type Statistic = 'avg' | 'sum';
 export const STATISTICS: { value: Statistic; label: string }[] = [
   { value: 'avg', label: 'Average' },
@@ -26,22 +39,22 @@ export interface Row {
 }
 
 export interface Table {
+  table_type: TableType;
   columns: Column[];
   rows: Row[];
 }
-
-export type Tables = Record<TableType, Table>;
 
 @Injectable({ providedIn: 'root' })
 export class TableApi {
   private readonly http = inject(HttpClient);
 
-  getTables(courseId: number): Observable<Tables> {
-    return this.http.get<Tables>(`/api/table/${courseId}`);
+  /** One table per table type of the course, ordered by the name of the type. */
+  getTables(courseId: number): Observable<Table[]> {
+    return this.http.get<Table[]>(`/api/table/${courseId}`);
   }
 
-  addRow(courseId: number, tableType: TableType, title: string): Observable<{ id: number }> {
-    return this.http.post<{ id: number }>(`/api/table/${courseId}/${tableType}/row`, { title });
+  addRow(courseId: number, tableTypeId: number, title: string): Observable<{ id: number }> {
+    return this.http.post<{ id: number }>(`/api/table/${courseId}/${tableTypeId}/row`, { title });
   }
 
   renameRow(rowId: number, title: string): Observable<unknown> {
@@ -52,8 +65,8 @@ export class TableApi {
     return this.http.delete<void>(`/api/table/row/${rowId}`);
   }
 
-  addCheckboxColumn(courseId: number, tableType: TableType, label: string): Observable<Column> {
-    return this.http.post<Column>(`/api/table/${courseId}/${tableType}/column`, {
+  addCheckboxColumn(courseId: number, tableTypeId: number, label: string): Observable<Column> {
+    return this.http.post<Column>(`/api/table/${courseId}/${tableTypeId}/column`, {
       column_type: 'bool',
       label,
     });
@@ -61,11 +74,11 @@ export class TableApi {
 
   addNumberColumn(
     courseId: number,
-    tableType: TableType,
+    tableTypeId: number,
     label: string,
     bounds: { min: number | null; max: number | null; preferred_statistic?: Statistic },
   ): Observable<Column> {
-    return this.http.post<Column>(`/api/table/${courseId}/${tableType}/column`, {
+    return this.http.post<Column>(`/api/table/${courseId}/${tableTypeId}/column`, {
       column_type: 'number',
       label,
       ...bounds,

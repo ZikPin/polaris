@@ -1,4 +1,4 @@
-import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EMPTY, Subject, catchError, switchMap } from 'rxjs';
 import { errorMessage } from '../../core/api-error';
@@ -6,7 +6,7 @@ import { CourseColor } from '../../core/course-color';
 import { Icon } from '../../core/icon';
 import { Select } from '../../core/select';
 import { CourseApi } from '../courses/course-api';
-import { TableApi, Tables } from '../table/table-api';
+import { Table, TableApi, TableTypeApi } from '../table/table-api';
 import { CalendarApi, CalendarRow } from './calendar-api';
 import { buildWeeks, dateKey, monthKey } from './month-grid';
 
@@ -15,10 +15,11 @@ import { buildWeeks, dateKey, monthKey } from './month-grid';
   imports: [CourseColor, Icon, Select],
   templateUrl: './calendar.html',
 })
-export class Calendar implements OnInit {
+export class Calendar {
   private readonly api = inject(CalendarApi);
   private readonly courseApi = inject(CourseApi);
   private readonly tableApi = inject(TableApi);
+  private readonly tableTypes = inject(TableTypeApi).all;
 
   protected readonly colors = this.courseApi.colors;
   protected readonly today = dateKey(new Date());
@@ -54,17 +55,12 @@ export class Calendar implements OnInit {
   );
   protected readonly chosenCourse = signal<number | null>(null);
   /** The tables of the chosen course, to pick the row to add from. */
-  private readonly tables = signal<Tables | null>(null);
-  protected readonly rowChoices = computed(() => {
-    const tables = this.tables();
-    if (!tables) {
-      return [];
-    }
-    return [
-      ...tables.lecture.rows.map((row) => ({ value: row.id, label: `${row.title}, lecture` })),
-      ...tables.assignment.rows.map((row) => ({ value: row.id, label: `${row.title}, assignment` })),
-    ];
-  });
+  private readonly tables = signal<Table[]>([]);
+  protected readonly rowChoices = computed(() =>
+    this.tables().flatMap((table) =>
+      table.rows.map((row) => ({ value: row.id, label: `${row.title}, ${table.table_type.name}` })),
+    ),
+  );
   protected readonly chosenRow = signal<number | null>(null);
   protected readonly error = signal('');
 
@@ -87,10 +83,12 @@ export class Calendar implements OnInit {
       .subscribe((days) => {
         this.days.set(Object.fromEntries(days.map((day) => [day.date, day.rows])));
       });
-  }
 
-  ngOnInit() {
-    this.load$.next();
+    // Loads the month, and again when the table types change: the list of a day shows their names.
+    effect(() => {
+      this.tableTypes();
+      untracked(() => this.load$.next());
+    });
   }
 
   protected shift(months: number) {
@@ -112,7 +110,7 @@ export class Calendar implements OnInit {
   protected chooseCourse(courseId: number) {
     this.chosenCourse.set(courseId);
     this.chosenRow.set(null);
-    this.tables.set(null);
+    this.tables.set([]);
     this.tableApi.getTables(courseId).subscribe((tables) => {
       if (this.chosenCourse() === courseId) {
         this.tables.set(tables);

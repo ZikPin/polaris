@@ -22,9 +22,17 @@
   }
 
   @if (tables(); as tables) {
-    <div class="tables" [appCourseColor]="course.color">
-      <app-table-view [courseId]="courseId()" tableType="lecture" [table]="tables.lecture" (changed)="reload()" />
-      <app-table-view [courseId]="courseId()" tableType="assignment" [table]="tables.assignment" (changed)="reload()" />
-    </div>
+    @if (tables.length) {
+      <div class="tables" [appCourseColor]="course.color">
+        @for (table of tables; track table.table_type.id) {
+          <app-table-view [courseId]="courseId()" [table]="table" (changed)="reload()" />
+        }
+      </div>
+    } @else {
+      <p class="muted">
+        This course has no tables yet. Create table types with Tables at the top of the page, then tick them in the
+        dialog of the course (its edit button on the courses page).
+      </p>
+    }
   }
 }

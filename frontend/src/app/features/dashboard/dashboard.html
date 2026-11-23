@@ -20,47 +20,51 @@
 @for (block of blocks(); track block.id) {
   <section class="course-block" [appCourseColor]="colors()[block.id]">
     <h2><i class="dot"></i>{{ block.title }}</h2>
-    <div class="pair">
-      @for (card of block.cards; track card.title) {
-        <article class="card stat-card">
-          <i class="deco"></i>
-          <h3>{{ card.title }}</h3>
+    @if (block.cards.length) {
+      <div class="stat-cards">
+        @for (card of block.cards; track card.title) {
+          <article class="card stat-card">
+            <i class="deco"></i>
+            <h3>{{ card.title }}</h3>
 
-          @if (card.columns.length) {
-            <dl class="stats">
-              @for (column of card.columns; track column.column_id) {
-                @if (column.column_type === 'bool') {
-                  <div>
-                    <dt>{{ column.label }}</dt>
-                    <dd>{{ column.checked }} checked, {{ column.unchecked }} unchecked</dd>
-                  </div>
-                } @else {
-                  <div>
-                    <dt>{{ column.label }} ({{ column.statistic === 'sum' ? 'sum' : 'average' }})</dt>
-                    <dd>{{ column.value == null ? 'no data' : (column.value | number: '1.0-2') }}</dd>
-                  </div>
+            @if (card.columns.length) {
+              <dl class="stats">
+                @for (column of card.columns; track column.column_id) {
+                  @if (column.column_type === 'bool') {
+                    <div>
+                      <dt>{{ column.label }}</dt>
+                      <dd>{{ column.checked }} checked, {{ column.unchecked }} unchecked</dd>
+                    </div>
+                  } @else {
+                    <div>
+                      <dt>{{ column.label }} ({{ column.statistic === 'sum' ? 'sum' : 'average' }})</dt>
+                      <dd>{{ column.value == null ? 'no data' : (column.value | number: '1.0-2') }}</dd>
+                    </div>
+                  }
                 }
-              }
-            </dl>
-          } @else {
-            <p class="muted">No custom columns.</p>
-          }
+              </dl>
+            } @else {
+              <p class="muted">No custom columns.</p>
+            }
 
-          @if (card.open.length) {
-            <div class="todo">
-              <h4>Not done yet</h4>
-              <ul>
-                @for (row of card.open; track row.id) {
-                  <li>{{ row.title }}</li>
-                }
-              </ul>
-            </div>
-          } @else {
-            <p class="muted">Nothing open.</p>
-          }
-        </article>
-      }
-    </div>
+            @if (card.open.length) {
+              <div class="todo">
+                <h4>Not done yet</h4>
+                <ul>
+                  @for (row of card.open; track row.id) {
+                    <li>{{ row.title }}</li>
+                  }
+                </ul>
+              </div>
+            } @else {
+              <p class="muted">Nothing open.</p>
+            }
+          </article>
+        }
+      </div>
+    } @else {
+      <p class="muted">No tables.</p>
+    }
   </section>
 } @empty {
   <p class="muted">No courses match.</p>

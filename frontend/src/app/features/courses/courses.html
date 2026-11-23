@@ -7,9 +7,17 @@
   }
 </div>
 
-<form class="add-row" (submit)="add($event, title)">
-  <input #title class="input grow" placeholder="Title of a new course" aria-label="Title of a new course" required />
-  <button class="btn btn-primary icon" type="submit" aria-label="Add course"><app-icon name="plus" /></button>
+<form class="add-card" aria-label="New course" (submit)="add($event, title)">
+  <div class="add-row">
+    <input #title class="input grow" placeholder="Title of a new course" aria-label="Title of a new course" required />
+    <button class="btn icon toggle" type="button" aria-label="More fields" [attr.aria-expanded]="expanded()" (click)="expanded.set(!expanded())">
+      <app-icon name="chevron-down" />
+    </button>
+    <button class="btn btn-primary icon" type="submit" aria-label="Add course"><app-icon name="plus" /></button>
+  </div>
+  @if (expanded()) {
+    <app-course-fieldset [(fields)]="fields" />
+  }
 </form>
 
 @if (error() && !editing()) {

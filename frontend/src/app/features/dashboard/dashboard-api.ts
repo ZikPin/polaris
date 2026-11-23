@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TableType } from '../table/table-api';
 
 export interface DashboardFilter {
   tagIds: number[];
@@ -36,14 +35,14 @@ export interface CourseNotDone {
 export class DashboardApi {
   private readonly http = inject(HttpClient);
 
-  columnStatistics(tableType: TableType, filter: DashboardFilter): Observable<CourseStatistics[]> {
-    return this.http.get<CourseStatistics[]>(`/api/dashboard/${tableType}/column_statistics`, {
+  columnStatistics(tableTypeId: number, filter: DashboardFilter): Observable<CourseStatistics[]> {
+    return this.http.get<CourseStatistics[]>(`/api/dashboard/${tableTypeId}/column_statistics`, {
       params: this.params(filter),
     });
   }
 
-  notDone(tableType: TableType, filter: DashboardFilter): Observable<CourseNotDone[]> {
-    return this.http.get<CourseNotDone[]>(`/api/dashboard/${tableType}/not_done`, {
+  notDone(tableTypeId: number, filter: DashboardFilter): Observable<CourseNotDone[]> {
+    return this.http.get<CourseNotDone[]>(`/api/dashboard/${tableTypeId}/not_done`, {
       params: this.params(filter),
     });
   }

@@ -327,7 +327,14 @@ app-multi-select, app-select { position: relative; }
 }
 .banner .ico { margin-top: 1px; color: var(--color-danger); }
 
-.add-row { display: flex; gap: 8px; margin-bottom: 20px; }
+/* add card (courses page): the title row, expanded also the fields of the course dialog, here without their panels */
+.add-card { margin-bottom: 20px; padding: 14px; border-radius: var(--radius-card); background: var(--color-panel); }
+.add-row { display: flex; gap: 8px; }
+.add-card .input, .add-card .toggle { background: var(--color-sheet); }
+.add-card .toggle:hover { background: var(--color-hover); }
+.add-card .toggle[aria-expanded="true"] .ico { transform: rotate(180deg); }
+.add-card .course-fieldset { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; margin-top: 16px; padding: 0 4px 4px; }
+.add-card .course-fieldset > .opt { margin: 0; padding: 0; background: none; }
 .grow { flex: 1; min-width: 0; }
 
 /* ========== 5. CARDS: courses, dashboard ========== */
@@ -369,9 +376,9 @@ app-multi-select, app-select { position: relative; }
 .course-block { margin-top: 28px; }
 .course-block h2 { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
 .course-block h2 .dot { width: 10px; height: 10px; }
-.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.stat-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .stat-card { min-height: 0; padding: 20px; }
-.pair > .stat-card:nth-child(2) { background: color-mix(in srgb, var(--course-color) var(--mix-card-secondary), var(--color-sheet)); }
+.stat-cards > .stat-card:nth-child(even) { background: color-mix(in srgb, var(--course-color) var(--mix-card-secondary), var(--color-sheet)); }
 .stat-card h3 { font-size: var(--fs-lg); font-weight: var(--fw-bold); }
 .stat-card .muted { margin-top: 10px; color: var(--color-ink-on-accent); }
 .stats { display: grid; gap: 4px; margin-top: 10px; }
@@ -555,26 +562,31 @@ app-multi-select, app-select { position: relative; }
 .modal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
 .modal-head h2 { font-size: var(--fs-dialog); font-weight: var(--fw-extrabold); letter-spacing: var(--tracking-heading); }
 .modal .banner { margin-bottom: 12px; }
-.tag-new { display: flex; align-items: center; gap: 8px; }
+.name-new { display: flex; align-items: center; gap: 8px; }
 .input-wrap { display: flex; align-items: center; gap: 10px; height: var(--field-h); padding: 0 16px; border-radius: var(--radius-lg); background: var(--color-field); }
 .input-wrap:focus-within { outline: 2px solid var(--color-focus); }
 .input-wrap input { flex: 1; min-width: 0; height: 100%; padding: 0; background: none; }
 .swatch { flex: none; width: 16px; height: 16px; border-radius: 50%; background: var(--tag-color); }
-.tag-list { display: grid; gap: 6px; margin-top: 20px; }
-.tag-list li {
+.name-list { display: grid; gap: 6px; margin-top: 20px; }
+.name-list li {
   display: flex;
   align-items: center;
   gap: 12px;
   height: 38px;
   padding: 0 12px;
   border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--tag-color) var(--mix-tag-row), var(--color-sheet));
+  background: var(--color-panel);
   font-weight: var(--fw-semibold);
 }
-.tag-list .muted { background: none; }
-.tag-name, .tag-input { flex: 1; min-width: 0; height: 100%; padding: 0; text-align: left; font-weight: var(--fw-semibold); background: none; }
-.tag-list .tool { opacity: 0; }
-.tag-list li:hover .tool, .tag-list li:focus-within .tool { opacity: 1; }
+.name-list.colored li { background: color-mix(in srgb, var(--tag-color) var(--mix-tag-row), var(--color-sheet)); }
+.name-list .muted, .name-list.colored .muted { background: none; }
+.name-btn, .name-input { flex: 1; min-width: 0; height: 100%; padding: 0; text-align: left; font-weight: var(--fw-semibold); background: none; }
+.name-list .tool { opacity: 0; }
+.name-list li:hover .tool, .name-list li:focus-within .tool { opacity: 1; }
+/* the warning that something is deleted with its data: in the table options and the Tables dialog */
+.danger-mark { display: flex; align-items: flex-start; gap: 8px; font-size: var(--fs-sm); font-weight: var(--fw-semibold); }
+.danger-mark .ico { width: 16px; height: 16px; margin-top: 1px; color: var(--color-danger); }
+.name-new + .danger-mark { margin-top: 14px; }
 .modal-col h3, .welcome-item h3 { font-size: var(--fs-lg); font-weight: var(--fw-bold); }
 .opt { display: grid; gap: 12px; padding: 16px 18px; border-radius: var(--radius-xl); background: var(--color-panel); }
 .opt + .opt { margin-top: 10px; }
@@ -582,6 +594,8 @@ app-multi-select, app-select { position: relative; }
 .opt-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .opt-actions { display: flex; justify-content: center; gap: 8px; }
 .modal-course .opt-actions { margin-top: 16px; }
+.course-fieldset { display: block; }
+.opt + .course-fieldset { margin-top: 10px; }
 .opt-label { font-size: var(--fs-sm); font-weight: var(--fw-bold); color: var(--color-ink-soft); }
 .opt-tags { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; }
 .swatches { display: flex; gap: 8px; }
@@ -705,8 +719,8 @@ app-multi-select, app-select { position: relative; }
 /* ========== 10. NARROW SCREEN (below 768px): the burger opens the navbar over the page, everything else is one column ========== */
 @media (max-width: 767px) {
   .topbar { position: sticky; top: 0; z-index: 30; padding: 0 16px; background: var(--color-page); }
-  .topbar .user, .topbar .btn-logout, .btn-tags .label { display: none; }
-  .btn-tags, .burger { width: var(--control-h); padding: 0; }
+  .topbar .user, .topbar .btn-logout, .btn-header .label { display: none; }
+  .btn-header, .burger { width: var(--control-h); padding: 0; }
   .btn.burger { display: inline-flex; }
   .shell { display: block; }
   .sidebar {
@@ -727,7 +741,7 @@ app-multi-select, app-select { position: relative; }
   .page-head { flex-direction: column; align-items: flex-start; gap: 12px; }
   .filters { margin-left: 0; }
   .filters .menu { right: auto; left: 0; }
-  .grid, .pair { grid-template-columns: minmax(0, 1fr); }
+  .grid, .stat-cards, .add-card .course-fieldset { grid-template-columns: minmax(0, 1fr); }
   .tables { flex-direction: column; flex-wrap: nowrap; align-items: stretch; }
   .tbl { min-width: 0; }
   .tbl-body { overflow-x: auto; }
@@ -743,7 +757,7 @@ app-multi-select, app-select { position: relative; }
   .scrim { z-index: 40; align-items: start; padding: calc(var(--header-h) + 12px) 16px 16px; }
   .modal { max-height: calc(100vh - var(--header-h) - 28px); padding: 20px; }
   .opt { gap: 10px; padding: 14px 16px; }
-  .opt + .opt { margin-top: 8px; }
+  .opt + .opt, .opt + .course-fieldset { margin-top: 8px; }
   .opt-fields { grid-template-columns: 1fr; }
   .swatches { display: grid; grid-template-columns: repeat(5, 28px); justify-content: space-between; gap: 12px 0; }
   .modal-course .opt-actions { margin-top: 12px; }

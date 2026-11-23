@@ -2,10 +2,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { EMPTY, Subject, catchError, map, merge, switchMap, tap } from 'rxjs';
+import { EMPTY, Subject, catchError, map, merge, skip, switchMap, tap } from 'rxjs';
 import { CourseColor } from '../../core/course-color';
 import { Icon } from '../../core/icon';
-import { TableApi, Tables } from '../table/table-api';
+import { Table, TableApi, TableTypeApi } from '../table/table-api';
 import { TableView } from '../table/table-view';
 import { Course, CourseApi } from './course-api';
 
@@ -25,7 +25,7 @@ export class CourseDetail {
     { requireSync: true },
   );
   protected readonly course = signal<Course | null>(null);
-  protected readonly tables = signal<Tables | null>(null);
+  protected readonly tables = signal<Table[] | null>(null);
 
   /** Every reload goes through this stream, `switchMap` drops the answers of outdated requests. */
   private readonly reload$ = new Subject<void>();
@@ -52,7 +52,9 @@ export class CourseDetail {
       )
       .subscribe((course) => this.course.set(course));
 
-    merge(courseId$, this.reload$)
+    // A renamed or deleted table type changes the tables too.
+    const tableTypes$ = toObservable(inject(TableTypeApi).all).pipe(skip(1));
+    merge(courseId$, this.reload$, tableTypes$)
       .pipe(
         switchMap(() =>
           this.tableApi.getTables(this.courseId()).pipe(

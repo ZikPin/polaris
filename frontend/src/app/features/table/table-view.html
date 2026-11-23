@@ -1,5 +1,5 @@
 <section class="tbl">
-  <h2>{{ heading }}</h2>
+  <h2>{{ table().table_type.name }}</h2>
 
   @if (error() && !addingColumn() && !editedColumn()) {
     <div class="banner" role="alert">

@@ -5,7 +5,8 @@
   </a>
   @if (auth.user(); as user) {
     <nav class="topbar-actions" aria-label="Account">
-      <button class="btn btn-ghost btn-tags" type="button" aria-label="Tags" (click)="tagsOpen.set(true)"><app-icon name="tag" /><span class="label">Tags</span></button>
+      <button class="btn btn-ghost btn-header" type="button" aria-label="Tables" (click)="tablesOpen.set(true)"><app-icon name="table" /><span class="label">Tables</span></button>
+      <button class="btn btn-ghost btn-header" type="button" aria-label="Tags" (click)="tagsOpen.set(true)"><app-icon name="tag" /><span class="label">Tags</span></button>
       <span class="user">{{ user.email }}</span>
       <button class="btn btn-ghost btn-logout" type="button" (click)="logout()"><app-icon name="logout" />Log out</button>
       <button class="btn btn-ghost burger" type="button" [attr.aria-label]="menuOpen() ? 'Close the menu' : 'Open the menu'" (click)="menuOpen.set(!menuOpen())">
@@ -45,6 +46,17 @@
     <router-outlet />
   </main>
 </div>
+@if (tablesOpen()) {
+  <app-names-dialog
+    heading="Tables"
+    noun="table type"
+    consequence="Its table is removed from every course, with all rows, columns and values."
+    [api]="tableTypeApi"
+    (closed)="tablesOpen.set(false)"
+  >
+    <p class="danger-mark"><app-icon name="alert" />Deleting a table type removes its table from every course, with all rows, columns and values.</p>
+  </app-names-dialog>
+}
 @if (tagsOpen()) {
-  <app-tags-dialog (closed)="tagsOpen.set(false)" />
+  <app-names-dialog heading="Tags" noun="tag" consequence="Its courses are kept." [api]="tagApi" [colored]="true" (closed)="tagsOpen.set(false)" />
 }

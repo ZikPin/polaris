@@ -1,13 +1,14 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { EMPTY, Subject, catchError, forkJoin, switchMap } from 'rxjs';
+import { EMPTY, Subject, catchError, forkJoin, map, of, switchMap } from 'rxjs';
 import { errorMessage } from '../../core/api-error';
 import { CourseColor } from '../../core/course-color';
 import { Icon } from '../../core/icon';
 import { toggleId } from '../../core/ids';
 import { MultiSelect } from '../../core/multi-select';
 import { CourseApi } from '../courses/course-api';
+import { TableTypeApi } from '../table/table-api';
 import { TagApi } from '../tags/tag-api';
 import {
   ColumnStatistic,
@@ -17,29 +18,31 @@ import {
   DashboardFilter,
 } from './dashboard-api';
 
-/** The card of one table (lectures or assignments) of a course. */
+/** The card of one table of a course. */
 interface Card {
   title: string;
   columns: ColumnStatistic[];
   open: { id: number; title: string }[];
 }
 
+/** A course with one card per table, none if it has no tables. */
 interface CourseBlock {
   id: number;
   title: string;
   cards: Card[];
 }
 
-function card(
-  title: string,
-  courseId: number,
-  statistics: CourseStatistics[],
-  notDone: CourseNotDone[],
-): Card {
+/** The answers for one table type: an entry for every course that has it. */
+interface TableData {
+  statistics: CourseStatistics[];
+  notDone: CourseNotDone[];
+}
+
+function card(title: string, courseId: number, data?: TableData): Card {
   return {
     title,
-    columns: statistics.find((entry) => entry.course_id === courseId)?.columns ?? [],
-    open: notDone.find((entry) => entry.course_id === courseId)?.rows ?? [],
+    columns: data?.statistics.find((entry) => entry.course_id === courseId)?.columns ?? [],
+    open: data?.notDone.find((entry) => entry.course_id === courseId)?.rows ?? [],
   };
 }
 
@@ -51,10 +54,10 @@ function card(
 export class Dashboard {
   private readonly api = inject(DashboardApi);
   private readonly courseApi = inject(CourseApi);
-  private readonly tagApi = inject(TagApi);
+  private readonly tableTypes = inject(TableTypeApi).all;
 
   protected readonly colors = this.courseApi.colors;
-  protected readonly tags = this.tagApi.all;
+  protected readonly tags = inject(TagApi).all;
   protected readonly tagOptions = computed(() =>
     this.tags().map((tag) => ({ id: tag.id, label: tag.value })),
   );
@@ -70,6 +73,7 @@ export class Dashboard {
   private readonly reload$ = new Subject<void>();
 
   constructor() {
+    // The courses come with their table types, so a course without tables is listed too (REQ-F-91).
     this.reload$
       .pipe(
         switchMap(() => {
@@ -77,12 +81,29 @@ export class Dashboard {
             tagIds: this.tagFilter(),
             courseIds: this.courseFilter(),
           };
+          const tableTypes = this.tableTypes();
+          const tables = tableTypes.map((tableType) =>
+            forkJoin({
+              statistics: this.api.columnStatistics(tableType.id, filter),
+              notDone: this.api.notDone(tableType.id, filter),
+            }),
+          );
           return forkJoin({
-            lectureStatistics: this.api.columnStatistics('lecture', filter),
-            lectureNotDone: this.api.notDone('lecture', filter),
-            assignmentStatistics: this.api.columnStatistics('assignment', filter),
-            assignmentNotDone: this.api.notDone('assignment', filter),
+            courses: this.courseApi.list(filter.tagIds),
+            tables: tables.length ? forkJoin(tables) : of([]),
           }).pipe(
+            map(({ courses, tables }) => {
+              const byType = new Map(tableTypes.map((tableType, i) => [tableType.id, tables[i]]));
+              return courses
+                .filter((course) => !filter.courseIds.length || filter.courseIds.includes(course.id))
+                .map((course) => ({
+                  id: course.id,
+                  title: course.title,
+                  cards: course.table_types.map((tableType) =>
+                    card(tableType.name, course.id, byType.get(tableType.id)),
+                  ),
+                }));
+            }),
             catchError((e) => {
               this.error.set(errorMessage(e));
               return EMPTY;
@@ -91,29 +112,16 @@ export class Dashboard {
         }),
         takeUntilDestroyed(),
       )
-      .subscribe((result) => {
+      .subscribe((blocks) => {
         this.error.set('');
-        this.blocks.set(
-          result.lectureStatistics.map((course) => ({
-            id: course.course_id,
-            title: course.title,
-            cards: [
-              card('Lectures', course.course_id, result.lectureStatistics, result.lectureNotDone),
-              card(
-                'Assignments',
-                course.course_id,
-                result.assignmentStatistics,
-                result.assignmentNotDone,
-              ),
-            ],
-          })),
-        );
+        this.blocks.set(blocks);
       });
 
-    // Loads the dashboard, and again when the tags or courses change (deleted ones leave the filters).
+    // Loads the dashboard, and again when the tags, courses or table types change (deleted ones leave the filters).
     effect(() => {
       const tagIds = this.tags().map((tag) => tag.id);
       const courseIds = this.courseApi.all().map((course) => course.id);
+      this.tableTypes();
       untracked(() => {
         this.tagFilter.update((ids) => ids.filter((id) => tagIds.includes(id)));
         this.courseFilter.update((ids) => ids.filter((id) => courseIds.includes(id)));
