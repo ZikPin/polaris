@@ -5,11 +5,11 @@ def titles(response):
     return [row["title"] for row in response.get_json()["rows"]]
 
 
-def test_a_day_lists_lectures_before_assignments(user_client, course, add_row):
-    """ST-18"""
-    lecture1 = add_row(course["id"], "lecture", "L1")
-    assignment = add_row(course["id"], "assignment", "A1")
-    lecture2 = add_row(course["id"], "lecture", "L2")
+def test_a_day_lists_its_rows_by_table_type(user_client, course, add_row):
+    """ST-18: Assignments before Lectures (alphabetical), each in creation order"""
+    lecture1 = add_row(course["id"], "Lectures", "L1")
+    assignment = add_row(course["id"], "Assignments", "A1")
+    lecture2 = add_row(course["id"], "Lectures", "L2")
 
     response = user_client.put(
         "/api/calendar/2026-11-03", json={"row_ids": [assignment["id"], lecture2["id"], lecture1["id"]]}
@@ -17,12 +17,12 @@ def test_a_day_lists_lectures_before_assignments(user_client, course, add_row):
 
     assert response.status_code == 200
     assert response.get_json()["date"] == "2026-11-03"
-    assert titles(response) == ["L1", "L2", "A1"]
+    assert titles(response) == ["A1", "L1", "L2"]
 
 
 def test_setting_a_day_replaces_its_rows(user_client, course, add_row):
     """ST-18"""
-    first, second, third = (add_row(course["id"], "lecture", name) for name in ("L1", "L2", "L3"))
+    first, second, third = (add_row(course["id"], "Lectures", name) for name in ("L1", "L2", "L3"))
     day = "/api/calendar/2026-11-03"
     user_client.put(day, json={"row_ids": [first["id"], second["id"]]})
     user_client.put("/api/calendar/2026-11-04", json={"row_ids": [first["id"]]})
@@ -38,7 +38,7 @@ def test_setting_a_day_replaces_its_rows(user_client, course, add_row):
 
 def test_deleting_a_row_removes_it_from_its_days(user_client, course, add_row):
     """ST-18"""
-    first, second = add_row(course["id"], "lecture", "L1"), add_row(course["id"], "lecture", "L2")
+    first, second = add_row(course["id"], "Lectures", "L1"), add_row(course["id"], "Lectures", "L2")
     user_client.put("/api/calendar/2026-11-03", json={"row_ids": [first["id"], second["id"]]})
 
     user_client.delete(f"/api/table/row/{second['id']}")
@@ -48,7 +48,7 @@ def test_deleting_a_row_removes_it_from_its_days(user_client, course, add_row):
 
 
 def test_month_only_contains_its_own_days(user_client, course, add_row):
-    row = add_row(course["id"], "lecture", "L1")
+    row = add_row(course["id"], "Lectures", "L1")
     for day in ("2026-10-31", "2026-11-01", "2026-11-30", "2026-12-01"):
         user_client.put(f"/api/calendar/{day}", json={"row_ids": [row["id"]]})
 
@@ -59,9 +59,10 @@ def test_month_only_contains_its_own_days(user_client, course, add_row):
 
 def test_users_share_dates_but_not_rows(user_client, second_client, course, add_row):
     """ST-18"""
-    own = add_row(course["id"], "lecture", "Mine")
-    other_course = second_client.post("/api/course", json={"title": "Other"}).get_json()
-    foreign = second_client.post(f"/api/table/{other_course['id']}/lecture/row", json={"title": "Theirs"}).get_json()
+    own = add_row(course["id"], "Lectures", "Mine")
+    lectures = next(t["id"] for t in second_client.get("/api/table_type").get_json() if t["name"] == "Lectures")
+    other_course = second_client.post("/api/course", json={"title": "Other", "table_type_ids": [lectures]}).get_json()
+    foreign = second_client.post(f"/api/table/{other_course['id']}/{lectures}/row", json={"title": "Theirs"}).get_json()
     user_client.put("/api/calendar/2026-11-03", json={"row_ids": [own["id"]]})
     second_client.put("/api/calendar/2026-11-03", json={"row_ids": [foreign["id"]]})
 

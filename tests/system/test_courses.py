@@ -3,7 +3,6 @@ import pytest
 from backend.app.models.course import COLORS
 
 CREDENTIALS = {"email": "a@example.com", "password": "password1"}
-EMPTY_TABLES = {"lecture": {"columns": [], "rows": []}, "assignment": {"columns": [], "rows": []}}
 
 
 def test_course_lifecycle(user_client):
@@ -12,8 +11,8 @@ def test_course_lifecycle(user_client):
     assert created.status_code == 201
     course = created.get_json()
     assert course["title"] == "Algorithms"
-    assert course["tags"] == []
-    assert user_client.get(f"/api/table/{course['id']}").get_json() == EMPTY_TABLES
+    assert course["tags"] == course["table_types"] == []
+    assert user_client.get(f"/api/table/{course['id']}").get_json() == []
 
     renamed = user_client.patch(f"/api/course/{course['id']}", json={"title": "Algorithms 1"})
     assert renamed.status_code == 200
@@ -29,8 +28,8 @@ def test_deleting_a_course_deletes_everything_in_it(user_client, course, add_row
     """ST-02"""
     tag = user_client.post("/api/tag", json={"value": "ML"}).get_json()
     user_client.patch(f"/api/course/{course['id']}", json={"tag_ids": [tag["id"]]})
-    row = add_row(course["id"], "lecture", "Chapter 1")
-    column = add_column(course["id"], "lecture", "Watched")
+    row = add_row(course["id"], "Lectures", "Chapter 1")
+    column = add_column(course["id"], "Lectures", "Watched")
     user_client.put(f"/api/table/cell/{row['id']}/{column['id']}", json={"value": True})
 
     assert user_client.delete(f"/api/course/{course['id']}").status_code == 204
@@ -38,7 +37,7 @@ def test_deleting_a_course_deletes_everything_in_it(user_client, course, add_row
     assert user_client.get(f"/api/table/{course['id']}").status_code == 404
     assert [t["value"] for t in user_client.get("/api/tag").get_json()] == ["ML"]
     new_course = user_client.post("/api/course", json={"title": "Algorithms"}).get_json()
-    assert get_tables(new_course["id"]) == EMPTY_TABLES
+    assert get_tables(new_course["id"]) == {}
 
 
 @pytest.mark.parametrize("title", ["", "   "])
@@ -71,16 +70,19 @@ def test_course_description_and_color(user_client, course):
     assert (stored["description"], stored["color"]) == ("x" * 1000, "stone")
 
 
-def test_course_edit_is_saved_at_once(user_client, course):
+def test_course_edit_is_saved_at_once(user_client, course, types):
     """ST-33"""
     url = f"/api/course/{course['id']}"
     tag = user_client.post("/api/tag", json={"value": "ML"}).get_json()
 
-    edit = {"title": "Algorithms 1", "tag_ids": [tag["id"]], "description": "Spring term", "color": "teal", "hidden": True}
+    edit = {
+        "title": "Algorithms 1", "tag_ids": [tag["id"]], "table_type_ids": [types["Lectures"]],
+        "description": "Spring term", "color": "teal", "hidden": True,
+    }
     saved = user_client.patch(url, json=edit).get_json()
     assert saved == {
         "id": course["id"], "title": "Algorithms 1", "description": "Spring term", "color": "teal", "hidden": True,
-        "tags": [tag],
+        "tags": [tag], "table_types": [{"id": types["Lectures"], "name": "Lectures"}],
     }
 
     rejected = user_client.patch(url, json={**edit, "title": "Other", "color": "rose", "tag_ids": [999]})
@@ -88,7 +90,7 @@ def test_course_edit_is_saved_at_once(user_client, course):
     assert user_client.get(url).get_json() == saved
 
 
-def test_hidden_course(user_client, course, add_row):
+def test_hidden_course(user_client, course, types, add_row):
     """ST-35"""
     url = f"/api/course/{course['id']}"
     assert course["hidden"] is False
@@ -102,14 +104,40 @@ def test_hidden_course(user_client, course, add_row):
     assert list(rejected.get_json()["fields"]) == ["hidden"]
     assert user_client.get(url).get_json()["hidden"] is True
 
-    row = add_row(course["id"], "lecture", "Chapter 1")
+    row = add_row(course["id"], "Lectures", "Chapter 1")
     assert user_client.put("/api/calendar/2026-11-03", json={"row_ids": [row["id"]]}).status_code == 200
     assert [c["id"] for c in user_client.get("/api/course").get_json()] == [course["id"]]
-    assert [c["course_id"] for c in user_client.get("/api/dashboard/lecture/not_done").get_json()] == [course["id"]]
+    dashboard = user_client.get(f"/api/dashboard/{types['Lectures']}/not_done").get_json()
+    assert [c["course_id"] for c in dashboard] == [course["id"]]
     assert [r["id"] for r in user_client.get("/api/calendar?month=2026-11").get_json()[0]["rows"]] == [row["id"]]
 
     user_client.patch(url, json={"hidden": False})
     assert user_client.get(url).get_json()["hidden"] is False
+
+
+def test_course_is_added_with_all_its_fields(user_client, types):
+    """ST-36"""
+    tag = user_client.post("/api/tag", json={"value": "ML"}).get_json()
+    full = {
+        "title": "Algorithms", "tag_ids": [tag["id"]], "table_type_ids": list(types.values()),
+        "description": "Spring term", "color": "sage", "hidden": True,
+    }
+
+    created = user_client.post("/api/course", json=full)
+    assert created.status_code == 201
+    course = created.get_json()
+    assert (course["title"], course["tags"], course["description"], course["color"], course["hidden"]) == (
+        "Algorithms", [tag], "Spring term", "sage", True
+    )
+    assert [t["name"] for t in course["table_types"]] == ["Assignments", "Lectures"]
+
+    plain = user_client.post("/api/course", json={"title": "Databases"}).get_json()
+    assert (plain["tags"], plain["table_types"], plain["description"], plain["color"], plain["hidden"]) == (
+        [], [], "", "clay", False
+    )
+
+    assert user_client.post("/api/course", json={"title": "Networks", "tag_ids": [999]}).status_code == 400
+    assert [c["title"] for c in user_client.get("/api/course").get_json()] == ["Algorithms", "Databases"]
 
 
 def test_data_is_still_there_after_logging_in_again(app, user_client, course):

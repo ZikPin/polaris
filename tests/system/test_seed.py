@@ -37,9 +37,12 @@ def test_seed_content(app, tables):
     assert titles == ["Algorithms", "Linear Algebra", "Databases", "Machine Learning", "Statistics"]
     assert len(alice.get("/api/tag").get_json()) == 5
 
+    table_types = alice.get("/api/table_type").get_json()
+    assert [table_type["name"] for table_type in table_types] == ["Assignments", "Lectures"]
+    assert all(course["table_types"] == table_types for course in alice.get("/api/course").get_json())
     algorithms = next(
         course
-        for course in alice.get("/api/dashboard/lecture/column_statistics").get_json()
+        for course in alice.get(f"/api/dashboard/{table_types[1]['id']}/column_statistics").get_json()
         if course["title"] == "Algorithms"
     )
     watched = next(column for column in algorithms["columns"] if column["label"] == "Watched")

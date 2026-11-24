@@ -1,14 +1,14 @@
 import pytest
 
 
-def cells(get_tables, course, table_type="lecture"):
+def cells(get_tables, course, table_type="Lectures"):
     return [row["cells"] for row in get_tables(course["id"])[table_type]["rows"]]
 
 
 def test_number_cells_start_empty(course, add_row, add_column, get_tables):
-    add_row(course["id"], "lecture", "Chapter 1")
-    column = add_column(course["id"], "lecture", "Grade", "number")
-    add_row(course["id"], "lecture", "Chapter 2")
+    add_row(course["id"], "Lectures", "Chapter 1")
+    column = add_column(course["id"], "Lectures", "Grade", "number")
+    add_row(course["id"], "Lectures", "Chapter 2")
 
     assert cells(get_tables, course) == [{str(column["id"]): None}] * 2
 
@@ -26,8 +26,8 @@ def test_number_cell_values_are_checked_against_the_bounds(
     user_client, course, add_row, add_column, get_tables, bounds, accepted, rejected
 ):
     """ST-07"""
-    row = add_row(course["id"], "lecture", "Chapter 1")
-    column = add_column(course["id"], "lecture", "Grade", "number", **bounds)
+    row = add_row(course["id"], "Lectures", "Chapter 1")
+    column = add_column(course["id"], "Lectures", "Grade", "number", **bounds)
     url = f"/api/table/cell/{row['id']}/{column['id']}"
 
     for value in accepted:
@@ -45,8 +45,8 @@ def test_number_cell_values_are_checked_against_the_bounds(
 
 def test_changing_the_bounds_only_affects_later_values(user_client, course, add_row, add_column, set_cell, get_tables):
     """ST-08"""
-    column = add_column(course["id"], "lecture", "Grade", "number", min=1, max=5)
-    rows = [add_row(course["id"], "lecture", f"Chapter {i}") for i in range(1, 6)]
+    column = add_column(course["id"], "Lectures", "Grade", "number", min=1, max=5)
+    rows = [add_row(course["id"], "Lectures", f"Chapter {i}") for i in range(1, 6)]
     for value, row in enumerate(rows, start=1):
         set_cell(row, column, value)
 
@@ -60,13 +60,13 @@ def test_changing_the_bounds_only_affects_later_values(user_client, course, add_
     assert (low.status_code, high.status_code) == (400, 200)
 
 
-def test_bounds_must_stay_ordered(user_client, course, add_column):
-    column = add_column(course["id"], "lecture", "Grade", "number", min=1, max=5)
+def test_bounds_must_stay_ordered(user_client, course, types, add_column):
+    column = add_column(course["id"], "Lectures", "Grade", "number", min=1, max=5)
 
     too_high = user_client.patch(f"/api/table/column/{column['id']}", json={"min": 9})
     removed = user_client.patch(f"/api/table/column/{column['id']}", json={"min": None, "max": None})
     created = user_client.post(
-        f"/api/table/{course['id']}/lecture/column",
+        f"/api/table/{course['id']}/{types['Lectures']}/column",
         json={"column_type": "number", "label": "X", "min": 5, "max": 1},
     )
 
@@ -76,7 +76,7 @@ def test_bounds_must_stay_ordered(user_client, course, add_column):
 
 
 def test_checkbox_column_only_accepts_a_label_change(user_client, course, add_column):
-    column = add_column(course["id"], "lecture", "Watched")
+    column = add_column(course["id"], "Lectures", "Watched")
 
     response = user_client.patch(f"/api/table/column/{column['id']}", json={"label": "Seen", "min": 1})
 
@@ -86,8 +86,8 @@ def test_checkbox_column_only_accepts_a_label_change(user_client, course, add_co
 
 def test_values_must_match_the_column_type(user_client, course, add_row, add_column, set_cell):
     """ST-10"""
-    row = add_row(course["id"], "lecture", "Chapter 1")
-    number = add_column(course["id"], "lecture", "Grade", "number")
+    row = add_row(course["id"], "Lectures", "Chapter 1")
+    number = add_column(course["id"], "Lectures", "Grade", "number")
     set_cell(row, number, 3)
 
     response = user_client.put(f"/api/table/cell/{row['id']}/{number['id']}", json={"value": True})
@@ -97,23 +97,23 @@ def test_values_must_match_the_column_type(user_client, course, add_row, add_col
 
 def test_deleting_a_number_column_deletes_its_values(user_client, course, add_row, add_column, set_cell, get_tables):
     """ST-06"""
-    row = add_row(course["id"], "lecture", "Chapter 1")
-    column = add_column(course["id"], "lecture", "Grade", "number")
+    row = add_row(course["id"], "Lectures", "Chapter 1")
+    column = add_column(course["id"], "Lectures", "Grade", "number")
     set_cell(row, column, 3)
 
     assert user_client.delete(f"/api/table/column/{column['id']}").status_code == 204
 
-    lecture = get_tables(course["id"])["lecture"]
+    lecture = get_tables(course["id"])["Lectures"]
     assert lecture["columns"] == []
     assert [r["cells"] for r in lecture["rows"]] == [{}]
 
 
 def test_columns_of_both_types_keep_their_creation_order(course, add_column, get_tables):
     """ST-09"""
-    add_column(course["id"], "lecture", "X")
-    add_column(course["id"], "lecture", "Y", "number")
-    add_column(course["id"], "lecture", "Z")
+    add_column(course["id"], "Lectures", "X")
+    add_column(course["id"], "Lectures", "Y", "number")
+    add_column(course["id"], "Lectures", "Z")
 
-    columns = get_tables(course["id"])["lecture"]["columns"]
+    columns = get_tables(course["id"])["Lectures"]["columns"]
 
     assert [(c["label"], c["column_type"]) for c in columns] == [("X", "bool"), ("Y", "number"), ("Z", "bool")]

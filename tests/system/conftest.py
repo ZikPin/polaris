@@ -74,24 +74,34 @@ def second_client(app, tables):
 
 
 @pytest.fixture
-def course(user_client):
-    """A course of the logged-in user."""
-    return user_client.post("/api/course", json={"title": "Algorithms"}).get_json()
+def types(user_client):
+    """The ids of the table types of the logged-in user by name, at first Lectures and Assignments."""
+    return {table_type["name"]: table_type["id"] for table_type in user_client.get("/api/table_type").get_json()}
+
+
+@pytest.fixture
+def course(user_client, types):
+    """A course of the logged-in user with the tables Lectures and Assignments."""
+    payload = {"title": "Algorithms", "table_type_ids": list(types.values())}
+    return user_client.post("/api/course", json=payload).get_json()
 
 
 @pytest.fixture
 def get_tables(user_client):
+    """The tables of a course by the name of their table type."""
     def get(course_id):
         response = user_client.get(f"/api/table/{course_id}")
         assert response.status_code == 200
-        return response.get_json()
+        return {table["table_type"]["name"]: table for table in response.get_json()}
     return get
 
 
+# The helpers below take the name of a table type (for example "Lectures") instead of its id, to keep tests readable
+
 @pytest.fixture
-def add_row(user_client):
+def add_row(user_client, types):
     def add(course_id, table_type, title):
-        response = user_client.post(f"/api/table/{course_id}/{table_type}/row", json={"title": title})
+        response = user_client.post(f"/api/table/{course_id}/{types[table_type]}/row", json={"title": title})
         assert response.status_code == 201
         return response.get_json()
     return add
@@ -107,10 +117,10 @@ def set_cell(user_client):
 
 
 @pytest.fixture
-def add_column(user_client):
+def add_column(user_client, types):
     def add(course_id, table_type, label, column_type="bool", **extra):
         payload = {"column_type": column_type, "label": label, **extra}
-        response = user_client.post(f"/api/table/{course_id}/{table_type}/column", json=payload)
+        response = user_client.post(f"/api/table/{course_id}/{types[table_type]}/column", json=payload)
         assert response.status_code == 201
         return response.get_json()
     return add
