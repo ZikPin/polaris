@@ -13,12 +13,7 @@ import { Named, NamedApi } from './named-api';
   template: `
     <app-dialog [heading]="heading()" (closed)="closed.emit()">
       <form class="name-new" (submit)="add($event, name)">
-        <label class="input-wrap grow">
-          @if (colored()) {
-            <i class="swatch"></i>
-          }
-          <input #name [placeholder]="'New ' + noun()" [attr.aria-label]="'New ' + noun()" required />
-        </label>
+        <input #name class="input grow" [placeholder]="'New ' + noun()" [attr.aria-label]="'New ' + noun()" required />
         <button class="btn btn-primary icon" type="submit" [attr.aria-label]="'Add ' + noun()"><app-icon name="plus" /></button>
       </form>
 
@@ -31,12 +26,9 @@ import { Named, NamedApi } from './named-api';
         </div>
       }
 
-      <ul class="name-list" [class.colored]="colored()">
+      <ul class="name-list">
         @for (item of api().named(); track item.id) {
           <li>
-            @if (colored()) {
-              <i class="swatch"></i>
-            }
             @if (editingId() === item.id) {
               <input
                 #rename
@@ -69,8 +61,6 @@ export class NamesDialog<T extends { id: number }> {
   readonly api = input.required<NamedApi<T>>();
   /** What else deleting an item does, added to the confirmation question. */
   readonly consequence = input.required<string>();
-  /** Tags have a color: a swatch and a tinted row. */
-  readonly colored = input(false);
   readonly closed = output<void>();
 
   protected readonly editingId = signal<number | null>(null);

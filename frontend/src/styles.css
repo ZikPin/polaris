@@ -37,7 +37,7 @@
   --glass-4: rgba(255, 255, 255, .7);    /* checkbox in a table */
   --color-ink-on-accent: color-mix(in srgb, var(--color-ink) 84%, transparent);   /* secondary text on an accent */
 
-  /* accent palette: course colors and tag colors (darker pastels, dark text reads on all of them) */
+  /* accent palette: course colors (darker pastels, dark text reads on all of them) */
   --accent-clay: #D49A85;
   --accent-mustard: #D9B26A;
   --accent-olive: #B9B97C;
@@ -48,13 +48,11 @@
   --accent-plum: #B592B5;
   --accent-rose: #D49BA9;
   --accent-stone: #BCA79D;
-  --accent-default: var(--accent-clay);      /* used while a course or tag has no color of its own */
+  --accent-default: var(--accent-clay);      /* used while a course has no color of its own */
   --course-color: var(--accent-default);     /* the color of the current course: set on the element, inherited by its parts */
-  --tag-color: var(--accent-default);        /* the color of the current tag */
   --mix-table-title: 38%;                    /* share of the course color in a table's title column */
   --mix-table-body: 15%;                     /* ... in the table body */
   --mix-card-secondary: 78%;                 /* ... in the second dashboard card of a course */
-  --mix-tag-row: 30%;                        /* ... in a row of the tags dialog */
 
   /* type */
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
@@ -563,10 +561,6 @@ app-multi-select, app-select { position: relative; }
 .modal-head h2 { font-size: var(--fs-dialog); font-weight: var(--fw-extrabold); letter-spacing: var(--tracking-heading); }
 .modal .banner { margin-bottom: 12px; }
 .name-new { display: flex; align-items: center; gap: 8px; }
-.input-wrap { display: flex; align-items: center; gap: 10px; height: var(--field-h); padding: 0 16px; border-radius: var(--radius-lg); background: var(--color-field); }
-.input-wrap:focus-within { outline: 2px solid var(--color-focus); }
-.input-wrap input { flex: 1; min-width: 0; height: 100%; padding: 0; background: none; }
-.swatch { flex: none; width: 16px; height: 16px; border-radius: 50%; background: var(--tag-color); }
 .name-list { display: grid; gap: 6px; margin-top: 20px; }
 .name-list li {
   display: flex;
@@ -578,8 +572,7 @@ app-multi-select, app-select { position: relative; }
   background: var(--color-panel);
   font-weight: var(--fw-semibold);
 }
-.name-list.colored li { background: color-mix(in srgb, var(--tag-color) var(--mix-tag-row), var(--color-sheet)); }
-.name-list .muted, .name-list.colored .muted { background: none; }
+.name-list .muted { background: none; }
 .name-btn, .name-input { flex: 1; min-width: 0; height: 100%; padding: 0; text-align: left; font-weight: var(--fw-semibold); background: none; }
 .name-list .tool { opacity: 0; }
 .name-list li:hover .tool, .name-list li:focus-within .tool { opacity: 1; }

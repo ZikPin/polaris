@@ -42,9 +42,7 @@ input{border:0;outline:0}
 .add-card .course-fieldset{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 24px;margin-top:16px}
 .add-card .course-fieldset>.opt,.add-card .opt-hide{margin:0}
 .grow{flex:1;min-width:0}
-.input,.input-wrap{display:block;width:100%;height:40px;padding:0 14px}
-.input-wrap{display:flex;align-items:center;gap:10px}
-.input-wrap input{flex:1;min-width:0;height:100%;padding:0;background:none}
+.input{display:block;width:100%;height:40px;padding:0 14px}
 
 /* course cards: 4 per row */
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
@@ -89,7 +87,6 @@ input{border:0;outline:0}
 .danger-mark{display:flex;align-items:flex-start;gap:8px}
 .danger-mark .ico{width:16px;height:16px;margin-top:1px}
 .name-new+.danger-mark{margin-top:14px}
-.swatch{flex:none;width:16px;height:16px;border-radius:50%;background:var(--tag-color)}
 
 /* field error (register): the input is outlined, the message sits right under it */
 .input.invalid{outline:2px solid var(--color-danger)}

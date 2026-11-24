@@ -58,5 +58,5 @@
   </app-names-dialog>
 }
 @if (tagsOpen()) {
-  <app-names-dialog heading="Tags" noun="tag" consequence="Its courses are kept." [api]="tagApi" [colored]="true" (closed)="tagsOpen.set(false)" />
+  <app-names-dialog heading="Tags" noun="tag" consequence="Its courses are kept." [api]="tagApi" (closed)="tagsOpen.set(false)" />
 }

@@ -1,6 +1,12 @@
 # Change Log
 One line per finished ticket, newest first: date · ticket · one sentence.
 
+- 2026-11-24 · T-036 · A course without tables shows a message on its page and a note on the dashboard, and the dashboard cards wrap for more than two tables.
+- 2026-11-24 · T-035 · A Tables button in the header opens a dialog to create, rename and delete table types, with an always visible danger mark and a confirmation before deleting.
+- 2026-11-24 · T-034 · Table types are data: rows and columns reference a type, a migration keeps all data, new users get Lectures and Assignments, and tables, dashboard and calendar loop over the types of a course.
+- 2026-11-24 · T-055 · Design: wireframes and mock-ups for the Tables button and dialog, the table options with the danger mark, the empty states and several tables per course.
+- 2026-11-24 · T-054 · Add card on the courses page, expandable with the fields of the course dialog as one shared component, creating the course in one POST.
+- 2026-11-24 · T-053 · Design: wireframes and mock-ups for the add card, collapsed and expanded, on wide and phone screens.
 - 2026-11-10 · T-031 · The reset email is sent through Resend with an HTML message in the style of the app, without a key the link is only logged.
 - 2026-11-10 · T-030 · Password reset: a link with a signed one-hour token, reached from the login page, sets a new password and logs the user in.
 - 2026-11-10 · T-029 · Welcome dialog over the courses page after registering, shown once and not after logging in.

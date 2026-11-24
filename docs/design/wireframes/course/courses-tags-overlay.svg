@@ -95,32 +95,26 @@
   <text x="252" y="683" font-size="11" text-anchor="start" font-weight="normal" fill="#777">The edit button opens the course dialog (courses-edit-dialog.svg), there is no inline edit. The delete button asks for a confirmation.</text>
   <text x="252" y="699" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Navbar: Courses expands to the list of courses, Dashboard and Calendar are single entries.</text>
   <rect x="0" y="0" width="1280" height="739" fill="#000000" stroke="none" opacity="0.35" />
-  <rect x="410" y="90" width="460" height="540" fill="#ffffff" stroke="#757575" />
+  <rect x="410" y="90" width="460" height="440" fill="#ffffff" stroke="#757575" />
   <text x="434" y="130" font-size="20" text-anchor="start" font-weight="bold" fill="#333">Tags</text>
   <rect x="836" y="106" width="24" height="24" fill="#e0e0e0" stroke="#8c8c8c" />
   <text x="848" y="123" font-size="13" text-anchor="middle" font-weight="normal" fill="#333">✕</text>
   <rect x="434" y="150" width="366" height="40" fill="#ffffff" stroke="#757575" />
-  <circle cx="456" cy="170" r="10" fill="#bdbdbd" stroke="#8c8c8c" />
-  <text x="478" y="175" font-size="14" text-anchor="start" font-weight="normal" fill="#999">New tag</text>
+  <text x="448" y="175" font-size="14" text-anchor="start" font-weight="normal" fill="#999">New tag</text>
   <rect x="808" y="150" width="40" height="40" fill="#d0d0d0" stroke="#8c8c8c" />
   <text x="828" y="175" font-size="15" text-anchor="middle" font-weight="normal" fill="#333">+</text>
   <rect x="434" y="212" width="406" height="36" fill="#f4f4f4" stroke="#8c8c8c" />
-  <circle cx="456" cy="230" r="10" fill="#bdbdbd" stroke="#8c8c8c" />
-  <text x="478" y="235" font-size="14" text-anchor="start" font-weight="normal" fill="#333">CS</text>
+  <text x="448" y="235" font-size="14" text-anchor="start" font-weight="normal" fill="#333">CS</text>
   <rect x="434" y="256" width="406" height="36" fill="#f4f4f4" stroke="#8c8c8c" />
-  <circle cx="456" cy="274" r="10" fill="#bdbdbd" stroke="#8c8c8c" />
-  <text x="478" y="279" font-size="14" text-anchor="start" font-weight="normal" fill="#333">Exam</text>
+  <text x="448" y="279" font-size="14" text-anchor="start" font-weight="normal" fill="#333">Exam</text>
   <rect x="434" y="300" width="406" height="36" fill="#f4f4f4" stroke="#8c8c8c" />
-  <circle cx="456" cy="318" r="10" fill="#bdbdbd" stroke="#8c8c8c" />
-  <text x="478" y="323" font-size="14" text-anchor="start" font-weight="normal" fill="#333">Math</text>
+  <text x="448" y="323" font-size="14" text-anchor="start" font-weight="normal" fill="#333">Math</text>
   <rect x="434" y="344" width="406" height="36" fill="#f4f4f4" stroke="#8c8c8c" />
-  <circle cx="456" cy="362" r="10" fill="#bdbdbd" stroke="#8c8c8c" />
-  <text x="478" y="367" font-size="14" text-anchor="start" font-weight="normal" fill="#333">ML</text>
+  <text x="448" y="367" font-size="14" text-anchor="start" font-weight="normal" fill="#333">ML</text>
   <rect x="434" y="388" width="406" height="36" fill="#f4f4f4" stroke="#8c8c8c" />
-  <circle cx="456" cy="406" r="10" fill="#bdbdbd" stroke="#8c8c8c" />
-  <text x="478" y="411" font-size="14" text-anchor="start" font-weight="normal" fill="#333">Semester 1</text>
+  <text x="448" y="411" font-size="14" text-anchor="start" font-weight="normal" fill="#333">Semester 1</text>
   <rect x="434" y="432" width="406" height="36" fill="#f4f4f4" stroke="#8c8c8c" />
-  <circle cx="456" cy="450" r="10" fill="#bdbdbd" stroke="#8c8c8c" />
-  <text x="478" y="455" font-size="14" text-anchor="start" font-weight="normal" fill="#333">Semester 2</text>
-  <text x="434" y="612" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Opened from &quot;Tags&quot; in the header, no new page. Circle = tag color (default grey).</text>
+  <text x="448" y="455" font-size="14" text-anchor="start" font-weight="normal" fill="#333">Semester 2</text>
+  <text x="434" y="498" font-size="11" text-anchor="start" font-weight="normal" fill="#777">Opened from &quot;Tags&quot; in the header, no new page. All tags look the same,</text>
+  <text x="434" y="514" font-size="11" text-anchor="start" font-weight="normal" fill="#777">they have no color: click a name to rename it, the ✕ on hover deletes it.</text>
 </svg>

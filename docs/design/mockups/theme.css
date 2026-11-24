@@ -32,7 +32,7 @@
   --glass-4:rgba(255,255,255,.7);    /* checkbox in a table */
   --color-ink-on-accent:color-mix(in srgb,var(--color-ink) 84%,transparent);   /* secondary text on an accent */
 
-  /* accent palette: course colors and tag colors (darker pastels, dark text reads on all of them) */
+  /* accent palette: course colors (darker pastels, dark text reads on all of them) */
   --accent-clay:#D49A85;
   --accent-mustard:#D9B26A;
   --accent-olive:#B9B97C;
@@ -43,13 +43,11 @@
   --accent-plum:#B592B5;
   --accent-rose:#D49BA9;
   --accent-stone:#BCA79D;
-  --accent-default:var(--accent-clay);      /* used while a course or tag has no color of its own */
+  --accent-default:var(--accent-clay);      /* used while a course has no color of its own */
   --course-color:var(--accent-default);     /* the color of the current course: set on the element, inherited by its parts */
-  --tag-color:var(--accent-default);        /* the color of the current tag */
   --mix-table-title:38%;                    /* share of the course color in a table's title column */
   --mix-table-body:15%;                     /* ... in the table body */
   --mix-card-secondary:78%;                 /* ... in the second dashboard card of a course */
-  --mix-tag-row:30%;                        /* ... in a row of the tags dialog */
 
   /* type */
   --font-sans:"Manrope",ui-sans-serif,system-ui,sans-serif;
@@ -113,8 +111,8 @@ h1{font-size:var(--fs-h1);font-weight:var(--fw-extrabold);letter-spacing:var(--t
 .btn.icon{width:var(--field-h);height:var(--field-h);padding:0;border-radius:var(--radius-lg)}
 .icon-btn{border-radius:var(--radius-sm);background:var(--glass-3);transition:background var(--duration)}
 .icon-btn:hover{background:var(--color-ink);color:var(--color-on-ink)}
-.input,.input-wrap{height:var(--field-h);padding:0 16px;border-radius:var(--radius-lg);background:var(--color-field)}
-.input:focus,.input-wrap:focus-within{outline:2px solid var(--color-focus)}
+.input{height:var(--field-h);padding:0 16px;border-radius:var(--radius-lg);background:var(--color-field)}
+.input:focus{outline:2px solid var(--color-focus)}
 .check{font-size:var(--fs-sm);font-weight:var(--fw-medium)}
 .check input{--check:var(--color-on-ink);border-radius:var(--radius-xs);background:var(--color-field)}
 .check input:checked{background:var(--color-ink)}
@@ -186,7 +184,6 @@ h1{font-size:var(--fs-h1);font-weight:var(--fw-extrabold);letter-spacing:var(--t
 .modal{padding:26px;border-radius:var(--radius-dialog);background:var(--color-sheet)}
 .modal-head h2{font-size:var(--fs-dialog);font-weight:var(--fw-extrabold);letter-spacing:var(--tracking-heading)}
 .name-list li{border-radius:var(--radius-md);background:var(--color-panel);font-weight:var(--fw-semibold)}
-.name-list.colored li{background:color-mix(in srgb,var(--tag-color) var(--mix-tag-row),var(--color-sheet))}
 .danger-mark{font-size:var(--fs-sm);font-weight:var(--fw-semibold)}
 .danger-mark .ico{color:var(--color-danger)}
 .modal-col h3,.welcome-item h3{font-size:var(--fs-lg);font-weight:var(--fw-bold)}

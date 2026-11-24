@@ -74,7 +74,7 @@ Rule: ink tints on light surfaces, white glass on accent colors.
 
 ### 3.4 Accent palette
 
-Ten colors for courses and tags: darker pastels with moderate saturation, each clearly different from its neighbors. Hues run around the wheel; `stone` is the neutral. Contrast is measured with the WCAG formula; secondary text (ink 84%) is at least 4.8:1 on every accent.
+Ten colors for courses: darker pastels with moderate saturation, each clearly different from its neighbors. Hues run around the wheel; `stone` is the neutral. Contrast is measured with the WCAG formula; secondary text (ink 84%) is at least 4.8:1 on every accent.
 
 | Token | Value | Hue | Ink on it |
 | ----- | ----- | --- | --------- |
@@ -89,9 +89,9 @@ Ten colors for courses and tags: darker pastels with moderate saturation, each c
 | `--accent-rose` | `#D49BA9` | 345 | 7.4 |
 | `--accent-stone` | `#BCA79D` | 19 (neutral) | 7.5 |
 
-**Default: `--accent-clay`**, set once as `--accent-default`. It is the warmest of the ten, belongs to the pearl and ink base, and looks good as a full gallery. `stone` is the quiet alternative. A course picks its color in the course dialog (6.9) and starts with the default. Tags cannot pick one yet and always use it.
+**Default: `--accent-clay`**, set once as `--accent-default`. It is the warmest of the ten, belongs to the pearl and ink base, and looks good as a full gallery. `stone` is the quiet alternative. A course picks its color in the course dialog (6.9) and starts with the default. Tags have no color.
 
-A course has one color, `--course-color` (`--tag-color` for a tag), and everything that shows the course reads it: the card fill, the navbar dot, the dashboard heading dot and cards, the table headers, the calendar entries and the circles in the day list. Without a value both fall back to `--accent-default`.
+A course has one color, `--course-color`, and everything that shows the course reads it: the card fill, the navbar dot, the dashboard heading dot and cards, the table headers, the calendar entries and the circles in the day list. Without a value it falls back to `--accent-default`.
 
 Derived tones, all mixed from `--course-color` over `--color-sheet` and tunable in one place:
 
@@ -100,7 +100,6 @@ Derived tones, all mixed from `--course-color` over `--color-sheet` and tunable 
 | `--mix-table-title` | 38% | Title column of a table (the table header is the full color). |
 | `--mix-table-body` | 15% | Body cells of a table. |
 | `--mix-card-secondary` | 78% | Every second dashboard card of a course, slightly lighter than the one before. |
-| `--mix-tag-row` | 30% | A row in the tags dialog. |
 
 An eleventh color needs at least 4.5:1 contrast with ink at 84%, at least 25 degrees of hue distance to its neighbors, and about the same saturation and lightness as the others.
 
@@ -193,7 +192,6 @@ All buttons: `--control-h`, `--radius-md`, semibold, field tone, **hover = `--co
 ### 6.3 Form controls
 
 - **Text input.** 44px, `--radius-lg`, field tone, padding 0 16px, no border. Placeholder `--color-ink-soft`. Focus: 2px `--color-focus` outline, 2px offset (inputs outline themselves).
-- **Input with a swatch** (new tag): the field has the tag color swatch (16px circle) inside at the left.
 - **Invalid input.** 2px `--color-danger` outline, and the message under it: 16px danger icon plus ink text, 12.5px semibold. A whole-form error is a banner instead (`--color-danger-tint`, `--radius-lg`, danger icon, ink text).
 - **Danger mark.** The look of the field message (16px danger icon, ink text 12.5px semibold), but always shown, not only after an error: it warns that an action deletes data. Used in the table options of the course dialog and in the Tables dialog (REQ-F-90).
 - **Checkbox.** 16px, `--radius-xs`, field tone; checked = ink fill with an on-ink checkmark. In tables 17px with `--glass-4` instead of field tone.
@@ -201,7 +199,7 @@ All buttons: `--control-h`, `--radius-md`, semibold, field tone, **hover = `--co
 
 ### 6.4 Tags
 
-Pill (`--radius-pill`), `--glass-3` on the card, 11.5px semibold, padding 3px 10px. On the sheet (the course page) the pill is `--color-field`. The tag color shows in the tags dialog (swatch and row tint), not on the pill.
+Pill (`--radius-pill`), `--glass-3` on the card, 11.5px semibold, padding 3px 10px. On the sheet (the course page) the pill is `--color-field`. All tags look the same, they have no color.
 
 ### 6.5 Course card (courses page)
 
@@ -239,8 +237,8 @@ Per course: a heading (a dot in the course color and the name, 18px bold), then 
 
 A scrim (`--color-scrim`) over the whole page, a centered 460px panel: `--color-sheet`, `--radius-dialog`, padding 26px. Head: title (20px extrabold) and a close icon button. The page behind stays visible. A dialog higher than the window scrolls (at most the window height minus 32px).
 
-- **Tags dialog:** new tag input with swatch and a square add button, then rows (38px, `--radius-md`, `--mix-tag-row` tint of the tag color, swatch and name). Click a name to rename it in place; the delete circle (same as the table tools) appears on hover at the right of the row. The swatch is not clickable yet.
-- **Tables dialog** (title "Tables", opened by the Tables button of the header): the tags dialog without colors. The new table type input and the add button, under them the danger mark (deleting a table type removes its table from every course), then the rows in `--color-panel`, renamed in place and deleted with the hover circle after a confirmation.
+- **Tags dialog:** the new tag input (text input, 6.3) and a square add button, then the rows (38px, `--radius-md`, `--color-panel`, the name). Click a name to rename it in place; the delete circle (same as the table tools) appears on hover at the right of the row.
+- **Tables dialog** (title "Tables", opened by the Tables button of the header): the tags dialog for table types, with the danger mark (deleting a table type removes its table from every course) between the input and the rows. Deleting asks for a confirmation.
 - **Course dialog** (title "Edit the course", opened by the edit button of a card; the add card shares its fields): five option panels like the column dialogs, each with a label (12.5px bold, soft ink): the title (input), the tags (checkbox rows like the tags filter, two per line, boxes in `--color-sheet`), the tables (the table types as the same checkbox rows, with the danger mark under them, always shown), the description (multi-line input, three rows, can be resized) and the color (the ten accents as 28px circles with an 8px gap, the chosen one with a 2px ink outline 2px away from the circle). Under the panels, outside them, the checkbox "Hide from the menu" (aligned with the panel contents, boxes in field tone). Cancel (field tone) and Save (primary) sit centered at the bottom.
 - **Welcome dialog** (title "Welcome to Polaris", subtitle "Your guiding star through the semester" in soft ink): shown once after registering, the cross is its only button. One option panel per navigation entry, in menu order: the name (18px bold on wide screens, 16px below), a text of at most three sentences (soft ink) and a hint, a rough drawing of the page in its own colors on a `--color-sheet` area. From **1000px** wide the dialog is 80% of the window wide (at most 1200px) and as high as its content, padding 32px, the three panels stand side by side with the name and text on top (at least four lines high, so the hints line up) and a 4:3 hint below. These hints are detailed: the add card and course cards with title, tags and the corner circle; per course a heading and the two cards with stats and the "not done yet" box; a month with entries, today in ink and one selected day. Below 1000px the panels are rows with a 92x68px hint of plain shapes (2x2 cards, two pairs of cards, a month of 5x3 days) beside the text, in the normal 460px dialog.
 - **Column dialogs:** option panels (`--color-panel`, `--radius-xl`, padding 16px 18px) with the title and its control on one line, inputs below in `--color-sheet` (42px), the action button centered at the bottom.
@@ -323,7 +321,6 @@ Only lean tables share a row, because the title column is wide (224px): at 1280p
 
 ## 11. Open points
 
-- **Tag color** cannot be chosen, tags use `--accent-default`.
 - **Disabled state** and **empty states** beyond the table and dashboard ones are not designed.
 - **Tablets.** Between 768px and about 1000px the wide layout is used as it is.
 - **Calendar entries** are 10px text, readable by contrast but small. If that is too small in use, the day cells need to grow.
