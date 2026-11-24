@@ -23,7 +23,7 @@ When('I create the tags {string}', async ({ page }, names: string) => {
   for (const name of names.split(', ')) {
     await page.getByLabel('New tag').fill(name);
     await page.getByRole('button', { name: 'Add tag' }).click();
-    await expect(page.locator('.tag-name', { hasText: name })).toBeVisible();
+    await expect(page.locator('.name-btn', { hasText: name })).toBeVisible();
   }
   await closeDialog(page);
 });
@@ -55,7 +55,7 @@ When('I remove the course filter', async ({ page }) => {
 
 Then('the tags are listed as {string}', async ({ page }, names: string) => {
   await openTagsDialog(page);
-  await expect(page.locator('.tag-list .tag-name')).toHaveText(names.split(', '));
+  await expect(page.locator('.name-list .name-btn')).toHaveText(names.split(', '));
   await closeDialog(page);
 });
 

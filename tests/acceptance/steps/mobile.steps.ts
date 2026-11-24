@@ -30,9 +30,10 @@ When('I choose {string} in the menu', async ({ page }, name: string) => {
   await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name, exact: true }).click();
 });
 
-Then('the header shows only the brand, the tags button and the burger button', async ({ page }) => {
+Then('the header shows only the brand, the tables and tags buttons and the burger button', async ({ page }) => {
   const header = page.locator('header.topbar');
   await expect(header.getByRole('link', { name: 'Polaris' })).toBeVisible();
+  await expect(header.getByRole('button', { name: 'Tables' })).toBeVisible();
   await expect(header.getByRole('button', { name: 'Tags' })).toBeVisible();
   await expect(header.getByRole('button', { name: 'Open the menu' })).toBeVisible();
   await expect(header.getByRole('button', { name: 'Log out' })).toHaveCount(0);
@@ -82,7 +83,7 @@ Then('the courses are shown one per row', async ({ page }) => {
   await expectOnePerRow(page.locator('article.card'));
 });
 
-Then('the lecture table is above the assignment table', async ({ page }) => {
+Then('the tables are shown one per row', async ({ page }) => {
   await expectOnePerRow(page.locator('app-table-view'));
 });
 

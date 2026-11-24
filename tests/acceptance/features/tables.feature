@@ -3,7 +3,7 @@ Feature: Tables of a course
   Background:
     Given I am logged in as "carol"
     And I open the courses page
-    And I add the course "Algorithms"
+    And I add the course "Algorithms" with the tables "Lectures, Assignments"
     And I open the course "Algorithms"
 
   @AT-04 @SR-M-02

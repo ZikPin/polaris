@@ -31,6 +31,11 @@ export function accent(page: Page, name: string): Promise<string> {
   }, name);
 }
 
+/** The card on the courses page that adds a course. */
+export function addCard(page: Page): Locator {
+  return page.getByRole('form', { name: 'New course' });
+}
+
 /** The edit dialog of a course, opened from its card. */
 export async function openEditDialog(page: Page, title: string): Promise<Locator> {
   await page.getByRole('button', { name: `Edit ${title}`, exact: true }).click();
@@ -39,12 +44,12 @@ export async function openEditDialog(page: Page, title: string): Promise<Locator
   return dialog;
 }
 
-/** "lecture", "lectures", "assignment" or "assignments": the heading of a table on the course page. */
-export function heading(kind: string): 'Lectures' | 'Assignments' {
-  return kind.startsWith('lecture') ? 'Lectures' : 'Assignments';
+/** The heading of a table on the course page: its table type. "lecture(s)" and "assignment(s)" name the default ones. */
+export function heading(kind: string): string {
+  return kind.startsWith('lecture') ? 'Lectures' : kind.startsWith('assignment') ? 'Assignments' : kind;
 }
 
-/** One of the two tables on the course page. */
+/** A table on the course page. */
 export function table(page: Page, kind: string): Locator {
   return page.locator('app-table-view').filter({ has: page.getByRole('heading', { name: heading(kind), exact: true }) });
 }
@@ -70,14 +75,14 @@ export async function cell(page: Page, kind: string, title: string, column: stri
   return row(page, kind, title).locator('td').nth(position - 1);
 }
 
-/** A course on the dashboard (its heading and the two cards below it). */
+/** A course on the dashboard (its heading and a card per table below it). */
 export function courseBlock(page: Page, course: string): Locator {
   return page
     .locator('section.course-block')
     .filter({ has: page.getByRole('heading', { level: 2, name: course, exact: true }) });
 }
 
-/** The lectures or the assignments card of a course on the dashboard. */
+/** The card of a table of a course on the dashboard. */
 export function card(page: Page, course: string, kind: string): Locator {
   return courseBlock(page, course)
     .locator('article.card')

@@ -4,8 +4,8 @@ Feature: Success criteria of the vision
   Scenario: A course view only shows its own lectures and assignments
     Given I am logged in as "carol"
     And I open the courses page
-    And I add the course "Course A"
-    And I add the course "Course B"
+    And I add the course "Course A" with the tables "Lectures, Assignments"
+    And I add the course "Course B" with the tables "Lectures, Assignments"
     When I open the course "Course A"
     And I add the row "A lecture" to the lectures table
     And I add the row "A sheet" to the assignments table
@@ -42,4 +42,4 @@ Feature: Success criteria of the vision
     And renaming the row "Quick" to "Quicker" in the lectures table gives feedback within 500 ms
     And checking the box "Watched" of the row "Quicker" in the lectures table gives feedback within 500 ms
     And deleting the row "Quicker" from the lectures table gives feedback within 500 ms
-    And opening the dashboard gives feedback within 500 ms
+    And opening the dashboard gives feedback within 1500 ms

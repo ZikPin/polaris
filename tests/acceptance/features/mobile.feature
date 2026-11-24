@@ -5,7 +5,7 @@ Feature: Phone layout
     Given I am logged in as "alice"
     And I use a phone 390 pixels wide
     When I open the courses page
-    Then the header shows only the brand, the tags button and the burger button
+    Then the header shows only the brand, the tables and tags buttons and the burger button
     When I open the menu
     Then the menu opens below the header and lists "Courses, Dashboard, Calendar" and the course "Algorithms"
     And the last entry of the menu is "Log out"
@@ -25,7 +25,7 @@ Feature: Phone layout
     And the courses are shown one per row
     When I open the course "Algorithms"
     Then the back button is directly under the title
-    And the lecture table is above the assignment table
+    And the tables are shown one per row
     When I open the dashboard
     Then the filters are directly under the title
     And the dashboard cards of "Algorithms" are shown one per row

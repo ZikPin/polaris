@@ -26,9 +26,11 @@ When('I click the card of {string}', async ({ page }, title: string) => {
 Given(
   'I have the course {string} in the color {string} with a lecture and an assignment',
   async ({ page, notes }, title: string, color: string) => {
-    const course = await (await page.request.post('/api/course', { data: { title, color } })).json();
-    for (const kind of ['lecture', 'assignment']) {
-      const row: Row = await (await page.request.post(`/api/table/${course.id}/${kind}/row`, { data: { title: `${title} ${kind}` } })).json();
+    const tableTypes: { id: number; name: string }[] = await (await page.request.get('/api/table_type')).json();
+    const ids = tableTypes.map((tableType) => tableType.id);
+    const course = await (await page.request.post('/api/course', { data: { title, color, table_type_ids: ids } })).json();
+    for (const id of ids) {
+      const row: Row = await (await page.request.post(`/api/table/${course.id}/${id}/row`, { data: { title: `${title} ${id}` } })).json();
       notes['rows'] = [notes['rows'], row.id].filter(Boolean).join(',');
     }
   },

@@ -38,3 +38,12 @@ Then('the selected day is empty', async ({ page }) => {
   await expect(panel(page).getByText('Nothing planned.')).toBeVisible();
   await expect(panel(page).locator('.entries li:not(.muted)')).toHaveCount(0);
 });
+
+Then('the selected day lists the entries {string}', async ({ page }, entries: string) => {
+  await expect(panel(page).locator('.entries li')).toHaveText(entries.split('; '));
+});
+
+Then('the calendar shows the entry {string} but not {string}', async ({ page }, kept: string, removed: string) => {
+  await expect(page.locator('.ev > span', { hasText: kept })).toHaveCount(1);
+  await expect(page.locator('.ev > span', { hasText: removed })).toHaveCount(0);
+});
